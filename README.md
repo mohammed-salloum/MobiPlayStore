@@ -2,8 +2,7 @@
 
 ### 💼 Personal Project | June 2025
 
-MobiPlayStore is a full-featured responsive web application for selling mobile game top-up cards. Developed using React, Redux Toolkit, React Router, Context API, React Select, Bootstrap 5, and CSS3.  
-Features include shopping cart management, product rating system, dark/light mode toggle, and a smooth user experience across all devices.
+MobiPlayStore is a full-featured responsive web application for selling mobile game top-up cards. Developed using React, Redux Toolkit, React Router, Context API, React Select, Bootstrap 5, and CSS3. Features include shopping cart management, product rating system, dark/light mode toggle, and a smooth user experience across all devices.
 
 ---
 
