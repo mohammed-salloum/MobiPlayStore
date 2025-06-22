@@ -1,0 +1,63 @@
+/* App.css: أنماط خاصة بمكونات الواجهة مثل Navbar وأيقونة السلة */
+
+/* تصميم الـ Navbar */
+.navbar {
+  min-height: 56px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1050; /* فوق كل العناصر */
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  transition: background-color 0.3s ease;
+}
+
+/* لون خلفية الـ Navbar حسب الوضع */
+body.dark-mode .navbar {
+  background-color: #121212;
+}
+body.light-mode .navbar {
+  background-color: #ffffff;
+}
+
+/* حاوية داخل الـ Navbar */
+.navbar .container {
+  margin: 0;
+  padding: 0 1rem;
+}
+
+/* الروابط داخل الـ Navbar في الوضع الداكن */
+.navbar-dark .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* رابط نشط داخل الـ Navbar */
+.navbar-dark .nav-link.active {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* شعار الموقع والروابط في الوضع الداكن */
+.navbar-dark .navbar-brand,
+.navbar-dark .nav-link,
+.navbar-dark .btn {
+  color: #e0e0e0;
+  transition: color 0.3s ease;
+}
+
+/* تأثير أيقونة السلة عند تغيير الثيم */
+.cart-icon {
+  transition: fill 0.3s ease;
+}
+
+/* لون أيقونة السلة في الوضع الداكن */
+body.dark-mode .cart-icon {
+  fill: #ffffff;
+}
+
+/* لون أيقونة السلة في الوضع الفاتح */
+body.light-mode .cart-icon {
+  fill: #007bff;
+}
