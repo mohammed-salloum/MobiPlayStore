@@ -32,46 +32,46 @@ Features include shopping cart management, product rating system, dark/light mod
 ## 📸 Screenshots
 
 ### 🏠 Home Page – Light Mode  
-![Home Light](Screenshots/light/home-page.png)
+![Home Light](Screenshots/light/home-page.PNG)
 
 ### 🏠 Home Page – Dark Mode  
-![Home Dark](Screenshots/dark/home-page.png)
+![Home Dark](Screenshots/dark/home-page.PNG)
 
 ### 🛍️ Products Page – Light Mode  
-![Products Light](Screenshots/light/products-page.png)
+![Products Light](Screenshots/light/products-page.PNG)
 
 ### 🛍️ Products Page – Dark Mode  
-![Products Dark](Screenshots/dark/products-page.png)
+![Products Dark](Screenshots/dark/products-page.PNG)
 
 ### 🌟 Product Details Page - Light Mode
-![Product Rating](Screenshots/light/productDetails-page.png)
+![Product Rating](Screenshots/light/productDetails-page.PNG)
 
 ### 🌟 Product Details Page - Dark Mode
-![Product Rating](Screenshots/dark/productDetails-page.png)
+![Product Rating](Screenshots/dark/productDetails-page.PNG)
 
 ### 🎁 Offers Page - Light Mode
-![Product Rating](Screenshots/light/offers-page.png)
+![Product Rating](Screenshots/light/offers-page.PNG)
 
 ### 🎁 Offers Page - Dark Mode
-![Product Rating](Screenshots/dark/offers-page.png)
+![Product Rating](Screenshots/dark/offers-page.PNG)
 
 ### 🛒 Cart Page - Light Mode
-![Cart Page](Screenshots/light/cart-page.png)
+![Cart Page](Screenshots/light/cart-page.PNG)
 
 ### 🛒 Cart Page - Dark Mode
-![Cart Page](Screenshots/dark/cart-page.png)
+![Cart Page](Screenshots/dark/cart-page.PNG)
 
 ### 🛒 Checkout Page - Light Mode
-![Contact Page](Screenshots/light/checkout-page.png)
+![Contact Page](Screenshots/light/checkout-page.PNG)
 
 ### 🛒 Checkout Page - Dark Mode
-![Cart Page](Screenshots/dark/checkout-page.png)
+![Cart Page](Screenshots/dark/checkout-page.PNG)
 
 ### 📝 Contact Page - Light Mode
-![Contact Page](Screenshots/light/contact-page.png)
+![Contact Page](Screenshots/light/contact-page.PNG)
 
 ### 📝 Contact Page - Dark Mode
-![Contact Page](Screenshots/dark/contact-page.png)
+![Contact Page](Screenshots/dark/contact-page.PNG)
 
 ---
 
