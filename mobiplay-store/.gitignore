@@ -1,4 +1,4 @@
-# Logs
+# Logs: ملفات تسجيل الأخطاء واللوجات المؤقتة
 logs
 *.log
 npm-debug.log*
@@ -7,18 +7,38 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Dependencies: مجلد الحزم والمكتبات المثبتة (لا ترفع إلى المستودع)
+node_modules/
+
+# Production build: مجلد ملفات البناء الجاهزة للنشر
+dist/
+dist-ssr/
+
+# Environment variables: ملفات إعدادات البيئة المحلية والخاصة
+.env
+.env.*.local
 *.local
 
-# Editor directories and files
+# Editor settings: ملفات إعدادات المحرر وأنظمة التشغيل (لتجنب رفع ملفات شخصية)
 .vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
+!.vscode/extensions.json  # السماح بمشاركة ملف إعدادات الإضافات فقط
+.idea/
+.DS_Store                 # ملفات النظام في macOS
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Vite cache: ملفات الكاش الخاصة بأداة Vite للبناء
+.cache/
+vite.config.ts
+
+# Test coverage: ملفات تقارير التغطية الخاصة بالاختبارات
+coverage/
+
+# TypeScript: ملفات بناء وتحليل TypeScript المؤقتة
+*.tsbuildinfo
+
+# Optional: system generated files (ملفات نظام تشغيل ويندوز)
+Thumbs.db
