@@ -1,0 +1,98 @@
+/* ======= بطاقة ملخص الطلب (Order Summary Card) ======= */
+.order-summary-card.light-mode {
+  background-color: #f5f5dc;
+  border: 2px solid #556b2f; /* زيتوني */
+  color: #000;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.order-summary-card.dark-mode {
+  background-color: #2a2a3d;
+  border: 2px solid #d4af37; /* ذهبي */
+  color: #ddd;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.order-summary-title {
+  margin-bottom: 24px;
+  font-weight: 700;
+  color: inherit;
+}
+
+.order-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* خلفية القائمة حسب المود */
+.order-summary-card.light-mode .order-items-list {
+  background-color: #fff;
+}
+
+.order-summary-card.dark-mode .order-items-list {
+  background-color: #121224;
+}
+
+/* عناصر الطلب */
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+}
+
+.order-summary-card.dark-mode .order-item {
+  background-color: #121224;
+}
+
+.order-item-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.order-item-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 2px;
+}
+
+.order-item-name-qty {
+  font-weight: 600;
+  color: inherit;
+}
+
+.order-item-price {
+  font-weight: 700;
+  color: #556b2f; /* زيتوني */
+}
+
+.order-summary-card.dark-mode .order-item-price {
+  color: #d4af37; /* ذهبي */
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding-top: 12px;
+  border-top: 2px solid #556b2f; /* زيتوني */
+  color: #556b2f;
+}
+
+.order-summary-card.dark-mode .order-total {
+  border-top-color: #d4af37; /* ذهبي */
+  color: #d4af37;
+}

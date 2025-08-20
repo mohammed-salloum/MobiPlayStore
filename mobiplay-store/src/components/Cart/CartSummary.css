@@ -1,0 +1,25 @@
+/* CartSummary.css */
+.cart-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 1rem;
+}
+
+.cart-total {
+  padding: 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-total.light {
+  background-color: #fff;
+  color: #212529;
+}
+
+.cart-total.dark {
+  background-color: #121224;
+  color: #ddd;
+}

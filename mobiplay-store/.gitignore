@@ -1,0 +1,44 @@
+# Logs: Temporary log files
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+
+# 👉 Production build
+dist/
+dist-ssr/
+
+# Environment variables
+.env
+.env.*.local
+*.local
+
+# Editor settings
+.vscode/*
+!.vscode/extensions.json  # allow sharing extensions setup
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Vite cache
+.cache/
+vite.config.ts
+
+# Test coverage
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# System files (optional)
+Thumbs.db

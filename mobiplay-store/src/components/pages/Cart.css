@@ -1,0 +1,58 @@
+.cart-container {
+  min-height: 70vh;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 2rem auto;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.cart-container.dark {
+  background-color: #2a2a3d;
+  border: 2px solid #d4af37;
+  color: #e0dffb;
+}
+
+.cart-container.light {
+  background-color: #f5f5dc;
+  border: 2px solid #556b2f;
+  color: #212529;
+}
+
+.cart-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* =========================
+   Empty Cart Styles
+========================= */
+.cart-empty {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* أيقونة السلة حسب الوضع */
+.empty-icon {
+  font-size: 80px;
+  margin-bottom: 1rem;
+}
+
+.cart-empty.light .empty-icon {
+  color: #556b2f; /* زيتوني */
+}
+
+.cart-empty.dark .empty-icon {
+  color: #d4af37; /* ذهبي */
+}

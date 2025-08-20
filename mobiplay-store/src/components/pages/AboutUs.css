@@ -1,0 +1,125 @@
+/* ============================= */
+/* المتغيرات حسب الوضع */
+.about-container.light {
+  --bg-color: #ffffff;
+  --text-color: #080808;
+  --text-color-secondary: #6c757d;
+  --icon-color-gamepad: #6e7f41; /* زيتوني */
+  --icon-color-shield: #6e7f41;
+  --icon-color-bolt: #6e7f41;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  direction: ltr;
+}
+
+.about-container.dark {
+  --bg-color: #121224;
+  --text-color: #e0e0e0;
+  --text-color-secondary: #b0b0b0;
+  --icon-color-gamepad: #ffcc66; /* ذهبي */
+  --icon-color-shield: #ffcc66;
+  --icon-color-bolt: #ffcc66;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  direction: ltr; /* سيتغير ل rtl عند العربية */
+}
+
+/* ============================= */
+/* الكونتينر العام */
+.about-container {
+  padding: 2rem;
+  border-radius: 0.25rem;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* العنوان الرئيسي */
+.about-title {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.875rem;
+}
+
+/* النص الأساسي */
+.lead-text {
+  font-size: 1.125rem;
+  color: var(--text-color-secondary);
+  text-align: center;
+}
+
+/* الأيقونات */
+.icon {
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* ألوان الأيقونات حسب كل أيقونة */
+.gamepad-icon {
+  color: var(--icon-color-gamepad);
+}
+
+.shield-icon {
+  color: var(--icon-color-shield);
+}
+
+.bolt-icon {
+  color: var(--icon-color-bolt);
+}
+
+/* تأثير hover على الأيقونات */
+.icon:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
+}
+
+/* عناوين المزايا */
+.feature-title {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* نص المزايا */
+.feature-text {
+  font-size: 1rem;
+  color: var(--text-color-secondary);
+}
+
+/* نص الفوتر */
+.footer-text {
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+  text-align: center;
+  color: var(--text-color-secondary);
+}
+
+/* ============================= */
+/* دعم RTL للعربية */
+html[dir="rtl"] .about-container {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+html[dir="rtl"] .lead-text,
+html[dir="rtl"] .feature-text,
+html[dir="rtl"] .footer-text {
+  text-align: right !important;
+}
+
+html[dir="rtl"] .row {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* ============================= */
+/* استجابة للشاشات الصغيرة */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column !important;
+    gap: 1rem;
+  }
+}

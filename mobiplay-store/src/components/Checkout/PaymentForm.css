@@ -1,0 +1,81 @@
+/* الحاوية الرئيسية */
+.payment-form-card {
+  border: 2px solid; /* اللون سيتم تحديده حسب الوضع */
+  border-radius: 12px;
+  padding: 24px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  color: inherit;
+}
+
+/* الوضع الفاتح */
+.payment-form-card.light-mode {
+  background-color: #f5f5dc;
+  color: #000;
+  border-color: #556b2f;
+}
+
+/* الوضع الداكن */
+.payment-form-card.dark-mode {
+  background-color: #2a2a3d;
+  color: #ddd;
+  border-color: #d4af37;
+}
+
+/* العنوان */
+.payment-form-title {
+  margin-bottom: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* الوسوم */
+.form-label {
+  font-weight: 600;
+}
+
+/* حقول الإدخال و textarea */
+.form-control {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  background-color: white;
+  color: #000;
+  min-height: 48px;
+  padding: 8px 12px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.payment-form-card.dark-mode .form-control {
+  background-color: #121224;
+  color: #eee;
+  border-color: #121224;
+}
+
+/* placeholder */
+.form-control::placeholder {
+  color: #556b2f;
+}
+.payment-form-card.dark-mode .form-control::placeholder {
+  color: #d4af37;
+}
+
+/* تأثير التركيز */
+.form-control:focus {
+  outline: none;
+  border-color: #556b2f;
+  box-shadow: 0 0 8px #556b2f;
+  background-color: #f5f5dc;
+  color: #000;
+}
+.payment-form-card.dark-mode .form-control:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 8px #d4af37;
+  background-color: #1e1e2f;
+  color: #eee;
+}
+
+/* textarea */
+textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+}

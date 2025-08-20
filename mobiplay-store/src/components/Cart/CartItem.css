@@ -1,0 +1,30 @@
+.cart-item {
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-item.dark {
+  background-color: #121224;
+  color: #e0dffb;
+}
+
+.cart-item.light {
+  background-color: white;
+  color: #212529;
+}
+
+.quantity-controls {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.cart-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

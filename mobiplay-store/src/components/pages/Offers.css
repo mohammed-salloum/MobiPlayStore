@@ -1,0 +1,109 @@
+/* الحاوية الرئيسية */
+.offers-container {
+  min-height: 75vh;
+}
+
+.offers-container.dark-mode {
+  background-color: #121224;
+  color: #e0e0e0;
+}
+
+.offers-container.light-mode {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+/* البطاقة - الوضع الفاتح */
+.offer-card {
+  border: 1px solid rgba(128, 128, 0, 0.3); /* زيتوني أفتح للفاتح */
+  border-radius: 6px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  align-items: center; /* مَركَز أفقي */
+  text-align: center;  /* النصوص بالوسط */
+}
+
+/* البطاقة - الوضع الداكن */
+.dark-mode .offer-card {
+  border: 1px solid rgba(201, 176, 55, 0.4); /* ذهبي خفيف للداكن */
+}
+
+/* عند التحويم - الوضع الفاتح */
+.offer-card:hover {
+  border-color: rgba(128, 128, 0, 0.7); /* زيتوني أوضح */
+  transform: scale(1.03);
+}
+
+/* عند التحويم - الوضع الداكن */
+.dark-mode .offer-card:hover {
+  border-color: rgba(201, 176, 55, 0.8); /* ذهبي أوضح */
+  transform: scale(1.03);
+}
+
+.dark-card {
+  background: #121224;
+  box-shadow: 0 4px 15px rgba(122, 89, 209, 0.5);
+  color: #e0e0e0;
+}
+
+.light-card {
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* الصورة */
+.offer-img {
+  height: 220px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* النصوص */
+.offer-title {
+  color: inherit;
+}
+
+.old-price {
+  text-decoration: line-through;
+  margin-right: 8px;
+  color: black;
+}
+
+.dark-mode .old-price {
+  color: white;
+}
+
+.new-price {
+  font-weight: bold;
+  color: red;
+}
+
+.discount-text {
+  color: green;
+}
+
+.dark-mode .discount-text {
+  color: #b3ffb3;
+}
+
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+/* نصوص الأسعار والخصم */
+.rtl .old-price,
+.rtl .new-price,
+.rtl .discount-text {
+  text-align: center;
+}
+
+.ltr .old-price,
+.ltr .new-price,
+.ltr .discount-text {
+  text-align: center;
+}

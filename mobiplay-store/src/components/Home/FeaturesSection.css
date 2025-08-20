@@ -1,0 +1,74 @@
+/* FeaturesSection.css */
+.features-section.dark {
+  color: #f1f1f1;
+}
+
+.features-section.light {
+  color: #000;
+}
+
+.feature-card.dark {
+  background-color: #121224 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: none;
+  color: #eee;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.feature-card.light {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px 3px rgba(0, 123, 255, 0.3);
+}
+
+.feature-card.dark:hover {
+  box-shadow: 0 0 15px 3px rgba(255, 215, 0, 0.6);
+}
+
+/* ======== Icons ======== */
+.icon-wrapper {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  color: inherit;
+}
+
+/* حركة مستمرة خفيفة للأيقونات */
+@keyframes iconRotate {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  50% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.icon-wrapper.animate {
+  animation: iconRotate 4s infinite ease-in-out;
+}
+
+/* ألوان الأيقونات حسب الوضع */
+.feature-card.light .icon-wrapper {
+  color: #556b2f; /* زيتوني */
+}
+
+.feature-card.dark .icon-wrapper {
+  color: #ffcc66; /* ذهبي */
+}
+
+/* على جميع شاشات الموبايل */
+@media (max-width: 768px) {
+  .features-section h2 {
+    font-size: 1.4rem;      /* حجم مناسب للشاشة الصغيرة */
+    line-height: 1.4;       /* لتفادي التقطيع */
+    overflow: visible;      /* السماح للعنصر بالظهور */
+    display: block;         /* اجعل العنصر في سطر مستقل */
+    text-align: center;     /* توسيط العنوان */
+  }
+}

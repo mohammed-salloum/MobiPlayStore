@@ -1,0 +1,86 @@
+/* الحاوية الرئيسية */
+.faq-container {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #fff;
+  color: #212529;
+}
+
+.faq-container.dark {
+  background-color: #121224;
+  color: #f1f1f1;
+}
+
+/* العنوان */
+.faq-title {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+  color: inherit;
+}
+
+/* العناصر */
+.faq-item {
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  background-color: #f5f5dc;
+  border: 1px solid #dee2e6;
+  color: #212529;
+}
+
+.faq-item.dark {
+  background-color: #383E45;
+  border: 1px solid #bb86fc;
+  color: #e0e0e0;
+}
+
+/* السؤال */
+.faq-question {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: left;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12px;
+  color: inherit;
+}
+
+/* أيقونة السؤال */
+.faq-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  color: inherit;
+}
+
+.faq-icon.rotate {
+  transform: rotate(180deg);
+}
+
+/* الإجابة */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 1.5rem;
+  color: inherit;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.faq-answer.open {
+  max-height: 500px;
+  padding: 1rem 1.5rem;
+}

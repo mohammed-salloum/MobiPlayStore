@@ -1,0 +1,49 @@
+/* الإعدادات العامة لكل النصوص في الموقع */
+body {
+  font-family: "'Inter', 'Cairo', sans-serif"; /* افتراضي للإنجليزية + عربي احتياطي */
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+  word-wrap: break-word;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body[dir="rtl"] {
+  font-family: "'Cairo', 'Inter', sans-serif"; /* افتراضي للعربية + إنجليزي احتياطي */
+  text-align: right;
+}
+
+
+/* إعدادات العناوين */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;                  /* وزن العنوان */
+  line-height: 1.3;                  /* ارتفاع السطر للعناوين */
+  letter-spacing: 0.5px;
+  margin: 0 0 0.5em 0;              /* مسافة أسفل العنوان */
+}
+
+/* إعدادات الفقرات */
+p {
+  margin: 0 0 1em 0;                 /* مسافة أسفل الفقرة */
+  font-weight: 400;
+}
+
+/* إعدادات القوائم */
+ul, ol {
+  margin: 0 0 1em 1.5em;
+  padding: 0;
+  line-height: 1.6;
+}
+
+body.light-body {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+body.dark-body {
+  background-color: #121224 !important;
+  color: #f5f5dc !important;
+}

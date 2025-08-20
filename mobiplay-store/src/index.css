@@ -1,0 +1,30 @@
+/* index.css: إعدادات أساسية وثيم عام للتطبيق */
+
+/* يجعل الصفحة تملأ كامل الشاشة بدون هوامش */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* الوضع الفاتح */
+body.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* الوضع الداكن */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* الحاوية الرئيسية لكل الصفحات - أسفل الـ Navbar */
+.main-content {
+  min-height: calc(100vh - 60px); /* ارتفاع الشاشة ناقص النافبار */
+  padding-top: 60px;              /* إزاحة لأسفل حتى لا يغطي النافبار المحتوى */
+  background-color: inherit;      /* ترث الخلفية حسب الثيم */
+  box-sizing: border-box;         /* يجعل الحشوة داخل الأبعاد */
+}

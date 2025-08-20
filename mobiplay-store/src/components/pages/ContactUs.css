@@ -1,0 +1,57 @@
+/* الوضع الفاتح والداكن */
+.container.dark {
+  background-color: #121224;
+  color: #ddd;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.container.light {
+  background-color: #fff;
+  color: #000;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* اتجاه الصفحة */
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+/* عنوان الصفحة */
+.contact-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: inherit;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* الحاوية الرئيسية */
+.contact-wrapper {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  border: none !important;
+  padding: 0;
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* ترتيب الأعمدة على الشاشات الصغيرة */
+@media (max-width: 767px) {
+  .contact-wrapper {
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+}

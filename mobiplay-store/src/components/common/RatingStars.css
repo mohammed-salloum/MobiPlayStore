@@ -1,0 +1,5 @@
+.stars-wrapper { display: flex; gap: 4px; }
+.star-wrapper { font-size: 22px; }
+.rating-star { color: #555; }
+.stars-wrapper.light-mode .rating-star.filled { color: #6b8e23; }
+.stars-wrapper.dark-mode .rating-star.filled { color: #ffc107; }

@@ -1,0 +1,57 @@
+/* =========================
+   General Backgrounds & RTL/LTR
+========================= */
+.custom-bg-light {
+  background-color: #fff;
+  color: #000;
+}
+
+.custom-bg-dark {
+  background-color: #121224 !important;
+  color: #ddd !important;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+.ltr {
+  direction: ltr;
+}
+
+/* =========================
+   Page Container & Wrapper
+========================= */
+.content-wrapper {
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* =========================
+   Product Details Layout
+========================= */
+.product-details-wrapper {
+  display: flex;
+  gap: 0.5rem;          /* المسافة بين الصورة والتفاصيل */
+  align-items: stretch;  /* مهم: يجعل الأعمدة بنفس ارتفاع بعضها */
+  flex-wrap: nowrap;
+  margin-bottom: 40px; 
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 1200px) {
+  .product-details-wrapper {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-details-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+}

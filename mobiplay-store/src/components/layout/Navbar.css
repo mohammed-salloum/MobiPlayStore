@@ -1,0 +1,177 @@
+/* ======= Navbar الوضع الداكن ======= */
+.navbar-dark {
+  background-color: #383E45 !important; /* خمري */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: white !important;
+}
+
+.navbar-dark .navbar-brand,
+.navbar-dark .nav-link,
+.navbar-dark .nav-item,
+.navbar-dark .btn-toggle-darkmode,
+.navbar-dark .badge {
+  color: white !important;
+  transition: color 0.3s ease;
+}
+
+.navbar-dark .btn-toggle-darkmode svg,
+.navbar-dark .btn-toggle-darkmode i,
+.navbar-dark .cart-icon,
+.navbar-dark .nav-item svg,
+.navbar-dark .nav-item i {
+  color: white !important;
+  transition: color 0.3s ease;
+}
+
+.navbar-dark .nav-link:hover,
+.navbar-dark .nav-link.active,
+.navbar-dark .navbar-brand:hover,
+.navbar-dark .btn-toggle-darkmode:hover,
+.navbar-dark .cart-icon:hover,
+.navbar-dark .nav-item:hover svg,
+.navbar-dark .nav-item:hover i {
+  color: #ffcc66 !important;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dropdown-menu-dark {
+  background-color: #383E45 !important;
+}
+
+/* ======= Navbar الوضع الفاتح ======= */
+.navbar-light {
+  background-color: #f5f5dc !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu-light {
+  background-color: #f5f5dc !important;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.navbar-dark .navbar-brand,
+.navbar-dark .navbar-brand svg {
+  color: #ffcc66 !important;
+}
+
+.navbar-light .navbar-brand,
+.navbar-light .navbar-brand svg {
+  color: #556b2f !important;
+}
+
+.nav-link {
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.navbar-light .nav-link:hover,
+.navbar-light .nav-link.active {
+  color: #556b2f;
+  font-weight: 700;
+}
+
+.dropdown-item {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  color: inherit;
+}
+
+.navbar-dark .dropdown-item:hover,
+.navbar-dark .dropdown-item:focus,
+.navbar-dark .dropdown-item.active {
+  background-color: #ffcc66 !important;
+  color: #383E45 !important;
+  font-weight: 700;
+}
+
+.navbar-light .dropdown-item:hover,
+.navbar-light .dropdown-item:focus,
+.navbar-light .dropdown-item.active {
+  background-color: #556b2f !important;
+  color: #f5f5dc !important;
+  font-weight: 700;
+}
+
+/* زر LanguageSwitcher */
+.btn-toggle-language {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  outline: none;
+}
+
+.btn-toggle-language:focus,
+.btn-toggle-language:hover {
+  outline: none;
+  background-color: transparent;
+}
+
+.btn-toggle-language:hover {
+  transform: scale(1.2);
+}
+
+.btn-toggle-language .language-flag {
+  width: 24px;
+  height: 24px;
+  border-radius: 0;
+  display: block;
+}
+
+/* زر الوضع الداكن */
+.btn-toggle-darkmode {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.btn-toggle-darkmode:hover {
+  transform: scale(1.2);
+}
+
+/* أيقونة السلة */
+.navbar .nav-item.position-relative .badge {
+  font-size: 0.7rem;
+  min-width: 18px;
+  height: 18px;
+  line-height: 18px;
+}
+
+/* تعديل مسافة كلمة السلة عند اللغة العربية */
+body[dir="rtl"] .navbar .nav-item.position-relative .nav-link span.ms-2 {
+  margin-left: 0 !important;
+  margin-right: 0.4rem !important;
+}
+
+/* نهاية CSS */
