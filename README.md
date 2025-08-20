@@ -3,8 +3,7 @@
 ### 💼 Personal Project | June 2025
 
 MobiPlayStore is a full-featured responsive web application for selling mobile game top-up cards.  
-Developed using React, Redux Toolkit, React Router, Context API, React Select, Bootstrap 5, and CSS3, the application provides a smooth user experience across all devices.  
-It also includes advanced features such as shopping cart management, a product rating system, dark/light mode toggle, multi-language support (Arabic/English), and a font style switcher for enhanced readability and usability.
+Developed using React, Redux Toolkit, React Router, Context API, React Select, Bootstrap 5, and CSS3, the application provides a smooth user experience across all devices. It also includes advanced features such as shopping cart management, a product rating system, dark/light mode toggle, multi-language support (Arabic/English), and a font style switcher for enhanced readability and usability.
 
 ---
 
@@ -14,12 +13,15 @@ It also includes advanced features such as shopping cart management, a product r
 ---
 ## 🔧 Tech Stack
 
-- ⚛️ React  
-- 🗂️ Redux Toolkit, React Context API  
-- 🔄 React Router  
-- 🎨 Bootstrap 5, CSS3  
-- 🔌 React Select  
-- 💾 localStorage for state persistence
+* ⚛️ React
+* 🗂️ Redux Toolkit, React Context API
+* 🔄 React Router
+* 🎨 Bootstrap 5, CSS3
+* 🔌 React Select
+* 🌐 i18next for multilingual support (English/Arabic + RTL)
+* 📝 Google Fonts (Inter, Cairo) with font toggle
+* 💾 localStorage for preferences persistence (language, font, theme)
+* ☁️ Firebase Hosting for deployment
 
 ---
 
