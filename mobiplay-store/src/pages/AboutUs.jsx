@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { FaGamepad, FaShieldAlt, FaBolt } from "react-icons/fa";
-import { ThemeContext } from "../../context/ThemeContext";
+import { ThemeContext } from "../context/ThemeContext";
 import { useTranslation } from "react-i18next";
 import "./AboutUs.css";
 

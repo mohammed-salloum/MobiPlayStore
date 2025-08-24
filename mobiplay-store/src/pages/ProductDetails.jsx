@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { rateProduct } from "../../store/ratingSlice";
-import { addToCart, removeFromCart } from "../../store/cartSlice";
-import { ThemeContext } from "../../context/ThemeContext";
-import ProductInfoAndCart from "../ProductDetails/ProductInfoAndCart";
-import ProductImageAndRating from "../ProductDetails/ProductImageAndRating";
-import products from "../../data/productsData";
+import { rateProduct } from "../store/ratingSlice";
+import { addToCart, removeFromCart } from "../store/cartSlice";
+import { ThemeContext } from "../context/ThemeContext";
+import ProductInfoAndCart from "../components/ProductDetails/ProductInfoAndCart";
+import ProductImageAndRating from "../components/ProductDetails/ProductImageAndRating";
+import products from "../data/productsData";
 import { useTranslation } from "react-i18next";
 import "./ProductDetails.css";
 

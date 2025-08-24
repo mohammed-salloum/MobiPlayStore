@@ -1,10 +1,10 @@
 // src/pages/Products.jsx
 import React, { useContext, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import products from '../../data/productsData';
-import { ThemeContext } from "../../context/ThemeContext";
-import ProductCard from '../Products/ProductCard';
-import RatingStars from '../common/RatingStars';
+import products from '../data/productsData';
+import { ThemeContext } from "../context/ThemeContext";
+import ProductCard from '../components/Products/ProductCard';
+import RatingStars from '../components/common/RatingStars';
 import { useTranslation } from 'react-i18next';
 import './Products.css';
 

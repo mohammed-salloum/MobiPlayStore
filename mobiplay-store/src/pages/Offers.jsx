@@ -1,9 +1,9 @@
 // src/components/Home/Offers.jsx
 import React, { useContext } from "react";
-import products from "../../data/productsData";
-import { ThemeContext } from "../../context/ThemeContext";
+import products from "../data/productsData";
+import { ThemeContext } from "../context/ThemeContext";
 import { useTranslation } from "react-i18next";
-import Button from "../common/Button"; // استيراد المكون العام
+import Button from "../components/common/Button"; // استيراد المكون العام
 import "./Offers.css";
 
 function Offers() {

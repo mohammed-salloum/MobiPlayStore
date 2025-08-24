@@ -1,5 +1,5 @@
-import HeroSection from "../Home/HeroSection";
-import FeaturesSection from "../Home/FeaturesSection";
+import HeroSection from "../components/Home/HeroSection";
+import FeaturesSection from "../components/Home/FeaturesSection";
 import './Home.css';
 import { useTranslation } from "react-i18next";
 

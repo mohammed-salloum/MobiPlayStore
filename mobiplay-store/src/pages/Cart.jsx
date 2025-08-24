@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { ThemeContext } from "../../context/ThemeContext";
+import { ThemeContext } from "../context/ThemeContext";
 import { useTranslation } from "react-i18next";
-import CartItem from "../Cart/CartItem";
-import CartSummary from "../Cart/CartSummary";
-import Button from "../common/Button"; 
+import CartItem from "../components/Cart/CartItem";
+import CartSummary from "../components/Cart/CartSummary";
+import Button from "../components/common/Button"; 
 import "./Cart.css";
 
 function Cart() {

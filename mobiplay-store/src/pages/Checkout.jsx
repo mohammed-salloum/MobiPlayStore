@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { ThemeContext } from "../../context/ThemeContext";
-import OrderSummary from "../Checkout/OrderSummary";
-import PaymentForm from "../Checkout/PaymentForm";
+import { ThemeContext } from "../context/ThemeContext";
+import OrderSummary from "../components/Checkout/OrderSummary";
+import PaymentForm from "../components/Checkout/PaymentForm";
 import { useTranslation } from 'react-i18next';
 import './Checkout.css'; // فقط تنسيق عام للصفحة
 

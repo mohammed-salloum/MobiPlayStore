@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { ThemeContext } from "../../context/ThemeContext";
+import { ThemeContext } from "../context/ThemeContext";
 import { FaChevronDown } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import './FAQ.css';

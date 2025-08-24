@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
+import { ThemeContext } from "../context/ThemeContext";
 import { useTranslation } from "react-i18next";
-import ContactInfo from "../Contact/ContactInfo";
-import ContactForm from "../Contact/ContactForm";
+import ContactInfo from "../components/Contact/ContactInfo";
+import ContactForm from "../components/Contact/ContactForm";
 import "./ContactUs.css";
 
 function Contact() {
