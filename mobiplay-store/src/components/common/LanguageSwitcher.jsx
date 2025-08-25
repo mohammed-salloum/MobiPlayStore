@@ -4,11 +4,12 @@ import "../layout/Navbar.css";
 import 'flag-icons/css/flag-icons.min.css'; // استيراد مكتبة الأعلام
 
 export default function LanguageSwitcher() {
-  const { i18n } = useTranslation();
+  const { i18n } = useTranslation(); // الحصول على كائن i18n للتحكم باللغة
 
+  // 🔹 دالة لتبديل اللغة بين الإنجليزية والعربية
   const toggleLanguage = () => {
-    const newLang = i18n.language === "en" ? "ar" : "en";
-    i18n.changeLanguage(newLang);
+    const newLang = i18n.language === "en" ? "ar" : "en"; // إذا كانت en تصبح ar والعكس
+    i18n.changeLanguage(newLang); // تغيير اللغة عبر i18next
   };
 
   return (

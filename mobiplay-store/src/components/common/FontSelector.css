@@ -1,14 +1,14 @@
 .btn-font {
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
-  background-color: inherit !important;
-  color: inherit !important;
-  outline: none !important;
-  box-shadow: none !important;
-  font-size: 20x; /* صغر حجم الحرف */
-  padding: 6px 8px; /* تقليل المساحة حول الحرف */
-  border: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: inherit;
+  color: inherit;
+  outline: none;
+  box-shadow: none;
+  font-size: 20px;
+  padding: 6px 8px;
+  border: none;
   border-radius: 6px;
   cursor: pointer;
   display: inline-flex;
@@ -18,11 +18,11 @@
   transition: transform 0.2s ease;
 }
 
-
 /* دوران عند الضغط */
 .rotate {
   animation: spin 0.5s ease;
 }
+
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

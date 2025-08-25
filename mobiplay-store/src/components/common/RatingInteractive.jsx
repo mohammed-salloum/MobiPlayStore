@@ -1,23 +1,31 @@
 import React from "react";
-import RatingStars from "./RatingStars";
-import { useTranslation } from "react-i18next";
+import RatingStars from "./RatingStars"; // كومبوننت النجوم التفاعلية
+import { useTranslation } from "react-i18next"; // hook للترجمة
 
-function RatingInteractive({ userRating = 0, onRate, allowRate = true, darkMode = false, isRTL = false }) {
-  const { t } = useTranslation();
+// 🔹 كومبوننت يسمح للمستخدم بتقييم المنتج (تفاعلي)
+function RatingInteractive({ 
+  userRating = 0,      // التقييم الحالي للمستخدم (افتراضي 0)
+  onRate,              // دالة callback تُستدعى عند تقييم المستخدم
+  allowRate = true,    // هل يسمح للمستخدم بالتصويت؟
+  darkMode = false,    // الوضع الداكن أو الفاتح
+  isRTL = false        // اتجاه النصوص (Right-To-Left / Left-To-Right)
+}) {
+  const { t } = useTranslation(); // للحصول على دالة الترجمة
 
   return (
     <div className={`rating-interactive-wrapper ${darkMode ? "dark-mode" : "light-mode"}`}>
-      {/* النص يظهر مرة واحدة هنا */}
+      {/* 🔹 نص "قيم هذا المنتج" */}
       <div className={`rate-text ${darkMode ? "dark" : "light"}`}>
-        {t("productDetails.rateThis")}
+        {t("productDetails.rateThis")} {/* الترجمة حسب اللغة الحالية */}
       </div>
 
+      {/* 🔹 عرض النجوم التفاعلية */}
       <RatingStars
-        userRating={userRating}
-        onRate={onRate}
-        allowRate={allowRate}
-        darkMode={darkMode}
-        isRTL={isRTL}
+        userRating={userRating}  // تمرير التقييم الحالي
+        onRate={onRate}          // تمرير دالة callback لتخزين التقييم
+        allowRate={allowRate}    // السماح بالتصويت
+        darkMode={darkMode}      // الوضع الداكن/الفاتح
+        isRTL={isRTL}            // اتجاه النصوص
       />
     </div>
   );

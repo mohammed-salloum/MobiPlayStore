@@ -21,29 +21,28 @@ function App() {
   const { darkMode } = useContext(ThemeContext);
   const { i18n } = useTranslation();
 
-  // ✅ حالة الخط المختار من localStorage أو الافتراضي
-  const [font, setFont] = useState(localStorage.getItem('selectedFont') || "Arial, sans-serif");
+  // أسماء قصيرة للخطوط (لا تحتوي مسافات أو فواصل)
+  const [font, setFont] = useState(localStorage.getItem('selectedFont') || 'inter');
 
   useEffect(() => {
-    // إزالة كلاسات قديمة للوضع الداكن/الفاتح
-    document.body.classList.remove('light-body', 'dark-body');
+    // إزالة كلاسات الوضع والخطوط السابقة
+    document.body.classList.remove('light-body', 'dark-body', 'inter', 'cairo', 'lato', 'roboto');
 
     // إضافة كلاس حسب الوضع
     document.body.classList.add(darkMode ? 'dark-body' : 'light-body');
 
     // ضبط اتجاه الصفحة حسب اللغة
-    document.body.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+    document.body.setAttribute("dir", i18n.language === 'ar' ? 'rtl' : 'ltr');
 
-    // ✅ تطبيق الخط على كل الموقع
-    document.body.style.fontFamily = font;
+    // إضافة كلاس الخط
+    document.body.classList.add(font);
   }, [darkMode, i18n.language, font]);
 
   return (
-    <div style={{ minHeight: '100vh' }} className={darkMode ? 'app-dark' : 'app-light'}>
+    <div className="app-container">
       <Router>
-        {/* ✅ تمرير setFont للـ Navbar ليتمكن FontSelector من تغيير الخط */}
         <Navbar setFont={setFont} />
-        <main className="main-content" style={{ minHeight: 'calc(100vh - 140px)' }}>
+        <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />

@@ -1,6 +1,6 @@
-/* الإعدادات العامة لكل النصوص في الموقع */
+/* إعدادات عامة للنصوص */
 body {
-  font-family: "'Inter', 'Cairo', sans-serif"; /* افتراضي للإنجليزية + عربي احتياطي */
+  font-family: 'Inter', 'Cairo', sans-serif; /* default */
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: 0.5px;
@@ -11,39 +11,74 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body[dir="rtl"] {
-  font-family: "'Cairo', 'Inter', sans-serif"; /* افتراضي للعربية + إنجليزي احتياطي */
-  text-align: right;
-}
-
-
-/* إعدادات العناوين */
+/* العناوين */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;                  /* وزن العنوان */
-  line-height: 1.3;                  /* ارتفاع السطر للعناوين */
+  font-weight: 600;
+  line-height: 1.3;
   letter-spacing: 0.5px;
-  margin: 0 0 0.5em 0;              /* مسافة أسفل العنوان */
+  margin: 0 0 0.5em 0;
 }
 
-/* إعدادات الفقرات */
+/* الفقرات */
 p {
-  margin: 0 0 1em 0;                 /* مسافة أسفل الفقرة */
+  margin: 0 0 1em 0;
   font-weight: 400;
 }
 
-/* إعدادات القوائم */
+/* القوائم */
 ul, ol {
   margin: 0 0 1em 1.5em;
   padding: 0;
   line-height: 1.6;
 }
 
+/* الوضع الفاتح / الداكن */
 body.light-body {
-  background-color: #ffffff !important;
-  color: #000000 !important;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 body.dark-body {
-  background-color: #121224 !important;
-  color: #f5f5dc !important;
+  background-color: #121224;
+  color: #f5f5dc;
+}
+
+/* الحاوية والمساحة الرئيسية */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  min-height: calc(100vh - 140px);
+}
+
+/* الخطوط عبر class names قصيرة */
+body.inter {
+  font-family: 'Inter', 'Cairo', sans-serif;
+}
+
+body.cairo {
+  font-family: 'Cairo', 'Inter', sans-serif;
+}
+
+body.lato {
+  font-family: 'Lato', 'El Messiri', sans-serif;
+}
+
+body.roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* اتجاه النصوص */
+body[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+body[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
 }
