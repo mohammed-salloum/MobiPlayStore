@@ -3,33 +3,29 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import i18n from "../i18n/i18n";
 
+const API_URL = window.location.hostname.includes("localhost")
+  ? "http://localhost:5000/api/games"
+  : "https://mobiplaystore.onrender.com/api/games";
+
 const AXIOS_TIMEOUT = 30000;
 const AXIOS_RETRIES = 2;
 
-// =========================
-// truncate خفيف وسريع
 export const truncateWords = (text, wordLimit = 50) => {
   if (!text) return "";
   const words = text.split(/\s+/);
   return words.length <= wordLimit ? text : words.slice(0, wordLimit).join(" ") + "...";
 };
 
-// =========================
-// حساب السعر بعد الخصم
 export const calculateDiscountedPrice = (price, discount) => {
   if (!price) return 0;
   return discount ? +(price * (1 - discount / 100)).toFixed(2) : price;
 };
 
-// =========================
-// تحويل السعر إلى صيغة الدولار
 export const formatUSD = (amount) => {
   if (typeof amount !== "number") return "$0.00";
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount);
 };
 
-// =========================
-// map بيانات الألعاب مع دعم RTL واللغة العربية من الباك
 export const mapGamesData = (results, lang) =>
   results.map((game) => {
     const price = Number(game.price) || 0;
@@ -38,10 +34,7 @@ export const mapGamesData = (results, lang) =>
       ? Number(game.discountedPrice)
       : calculateDiscountedPrice(price, discount);
 
-    // نستخدم الوصف العربي إذا موجود في الباك
-    const description = lang === "ar" && game.description_ar
-      ? game.description_ar
-      : game.description || "";
+    const description = game.description || "";
 
     return {
       id: game.id,
@@ -59,8 +52,7 @@ export const mapGamesData = (results, lang) =>
     };
   });
 
-// =========================
-// Axios fetch مع retry و delay
+// ===== Axios fetch مع retry
 const axiosGet = async (url, params = {}) => {
   const delay = ms => new Promise(res => setTimeout(res, ms));
   for (let i = 0; i <= AXIOS_RETRIES; i++) {
@@ -74,26 +66,26 @@ const axiosGet = async (url, params = {}) => {
   }
 };
 
-// =========================
-// Fetchers
-const fetchGamesAPI = async (url, lang) => {
+// ===== Fetchers
+const fetchGamesAPI = async (endpoint, lang) => {
+  const url = `${API_URL}${endpoint}`;
   const data = await axiosGet(url, { lang });
   return mapGamesData(data.results, lang);
 };
 
 const fetchProductAPI = async (id, lang) => {
-  const data = await axiosGet(`/api/games/${id}`, { lang });
+  const url = `${API_URL}/products/${id}`; // ← مهم هنا
+  const data = await axiosGet(url, { lang });
   if (!data) return null;
   return mapGamesData([data], lang)[0];
 };
 
-// =========================
-// React Query Hooks مع تحسين cache و prefetch
+// ===== React Query Hooks
 export const useProducts = () => {
   const lang = i18n.language || "en";
   return useQuery({
     queryKey: ["products", lang],
-    queryFn: ({ queryKey }) => fetchGamesAPI("/api/games/products", queryKey[1]),
+    queryFn: () => fetchGamesAPI("/products", lang),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 60,
     refetchOnWindowFocus: false,
@@ -104,7 +96,7 @@ export const useOffers = () => {
   const lang = i18n.language || "en";
   return useQuery({
     queryKey: ["offers", lang],
-    queryFn: ({ queryKey }) => fetchGamesAPI("/api/games/offers", queryKey[1]),
+    queryFn: () => fetchGamesAPI("/offers", lang),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 60,
     refetchOnWindowFocus: false,
@@ -115,7 +107,7 @@ export const useProductById = (id) => {
   const lang = i18n.language || "en";
   return useQuery({
     queryKey: ["product", id, lang],
-    queryFn: ({ queryKey }) => fetchProductAPI(id, queryKey[2]),
+    queryFn: () => fetchProductAPI(id, lang),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 60,
     enabled: !!id,
@@ -123,34 +115,23 @@ export const useProductById = (id) => {
   });
 };
 
-// =========================
-// Prefetch ذكي للسرعة القصوى
+// ===== Prefetch + reload عند تغيير اللغة
 export const usePrefetchProducts = () => {
   const queryClient = useQueryClient();
   useEffect(() => {
     const lang = i18n.language || "en";
-    queryClient.prefetchQuery(["products", lang], () => fetchGamesAPI("/api/games/products", lang), {
-      staleTime: 1000 * 60 * 10,
-      cacheTime: 1000 * 60 * 60,
-    });
-    queryClient.prefetchQuery(["offers", lang], () => fetchGamesAPI("/api/games/offers", lang), {
-      staleTime: 1000 * 60 * 10,
-      cacheTime: 1000 * 60 * 60,
-    });
+    queryClient.prefetchQuery(["products", lang], () => fetchGamesAPI("/products", lang));
+    queryClient.prefetchQuery(["offers", lang], () => fetchGamesAPI("/offers", lang));
   }, [queryClient]);
 };
 
-// =========================
-// تحديث عند تغيير اللغة بدقة أكبر
 export const useReloadOnLanguageChange = () => {
   const queryClient = useQueryClient();
   useEffect(() => {
     const handleLanguageChange = () => {
-      // invalidate كل المنتجات والعروض
-      queryClient.invalidateQueries({ queryKey: ["products"] });
-      queryClient.invalidateQueries({ queryKey: ["offers"] });
-
-      // invalidate لكل المنتجات الفردية
+      const lang = i18n.language || "en";
+      queryClient.invalidateQueries({ queryKey: ["products", lang] });
+      queryClient.invalidateQueries({ queryKey: ["offers", lang] });
       queryClient.invalidateQueries({ predicate: query => query.queryKey[0] === "product" });
     };
     i18n.on("languageChanged", handleLanguageChange);

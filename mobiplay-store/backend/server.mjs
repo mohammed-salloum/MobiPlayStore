@@ -29,20 +29,35 @@ const logCache = (msg) => {
 // ===== Express setup
 const app = express();
 const PORT = process.env.PORT || 5000;
-app.use(cors());
+
+// ===== CORS setup
+app.use(cors({
+  origin: ["https://mobiplaystore-syr.web.app", "http://localhost:5173"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
+
 app.use(express.json());
 
 // ===== Mount routes
 app.use("/api/games", gamesRouter);
 
+// ===== Serve React SPA
+const distPath = path.join(process.cwd(), "dist");
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(distPath, "index.html"));
+  });
+}
+
 // ===== Health check
-app.get("/", (req, res) => res.send("API is running!"));
+app.get("/health", (req, res) => res.send("API is running!"));
 
 // ===== Start server
 app.listen(PORT, async () => {
   logServer(`🚀 Server running on http://localhost:${PORT}`);
   try {
-    // preload لجميع المنتجات والعروض مع ترجمة الوصف إذا لم تكن موجودة بالكاش
     await preloadCache(logCache);
     logServer("✅ Cache preloaded at startup");
   } catch (err) {
