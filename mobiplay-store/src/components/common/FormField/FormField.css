@@ -1,0 +1,278 @@
+/* =========================
+   Form Field Wrapper
+========================= */
+.form-field-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  position: relative;
+  font-family: var(--main-font);
+}
+
+/* RTL Support */
+.form-field-wrapper.rtl {
+  direction: rtl;
+}
+
+.form-field-wrapper label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+}
+
+.form-field-wrapper label.required::after {
+  content: " *";
+  color: var(--error-color);
+}
+
+/* =========================
+   Inputs, Textareas & PhoneInput
+========================= */
+.form-input,
+textarea.form-input,
+.phone-container .form-control {
+  background-color: var(--input-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--input-text) !important;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: border-color var(--transition-default),
+              box-shadow var(--transition-default),
+              background-color var(--transition-default),
+              color var(--transition-default);
+  height: 48px;
+}
+
+/* Placeholder */
+.form-input::placeholder,
+textarea.form-input::placeholder,
+.phone-container .form-control::placeholder {
+  color: var(--input-text)99;
+}
+
+/* textarea أكبر حسب rows */
+textarea.form-input {
+  min-height: 120px;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Focus State */
+.form-input:focus,
+textarea.form-input:focus,
+.phone-container .form-control:focus {
+  outline: none;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 5px var(--primary-color)33 !important;
+  background-color: var(--input-bg) !important;
+  color: #ffffff !important;
+}
+
+/* Placeholder عند التركيز */
+.phone-container .form-control:focus::placeholder {
+  color: #ffffff !important;
+  opacity: 1;
+}
+
+/* نص الدولة المختارة عند التركيز */
+.phone-container .selected-flag,
+.phone-container .selected-flag .country-name {
+  transition: color var(--transition-default);
+}
+
+.phone-container .form-control:focus + .selected-flag,
+.phone-container .selected-flag:focus,
+.phone-container .selected-flag .country-name:focus {
+  color: #ffffff !important;
+}
+
+/* Error State */
+.form-input.error-border,
+textarea.form-input.error-border,
+.phone-container .form-control.error-border {
+  border-color: var(--form-error-border) !important;
+  box-shadow: 0 0 5px var(--form-error-border)33 !important;
+}
+
+/* Success State */
+.form-input.success-border,
+textarea.form-input.success-border,
+.phone-container .form-control.success-border {
+  border-color: var(--form-success-border) !important;
+  box-shadow: 0 0 5px var(--form-success-border)33 !important;
+}
+
+/* =========================
+   Field Messages
+========================= */
+.field-message {
+  min-height: 24px;
+  margin-top: 4px;
+  font-size: 0.85rem;
+}
+
+.error {
+  color: var(--form-error-text);
+  background-color: var(--form-error-bg);
+  border: 1px solid var(--form-error-border);
+  border-radius: var(--border-radius);
+  padding: 4px 8px;
+}
+
+.success {
+  color: var(--form-success-text);
+  background-color: var(--form-success-bg);
+  border: 1px solid var(--form-success-border);
+  border-radius: var(--border-radius);
+  padding: 4px 8px;
+}
+
+/* =========================
+   PhoneInput Specific
+========================= */
+.phone-container {
+  width: 100%;
+  position: relative;
+}
+
+.phone-container .form-control {
+  font-family: var(--main-font);
+  height: 48px;
+  padding-left: 50px;
+  color: var(--input-text);
+  transition: color var(--transition-default);
+}
+
+/* RTL Support */
+.form-field-wrapper.rtl .phone-container .form-control {
+  padding-left: 12px;
+  padding-right: 50px;
+}
+
+/* أيقونة العلم داخل الحقل */
+.phone-container .flag-dropdown,
+.phone-container .selected-flag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100% !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* RTL */
+.form-field-wrapper.rtl .phone-container .flag-dropdown,
+.form-field-wrapper.rtl .phone-container .selected-flag {
+  left: auto;
+  right: 0;
+}
+
+/* إلغاء أي تأثير hover أو open */
+.phone-container .flag-dropdown:hover,
+.phone-container .selected-flag:hover,
+.phone-container .flag-dropdown.open {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* إخفاء العلم وقت ما القائمة مفتوحة */
+.phone-container .flag-dropdown.open .selected-flag {
+  display: none !important;
+}
+
+/* =========================
+   PhoneInput Dropdown
+========================= */
+.country-list {
+  background-color: var(--dropdown-bg) !important;
+  color: var(--dropdown-text) !important;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 8px var(--card-shadow);
+  max-height: 250px;
+  overflow-y: auto;
+  font-family: var(--main-font);
+  font-size: 0.95rem;
+  z-index: 1000;
+}
+
+.country-list .country {
+  color: var(--dropdown-text) !important;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background-color var(--transition-default), color var(--transition-default);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Fix RTL list order */
+.form-field-wrapper.rtl .country-list .country {
+  direction: ltr;
+}
+
+/* Hover على الدول الغير مختارة */
+.country-list .country:hover {
+  background-color: var(--dropdown-hover-bg) !important;
+}
+
+/* الدولة المختارة بدون تأثير hover */
+.country-list .country.highlight,
+.country-list .country.highlight * {
+  background-color: var(--dropdown-selected-bg) !important;
+  color: var(--selected-text-color) !important;
+  cursor: default;
+}
+
+/* Scrollbar */
+.country-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.country-list::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 4px;
+}
+
+.country-list::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-color);
+}
+
+/* =========================
+   RTL Arrow Fix
+========================= */
+.form-field-wrapper.rtl .phone-container .selected-flag .arrow {
+  right: auto !important;
+  left: 8px !important;
+}
+
+.form-field-wrapper.rtl .phone-container .selected-flag {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  padding-right: 8px;
+  padding-left: 0;
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 480px) {
+  .form-input,
+  textarea.form-input,
+  .phone-container .form-control {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+    height: 44px;
+  }
+}

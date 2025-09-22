@@ -1,30 +1,101 @@
+/* =========================
+   Cart Items List
+========================= */
+.cart-items-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* =========================
+   Cart Item
+========================= */
 .cart-item {
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 2fr auto 1fr;
   align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: var(--body-bg);
+  border: 1px solid var(--border-color);
+  box-sizing: border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%; /* مهم لتتمدد كامل مساحة الحاوية */
+  max-width: none;
 }
 
-.cart-item.dark {
-  background-color: #121224;
-  color: #e0dffb;
+.cart-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--card-shadow);
 }
 
-.cart-item.light {
-  background-color: white;
-  color: #212529;
+.cart-item-name {
+  font-weight: 600;
+  font-size: 1rem;
+  word-break: break-word;
 }
 
-.quantity-controls {
-  margin-top: 0.5rem;
+.quantity-wrapper {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
+}
+
+.quantity-display {
+  min-width: 28px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cart-item-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.cart-item-actions .cart-item-price {
+  font-weight: 600;
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 768px) {
+  .cart-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    width: 100%; /* مهم */
+  }
+
+  .cart-item-name,
+  .quantity-wrapper,
+  .cart-item-actions {
+    width: 100%;
+  }
+
+  .quantity-wrapper {
+    justify-content: center;
+  }
+
+  .cart-item-actions {
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+  }
+
+  .cart-item-actions button {
+    width: 100%;
+    min-width: 120px;
+  }
 }

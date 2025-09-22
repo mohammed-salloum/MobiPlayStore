@@ -1,0 +1,121 @@
+/* =========================
+   Pagination & Nav Buttons (متوافقة مع كل الثيمات)
+========================= */
+.btn-pagination,
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: var(--border-radius, 6px);
+  background-color: var(--card-bg); /* الخلفية حسب الثيم */
+  color: var(--text-color);         /* النص حسب الثيم */
+  font-weight: 500;
+  font-size: 0.85rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+}
+
+/* Hover */
+.btn-pagination:hover:not(.active):not(:disabled),
+.nav-btn:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  color: var(--text-on-primary, #ffffff);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+/* Active */
+.btn-pagination.active,
+.btn-pagination.active:hover {
+  background-color: var(--primary-color);
+  color: var(--text-on-primary, #ffffff);
+  cursor: default;
+  transform: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* Disabled */
+.btn-pagination:disabled, 
+.btn-pagination.disabled,
+.nav-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transform: none;
+  box-shadow: none;
+  border: 1px solid var(--border-color);
+}
+
+/* ترتيب السهم والنص داخل زر Nav */
+.nav-btn .nav-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-btn .nav-content.rtl {
+  flex-direction: row-reverse;
+}
+
+.arrow {
+  font-size: 0.95rem;
+}
+
+/* =========================
+   Pagination Container
+========================= */
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 40px 0;
+  padding: 0 1rem;
+}
+
+.pages-wrapper {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.current-page-mobile {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin: 0 6px;
+}
+
+/* =========================
+   RTL عام للزر
+========================= */
+.rtl .btn-pagination,
+.rtl .nav-btn {
+  direction: rtl;
+}
+
+/* =========================
+   Responsive للهواتف
+========================= */
+@media (max-width: 576px) {
+  .btn-pagination,
+  .nav-btn {
+    min-width: 48px;
+    height: 48px;
+    font-size: 0.9rem;
+    padding: 0 12px;
+    gap: 6px;
+  }
+
+  .pages-wrapper {
+    display: none;
+  }
+}

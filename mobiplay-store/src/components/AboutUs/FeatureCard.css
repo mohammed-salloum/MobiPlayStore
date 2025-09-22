@@ -1,0 +1,90 @@
+/* ============================= */
+/* البطاقات */
+.feature-card {
+  flex: 0 1 300px;      /* الحد الأدنى */
+  min-width: 280px;
+  max-width: 320px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  background-color: var(--card-bg);
+
+  /* حركة الظهور */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* الأيقونات */
+.icon-wrapper {
+  color: var(--icon-color); /* يرث اللون من الثيم */
+  width: 60px;
+  height: 60px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.icon-wrapper > svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor; /* أهم سطر: يخلي الأيقونة ترث اللون */
+}
+
+.icon-wrapper:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
+}
+
+/* العناوين والنصوص */
+.feature-title { 
+  margin-bottom: 0.5rem; 
+  font-weight: 600; 
+  color: var(--title-color); 
+}
+
+.feature-text { 
+  font-size: 1rem; 
+  color: var(--text-secondary); 
+}
+
+/* حركة البطاقات */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* صف البطاقات */
+.row-features {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* ============================= */
+/* تجاوب البطاقات */
+
+/* شاشات كبيرة */
+@media (max-width: 1024px) {
+  .feature-card { flex: 0 1 45%; max-width: 45%; }
+}
+
+/* شاشات متوسطة */
+@media (max-width: 768px) {
+  .feature-card { flex: 0 1 90%; max-width: 90%; }
+}
+
+/* شاشات صغيرة */
+@media (max-width: 480px) {
+  .feature-card { flex: 0 1 100%; max-width: 100%; }
+}
+
+/* شاشات صغيرة جدًا (350px وما دونها) */
+@media (max-width: 350px) {
+  .feature-card { flex: 0 1 100%; max-width: 100%; padding: 0.8rem; }
+  .icon-wrapper { width: 50px; height: 50px; }
+}

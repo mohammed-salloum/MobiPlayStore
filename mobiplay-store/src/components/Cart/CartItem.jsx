@@ -1,46 +1,40 @@
+// src/components/Cart/CartItem.jsx
 import React, { useContext } from "react";
-import { useDispatch } from "react-redux";
-import { removeFromCart, increaseQuantity, decreaseQuantity } from "../../store/cartSlice";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
-import Button from "../common/Button";
-import './CartItem.css';
-
+import { useCart } from "../../context/CartContext";
+import Button from "../common/Button/Button";
+import "./CartItem.css";
 
 function CartItem({ item }) {
-  const dispatch = useDispatch();
-  const { darkMode } = useContext(ThemeContext);
+  const { removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
+  const { theme } = useContext(ThemeContext);
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
 
   return (
-    <li className={`cart-item ${darkMode ? "dark" : "light"}`} dir={isRTL ? "rtl" : "ltr"}>
-      <div className="cart-item-details">
-        <strong>{item.name}</strong> × {item.quantity}
-        <div className="quantity-controls">
-            <Button
-                variant="quantity"
-                dark={darkMode}
-                onClick={() => dispatch(decreaseQuantity(item.id))}
-              >
-                -
-             </Button>
-              <Button
-                variant="quantity"
-                dark={darkMode}
-                onClick={() => dispatch(increaseQuantity(item.id))}
-              >
-                +
-              </Button>
-        </div>
+    <li className="cart-item" data-theme={theme} dir={isRTL ? "rtl" : "ltr"}>
+      {/* اسم اللعبة */}
+      <div className="cart-item-name">{item.name}</div>
+
+      {/* أزرار الكمية */}
+      <div className="quantity-wrapper">
+        <Button variant="quantity" theme={theme} onClick={() => decreaseQuantity(item.id)}>
+          -
+        </Button>
+        <div className="quantity-display">{item.quantity}</div>
+        <Button variant="quantity" theme={theme} onClick={() => increaseQuantity(item.id)}>
+          +
+        </Button>
       </div>
+
+      {/* السعر وزر الإلغاء */}
       <div className="cart-item-actions">
-        <span>${(item.price * item.quantity).toFixed(2)}</span>
-         <Button
-            variant="cancel"
-            onClick={() => dispatch(removeFromCart(item.id))}
-          >
-            {t("cart.cancel")}
+        <span className="cart-item-price">
+          ${((item.discountedPrice ?? item.price) * item.quantity).toFixed(2)}
+        </span>
+        <Button variant="cancel" theme={theme} onClick={() => removeFromCart(item.id)}>
+          {t("cart.cancel")}
         </Button>
       </div>
     </li>

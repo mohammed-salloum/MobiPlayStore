@@ -1,84 +1,61 @@
-/* إعدادات عامة للنصوص */
-body {
-  font-family: 'Inter', 'Cairo', sans-serif; /* default */
-  font-size: 16px;
-  line-height: 1.6;
-  letter-spacing: 0.5px;
-  font-weight: 400;
-  word-wrap: break-word;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* العناوين */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: 0.5px;
-  margin: 0 0 0.5em 0;
-}
-
-/* الفقرات */
-p {
-  margin: 0 0 1em 0;
-  font-weight: 400;
-}
-
-/* القوائم */
-ul, ol {
-  margin: 0 0 1em 1.5em;
-  padding: 0;
-  line-height: 1.6;
-}
-
-/* الوضع الفاتح / الداكن */
-body.light-body {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-body.dark-body {
-  background-color: #121224;
-  color: #f5f5dc;
-}
-
-/* الحاوية والمساحة الرئيسية */
+/* =========================
+   App.css - الحاوية العامة
+========================= */
 .app-container {
-  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;       /* نسمح بالامتداد الكامل */
+  margin: 0 auto;
+  padding-inline: 1rem;  /* حماية من الالتصاق يمين/يسار */
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-.main-content {
+.app-content {
   flex: 1;
-  min-height: calc(100vh - 140px);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* الخطوط عبر class names قصيرة */
-body.inter {
-  font-family: 'Inter', 'Cairo', sans-serif;
+footer {
+  margin-top: auto;
 }
 
-body.cairo {
-  font-family: 'Cairo', 'Inter', sans-serif;
+/* =========================
+   Responsive Adjustments
+========================= */
+@media (max-width: 1024px) {
+  .app-container {
+    padding-inline: 1rem; /* حماية من الالتصاق على الشاشات المتوسطة */
+  }
 }
 
-body.lato {
-  font-family: 'Lato', 'El Messiri', sans-serif;
+@media (max-width: 768px) {
+  .app-container {
+    max-width: 100%;      /* تمدد الحاوية بالكامل */
+    padding-inline: 0.8rem; /* تقليل المسافة الجانبية */
+  }
 }
 
-body.roboto {
-  font-family: 'Roboto', sans-serif;
+@media (max-width: 480px) {
+  .app-container {
+    padding-inline: 0.5rem; /* أقصى تقليل على الشاشات الصغيرة */
+  }
 }
 
-/* اتجاه النصوص */
-body[dir="rtl"] {
-  direction: rtl;
-  text-align: right;
+/* =========================
+   Theme support
+========================= */
+body[data-theme="dark"] .app-container {
+  background-color: #121212;
+  color: #f0f0f0;
 }
 
-body[dir="ltr"] {
-  direction: ltr;
-  text-align: left;
+body[data-theme="light"] .app-container {
+  background-color: #f5f5f5;
+  color: #1c1c1c;
 }

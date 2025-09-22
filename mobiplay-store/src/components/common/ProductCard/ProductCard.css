@@ -1,0 +1,165 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 450px;
+  padding: 0;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+/* الصورة */
+.image-wrapper {
+  width: 100%;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.3s ease;
+}
+/* بادج الخصم */
+.discount-badge {
+  position: absolute;
+  top: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  background-color: var(--accent-color);
+  color: var(--accent-text, #fff);
+  z-index: 10;
+}
+
+.discount-badge.en { left: 8px; }
+.discount-badge.ar { right: 8px; }
+
+/* محتوى الكارت */
+.content-wrapper {
+  padding: 0.5rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+}
+
+/* اسم المنتج */
+.product-name {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 700;
+  margin: 0.4rem 0 0.6rem;
+  line-height: 1.5rem;
+  min-height: 3rem;
+}
+
+/* الأسعار حسب اللغة */
+.price-wrapper {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+
+.price-wrapper.en {
+  flex-direction: row;
+}
+.price-wrapper.en .new-price { order: 1; }
+.price-wrapper.en .old-price { order: 2; }
+
+.price-wrapper.ar {
+  flex-direction: row-reverse;
+}
+.price-wrapper.ar .new-price { order: 1; }
+.price-wrapper.ar .old-price { order: 2; }
+
+.old-price {
+  text-decoration: line-through;
+  color: var(--secondary-color);
+  font-size: clamp(0.75rem, 1vw, 0.85rem);
+}
+
+.new-price {
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+/* التقييم */
+.rating-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.review-count {
+  font-size: 0.75rem;
+  color: var(--secondary-color);
+  margin-top: 0.25rem;
+}
+
+/* أزرار السلة */
+.cart-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+  justify-content: center;
+  width: 100%;
+}
+
+.cart-buttons.ltr { flex-direction: row; }
+.cart-buttons.rtl { flex-direction: row-reverse; }
+
+.cart-buttons .btn {
+  flex: 1;
+  padding: 0.5rem 0;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cart-buttons .btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .product-card { min-height: 440px; }
+  .product-name { font-size: 1.1rem; }
+  .new-price { font-size: 1.15rem; }
+}
+
+@media (max-width: 768px) {
+  .product-card { min-height: 430px; }
+  .product-name { font-size: 1rem; }
+  .new-price { font-size: 1.1rem; }
+  .cart-buttons { gap: 0.4rem; }
+}
+
+@media (max-width: 575px) {
+  .product-name { font-size: 0.95rem; line-height: 1.2rem; }
+  .new-price { font-size: 1rem; }
+  .old-price { font-size: 0.75rem; }
+  .cart-buttons { flex-direction: column !important; gap: 0.35rem; }
+  .cart-buttons .btn { font-size: 0.72rem; padding: 0.35rem 0; }
+}

@@ -1,0 +1,114 @@
+.contact-info {
+  flex: 1;
+  min-width: 250px;
+  padding: 0;
+  margin-top: 2rem; /* زيادة المسافة العلوية */
+}
+
+/* الأيقونات ترث اللون من الثيم */
+.icon-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--icon-color);
+  color: #fff;
+  flex-shrink: 0;
+  font-size: 14px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.icon-box:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+/* ترتيب العناصر */
+.contact-info .info-item {
+  display: flex;
+  align-items: center;
+  gap: 14px; /* زيادة المسافة قليلاً للشاشات الأكبر */
+  margin-bottom: 1rem;
+}
+
+/* نصوص وروابط */
+.contact-info .info-text,
+.contact-info .info-link {
+  font-size: 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-info .info-link:hover {
+  text-decoration: underline;
+  transform: translateX(3px);
+  transition: transform 0.2s ease;
+}
+
+/* الهاتف دائمًا LTR */
+.contact-info .info-link[href^="tel"] {
+  direction: ltr;
+}
+
+/* الاتجاه حسب اللغة */
+.rtl { direction: rtl; text-align: right; }
+.ltr { direction: ltr; text-align: left; }
+
+/* =========================
+   التجاوب الاحترافي
+========================= */
+@media (max-width: 1024px) {
+  .contact-info {
+    margin-top: 1.8rem;
+  }
+  .contact-info .info-item {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-info {
+    margin-top: 1.5rem;
+  }
+  .contact-info .info-item {
+    gap: 10px;
+  }
+  .contact-info .info-text,
+  .contact-info .info-link {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-info {
+    margin-top: 1.2rem;
+  }
+  .contact-info .info-item {
+    gap: 8px;
+  }
+  .contact-info .info-text,
+  .contact-info .info-link {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .contact-info {
+    margin-top: 1rem;
+  }
+  .contact-info .info-item {
+    gap: 6px;
+  }
+  .contact-info .info-text,
+  .contact-info .info-link {
+    font-size: 0.85rem;
+  }
+  .icon-box {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+}

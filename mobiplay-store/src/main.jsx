@@ -1,18 +1,48 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';                   // الكومبوننت الرئيسي للتطبيق
-import { Provider } from 'react-redux';   // لتوفير الـ Redux Store لكل الكومبوننتات
-import { store } from './store/store';    // المتجر المركزي (Redux Store)
-import { ThemeProvider } from './context/ThemeContext'; // مزود السياق للثيم (الداكن/الفاتح)
-import './index.css';  // القواعد العامة
-import './App.css';    // التفاصيل الخاصة بالمكونات
-import "./i18n/i18n"; // مهم جداً: استدعاء التهيئة
+// src/index.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 
+import { LanguageProvider } from "./context/LanguageContext";
+import { ThemeProvider } from "./context/ThemeContext";
+import { CartProvider } from "./context/CartContext";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
-  </Provider>
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import App from "./App";
+
+// ملفات CSS العالمية
+import "./styles/theme.css";
+import "./index.css";
+import "./App.css";
+
+// إنشاء React Query Client
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // البيانات تبقى حديثة لمدة 5 دقائق
+      cacheTime: 30 * 60 * 1000, // cache لمدة 30 دقيقة
+      refetchOnWindowFocus: false, // منع إعادة الجلب عند رجوع focus للنافذة
+      retry: 1, // إعادة محاولة واحدة فقط عند الفشل
+    },
+  },
+});
+
+// إنشاء root
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <LanguageProvider>
+        <ThemeProvider>
+          <CartProvider>
+            <QueryClientProvider client={queryClient}>
+              <App />
+            </QueryClientProvider>
+          </CartProvider>
+        </ThemeProvider>
+      </LanguageProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );

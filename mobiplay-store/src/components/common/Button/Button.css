@@ -1,0 +1,151 @@
+/* =========================
+   قاعدة عامة لكل الأزرار (متوافقة مع كل الثيمات)
+========================= */
+.btn, .btn-quantity {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-default, 6px);
+  text-align: center;
+  white-space: nowrap;
+  font-weight: 600;
+  border-radius: var(--border-radius, 6px);
+  cursor: pointer;
+  transition: all var(--transition-default, 0.3s) ease;
+  box-sizing: border-box;
+
+  /* الخلفية حسب الثيم */
+  background-color: var(--primary-color);
+  color: #ffffff; /* النص دائمًا أبيض */
+  border: 1px solid transparent;
+}
+
+/* المحتوى الداخلي */
+.btn span, .btn-quantity span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover / Active / Focus / Disabled */
+.btn:hover:not(.disabled),
+.btn-quantity:hover:not(.disabled) {
+  background-color: var(--accent-color);
+  color: #ffffff; /* يبقى أبيض */
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.btn:active,
+.btn-quantity:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn:focus-visible,
+.btn-quantity:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.btn.disabled,
+.btn:disabled,
+.btn-quantity.disabled,
+.btn-quantity:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+  box-shadow: none;
+}
+
+/* =========================
+   Full width
+========================= */
+.btn.full-width {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* =========================
+   زر العودة فقط
+========================= */
+.btn-back {
+  width: auto !important;
+  min-width: auto !important;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+}
+
+.btn-back.full-width {
+  width: 100% !important;
+  min-width: 100% !important;
+}
+
+.btn-back:hover {
+  background-color: var(--secondary-color);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   زر الكمية (+/-)
+========================= */
+.btn-quantity {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  padding: 0;
+  font-size: 1rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+}
+
+.btn-quantity:hover {
+  background-color: var(--accent-color);
+  color: #ffffff;
+}
+
+/* =========================
+   مربّع الكمية
+========================= */
+.quantity-wrapper input[type="number"] {
+  width: 80px;
+  height: 40px;
+  text-align: center;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--input-text);
+}
+
+/* إزالة أسهم الـ number input */
+.quantity-wrapper input::-webkit-outer-spin-button,
+.quantity-wrapper input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 576px) {
+  .btn:not(.btn-back) {
+    font-size: 0.9rem;
+    padding: 0 1rem;
+    min-width: 100px;
+    height: 38px;
+  }
+  .btn-quantity {
+    width: 32px;
+    height: 32px;
+    font-size: 0.95rem;
+  }
+}

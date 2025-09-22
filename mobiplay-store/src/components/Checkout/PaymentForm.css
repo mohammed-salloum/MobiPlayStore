@@ -1,81 +1,155 @@
-/* الحاوية الرئيسية */
+/* =========================
+   Payment Form Styles (Responsive & Themed)
+========================= */
+
+/* Card Wrapper */
 .payment-form-card {
-  border: 2px solid; /* اللون سيتم تحديده حسب الوضع */
+  width: 100%;
+  max-width: 600px;
+  border: 2px solid var(--border-color);
   border-radius: 12px;
   padding: 24px;
+  background-color: var(--bg-color); 
+  color: var(--text-color);         /* لون النص حسب الثيم */
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  color: inherit;
+  box-sizing: border-box;
 }
 
-/* الوضع الفاتح */
-.payment-form-card.light-mode {
-  background-color: #f5f5dc;
-  color: #000;
-  border-color: #556b2f;
-}
-
-/* الوضع الداكن */
-.payment-form-card.dark-mode {
-  background-color: #2a2a3d;
-  color: #ddd;
-  border-color: #d4af37;
-}
-
-/* العنوان */
+/* Form Title */
 .payment-form-title {
-  margin-bottom: 24px;
   font-weight: 700;
   text-align: center;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  line-height: 1.2;
 }
 
-/* الوسوم */
+/* Labels */
 .form-label {
   font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
-/* حقول الإدخال و textarea */
+/* Inputs & Textareas */
 .form-control {
   width: 100%;
   border-radius: 6px;
-  border: 1px solid #ced4da;
-  background-color: white;
-  color: #000;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg); /* نفس لون الثيم */
+  color: var(--text-color);
   min-height: 48px;
   padding: 8px 12px;
+  font-family: var(--main-font);
+  font-size: 1rem;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
-.payment-form-card.dark-mode .form-control {
-  background-color: #121224;
-  color: #eee;
-  border-color: #121224;
-}
-
-/* placeholder */
 .form-control::placeholder {
-  color: #556b2f;
-}
-.payment-form-card.dark-mode .form-control::placeholder {
-  color: #d4af37;
+  color: var(--text-color);
+  opacity: 0.7;
 }
 
-/* تأثير التركيز */
 .form-control:focus {
   outline: none;
-  border-color: #556b2f;
-  box-shadow: 0 0 8px #556b2f;
-  background-color: #f5f5dc;
-  color: #000;
-}
-.payment-form-card.dark-mode .form-control:focus {
-  border-color: #d4af37;
-  box-shadow: 0 0 8px #d4af37;
-  background-color: #1e1e2f;
-  color: #eee;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 8px var(--primary-color);
 }
 
-/* textarea */
 textarea.form-control {
   resize: vertical;
   min-height: 80px;
 }
+
+/* Custom Select Wrapper */
+.custom-select-container {
+  margin-top: 0.5rem;
+}
+
+/* Buttons */
+.payment-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 1.5rem;
+}
+
+.payment-buttons.row {
+  flex-direction: row;
+  gap: 16px;
+}
+
+/* Full width buttons */
+.btn.full-width {
+  width: 100%;
+  background-color: var(--primary-color);
+  color: var(--btn-text-color, #fff);
+  border: 1px solid var(--primary-color);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.btn.full-width:hover {
+  background-color: var(--primary-hover, var(--primary-color));
+}
+
+/* =========================
+   Form Messages (Under Form)
+========================= */
+.form-message {
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-top: 16px; 
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  border: 1px solid;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  box-sizing: border-box;
+  background-color: var(--card-bg); /* متوافق مع الثيم */
+  color: var(--text-color);
+}
+
+/* ظهور الرسالة */
+.form-message.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Success message */
+.form-message.success {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background-color: var(--primary-bg-light, rgba(0, 128, 0, 0.05));
+}
+
+/* Error message */
+.form-message.error {
+  border-color: var(--error-color, #ff4d4f);
+  color: var(--error-color, #ff4d4f);
+  background-color: var(--error-bg-light, rgba(255, 77, 79, 0.05));
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .payment-form-card { padding: 20px; }
+  .payment-form-title { font-size: 1.6rem; margin-bottom: 1.8rem; }
+}
+
+@media (max-width: 768px) {
+  .payment-form-card { padding: 18px; }
+  .payment-form-title { font-size: 1.5rem; margin-bottom: 1.6rem; }
+}
+
+@media (max-width: 480px) {
+  .payment-form-card { padding: 16px; }
+  .payment-form-title { font-size: 1.4rem; margin-bottom: 1.5rem; }
+}
+
+/* RTL Support */
+.rtl { direction: rtl; }
+.ltr { direction: ltr; }

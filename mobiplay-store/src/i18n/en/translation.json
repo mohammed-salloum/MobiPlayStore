@@ -1,0 +1,261 @@
+{
+  "siteName": "MobiPlayStore",
+  "nav": {
+    "home": "Home",
+    "productsLabel": "Products",
+    "offersLabel": "Offers",
+    "aboutLabel": "About Us",
+    "contactLabel": "Contact Us",
+    "more": "More",
+    "faqLabel": "FAQ",
+    "reviewsLabel": "Reviews",
+    "cart": "Cart",
+    "itemsInCart": "Items in Cart"
+  },
+  "common": {
+    "retry": "Retry"
+  },
+  "products": {
+    "title": "Products",
+    "addToCart": "Add to Cart",
+    "removeFromCart": "Remove from Cart",
+    "details": "Details",
+    "rateThis": "Rate this product:",
+    "reviews": "Reviews",
+    "review": "Review",
+    "noProducts": "No products available currently.",
+    "fetchError": "Failed to load products. Please try again later."
+  },
+  "product": {
+    "game": "Game",
+    "price": "Price",
+    "description": "Description",
+    "quantity": "Quantity",
+    "totalPrice": "Total Price",
+    "addToCart": "Add to Cart",
+    "updateCart": "Update Cart",
+    "remove": "Remove"
+  },
+  "spinner": {
+    "loading": "Loading..."
+  },
+  "productDetails": {
+    "back": "Back",
+    "rateThis": "Rate this game:",
+    "thankYou": "Thank you for rating!",
+    "game": "Game",
+    "price": "Price",
+    "description": "Description",
+    "readMore": "Read More",
+    "readLess": "Read Less",
+    "noDescription": "No description available",
+    "quantity": "Quantity",
+    "totalPrice": "Total Price",
+    "addToCart": "Add to Cart",
+    "updateCart": "Update Cart",
+    "remove": "Remove",
+    "notFound": "Product not found"
+  },
+  "offers": {
+  "title": "Special Offers & Discounts",
+  "noOffers": "No offers available",
+  "fetchError": "Failed to load offers. Please try again later.",
+  "viewDetails": "View Details",
+  "retry": "Retry"
+},
+  "hero": {
+    "welcome": "Welcome to ",
+    "siteName": "MobiPlayStore",
+    "subtitle": "Buy top-up cards for the most popular mobile games",
+    "exploreButton": "Explore Game Cards"
+  },
+  "features": {
+    "sectionTitle": "Why Choose MobiPlayStore?",
+    "fastDelivery": {
+      "title": "Fast Delivery",
+      "text": "Instant codes delivered immediately after purchase, no waiting!"
+    },
+    "securePayment": {
+      "title": "Secure Payment",
+      "text": "We use the latest security standards to protect your transactions."
+    },
+    "wideSelection": {
+      "title": "Wide Game Selection",
+      "text": "Top-up cards for PUBG, Free Fire, Call of Duty Mobile, and more."
+    }
+  },
+  "about": {
+    "title": "About MobiPlayStore",
+    "description": "MobiPlayStore is your trusted source for mobile game top-up cards. We’re passionate about delivering fast, secure, and affordable digital products for gamers around the world.",
+    "features": {
+      "selection": {
+        "title": "Wide Game Selection",
+        "text": "We offer top-ups for popular mobile games like PUBG, Free Fire, and more."
+      },
+      "security": {
+        "title": "Safe & Secure",
+        "text": "Your transactions are protected with the latest security standards."
+      },
+      "delivery": {
+        "title": "Instant Delivery",
+        "text": "Receive your codes instantly after payment – no waiting."
+      }
+    },
+    "footerText": "Whether you're a casual player or a competitive gamer, MobiPlayStore is here to make your gaming experience smoother and more rewarding."
+  },
+"contact": {
+  "title": "Contact Us",
+  "subtitle1": "Contact us about anything related to our company or services.",
+  "subtitle2": "We'll do our best to get back to you as soon as possible.",
+"form": {
+  "nameLabel": "Name",
+  "namePlaceholder": "Your full name",
+  "phoneLabel": "Phone Number",
+  "phonePlaceholder": "Your phone number",
+  "emailLabel": "Email",
+  "emailPlaceholder": "Your email",
+  "companyLabel": "Company",
+  "companyPlaceholder": "Your company name",
+  "subjectLabel": "Subject",
+  "subjectPlaceholder": "Enter the subject",
+  "questionLabel": "Question",
+  "questionPlaceholder": "Write your question here...",
+
+  "submitButton": "Submit",
+  "sending": "Sending...",
+  "successMessage": "✅ Thank you! Your message has been sent successfully.",
+  "errorMessage": "❌ Please fill in the form correctly.",
+
+  "invalidEmail": "Invalid email address",
+  "invalidPhone": "Invalid phone number",
+  "nameRequired": "Name is required",
+  "nameInvalid": "Name contains invalid characters",
+  "phoneRequired": "Phone number is required",
+  "emailRequired": "Email is required",
+  "subjectRequired": "Subject is required",
+  "questionRequired": "Question is required",
+  "questionInvalid": "Question contains invalid characters",
+  "companyInvalid": "Invalid company name",
+  "notEmpty": "Field cannot be empty",
+
+  "min3Chars": "Must be at least 3 characters",
+  "max50Chars": "Must not exceed 50 characters",
+  "max100Chars": "Must not exceed 100 characters",
+  "max500Chars": "Must not exceed 500 characters"
+},
+  "info": {
+    "companyName": "MobiPlayStore",
+    "address": "Tartous, Syria",
+    "email": "info@mobiplaystore.com",
+    "phone": "+(963) 944 123 456"
+  }
+}
+,
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How can I purchase a game top-up card?",
+        "answer": "Browse our products, select the card you want, choose quantity, and proceed to checkout."
+      },
+      {
+        "question": "What payment methods do you accept?",
+        "answer": "We accept credit cards, PayPal, and other popular payment gateways."
+      },
+      {
+        "question": "How long does it take to receive my code?",
+        "answer": "You will receive your code instantly after payment confirmation."
+      },
+      {
+        "question": "Can I return or exchange a top-up card?",
+        "answer": "No returns or exchanges for digital products. Please check before purchasing."
+      },
+      {
+        "question": "Is my personal information safe?",
+        "answer": "Yes. We use industry-standard encryption and security practices to protect your data."
+      }
+    ]
+  },
+  "reviews": {
+    "title": "Customer Testimonials",
+    "items": [
+      {
+        "name": "Mohammed Salloum",
+        "feedback": "Great service and fast delivery! I highly recommend.",
+        "rating": 5
+      },
+      {
+        "name": "Emad Salloum",
+        "feedback": "Very easy to use platform and excellent support.",
+        "rating": 4.5
+      },
+      {
+        "name": "Mike Johnson",
+        "feedback": "Amazing offers and perfect for mobile gamers.",
+        "rating": 5
+      },
+      {
+        "name": "Sarah Williams",
+        "feedback": "Fast response and smooth purchase experience.",
+        "rating": 4.5
+      }
+    ]
+  },
+  "footer": {
+    "usefulLinks": "Useful Links",
+    "storeName": "MobiPlayStore",
+    "city": "Tartous",
+    "country": "Syria",
+    "aboutUs": "About Us",
+    "aboutText": "MobiPlayStore offers fast, secure top-ups for popular mobile games like PUBG and Free Fire. Instant delivery and reliable transactions for all gamers.",
+    "connect": "Connect With Us",
+    "allRightsReserved": "Copyright © 2025 MobiPlayStore - All rights reserved",
+    "poweredBy": "Powered by",
+    "freeWebsite": "Free Website"
+  },
+  "home": "Home",
+  "aboutLabel": "About Us",
+  "contactLabel": "Contact Us",
+  
+  "cart": {
+    "title": "Your Cart",
+    "emptyMessage": "Your cart is empty.",
+    "continueShopping": "Continue Shopping",
+    "cancel": "Cancel",
+    "total": "Total",
+    "proceedToCheckout": "Proceed to Checkout",
+    "clearCart": "Clear Cart"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "emptyMessage": "Your cart is empty. Please add items before checkout.",
+    "orderSummary": "Order Summary",
+    "total": "Total",
+    "paymentDetails": "Payment Details",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Mohammed Salloum",
+    "email": "Email Address",
+    "emailPlaceholder": "example@example.com",
+    "shippingAddress": "Shipping Address",
+    "addressPlaceholder": "123 Main Street, City, Country",
+    "paymentMethod": "Payment Method",
+    "paymentOptions": {
+      "credit-card": "Credit Card",
+      "paypal": "PayPal",
+      "bank-transfer": "Bank Transfer"
+    },
+    "confirmPayment": "Confirm Payment",
+    "backToCart": "Back to Cart",
+    "processing": "Processing...",
+    "paymentSuccess": "🎉 Thank you for your purchase!",
+    "confirmationMessage": "Here is a summary of your order:",
+    "finish": "Finish",
+    "fillAllFields": "Please fill in all required fields."
+  },
+  "pagination": {
+    "prev": "Prev",
+    "next": "Next"
+  }
+  }
+
+

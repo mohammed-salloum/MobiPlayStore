@@ -1,0 +1,287 @@
+/* =========================
+   Global Theme Variables (Base)
+========================= */
+
+/* القيم المشتركة لكل الثيمات */
+:root {
+  --card-shadow-opacity-light: 0.08;
+  --card-shadow-opacity-dark: 0.6;
+  --card-shadow-opacity-sepia: 0.1;
+  --card-shadow-opacity-colorblind: 0.12;
+
+  /* Fonts default */
+  --main-font: 'Inter', sans-serif;
+
+  /* Common UI */
+  --border-radius: 6px;
+  --transition-default: 0.3s ease;
+  --gap-default: 6px;
+
+  /* =========================
+     Stars & Feedback
+  ========================= */
+  --star-empty: #cbd5e1;
+  --star-filled: #f59e0b;
+  --feedback-color: #1c1c1c;
+
+  /* =========================
+     Form Messages (Success / Error)
+  ========================= */
+  --form-success-bg: #d4edda;
+  --form-success-text: #155724;
+  --form-success-border: #c3e6cb;
+
+  --form-error-bg: #f8d7da;
+  --form-error-text: #721c24;
+  --form-error-border: #f5c6cb;
+
+  /* =========================
+     Spinner
+  ========================= */
+  --spinner-color: #2563eb; /* default color */
+}
+
+/* =========================
+   Theme Specific
+========================= */
+
+/* 🌞 Light */
+body[data-theme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #1c1c1c;
+  --input-bg: #ffffff;
+  --input-text: #1c1c1c;
+
+  --primary-color: #2563eb;
+  --secondary-color: #10b981;
+  --accent-color: #f59e0b;
+  --border-color: #e5e7eb;
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0,0,0,var(--card-shadow-opacity-light));
+  --icon-color: #2563eb;
+  --spinner-color: #2563eb;
+
+  --error-color: #dc2626;
+  --primary-hover: #1d4ed8;
+
+  --dropdown-bg: #f9fafb;
+  --dropdown-hover-bg: #e5e7eb;
+  --dropdown-selected-bg: #2563eb;
+  --dropdown-text: #1c1c1c;
+  --selected-text-color: #ffffff;
+
+  --navbar-bg: #ffffff;
+  --navbar-text: #1c1c1c;
+  --navbar-icon: #2563eb;
+
+  --star-empty: #cbd5e1;
+  --star-filled: #f59e0b;
+  --feedback-color: #1c1c1c;
+
+  --social-facebook: #1877f2;
+  --social-x: #000000;
+  --social-linkedin: #0a66c2;
+  --social-youtube: #ff0000;
+  --social-instagram: #e4405f;
+  --social-pinterest: #bd081c;
+}
+
+/* 🌚 Dark */
+body[data-theme="dark"] {
+  --bg-color: #0f172a;
+  --text-color: #f8fafc;
+  --input-bg: #1e293b;
+  --input-text: #f8fafc;
+
+  --primary-color: #3b82f6;
+  --secondary-color: #22d3ee;
+  --accent-color: #facc15;
+  --border-color: #334155;
+  --card-bg: #1e293b;
+  --card-shadow: rgba(0,0,0,var(--card-shadow-opacity-dark));
+  --icon-color: var(--accent-color);
+  --spinner-color: #facc15;
+
+  --error-color: #f87171;
+  --primary-hover: #2563eb;
+
+  --dropdown-bg: #1f2937;
+  --dropdown-hover-bg: #374151;
+  --dropdown-selected-bg: #3b82f6;
+  --dropdown-text: #f8fafc;
+  --selected-text-color: #ffffff;
+
+  --navbar-bg: #1e293b;
+  --navbar-text: #f8fafc;
+  --navbar-icon: #facc15;
+
+  --star-empty: #475569;
+  --star-filled: #facc15;
+  --feedback-color: #f8fafc;
+
+  --social-facebook: #1877f2;
+  --social-x: #000000;
+  --social-linkedin: #0a66c2;
+  --social-youtube: #ff0000;
+  --social-instagram: #e4405f;
+  --social-pinterest: #ef4444;
+}
+
+/* 📜 Sepia */
+body[data-theme="sepia"] {
+  --bg-color: #f4ecd8;
+  --text-color: #4b3832;
+  --input-bg: #fdf6ec;
+  --input-text: #4b3832;
+
+  --primary-color: #a0522d;
+  --secondary-color: #d4a373;
+  --accent-color: #b87333;
+  --border-color: #d6c3a5;
+  --card-bg: #fdf6ec;
+  --card-shadow: rgba(0,0,0,var(--card-shadow-opacity-sepia));
+  --icon-color: var(--primary-color);
+  --spinner-color: #a0522d;
+
+  --error-color: #b45309;
+  --primary-hover: #92400e;
+
+  --dropdown-bg: #fdf6ec;
+  --dropdown-hover-bg: #e9dcc5;
+  --dropdown-selected-bg: #a0522d;
+  --dropdown-text: #4b3832;
+  --selected-text-color: #ffffff;
+
+  --navbar-bg: #fdf6ec;
+  --navbar-text: #4b3832;
+  --navbar-icon: #a0522d;
+
+  --star-empty: #a78b6f;
+  --star-filled: #b87333;
+  --feedback-color: #4b3832;
+
+  --social-facebook: #8b5e3c;
+  --social-x: #4b3832;
+  --social-linkedin: #a0522d;
+  --social-youtube: #b87333;
+  --social-instagram: #996633;
+  --social-pinterest: #8b4513;
+}
+
+/* 🎨 Colorblind Friendly */
+body[data-theme="colorblind"] {
+  --bg-color: #f8fafc;
+  --text-color: #111827;
+  --input-bg: #ffffff;
+  --input-text: #111827;
+
+  --primary-color: #0072b2;
+  --secondary-color: #009e73;
+  --accent-color: #d55e00;
+  --border-color: #cbd5e1;
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0,0,0,var(--card-shadow-opacity-colorblind));
+  --icon-color: var(--primary-color);
+  --spinner-color: #0072b2;
+
+  --error-color: #b91c1c;
+  --primary-hover: #005582;
+
+  --dropdown-bg: #f1f5f9;
+  --dropdown-hover-bg: #e2e8f0;
+  --dropdown-selected-bg: #0072b2;
+  --dropdown-text: #111827;
+  --selected-text-color: #ffffff;
+
+  --navbar-bg: #ffffff;
+  --navbar-text: #111827;
+  --navbar-icon: #0072b2;
+
+  --star-empty: #94a3b8;
+  --star-filled: #0072b2;
+  --feedback-color: #111827;
+
+  --social-facebook: #0072b2;
+  --social-x: #000000;
+  --social-linkedin: #005582;
+  --social-youtube: #d55e00;
+  --social-instagram: #009e73;
+  --social-pinterest: #cc3311;
+}
+
+/* =========================
+   Stars Components (All)
+========================= */
+.stars-wrapper,
+.stars-readonly,
+.rating-interactive-wrapper {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--main-font);
+}
+
+.rating-star,
+.star-readonly {
+  font-size: 22px;
+  color: var(--star-empty);
+  transition: color 0.2s;
+}
+
+.rating-star.filled,
+.rating-star.half,
+.star-readonly.filled,
+.star-readonly.half {
+  color: var(--star-filled);
+}
+
+.rating-text,
+.rate-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--feedback-color);
+  text-align: center;
+}
+
+/* دعم RTL */
+.stars-wrapper.rtl,
+.rating-readonly-wrapper[dir="rtl"] .stars-readonly,
+.rating-interactive-wrapper[dir="rtl"] .stars-wrapper {
+  flex-direction: row-reverse;
+}
+
+.rating-readonly-wrapper[dir="rtl"] .star-readonly.half {
+  transform: scaleX(-1);
+  display: inline-block;
+}
+
+/* =========================
+   Spinner
+========================= */
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.spinner-wrapper-fullscreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 6px solid var(--border-color);
+  border-top: 6px solid var(--spinner-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

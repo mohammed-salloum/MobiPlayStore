@@ -1,102 +1,54 @@
-import React, { useContext, useRef, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
+import { LanguageContext } from "../../context/LanguageContext";
 import { useTranslation } from "react-i18next";
-import "./HeroSection.css";
-import Button from "../common/Button";
 import { motion } from "framer-motion";
+import Button from "../common/Button/Button";
+import AnimatedBackground from "../common/AnimatedBackground/AnimatedBackground";
+import "./HeroSection.css";
 
 const HeroSection = () => {
-  const { darkMode } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
-  const headerRef = useRef(null);
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
-    <header
-      className={`hero-section ${darkMode ? "dark" : "light"}`}
-      dir={isRTL ? "rtl" : "ltr"}
-      ref={headerRef}
-    >
-      <div className="overlay" />
+    <header className={`hero-section`} dir={isRTL ? "rtl" : "ltr"}>
+      {/* الخلفية المتحركة */}
+      <AnimatedBackground theme={theme} />
 
-      <div className="content">
-        <h1 className="title d-flex justify-content-center align-items-center gap-3">
-          {/* Welcome */}
-          {isMobile ? (
-            <>
-              <span style={{ display: "block", opacity: 1 }}>{t("hero.welcome")}</span>
-              <span style={{ display: "block", opacity: 1 }}>{t("hero.siteName")}</span>
-            </>
-          ) : (
-            <>
-              <motion.span
-                initial={{ x: isRTL ? 200 : -200, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: false, amount: 0.5 }}
-                animate={{ y: [0, -3, 0, 3, 0] }}
-                transition={{
-                  y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-                  default: { duration: 1.2, delay: 0 },
-                }}
-              >
-                {t("hero.welcome")}
-              </motion.span>
-
-              <motion.span
-                initial={{ x: isRTL ? -200 : 200, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: false, amount: 0.5 }}
-                animate={{ y: [0, -3, 0, 3, 0] }}
-                transition={{
-                  y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-                  default: { duration: 1.2, delay: 0.2 },
-                }}
-              >
-                {t("hero.siteName")}
-              </motion.span>
-            </>
-          )}
-        </h1>
-
-        {/* Subtitle */}
-        {isMobile ? (
-          <p className="subtitle" style={{ opacity: 1 }}>
-            {t("hero.subtitle")}
-          </p>
-        ) : (
-          <motion.p
-            initial={{ x: isRTL ? 200 : -200, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: false, amount: 0.5 }}
-            animate={{ y: [0, -3, 0, 3, 0] }}
-            transition={{
-              y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-              default: { duration: 1.2, delay: 0.3 },
-            }}
-            className="subtitle"
-          >
-            {t("hero.subtitle")}
-          </motion.p>
-        )}
-
-        {/* Button */}
-        <motion.div
-          className="button-float"
-          initial={{ y: 100, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
+      <div className="hero-content">
+        <motion.h1
+          className="hero-title"
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
+          viewport={{ once: false, amount: 0.6 }}
         >
-          <Button to="/products" variant="browse" dark={darkMode}>
+          {t("hero.welcome")} <span>{t("hero.siteName")}</span>
+        </motion.h1>
+
+        <motion.p
+          className="hero-subtitle"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          viewport={{ once: false, amount: 0.6 }}
+        >
+          {t("hero.subtitle")}
+        </motion.p>
+
+        <motion.div
+          className="hero-button"
+          initial={{ scale: 0.8, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          viewport={{ once: false, amount: 0.6 }}
+        >
+          <Button to={`/${language}/products`} variant="browse">
             {t("hero.exploreButton")}
           </Button>
         </motion.div>

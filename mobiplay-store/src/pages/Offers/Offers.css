@@ -1,0 +1,27 @@
+/* شبكة Grid للعروض */
+.offers-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(5, 1fr);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1400px) { .offers-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 1200px) { .offers-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 992px)  { .offers-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 576px)  { .offers-grid { grid-template-columns: 1fr; } }
+
+/* بطاقات العروض */
+.offer-card {
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px var(--card-shadow);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-color);
+  box-shadow: 0 8px 16px var(--card-shadow-hover);
+}

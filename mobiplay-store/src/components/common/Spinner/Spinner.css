@@ -1,0 +1,29 @@
+/* wrapper عادي */
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0; /* مسافة فوق وتحت */
+}
+
+/* wrapper يغطي كامل الشاشة */
+.spinner-wrapper-fullscreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* يغطي 80% من ارتفاع الصفحة */
+}
+
+/* الدائرة الدوارة */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 6px solid var(--border-color);
+  border-top: 6px solid var(--spinner-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

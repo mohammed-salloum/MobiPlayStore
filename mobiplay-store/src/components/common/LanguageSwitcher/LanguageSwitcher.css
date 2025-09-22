@@ -1,0 +1,80 @@
+.language-switcher {
+  display: inline-flex;    
+  align-items: center;     
+  position: relative;      
+}
+
+/* زر تبديل اللغة */
+.btn-toggle-language {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  border: none;
+  background: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-toggle-language:hover {
+  background: var(--secondary-color);
+  color: var(--bg-color);
+}
+
+.caret-icon {
+  font-size: 0.9rem;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+  color: var(--text-color);
+}
+
+.caret-icon.open {
+  transform: rotate(180deg);
+}
+
+/* القائمة على شكل شبكة */
+.language-menu.grid-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 45px);
+  gap: 6px;
+  padding: 6px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--card-shadow);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  z-index: 2000;
+}
+
+/* أزرار اللغة */
+.language-btn {
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 8px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s, color 0.2s;
+}
+
+.language-btn:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 10px var(--card-shadow);
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+}
+
+/* أيقونات الأعلام */
+.language-btn .fi {
+  font-size: 2.2rem; 
+  line-height: 45px; /* لمحاذاة رأسية كاملة داخل الزر */
+}

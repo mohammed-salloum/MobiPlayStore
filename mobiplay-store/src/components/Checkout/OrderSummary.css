@@ -1,98 +1,136 @@
-/* ======= بطاقة ملخص الطلب (Order Summary Card) ======= */
-.order-summary-card.light-mode {
-  background-color: #f5f5dc;
-  border: 2px solid #556b2f; /* زيتوني */
-  color: #000;
-  border-radius: 12px;
+/* =========================
+   Professional Order Summary Card - Single Row
+========================= */
+.order-summary-card {
+  border-radius: 16px;
   padding: 24px;
+  background-color: var(--bg-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
-.order-summary-card.dark-mode {
-  background-color: #2a2a3d;
-  border: 2px solid #d4af37; /* ذهبي */
-  color: #ddd;
-  border-radius: 12px;
-  padding: 24px;
-}
-
+/* Title */
 .order-summary-title {
-  margin-bottom: 24px;
+  font-size: 1.9rem;
   font-weight: 700;
-  color: inherit;
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--text-color);
 }
 
+/* Items list */
 .order-items-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-/* خلفية القائمة حسب المود */
-.order-summary-card.light-mode .order-items-list {
-  background-color: #fff;
-}
-
-.order-summary-card.dark-mode .order-items-list {
-  background-color: #121224;
-}
-
-/* عناصر الطلب */
+/* Single item */
 .order-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  justify-content: space-between;
+  flex-wrap: nowrap; /* البقاء على سطر واحد */
+  background-color: var(--bg-color);
+  border-radius: 12px;
   padding: 12px 16px;
-  border-radius: 8px;
-  background-color: #f8f9fa;
-  transition: background-color 0.3s ease;
-  background-color: transparent;
+  transition: all 0.3s ease;
 }
 
-.order-summary-card.dark-mode .order-item {
-  background-color: #121224;
+.order-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
+/* Item info */
 .order-item-info {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: 1;
+  min-width: 0; /* للسماح بالتصغير عند الحاجة */
 }
 
+/* Image */
 .order-item-img {
   width: 50px;
   height: 50px;
   object-fit: cover;
   border-radius: 8px;
-  background-color: #fff;
-  padding: 2px;
+  flex-shrink: 0; /* لا ينكمش */
 }
 
-.order-item-name-qty {
+/* Name */
+.order-item-name {
   font-weight: 600;
-  color: inherit;
+  font-size: 1rem;
+  color: var(--text-color);
+  flex: 1; /* يأخذ كل المساحة المتاحة */
+  min-width: 0; /* للسماح بالقص عند الحاجة */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
+/* Quantity badge */
+.order-item-qty-badge {
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  min-width: 32px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Price */
 .order-item-price {
   font-weight: 700;
-  color: #556b2f; /* زيتوني */
+  font-size: 1rem;
+  color: var(--primary-color);
+  flex-shrink: 0;
+  white-space: nowrap;
+  text-align: right;
+  margin-left: 16px;
 }
 
-.order-summary-card.dark-mode .order-item-price {
-  color: #d4af37; /* ذهبي */
+[dir="rtl"] .order-item-price {
+  margin-left: 0;
+  margin-right: 16px;
 }
 
+/* Total */
 .order-total {
   display: flex;
   justify-content: space-between;
   font-weight: 700;
-  font-size: 1.2rem;
-  padding-top: 12px;
-  border-top: 2px solid #556b2f; /* زيتوني */
-  color: #556b2f;
+  font-size: 1.3rem;
+  padding-top: 16px;
+  border-top: 2px solid var(--border-color);
+  margin-top: 12px;
+  color: var(--text-color);
 }
 
-.order-summary-card.dark-mode .order-total {
-  border-top-color: #d4af37; /* ذهبي */
-  color: #d4af37;
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 480px) {
+  .order-item {
+    flex-direction: column; /* تتحول للعمود فقط على الهواتف */
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .order-item-img { width: 35px; height: 35px; }
+  .order-item-name { font-size: 0.85rem; white-space: normal; }
+  .order-item-qty-badge { font-size: 0.8rem; }
+  .order-item-price { font-size: 0.85rem; margin-left: 0; }
 }
+

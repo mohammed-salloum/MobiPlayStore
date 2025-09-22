@@ -1,0 +1,96 @@
+/* =========================
+   checkout.css - صفحة Checkout
+========================= */
+
+/* Wrapper رئيسي */
+.checkout-container {
+  inline-size: min(1200px, 100%);
+  margin-inline: auto;
+  padding-top: calc(var(--navbar-height, 80px) + 2rem); /* مسافة فوق العنوان */
+  padding-bottom: 1rem;
+  padding-inline: clamp(1rem, 5vw, 2rem);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  box-sizing: border-box;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* العنوان */
+.checkout-title {
+  font-weight: 700;
+  text-align: center;
+  font-size: 2rem;
+  margin-block: 2rem; /* مسافة فوق وتحت */
+  line-height: 1.2;
+}
+
+/* Layout المحتوى */
+.checkout-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  max-inline-size: 1200px;
+  margin-inline: auto;
+}
+
+/* الأعمدة */
+.order-summary-column,
+.payment-form-column {
+  flex: 1 1 45%; /* يسمح بالتمدد قليلاً */
+  min-inline-size: 280px; /* الحد الأدنى للعمود */
+  max-inline-size: 550px; /* الحد الأقصى للعرض */
+}
+
+/* Responsive Adjustments */
+
+/* Large desktops */
+@media (min-width: 1025px) {
+  .checkout-title {
+    font-size: 2rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .checkout-container {
+    padding-top: calc(var(--navbar-height, 70px) + 2rem);
+  }
+  .checkout-title {
+    font-size: 1.85rem;
+  }
+  .checkout-content {
+    gap: 1.5rem;
+  }
+}
+
+/* Small screens / Mobiles */
+@media (max-width: 768px) {
+  .checkout-title {
+    font-size: 1.65rem;
+  }
+  .checkout-content {
+    gap: 1.2rem;
+  }
+}
+
+/* Extra small devices / Phones */
+@media (max-width: 480px) {
+  .checkout-title {
+    font-size: 1.45rem;
+  }
+  .checkout-content {
+    gap: 1rem;
+  }
+}
+
+/* Very small screens / 350px */
+@media (max-width: 350px) {
+  .checkout-title {
+    font-size: 1.3rem;
+    margin-block: 1rem;
+  }
+  .checkout-content {
+    gap: 0.8rem;
+  }
+}

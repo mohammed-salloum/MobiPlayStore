@@ -1,84 +1,46 @@
 .hero-section {
-  min-height: 100vh;
   position: relative;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   overflow: hidden;
-  background-image: url('../../assets/home.PNG');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  padding: 0 20px;
 }
 
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.3);
-  z-index: 0;
-}
-
-.content {
+.hero-content {
   position: relative;
-  z-index: 1;
-  max-width: 700px;
-  width: 90%;
-  padding: 1rem;
+  z-index: 2;
+  width: 100%;
+  transition: background 0.6s ease, color 0.6s ease, box-shadow 0.6s ease;
 }
 
-.hero-section.light .title,
-.hero-section.light .subtitle {
-  color: #fff;
-  text-shadow: 0 0 15px rgba(85, 107, 47, 0.7); /* ظل زيتوني بنفس ستايل الدارك */
-}
-
-.hero-section.dark .title,
-.hero-section.dark .subtitle {
-  color: #fff;
-  text-shadow: 0 0 15px rgba(255, 215, 0, 0.6); /* ظل ذهبي */
-}
-
-
-.title {
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
+.hero-title {
+  font-size: 2.8rem;
   font-weight: bold;
-  margin-bottom: 1rem;
-  line-height: 1.2;
-  white-space: normal;
-  word-break: normal;
-  text-align: center;
+  margin: 0;
+  transition: color 0.6s ease, text-shadow 0.6s ease;
 }
 
-.subtitle {
-  font-size: clamp(1rem, 3vw, 1.25rem);
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  text-align: center;
+.hero-subtitle {
+  font-size: 1.4rem;
+  margin: 15px 0 25px;
+  transition: color 0.6s ease, text-shadow 0.6s ease;
 }
 
-/* حركة مستمرة للزر */
-@keyframes floatButton {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
-}
-
-.button-float {
-  display: inline-block;
-  animation: floatButton 2s ease-in-out infinite;
-}
-
-/* على الموبايل */
+/* =========================
+   Responsive Enhancements
+========================= */
 @media (max-width: 768px) {
-  .title span {
-    animation: none !important;  /* توقف حركة العنوان */
-    display: block;              /* كل كلمة على سطر جديد */
-  }
+  .hero-title { font-size: 2rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .hero-content { padding: 20px 10px; text-align: center; }
+  .hero-section { height: auto; padding-top: 100px; }
+}
 
-  .title {
-    flex-direction: column;      /* اجعل العنوان في سطرين */
-    text-align: center;
-  }
+@media (max-width: 480px) {
+  .hero-title { font-size: 1.6rem; }
+  .hero-subtitle { font-size: 0.9rem; }
+  .hero-section { padding-top: 120px; }
 }

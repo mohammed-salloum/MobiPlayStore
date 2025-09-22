@@ -1,74 +1,90 @@
-/* FeaturesSection.css */
-.features-section.dark {
-  color: #f1f1f1;
+.features-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60px 20px;
+  overflow: hidden;
+  width: 100%;
+  transition: all 0.3s ease;
+  color: var(--text-color);
+  z-index: 1;
 }
 
-.features-section.light {
-  color: #000;
+/* العنوان */
+.features-title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: bold;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
 }
 
-.feature-card.dark {
-  background-color: #121224 !important;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: none;
-  color: #eee;
-  border-radius: 8px;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+/* الشبكة */
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
-.feature-card.light {
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+/* البطاقة */
+.feature-card {
+  border-radius: 10px;
+  padding: 20px;
+  width: calc(33.333% - 30px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+  border: 2px solid var(--border-color);
+  box-shadow: var(--card-shadow);
 }
-
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 15px 3px rgba(0, 123, 255, 0.3);
 }
 
-.feature-card.dark:hover {
-  box-shadow: 0 0 15px 3px rgba(255, 215, 0, 0.6);
-}
-
-/* ======== Icons ======== */
+/* الأيقونات */
 .icon-wrapper {
-  display: inline-block;
-  transition: transform 0.3s ease;
-  color: inherit;
+  margin-bottom: 15px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  color: var(--icon-color);
 }
 
-/* حركة مستمرة خفيفة للأيقونات */
-@keyframes iconRotate {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(3deg); }
-  50% { transform: rotate(-3deg); }
-  75% { transform: rotate(3deg); }
-  100% { transform: rotate(0deg); }
+/* النصوص */
+.feature-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.feature-desc {
+  font-size: 1rem;
 }
 
-.icon-wrapper.animate {
-  animation: iconRotate 4s infinite ease-in-out;
-}
-
-/* ألوان الأيقونات حسب الوضع */
-.feature-card.light .icon-wrapper {
-  color: #556b2f; /* زيتوني */
-}
-
-.feature-card.dark .icon-wrapper {
-  color: #ffcc66; /* ذهبي */
-}
-
-/* على جميع شاشات الموبايل */
+/* =========================
+   Responsive Enhancements
+========================= */
 @media (max-width: 768px) {
-  .features-section h2 {
-    font-size: 1.4rem;      /* حجم مناسب للشاشة الصغيرة */
-    line-height: 1.4;       /* لتفادي التقطيع */
-    overflow: visible;      /* السماح للعنصر بالظهور */
-    display: block;         /* اجعل العنصر في سطر مستقل */
-    text-align: center;     /* توسيط العنوان */
-  }
+  .features-grid { flex-direction: column !important; gap: 20px; }
+  .feature-card { width: 100% !important; padding: 15px; }
+  .features-title { font-size: 1.6rem; }
+  .feature-title { font-size: 1rem; }
+  .feature-desc { font-size: 0.9rem; }
+}
+@media (max-width: 480px) {
+  .features-title { font-size: 1.4rem; }
+  .feature-title { font-size: 0.9rem; }
+  .feature-desc { font-size: 0.8rem; }
 }

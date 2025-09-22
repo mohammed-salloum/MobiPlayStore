@@ -1,0 +1,123 @@
+/* ============================= */
+/* الكونتينر العام للصفحة */
+.about-container {
+  padding: 2rem;
+  padding-top: 80px;            /* مسافة مناسبة من Navbar على الديسكتوب */
+  padding-bottom: 60px;
+  border-radius: 0.25rem;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* يبدأ المحتوى من الأعلى */
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* النص الأساسي */
+.lead-text {
+  font-size: 1.125rem;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* نص الفوتر */
+.footer-text {
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+  text-align: center;
+  color: var(--footer-color);
+}
+
+/* صف البطاقات */
+.row-features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* دعم RTL للصفحة */
+html[dir="rtl"] .row-features {
+  flex-direction: row-reverse;
+}
+
+/* ============================= */
+/* تجاوب البطاقات والنصوص حسب حجم الشاشة */
+@media (max-width: 1200px) {
+  .about-container {
+    padding-top: 70px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .row-features {
+    gap: 1.3rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .about-container {
+    padding-top: 60px;
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+  }
+  .row-features {
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    padding-top: 50px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .row-features {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .lead-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-container {
+    padding-top: 40px;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+  .row-features {
+    gap: 0.8rem;
+  }
+  .lead-text {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .about-container {
+    padding-top: 30px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 40px;
+  }
+  .row-features {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .feature-card {
+    flex: 0 1 100%;
+    max-width: 100%;
+  }
+  .lead-text {
+    font-size: 0.9rem;
+  }
+}
+

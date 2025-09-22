@@ -1,25 +1,66 @@
-/* CartSummary.css */
+/* =========================
+   Cart Summary Container
+========================= */
 .cart-summary {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 1rem;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: var(--bg-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-sizing: border-box;
+
+  width: 100% !important;
+  max-width: none !important;
 }
 
+
+/* =========================
+   Total Price
+========================= */
 .cart-total {
-  padding: 1rem;
-  border-radius: 10px;
-  font-weight: 700;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--bg-color);
+  box-sizing: border-box;
+  text-align: left;
 }
 
-.cart-total.light {
-  background-color: #fff;
-  color: #212529;
+/* دعم RTL */
+.cart-summary[dir="rtl"] .cart-total {
+  text-align: right;
 }
 
-.cart-total.dark {
-  background-color: #121224;
-  color: #ddd;
+/* =========================
+   Buttons Wrapper
+========================= */
+.cart-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cart-summary {
+    padding: 1rem;
+  }
+
+  .cart-buttons {
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .cart-buttons .btn {
+    font-size: 0.95rem;
+    padding: 0.7rem;
+  }
 }

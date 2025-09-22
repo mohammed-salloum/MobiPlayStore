@@ -1,0 +1,79 @@
+/* =========================
+   Control (الحقل الرئيسي)
+========================= */
+.custom-select__control {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius);
+  min-height: 48px;
+  cursor: pointer;
+  box-shadow: none;
+  color: var(--text-color);
+  font-family: var(--main-font);
+  transition: all var(--transition-default);
+}
+
+/* عند التركيز */
+.custom-select__control--is-focused {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px var(--primary-color) !important;
+}
+
+/* Placeholder */
+.custom-select__placeholder {
+  color: var(--text-color);
+  opacity: 0.6;
+}
+
+/* النص المحدد */
+.custom-select__single-value {
+  color: var(--text-color) !important;
+}
+
+/* =========================
+   القائمة Dropdown
+========================= */
+.custom-select__menu {
+  background-color: var(--dropdown-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius);
+  color: var(--dropdown-text) !important;
+  margin-top: 4px;
+  z-index: 9999 !important;
+  overflow: hidden;
+}
+
+/* =========================
+   الخيارات
+========================= */
+.custom-select__option {
+  background-color: var(--dropdown-bg) !important;
+  color: var(--dropdown-text) !important;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color var(--transition-default), color var(--transition-default);
+}
+
+/* عند التحويم Hover */
+.custom-select__option--is-focused {
+  background-color: var(--dropdown-hover-bg) !important;
+  color: var(--dropdown-text) !important;
+}
+
+/* الخيار المحدد Selected */
+.custom-select__option--is-selected {
+  background-color: var(--dropdown-selected-bg) !important;
+  color: var(--selected-text-color) !important; /* نص واضح لكل الثيمات */
+}
+
+/* مؤشر السهم والفاصل */
+.custom-select__indicator-separator { display: none; }
+.custom-select__dropdown-indicator { color: var(--text-color); transition: transform var(--transition-default); }
+.custom-select__control--menu-is-open .custom-select__dropdown-indicator { transform: rotate(180deg); }
+
+/* RTL / LTR */
+[dir="rtl"] .custom-select__control { text-align: right; }
+[dir="rtl"] .custom-select__single-value { margin-right: 8px; margin-left: 0; }
+[dir="ltr"] .custom-select__single-value { margin-left: 8px; margin-right: 0; }
+[dir="rtl"] .custom-select__dropdown-indicator { margin-left: 8px; margin-right: 0; }
+[dir="ltr"] .custom-select__dropdown-indicator { margin-right: 8px; margin-left: 0; }

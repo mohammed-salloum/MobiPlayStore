@@ -1,37 +1,38 @@
+// src/components/Cart/CartSummary.jsx
 import React, { useContext } from "react";
-import { useDispatch } from "react-redux";
-import { clearCart } from "../../store/cartSlice";
-import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
-import Button from "../common/Button"; 
+import { useCart } from "../../context/CartContext";
+import Button from "../common/Button/Button";
 import "./CartSummary.css";
 
-function CartSummary({ total }) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { darkMode } = useContext(ThemeContext);
+function CartSummary() {
+  const { clearCart, totalPrice } = useCart();
+  const { theme } = useContext(ThemeContext);
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
 
   return (
-    <div className={`cart-summary ${darkMode ? "dark" : "light"}`} dir={isRTL ? "rtl" : "ltr"}>
-      <li className={`cart-total ${darkMode ? "dark" : "light"}`}>
+    <div className={`cart-summary theme-${theme}`} dir={isRTL ? "rtl" : "ltr"}>
+      <div className="cart-total">
         <span>{t("cart.total")}:</span>
-        <span>${total}</span>
-      </li>
-      <Button variant="checkout" dark={darkMode} onClick={() => navigate("/checkout")}>
+        <span>${totalPrice.toFixed(2)}</span>
+      </div>
+
+      <div className="cart-buttons">
+        <Button variant="checkout" theme={theme} to="/checkout">
           {t("cart.proceedToCheckout")}
-      </Button>
+        </Button>
 
-      <Button variant="clear-cart" dark={darkMode} onClick={() => dispatch(clearCart())}>
+        <Button variant="clear-cart" theme={theme} onClick={clearCart}>
           {t("cart.clearCart")}
-      </Button>
+        </Button>
 
-      <Button variant="continue" dark={darkMode} onClick={() => navigate("/products")}>
+        <Button variant="continue" theme={theme} to="/products">
           ← {t("cart.continueShopping")}
-      </Button>
-            </div>
+        </Button>
+      </div>
+    </div>
   );
 }
 
