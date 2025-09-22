@@ -100,6 +100,7 @@
   background-color: var(--accent-color);
 }
 
+/* ===== Media Queries ===== */
 @media (max-width: 1024px) {
   .product-info-cart {
     width: 100%;
@@ -113,5 +114,38 @@
 
   .cart-buttons button {
     flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  /* كمية + أزرار بشكل عمودي */
+  .quantity-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .quantity-controls {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .qty-input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .quantity-controls button {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .cart-buttons {
+    flex-direction: column;
+  }
+
+  .cart-buttons button {
+    width: 100%;
   }
 }
