@@ -7,6 +7,16 @@
   margin-bottom: 1.5rem;
   position: relative;
   font-family: var(--main-font);
+  width: 100%;
+  max-width: 500px;
+}
+
+/* وسط الحقول على الموبايل */
+@media (max-width: 768px) {
+  .form-field-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* RTL Support */
@@ -70,12 +80,12 @@ textarea.form-input:focus,
   border-color: var(--primary-color) !important;
   box-shadow: 0 0 5px var(--primary-color)33 !important;
   background-color: var(--input-bg) !important;
-  color: #ffffff !important;
+  color: var(--input-text) !important;
 }
 
 /* Placeholder عند التركيز */
 .phone-container .form-control:focus::placeholder {
-  color: #ffffff !important;
+  color: var(--input-text) !important;
   opacity: 1;
 }
 
@@ -88,7 +98,7 @@ textarea.form-input:focus,
 .phone-container .form-control:focus + .selected-flag,
 .phone-container .selected-flag:focus,
 .phone-container .selected-flag .country-name:focus {
-  color: #ffffff !important;
+  color: var(--input-text) !important;
 }
 
 /* Error State */
@@ -143,15 +153,16 @@ textarea.form-input.success-border,
 .phone-container .form-control {
   font-family: var(--main-font);
   height: 48px;
-  padding-left: 50px;
+  padding-left: 3rem; /* مساحة للعلم */
+  padding-right: 0.8rem; /* قليل من الفراغ على اليمين */
   color: var(--input-text);
   transition: color var(--transition-default);
 }
 
 /* RTL Support */
 .form-field-wrapper.rtl .phone-container .form-control {
-  padding-left: 12px;
-  padding-right: 50px;
+  padding-left: 0.8rem; /* قليل من الفراغ على اليسار */
+  padding-right: 3rem; /* مساحة للعلم يمين */
 }
 
 /* أيقونة العلم داخل الحقل */
@@ -159,16 +170,21 @@ textarea.form-input.success-border,
 .phone-container .selected-flag {
   position: absolute;
   top: 0;
-  left: 0;
   height: 100% !important;
   border: none !important;
   background: transparent !important;
   box-shadow: none !important;
   display: flex;
   align-items: center;
-  padding: 0 8px;
   z-index: 2;
   cursor: pointer;
+}
+
+/* LTR */
+.phone-container .flag-dropdown,
+.phone-container .selected-flag {
+  left: 0;
+  padding: 0 6px;
 }
 
 /* RTL */
@@ -176,6 +192,7 @@ textarea.form-input.success-border,
 .form-field-wrapper.rtl .phone-container .selected-flag {
   left: auto;
   right: 0;
+  padding: 0 6px;
 }
 
 /* إلغاء أي تأثير hover أو open */
@@ -260,19 +277,35 @@ textarea.form-input.success-border,
 .form-field-wrapper.rtl .phone-container .selected-flag {
   flex-direction: row-reverse;
   justify-content: flex-start;
-  padding-right: 8px;
   padding-left: 0;
+  padding-right: 8px;
 }
 
 /* =========================
-   Responsive
+   Responsive (Mobile)
 ========================= */
 @media (max-width: 480px) {
   .form-input,
   textarea.form-input,
   .phone-container .form-control {
     font-size: 0.9rem;
-    padding: 8px 10px;
     height: 44px;
+  }
+
+  /* LTR */
+  .phone-container:not(.rtl) .form-control {
+    padding-left: 2.6rem;
+    padding-right: 0.6rem;
+  }
+
+  /* RTL */
+  .form-field-wrapper.rtl .phone-container .form-control {
+    padding-right: 2.6rem;
+    padding-left: 0.6rem;
+  }
+
+  /* العلم padding داخلي */
+  .phone-container .selected-flag {
+    padding: 0 5px;
   }
 }

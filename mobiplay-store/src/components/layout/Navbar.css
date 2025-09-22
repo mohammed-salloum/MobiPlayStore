@@ -262,23 +262,57 @@
 }
 
 /* =========================
-   Extra Small Screens (Mobile Landscape)
+   Extra Small Screens (Mobile)
 ========================= */
-@media (max-width: 480px) and (orientation: landscape) {
+@media (max-width: 480px) {
   .navbar-container {
     padding-left: 1rem;
     padding-right: 1rem;
+    gap: 0.5rem;
+  }
+  .navbar-links {
+    gap: 0.8rem;
+    flex-wrap: wrap; /* السماح بالانتقال للسطر التالي */
+    justify-content: center;
+  }
+  .navbar-tools {
+    gap: 0.4rem;
+  }
+  .navbar-brand {
+    font-size: 1.6rem;
+  }
+  .menu-toggle {
+    font-size: 1.9rem;
+  }
+  .navbar-content {
+    padding: 0.8rem 1rem;
+  }
+}
+
+/* =========================
+   Extra Small Screens Landscape (Mobile)
+========================= */
+@media (max-width: 480px) and (orientation: landscape) {
+  .navbar-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    gap: 0.8rem;
   }
   .navbar-links {
     gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   .navbar-tools {
-    gap: 0.3rem;
+    gap: 0.5rem;
   }
   .navbar-brand {
-    font-size: 1.5rem;
+    font-size: 1.55rem;
   }
   .menu-toggle {
-    font-size: 1.8rem;
+    font-size: 2rem;
+  }
+  .navbar-content {
+    padding: 0.8rem 1.5rem;
   }
 }

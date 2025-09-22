@@ -12,8 +12,15 @@
   transition: all 0.3s ease;
 }
 
-.product-info-cart.rtl { direction: rtl; text-align: right; }
-.product-info-cart.ltr { direction: ltr; text-align: left; }
+.product-info-cart.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.product-info-cart.ltr {
+  direction: ltr;
+  text-align: left;
+}
 
 .product-description,
 .product-description * {
@@ -26,20 +33,27 @@
   line-height: 1.5;
 }
 
+/* ===== Quantity Wrapper ===== */
 .quantity-wrapper {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
+.quantity-wrapper.ltr { text-align: left; }
+.quantity-wrapper.rtl { text-align: right; }
+
 .quantity-label {
   flex-shrink: 0;
   width: 90px;
   font-weight: 600;
+  text-align: left; /* افتراضي LTR */
 }
 
-.quantity-wrapper.ltr .quantity-label { text-align: left; }
-.quantity-wrapper.rtl .quantity-label { text-align: right; }
+.quantity-wrapper.rtl .quantity-label {
+  text-align: right; /* RTL عند العربية */
+  direction: rtl;     /* تصحيح كامل للكلمة */
+}
 
 .quantity-controls {
   display: flex;
@@ -47,6 +61,9 @@
   gap: 8px;
   flex-grow: 1;
 }
+
+.quantity-controls.ltr { justify-content: flex-start; }
+.quantity-controls.rtl { justify-content: flex-end; }
 
 .qty-input {
   width: 55px;
@@ -56,6 +73,7 @@
   font-size: 0.9rem;
   border-radius: 6px;
   border: 1px solid var(--border-color, #ccc);
+  transition: all 0.2s ease;
 }
 
 .quantity-controls button {
@@ -70,13 +88,15 @@
   background-color: var(--primary-color);
   color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .quantity-controls button:hover {
   background-color: var(--accent-color);
+  transform: translateY(-1px);
 }
 
+/* ===== Cart Buttons ===== */
 .cart-buttons {
   display: flex;
   gap: 0.5rem;
@@ -93,11 +113,12 @@
   border: none;
   background-color: var(--primary-color);
   color: #fff;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .cart-buttons button:hover {
   background-color: var(--accent-color);
+  transform: translateY(-1px);
 }
 
 /* ===== Media Queries ===== */
@@ -121,31 +142,32 @@
   /* كمية + أزرار بشكل عمودي */
   .quantity-wrapper {
     flex-direction: column;
-    align-items: flex-start;
     gap: 8px;
+  }
+
+  .quantity-wrapper.ltr { align-items: flex-start; }
+  .quantity-wrapper.rtl { align-items: flex-start; } /* تصحيح RTL على الموبايل */
+
+  /* Label الكمية يأخذ كامل العرض مع محاذاة اليمين للعربية */
+  .quantity-wrapper.rtl .quantity-label {
+    width: 100%;
+    text-align: right;
+    direction: rtl;
   }
 
   .quantity-controls {
     width: 100%;
-    justify-content: flex-start;
+    display: flex;
     gap: 8px;
   }
 
-  .qty-input {
-    width: 100%;
-    max-width: 100%;
-  }
+  .quantity-controls.ltr { justify-content: flex-start; }
+  .quantity-controls.rtl { justify-content: flex-end; }
 
-  .quantity-controls button {
-    width: 100%;
-    max-width: 100%;
-  }
+  .qty-input { width: 100%; max-width: 100%; }
 
-  .cart-buttons {
-    flex-direction: column;
-  }
+  .quantity-controls button { width: 100%; max-width: 100%; }
 
-  .cart-buttons button {
-    width: 100%;
-  }
+  .cart-buttons { flex-direction: column; }
+  .cart-buttons button { width: 100%; }
 }
