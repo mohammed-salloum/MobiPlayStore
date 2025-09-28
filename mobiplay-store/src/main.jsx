@@ -1,4 +1,3 @@
-// src/index.jsx
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
@@ -11,26 +10,34 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import App from "./App";
 
-// ملفات CSS العالمية
+// ===== Global CSS imports =====
 import "./styles/theme.css";
 import "./index.css";
 import "./App.css";
 
-// إنشاء React Query Client
+// ===== Initialize React Query Client =====
+// Configures global defaults for server-state management
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // البيانات تبقى حديثة لمدة 5 دقائق
-      cacheTime: 30 * 60 * 1000, // cache لمدة 30 دقيقة
-      refetchOnWindowFocus: false, // منع إعادة الجلب عند رجوع focus للنافذة
-      retry: 1, // إعادة محاولة واحدة فقط عند الفشل
+      staleTime: 5 * 60 * 1000,   // Data stays "fresh" for 5 minutes
+      cacheTime: 30 * 60 * 1000, // Cache persists for 30 minutes
+      refetchOnWindowFocus: false, // Prevent refetching on tab/window focus
+      retry: 1,                   // Retry failed requests only once
     },
   },
 });
 
-// إنشاء root
+// ===== Create React Root =====
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+// ===== Render Application =====
+// Wraps the App component with:
+// - BrowserRouter: enables client-side routing
+// - LanguageProvider: manages multilingual support
+// - ThemeProvider: manages light/dark theme state
+// - CartProvider: manages shopping cart state
+// - QueryClientProvider: provides React Query for server data caching
 root.render(
   <React.StrictMode>
     <BrowserRouter>

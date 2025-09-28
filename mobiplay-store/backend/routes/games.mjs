@@ -4,21 +4,32 @@ import { getCache, setCache } from "../utils/cache.js";
 import { translateText } from "../utils/translate.js";
 
 const router = express.Router();
+
+// ===== RAWG API Key setup =====
+// Ensure the RAWG API key is available in environment variables
 const RAWG_API_KEY = process.env.RAWG_API_KEY;
 if (!RAWG_API_KEY) {
   console.error("❌ RAWG_API_KEY is missing in .env!");
   process.exit(1);
 }
 
-const AXIOS_TIMEOUT = 30000;
+// ===== Constants =====
+const AXIOS_TIMEOUT = 30000; // 30 seconds timeout for external API requests
+
+// ===== Utility Functions =====
+
+// Generates a fixed price for a product based on its ID
 const getFixedPrice = (id) => 10 + (parseInt(id, 10) % 51);
+
+// Truncate a text to a maximum number of words for preview purposes
 const truncateWords = (text, wordLimit = 50) => {
   if (!text) return "";
   const words = text.split(/\s+/);
   return words.length <= wordLimit ? text : words.slice(0, wordLimit).join(" ") + "...";
 };
 
-// ===== Fetch RAWG
+// ===== Fetch RAWG Games =====
+// Fetch multiple pages of games from RAWG API
 const fetchRawgGames = async (pages = [1], pageSize = 8) => {
   const requests = pages.map((page) =>
     axios.get("https://api.rawg.io/api/games", {
@@ -30,19 +41,26 @@ const fetchRawgGames = async (pages = [1], pageSize = 8) => {
   return results.flatMap((r) => r.data.results);
 };
 
-// ===== Cache helper
+// ===== Cache Helper =====
+// Try to retrieve data from cache, otherwise fetch and cache it
 const getOrFetch = async (cacheKey, fetchFn, ttl = 86400, logFn = console.log) => {
   const cached = getCache(cacheKey);
-  if (cached) { logFn(`[CACHE HIT] ${cacheKey}`); return cached; }
+  if (cached) {
+    logFn(`[CACHE HIT] ${cacheKey}`);
+    return cached;
+  }
   const data = await fetchFn();
   setCache(cacheKey, data, ttl);
   logFn(`[CACHE SET] ${cacheKey}`);
   return data;
 };
 
-// ===== Routes
+// ===== Routes =====
+
+// Root route
 router.get("/", (req, res) => res.json({ message: "Welcome to Games API" }));
 
+// Fetch products (games) with caching
 router.get("/products", async (req, res) => {
   try {
     const data = await getOrFetch("products:fast", async () => {
@@ -57,6 +75,7 @@ router.get("/products", async (req, res) => {
       }));
       return { results, count: results.length };
     });
+    // Set client-side cache header for 1 hour
     res.set("Cache-Control", "public, max-age=3600");
     res.json(data);
   } catch (err) {
@@ -64,6 +83,8 @@ router.get("/products", async (req, res) => {
   }
 });
 
+
+// Fetch special offers with discounts
 router.get("/offers", async (req, res) => {
   try {
     const data = await getOrFetch("offers:fast", async () => {
@@ -87,20 +108,23 @@ router.get("/offers", async (req, res) => {
   }
 });
 
-// ===== Product by ID + translation
+// Fetch single product by ID with optional translation
 router.get("/products/:id", async (req, res) => {
   const { id } = req.params;
-  const lang = req.query.lang || "en";
+  const lang = req.query.lang || "en"; // Default language is English
   const cacheKey = `product:${id}`;
 
   try {
     let product = getCache(cacheKey);
+
+    // Fetch from RAWG API if not cached
     if (!product) {
       const rawGame = await axios
         .get(`https://api.rawg.io/api/games/${id}`, { params: { key: RAWG_API_KEY }, timeout: AXIOS_TIMEOUT })
         .then(r => r.data);
       if (!rawGame) return res.status(404).json({ error: "Product not found" });
 
+      // Check if product has a discount in offers cache
       const offersCache = getCache("offers:fast");
       let discount = 0;
       if (offersCache && offersCache.results.some(g => g.id === rawGame.id))
@@ -117,9 +141,10 @@ router.get("/products/:id", async (req, res) => {
         discountedPrice: getFixedPrice(id) * (1 - discount/100),
         description_raw: rawGame.description_raw || "",
       };
-      setCache(cacheKey, product, 86400);
+      setCache(cacheKey, product, 86400); // Cache product for 1 day
     }
 
+    // Translate description if needed
     const descCacheKey = `desc:${id}:${lang}`;
     let description = getCache(descCacheKey);
     if (!description) {
@@ -133,7 +158,7 @@ router.get("/products/:id", async (req, res) => {
   }
 });
 
-// ===== Prefetch عند تشغيل السيرفر
+// ===== Preload data at server start =====
 export const preloadData = async (logFn = console.log) => {
   await getOrFetch("products:fast", async () => {
     const rawGames = await fetchRawgGames([1,2,3,4]);
@@ -145,7 +170,7 @@ export const preloadData = async (logFn = console.log) => {
       ratings_count: g.ratings_count ?? 0,
       price: getFixedPrice(g.id),
     })), count: rawGames.length };
-  }, 43200, logFn);
+  }, 43200, logFn); // Cache for 12 hours
 
   await getOrFetch("offers:fast", async () => {
     const rawGames = await fetchRawgGames([5,6]);

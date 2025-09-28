@@ -1,10 +1,12 @@
 // src/context/CartContext.jsx
 import React, { createContext, useContext, useState, useEffect, useMemo } from "react";
 
+// Create a Context for the shopping cart
 const CartContext = createContext();
 
+// CartProvider component to wrap the app and provide cart state
 export const CartProvider = ({ children }) => {
-  // استرجاع السلة من localStorage عند أول تحميل
+  // Initialize cartItems state from localStorage or empty array
   const [cartItems, setCartItems] = useState(() => {
     try {
       const saved = localStorage.getItem("cart");
@@ -14,32 +16,34 @@ export const CartProvider = ({ children }) => {
     }
   });
 
-  // تحديث localStorage عند أي تغيير في السلة
+  // Update localStorage whenever cartItems change
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // إضافة منتج للسلة
+  // Add a product to the cart
   const addToCart = (product, quantity = 1) => {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
       if (existing) {
+        // If product already exists, increase quantity
         return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
       }
+      // Otherwise, add new product to cart
       return [...prev, { ...product, quantity }];
     });
   };
 
-  // إزالة منتج من السلة
+  // Remove a product from the cart by ID
   const removeFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // تعديل كمية منتج معين
+  // Update quantity of a specific product
   const updateQuantity = (id, quantity) => {
     setCartItems((prev) =>
       prev.map((item) =>
@@ -48,13 +52,13 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  // زيادة الكمية
+  // Increase quantity of a product by 1
   const increaseQuantity = (id) => {
     const currentQty = cartItems.find((item) => item.id === id)?.quantity || 1;
     updateQuantity(id, currentQty + 1);
   };
 
-  // نقصان الكمية (ما بتنزل عن 1)
+  // Decrease quantity of a product by 1 (minimum 1)
   const decreaseQuantity = (id) => {
     const currentQty = cartItems.find((item) => item.id === id)?.quantity || 1;
     if (currentQty > 1) {
@@ -62,10 +66,10 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // مسح كامل السلة
+  // Clear the entire cart
   const clearCart = () => setCartItems([]);
 
-  // حساب السعر الإجمالي
+  // Compute the total price using useMemo for optimization
   const totalPrice = useMemo(
     () =>
       cartItems.reduce(
@@ -76,6 +80,7 @@ export const CartProvider = ({ children }) => {
     [cartItems]
   );
 
+  // Provide all cart functions and state to child components
   return (
     <CartContext.Provider
       value={{
@@ -94,5 +99,5 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-// Hook لاستخدام السلة بسهولة
+// Custom hook to easily access the cart context in components
 export const useCart = () => useContext(CartContext);

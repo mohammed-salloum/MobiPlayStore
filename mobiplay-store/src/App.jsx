@@ -3,12 +3,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { LanguageContext } from "./context/LanguageContext";
 import { ThemeContext } from "./context/ThemeContext";
 
-// مكونات مشتركة
+// ===== Shared Layout Components =====
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import LanguageHandler from "./components/common/LanguageHandler/LanguageHandler";
 
-// الصفحات
+// ===== Pages =====
 import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
@@ -20,21 +20,21 @@ import Offers from "./pages/Offers/Offers";
 import FAQ from "./pages/FAQ/FAQ";
 import Reviews from "./pages/Reviews/Reviews";
 
-// React Query
+// ===== React Query Services =====
 import { useProducts, useOffers } from "./services/api";
 import { useQueryClient } from "@tanstack/react-query";
 
-// Toastify
+// ===== Toast Notifications =====
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const { language: currentLang } = useContext(LanguageContext);
-  const { theme } = useContext(ThemeContext);
+  const { language: currentLang } = useContext(LanguageContext); // Current app language
+  const { theme } = useContext(ThemeContext);                   // Current theme (light/dark)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient(); // React Query cache manager
 
-  // تطبيق الخط عند تحميل الموقع
+  // ===== Apply selected font on app load =====
   useEffect(() => {
     const selectedFont = localStorage.getItem("selectedFont") || "inter";
     const fontMap = {
@@ -46,27 +46,33 @@ function App() {
     document.body.style.setProperty("--main-font", fontMap[selectedFont] || fontMap.inter);
   }, []);
 
-  // Prefetch عند تغير اللغة
+  // ===== Invalidate cache when language changes =====
+  // Forces refetch of products & offers when the user switches language
   useEffect(() => {
     queryClient.invalidateQueries(["products"]);
     queryClient.invalidateQueries(["offers"]);
   }, [currentLang, queryClient]);
 
-  // Hooks جلب البيانات
+  // ===== Data Fetch Hooks =====
+  // Automatically fetch products and offers on app load
   useProducts();
   useOffers();
 
   return (
     <div
-      data-theme={theme} // CSS يعتمد على body[data-theme]
-      dir={currentLang === "ar" ? "rtl" : "ltr"}
+      data-theme={theme} // Theme applied through CSS [data-theme]
+      dir={currentLang === "ar" ? "rtl" : "ltr"} // RTL for Arabic, LTR otherwise
       className="app"
     >
       <Navbar />
 
+      {/* ===== App Routes ===== */}
       <main className="main-content">
         <Routes>
+          {/* Redirect root to localized path */}
           <Route path="/" element={<Navigate to={`/${currentLang}/`} replace />} />
+
+          {/* Language-aware routes */}
           <Route path="/:lang/*" element={<LanguageHandler />}>
             <Route index element={<Home />} />
             <Route path="products" element={<Products />} />
@@ -84,13 +90,14 @@ function App() {
 
       <Footer />
 
+      {/* ===== Toast Notifications ===== */}
       <ToastContainer
         position="bottom-right"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop
         closeOnClick
-        rtl={currentLang === "ar"}
+        rtl={currentLang === "ar"} // RTL for Arabic notifications
         pauseOnFocusLoss
         draggable
         pauseOnHover

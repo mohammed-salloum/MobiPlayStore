@@ -1,24 +1,24 @@
 /* =========================
    Global Theme Variables (Base)
+   Common CSS variables used across all themes
 ========================= */
-
-/* القيم المشتركة لكل الثيمات */
 :root {
+  /* Card shadow opacities for different themes */
   --card-shadow-opacity-light: 0.08;
   --card-shadow-opacity-dark: 0.6;
   --card-shadow-opacity-sepia: 0.1;
   --card-shadow-opacity-colorblind: 0.12;
 
-  /* Fonts default */
+  /* Default font family */
   --main-font: 'Inter', sans-serif;
 
-  /* Common UI */
+  /* Common UI settings */
   --border-radius: 6px;
   --transition-default: 0.3s ease;
   --gap-default: 6px;
 
   /* =========================
-     Stars & Feedback
+     Stars & Feedback Colors
   ========================= */
   --star-empty: #cbd5e1;
   --star-filled: #f59e0b;
@@ -38,14 +38,14 @@
   /* =========================
      Spinner
   ========================= */
-  --spinner-color: #2563eb; /* default color */
+  --spinner-color: #2563eb; /* Default spinner color */
 }
 
 /* =========================
-   Theme Specific
+   Theme Specific Variables
 ========================= */
 
-/* 🌞 Light */
+/* 🌞 Light Theme */
 body[data-theme="light"] {
   --bg-color: #ffffff;
   --text-color: #1c1c1c;
@@ -64,20 +64,24 @@ body[data-theme="light"] {
   --error-color: #dc2626;
   --primary-hover: #1d4ed8;
 
+  /* Dropdowns */
   --dropdown-bg: #f9fafb;
   --dropdown-hover-bg: #e5e7eb;
   --dropdown-selected-bg: #2563eb;
   --dropdown-text: #1c1c1c;
   --selected-text-color: #ffffff;
 
+  /* Navbar */
   --navbar-bg: #ffffff;
   --navbar-text: #1c1c1c;
   --navbar-icon: #2563eb;
 
+  /* Stars & Feedback */
   --star-empty: #cbd5e1;
   --star-filled: #f59e0b;
   --feedback-color: #1c1c1c;
 
+  /* Social media brand colors */
   --social-facebook: #1877f2;
   --social-x: #000000;
   --social-linkedin: #0a66c2;
@@ -86,7 +90,7 @@ body[data-theme="light"] {
   --social-pinterest: #bd081c;
 }
 
-/* 🌚 Dark */
+/* 🌚 Dark Theme */
 body[data-theme="dark"] {
   --bg-color: #0f172a;
   --text-color: #f8fafc;
@@ -105,20 +109,24 @@ body[data-theme="dark"] {
   --error-color: #f87171;
   --primary-hover: #2563eb;
 
+  /* Dropdowns */
   --dropdown-bg: #1f2937;
   --dropdown-hover-bg: #374151;
   --dropdown-selected-bg: #3b82f6;
   --dropdown-text: #f8fafc;
   --selected-text-color: #ffffff;
 
+  /* Navbar */
   --navbar-bg: #1e293b;
   --navbar-text: #f8fafc;
   --navbar-icon: #facc15;
 
+  /* Stars & Feedback */
   --star-empty: #475569;
   --star-filled: #facc15;
   --feedback-color: #f8fafc;
 
+  /* Social media brand colors */
   --social-facebook: #1877f2;
   --social-x: #000000;
   --social-linkedin: #0a66c2;
@@ -127,7 +135,7 @@ body[data-theme="dark"] {
   --social-pinterest: #ef4444;
 }
 
-/* 📜 Sepia */
+/* 📜 Sepia Theme */
 body[data-theme="sepia"] {
   --bg-color: #f4ecd8;
   --text-color: #4b3832;
@@ -146,20 +154,24 @@ body[data-theme="sepia"] {
   --error-color: #b45309;
   --primary-hover: #92400e;
 
+  /* Dropdowns */
   --dropdown-bg: #fdf6ec;
   --dropdown-hover-bg: #e9dcc5;
   --dropdown-selected-bg: #a0522d;
   --dropdown-text: #4b3832;
   --selected-text-color: #ffffff;
 
+  /* Navbar */
   --navbar-bg: #fdf6ec;
   --navbar-text: #4b3832;
   --navbar-icon: #a0522d;
 
+  /* Stars & Feedback */
   --star-empty: #a78b6f;
   --star-filled: #b87333;
   --feedback-color: #4b3832;
 
+  /* Social media brand colors */
   --social-facebook: #8b5e3c;
   --social-x: #4b3832;
   --social-linkedin: #a0522d;
@@ -168,7 +180,7 @@ body[data-theme="sepia"] {
   --social-pinterest: #8b4513;
 }
 
-/* 🎨 Colorblind Friendly */
+/* 🎨 Colorblind Friendly Theme */
 body[data-theme="colorblind"] {
   --bg-color: #f8fafc;
   --text-color: #111827;
@@ -187,20 +199,24 @@ body[data-theme="colorblind"] {
   --error-color: #b91c1c;
   --primary-hover: #005582;
 
+  /* Dropdowns */
   --dropdown-bg: #f1f5f9;
   --dropdown-hover-bg: #e2e8f0;
   --dropdown-selected-bg: #0072b2;
   --dropdown-text: #111827;
   --selected-text-color: #ffffff;
 
+  /* Navbar */
   --navbar-bg: #ffffff;
   --navbar-text: #111827;
   --navbar-icon: #0072b2;
 
+  /* Stars & Feedback */
   --star-empty: #94a3b8;
   --star-filled: #0072b2;
   --feedback-color: #111827;
 
+  /* Social media brand colors */
   --social-facebook: #0072b2;
   --social-x: #000000;
   --social-linkedin: #005582;
@@ -210,7 +226,7 @@ body[data-theme="colorblind"] {
 }
 
 /* =========================
-   Stars Components (All)
+   Stars Components (All Themes)
 ========================= */
 .stars-wrapper,
 .stars-readonly,
@@ -222,6 +238,7 @@ body[data-theme="colorblind"] {
   font-family: var(--main-font);
 }
 
+/* Individual star styles */
 .rating-star,
 .star-readonly {
   font-size: 22px;
@@ -229,6 +246,7 @@ body[data-theme="colorblind"] {
   transition: color 0.2s;
 }
 
+/* Filled or half stars */
 .rating-star.filled,
 .rating-star.half,
 .star-readonly.filled,
@@ -236,6 +254,7 @@ body[data-theme="colorblind"] {
   color: var(--star-filled);
 }
 
+/* Text next to rating stars */
 .rating-text,
 .rate-text {
   font-size: 0.9rem;
@@ -244,7 +263,7 @@ body[data-theme="colorblind"] {
   text-align: center;
 }
 
-/* دعم RTL */
+/* RTL support for stars */
 .stars-wrapper.rtl,
 .rating-readonly-wrapper[dir="rtl"] .stars-readonly,
 .rating-interactive-wrapper[dir="rtl"] .stars-wrapper {
@@ -256,32 +275,3 @@ body[data-theme="colorblind"] {
   display: inline-block;
 }
 
-/* =========================
-   Spinner
-========================= */
-.spinner-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0;
-}
-
-.spinner-wrapper-fullscreen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-}
-
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 6px solid var(--border-color);
-  border-top: 6px solid var(--spinner-color);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}

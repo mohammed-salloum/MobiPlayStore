@@ -1,54 +1,58 @@
 /* =========================
-   App.css - الحاوية العامة
+   App.css - Global container styles
+   Defines main layout wrapper and responsiveness
 ========================= */
+
 .app-container {
   width: 100%;
-  max-width: 100%;       /* نسمح بالامتداد الكامل */
+  max-width: 100%;       /* Allow full width usage */
   margin: 0 auto;
-  padding-inline: 1rem;  /* حماية من الالتصاق يمين/يسار */
+  padding-inline: 1rem;  /* Prevent content from sticking to edges */
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100vh;     /* Full viewport height */
   box-sizing: border-box;
 }
 
 .app-content {
-  flex: 1;
+  flex: 1;               /* Take remaining vertical space */
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2rem;             /* Spacing between sections */
   width: 100%;
   box-sizing: border-box;
 }
 
 footer {
-  margin-top: auto;
+  margin-top: auto;      /* Push footer to the bottom */
 }
 
 /* =========================
    Responsive Adjustments
+   Ensures proper spacing and layout on smaller screens
 ========================= */
 @media (max-width: 1024px) {
   .app-container {
-    padding-inline: 1rem; /* حماية من الالتصاق على الشاشات المتوسطة */
+    padding-inline: 1rem; /* Adjust padding for medium screens */
   }
 }
 
 @media (max-width: 768px) {
   .app-container {
-    max-width: 100%;      /* تمدد الحاوية بالكامل */
-    padding-inline: 0.8rem; /* تقليل المسافة الجانبية */
+    max-width: 100%;       /* Expand fully */
+    padding-inline: 0.8rem; /* Reduce side spacing */
   }
 }
 
 @media (max-width: 480px) {
   .app-container {
-    padding-inline: 0.5rem; /* أقصى تقليل على الشاشات الصغيرة */
+    padding-inline: 0.5rem; /* Minimal side spacing on small devices */
   }
 }
 
 /* =========================
    Theme support
+   Dynamically change colors based on active theme
 ========================= */
 body[data-theme="dark"] .app-container {
   background-color: #121212;

@@ -5,14 +5,14 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: "localhost",  // بتقدر تخليها 0.0.0.0 إذا بدك يفتح على الشبكة المحلية
-    port: 5173,
-    open: true,          // يفتح المتصفح أوتوماتيك
+    host: "localhost",  // you can set it to 0.0.0.0 to expose on the local network
+    port: 5173,          // the port Vite dev server will run on
+    open: true,          // automatically opens the browser when server starts
     proxy: {
       "/api": {
-        target: "http://localhost:5000", // سيرفر الـ Express
-        changeOrigin: true               // لتجنب مشاكل CORS
-        // ما في rewrite لحتى يضل /api شغال متل ما هو
+        target: "http://localhost:5000", // the Express server
+        changeOrigin: true               // avoids CORS issues
+        // no rewrite, so /api stays as-is
       }
     }
   }
