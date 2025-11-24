@@ -1,90 +1,21 @@
 .features-section {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  padding: 60px 20px;
-  overflow: hidden;
-  width: 100%;
-  transition: all 0.3s ease;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: var(--bg-color);
   color: var(--text-color);
-  z-index: 1;
-}
-
-/* العنوان */
-.features-title {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: bold;
-  margin-bottom: 40px;
-  position: relative;
-  z-index: 2;
-}
-
-/* الشبكة */
-.features-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
   width: 100%;
-  position: relative;
-  z-index: 2;
+  box-sizing: border-box;
+  min-height: 55vh;
+  overflow: hidden;
+  gap: 40px;
 }
 
-/* البطاقة */
-.feature-card {
-  border-radius: 10px;
-  padding: 20px;
-  width: calc(33.333% - 30px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.features-title {
+  font-size: 2.2rem;
+  margin-bottom: 30px;
   text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-  position: relative;
-  z-index: 2;
-  background-color: transparent;
-  border: 2px solid var(--border-color);
-  box-shadow: var(--card-shadow);
-}
-.feature-card:hover {
-  transform: translateY(-5px);
-}
 
-/* الأيقونات */
-.icon-wrapper {
-  margin-bottom: 15px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 48px;
-  height: 48px;
-  color: var(--icon-color);
-}
-
-/* النصوص */
-.feature-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-.feature-desc {
-  font-size: 1rem;
-}
-
-/* =========================
-   Responsive Enhancements
-========================= */
-@media (max-width: 768px) {
-  .features-grid { flex-direction: column !important; gap: 20px; }
-  .feature-card { width: 100% !important; padding: 15px; }
-  .features-title { font-size: 1.6rem; }
-  .feature-title { font-size: 1rem; }
-  .feature-desc { font-size: 0.9rem; }
-}
-@media (max-width: 480px) {
-  .features-title { font-size: 1.4rem; }
-  .feature-title { font-size: 0.9rem; }
-  .feature-desc { font-size: 0.8rem; }
 }

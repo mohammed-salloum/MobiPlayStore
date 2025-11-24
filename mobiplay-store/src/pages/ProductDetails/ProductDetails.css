@@ -7,7 +7,7 @@
   gap: 1.5rem;
   width: 100%;
   max-width: 1200px;
-  margin: 3rem auto;       /* زيادة المسافة عن أعلى وأسفل الصفحة */
+  margin: 3rem auto; /* زيادة المسافة عن أعلى وأسفل الصفحة */
   padding: 90px clamp(1rem, 5vw, 3rem) 2rem; /* padding داخلي */
   box-sizing: border-box;
   background-color: var(--bg-color, #f5f5f5);
@@ -32,23 +32,51 @@
 }
 
 /* =========================
-   رسالة خطأ المنتج
+   Wrapper رسائل الخطأ
+========================= */
+.product-error-wrapper {
+  display: flex;
+  justify-content: center; /* توسيط أفقي */
+  align-items: center;     /* توسيط عمودي */
+  width: 100%;
+  height: calc(100vh - 90px); /* يغطي الشاشة بدون padding الصفحة */
+  position: relative;       
+  padding: 0;               
+  box-sizing: border-box;
+}
+
+/* =========================
+   رسالة الخطأ نفسها
 ========================= */
 .product-error {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 60vh;
-  width: 100%;
-  padding: 1.5rem 1rem;
-  box-sizing: border-box;
+  display: inline-block; /* يتناسب مع محتواه فقط */
+  max-width: 90%;       /* لا يمتد للحافة */
+  padding: 1.5rem 2rem;
+  border: 2px solid var(--form-error-border);
+  border-radius: var(--border-radius-lg, 14px);
+  background-color: var(--form-error-bg);
+  color: var(--form-error-text);
+  font-size: 1rem;
+  font-weight: 500;
   text-align: center;
-  color: var(--text-color, #333);
-  background-color: var(--card-bg, #fff);
-  border-radius: 16px;
-  font-size: 1.2rem;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-  margin: 0 auto;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+/* زر إعادة المحاولة */
+.product-error button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--accent-color);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.product-error button:hover {
+  background-color: var(--primary-hover);
 }
 
 /* =========================

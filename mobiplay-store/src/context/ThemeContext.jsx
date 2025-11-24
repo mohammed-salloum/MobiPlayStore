@@ -6,7 +6,7 @@ export const ThemeContext = createContext();
 // ThemeProvider component to wrap the app and provide theme state
 export const ThemeProvider = ({ children }) => {
   // Available theme options
-  const themes = ["light", "dark", "colorblind", "sepia"];
+  const themes = ["light","reading","dark","colorblind"];
 
   // State to store current theme
   // Initialize from localStorage if available, otherwise default to "light"

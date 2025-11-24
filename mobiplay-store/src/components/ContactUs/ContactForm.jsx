@@ -1,11 +1,12 @@
-import React, { useContext, useState, useEffect, useMemo } from "react";
-import { useForm } from "react-hook-form";
+import React, { useContext, useState, useMemo, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../../context/ThemeContext";
-import Button from "../common/Button/Button";
-import FormField from "../common/FormField/FormField";
+import Button from "../Common/Button/Button";
+import FormField from "../Common/FormField/FormField";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 import "./ContactForm.css";
 
 function ContactForm() {
@@ -13,70 +14,109 @@ function ContactForm() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
 
-  const [formMessage, setFormMessage] = useState({ type: "", text: "" });
-  const [phoneValue, setPhoneValue] = useState("");
-  const [submitAttempted, setSubmitAttempted] = useState(false);
+  const [formMessageType, setFormMessageType] = useState(""); // 'error' | 'success' | ''
+  const [formMessageVisible, setFormMessageVisible] = useState(false);
 
-  const lettersOnly = /^[A-Za-z\u0600-\u06FF\s]+$/;
-
-  const schema = useMemo(() =>
+  const schema = useMemo(() => 
     yup.object().shape({
-      name: yup.string()
+      name: yup
+        .string()
+        .transform((v) => (v ? v.trim() : ""))
         .required(t("contact.form.nameRequired"))
-        .matches(lettersOnly, t("contact.form.nameInvalid"))
-        .min(3, t("contact.form.min3Chars"))
-        .max(50, t("contact.form.max50Chars"))
-        .test("not-empty", t("contact.form.notEmpty"), v => v?.trim().length > 0),
-      phone: yup.string().required(t("contact.form.phoneRequired")),
-      email: yup.string().email(t("contact.form.invalidEmail")).required(t("contact.form.emailRequired")),
+        .test("no-double-spaces", t("contact.form.nameDoubleSpaces"), (v) => !/\s{2,}/.test(v))
+        .test("valid-fullname", t("contact.form.nameInvalid"), (v) => {
+          if (!v) return false;
+          const words = v.split(" ");
+          return words.length >= 2 && words.length <= 4 && words.every((word) => /^[\u0621-\u064A A-Za-z]{3,}$/.test(word));
+        })
+        .max(50, t("contact.form.max50Chars")),
+      phone: yup
+        .string()
+        .nullable()
+        .transform((v) => (v?.trim() === "" ? null : v))
+        .test("phone-valid", function(value) {
+          const { createError } = this;
+          if (!value) return true;
+          const cleaned = value.replace(/\s+/g, "").replace(/^0+/, "");
+          try {
+            const phoneNumber = parsePhoneNumberFromString(cleaned.startsWith("+") ? cleaned : `+${cleaned}`);
+            if (!phoneNumber || !phoneNumber.isValid()) return createError({ message: t("contact.form.phoneInvalid") });
+            if (phoneNumber.country === "SY") {
+              const nationalNumber = phoneNumber.nationalNumber;
+              const validSecondDigits = ["3", "4", "5", "6", "8", "9"];
+              if (nationalNumber[0] !== "9" || !validSecondDigits.includes(nationalNumber[1])) {
+                return createError({ message: t("contact.form.phonePrefixError") });
+              }
+            }
+            return true;
+          } catch {
+            return createError({ message: t("contact.form.phoneInvalid") });
+          }
+        }),
+      email: yup.string()
+        .transform((v) => (v ? v.trim() : ""))
+        .email(t("contact.form.invalidEmail"))
+        .required(t("contact.form.emailRequired")),
       company: yup.string()
         .nullable()
-        .matches(lettersOnly, t("contact.form.companyInvalid"))
-        .min(3, t("contact.form.min3Chars"))
-        .max(50, t("contact.form.max50Chars")),
+        .transform((v) => (v ? v.trim() : ""))
+        .test("company-valid", function(val) {
+          if (!val) return true;
+          if (/^\s|\s$/.test(val) || /\s{2,}/.test(val)) return this.createError({ message: t("contact.form.companyDoubleSpaces") });
+          const valWithoutSpaces = val.replace(/\s/g, "");
+          if (!/[\p{L}]/u.test(valWithoutSpaces)) return this.createError({ message: t("contact.form.companyInvalid") });
+          if (valWithoutSpaces.length < 3) return this.createError({ message: t("contact.form.companyMin3Chars") });
+          if (valWithoutSpaces.length > 50) return this.createError({ message: t("contact.form.companyMax50Chars") });
+          return true;
+        }),
       subject: yup.string()
+        .transform((v) => (v ? v.trim() : ""))
         .required(t("contact.form.subjectRequired"))
-        .min(3, t("contact.form.min3Chars"))
-        .max(100, t("contact.form.max100Chars"))
-        .test("not-empty", t("contact.form.notEmpty"), v => v?.trim().length > 0),
+        .max(100, t("contact.form.subjectMax100Chars")),
       question: yup.string()
+        .transform((v) => (v ? v.trim() : ""))
         .required(t("contact.form.questionRequired"))
-        .matches(lettersOnly, t("contact.form.questionInvalid"))
-        .min(3, t("contact.form.min3Chars"))
-        .max(500, t("contact.form.max500Chars"))
-        .test("not-empty", t("contact.form.notEmpty"), v => v?.trim().length > 0),
+        .max(500, t("contact.form.questionMax500Chars"))
     }), [t, i18n.language]
   );
 
-  const { register, handleSubmit, formState: { errors, isSubmitting, touchedFields }, reset, setValue, trigger } = useForm({
+  const { register, handleSubmit, control, formState: { errors, isSubmitting, touchedFields }, reset, trigger, watch } = useForm({
     resolver: yupResolver(schema),
     mode: "onBlur",
     defaultValues: { name: "", phone: "", email: "", company: "", subject: "", question: "" },
   });
 
-  useEffect(() => { trigger(); }, [i18n.language, trigger]);
+  // ⚡️ اختفاء رسالة الخطأ عند تصحيح كل الحقول
+  const watchedFields = watch();
+  useEffect(() => {
+    const hasErrors = Object.keys(errors).length > 0;
+    if (!hasErrors && formMessageType === "error") {
+      setFormMessageVisible(false);
+      setFormMessageType("");
+    }
+  }, [watchedFields, errors, formMessageType]);
 
-  const onSubmit = async data => {
+  useEffect(() => {
+    trigger();
+  }, [i18n.language, trigger]);
+
+  const onSubmit = async (data) => {
     try {
       await new Promise(res => setTimeout(res, 1000));
       reset();
-      setPhoneValue("");
-      setFormMessage({ type: "success", text: t("contact.form.successMessage") });
-      setSubmitAttempted(false);
+      setFormMessageType("success");
+      setFormMessageVisible(true);
+      setTimeout(() => setFormMessageVisible(false), 4000); // اختفاء بعد 4 ثواني
     } catch {
-      setFormMessage({ type: "error", text: t("contact.form.errorMessage") });
+      setFormMessageType("error");
+      setFormMessageVisible(true);
+      setTimeout(() => setFormMessageVisible(false), 4000);
     }
   };
 
-  const handleFormSubmit = async e => {
-    e.preventDefault();
-    setSubmitAttempted(true);
-    const valid = await trigger();
-    if (!valid) {
-      setFormMessage({ type: "error", text: t("contact.form.errorMessage") });
-      return;
-    }
-    handleSubmit(onSubmit)();
+  const onError = () => {
+    setFormMessageType("error");
+    setFormMessageVisible(true);
   };
 
   return (
@@ -84,87 +124,105 @@ function ContactForm() {
       <p className="contact-form-subtitle">{t("contact.subtitle1")}</p>
       <p className="contact-form-subtitle">{t("contact.subtitle2")}</p>
 
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleSubmit(onSubmit, onError)}>
         <FormField
           label={t("contact.form.nameLabel")}
           placeholder={t("contact.form.namePlaceholder")}
-          name="name"
           register={register}
+          name="name"
           error={errors.name}
           required
           isRTL={isRTL}
-          touched={!!touchedFields.name || submitAttempted}
+          touched={!!touchedFields.name}
         />
 
-        <FormField
-          label={t("contact.form.phoneLabel")}
-          placeholder={t("contact.form.phonePlaceholder")}
-          type="phone"
+        <Controller
           name="phone"
-          value={phoneValue}
-          onChange={val => {
-            setPhoneValue(val);
-            setValue("phone", val, { shouldValidate: true });
-            trigger("phone");
-          }}
-          error={errors.phone}
-          required
-          isRTL={isRTL}
-          touched={submitAttempted}
+          control={control}
+          render={({ field }) => (
+            <FormField
+              type="phone"
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              error={errors.phone}
+              touched={!!touchedFields.phone}
+              label={t("contact.form.phoneLabel")}
+              placeholder={t("contact.form.phonePlaceholder")}
+              isRTL={isRTL}
+            />
+          )}
         />
 
         <FormField
           label={t("contact.form.emailLabel")}
           placeholder={t("contact.form.emailPlaceholder")}
-          type="email"
-          name="email"
           register={register}
+          name="email"
+          type="email"
           error={errors.email}
           required
           isRTL={isRTL}
-          touched={!!touchedFields.email || submitAttempted}
+          touched={!!touchedFields.email}
         />
 
         <FormField
           label={t("contact.form.companyLabel")}
           placeholder={t("contact.form.companyPlaceholder")}
-          name="company"
           register={register}
+          name="company"
           error={errors.company}
           isRTL={isRTL}
-          touched={!!touchedFields.company || submitAttempted}
+          touched={!!touchedFields.company}
         />
 
         <FormField
           label={t("contact.form.subjectLabel")}
           placeholder={t("contact.form.subjectPlaceholder")}
-          name="subject"
           register={register}
+          name="subject"
           error={errors.subject}
           required
           isRTL={isRTL}
-          touched={!!touchedFields.subject || submitAttempted}
+          touched={!!touchedFields.subject}
         />
 
         <FormField
           label={t("contact.form.questionLabel")}
           placeholder={t("contact.form.questionPlaceholder")}
-          name="question"
           register={register}
+          name="question"
           error={errors.question}
           rows={6}
           required
           isRTL={isRTL}
-          touched={!!touchedFields.question || submitAttempted}
+          touched={!!touchedFields.question}
         />
 
-        <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? t("contact.form.sending") : t("contact.form.submitButton")}
-        </Button>
+        <div className="form-field-wrapper submit-wrapper">
+          <label></label>
+          <div className="field-wrapper">
+       <Button type="submit" disabled={isSubmitting} className="btn-inline">
+  {isSubmitting ? (
+    <span className="sending-text">
+      {t("contact.form.sending")}
+      <span className="dots">
+        <span>.</span>
+        <span>.</span>
+        <span>.</span>
+      </span>
+    </span>
+  ) : (
+    t("contact.form.submitButton")
+  )}
+</Button>
 
-        <div className={`form-message-below ${formMessage.type ? "fade-in" : ""}`}>
-          {formMessage.type === "error" && <span className="form-error">{formMessage.text}</span>}
-          {formMessage.type === "success" && <span className="form-success">{formMessage.text}</span>}
+          </div>
+        </div>
+
+        <div className={`form-message-below ${formMessageVisible ? "fade-in" : "fade-out"}`}>
+          {formMessageType === "error" && <span className="form-error">{t("contact.form.errorMessage")}</span>}
+          {formMessageType === "success" && <span className="form-success">{t("contact.form.successMessage")}</span>}
         </div>
       </form>
     </div>

@@ -6,41 +6,58 @@ import "./Pagination.css";
 const Pagination = ({ currentPage, totalPages, onPageChange, lang }) => {
   const { t } = useTranslation();
   const isRTL = lang === "ar";
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
 
-  // اكتشاف حجم الشاشة
+  // تتبع حجم الشاشة
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 576);
-    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // تحديث رابط URL للصفحة الحالية
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    currentPage > 1 ? params.set("page", currentPage) : params.delete("page");
-    window.history.replaceState({}, "", `${window.location.pathname}?${params}`);
-  }, [currentPage]);
+  const handlePageChange = (page) => {
+    if (page === currentPage) return;
+    onPageChange(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-  const handlePrev = () => onPageChange(Math.max(currentPage - 1, 1));
-  const handleNext = () => onPageChange(Math.min(currentPage + 1, totalPages));
+  const handlePrev = () => handlePageChange(Math.max(currentPage - 1, 1));
+  const handleNext = () => handlePageChange(Math.min(currentPage + 1, totalPages));
 
-  // أرقام الصفحات
+  // توليد أرقام الصفحات مع ellipsis
+  const getPageNumbers = () => {
+    const pages = [];
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      const left = Math.max(currentPage - 1, 2);
+      const right = Math.min(currentPage + 1, totalPages - 1);
+      pages.push(1);
+      if (left > 2) pages.push("...");
+      for (let i = left; i <= right; i++) pages.push(i);
+      if (right < totalPages - 1) pages.push("...");
+      pages.push(totalPages);
+    }
+    return pages;
+  };
+
   const renderPages = () =>
-    Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-      <Button
-        key={page}
-        onClick={() => onPageChange(page)}
-        variant="pagination"
-        active={page === currentPage}
-        disabled={page === currentPage}
-      >
-        {page}
-      </Button>
-    ));
+    getPageNumbers().map((page, idx) =>
+      page === "..." ? (
+        <span key={`ellipsis-${idx}`} className="ellipsis">...</span>
+      ) : (
+        <Button
+          key={page}
+          onClick={() => handlePageChange(page)}
+          variant="pagination"
+          active={page === currentPage}
+          disabled={page === currentPage}
+        >
+          {page}
+        </Button>
+      )
+    );
 
-  // أزرار السابق / التالي
   const renderNavButton = (type) => {
     const isNext = type === "next";
     const disabled = isNext ? currentPage === totalPages : currentPage === 1;
@@ -53,26 +70,14 @@ const Pagination = ({ currentPage, totalPages, onPageChange, lang }) => {
         variant="nav-btn"
       >
         <span className={`nav-content ${isRTL ? "rtl" : ""}`}>
-          {isRTL ? (
-            isNext ? (
-              <>
-                <span className="label">{label}</span>
-                <span className="arrow">←</span>
-              </>
-            ) : (
-              <>
-                <span className="arrow">→</span>
-                <span className="label">{label}</span>
-              </>
-            )
-          ) : isNext ? (
+          {isNext ? (
             <>
               <span className="label">{label}</span>
-              <span className="arrow">→</span>
+              <span className="arrow-pagination">→</span>
             </>
           ) : (
             <>
-              <span className="arrow">←</span>
+              <span className="arrow-pagination">←</span>
               <span className="label">{label}</span>
             </>
           )}
@@ -84,12 +89,16 @@ const Pagination = ({ currentPage, totalPages, onPageChange, lang }) => {
   return (
     <div className={`pagination-container ${isRTL ? "rtl" : "ltr"}`}>
       {renderNavButton("prev")}
-      {!isMobile && <div className="pages-wrapper">{renderPages()}</div>}
-      {isMobile && (
+
+      {/* على الموبايل: أظهر فقط current / total */}
+      {isMobile ? (
         <span className="current-page-mobile">
           {currentPage} / {totalPages}
         </span>
+      ) : (
+        <div className="pages-wrapper">{renderPages()}</div>
       )}
+
       {renderNavButton("next")}
     </div>
   );

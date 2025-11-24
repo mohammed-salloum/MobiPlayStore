@@ -1,85 +1,61 @@
-.font-switcher {
-  display: inline-flex;    
-  align-items: center;     
-  position: relative;      
-}
+/* =========================
+   Fonts Switcher - Responsive with More Gap on Mobile
+========================= */
 
-/* زر FontSwitcher الرئيسي */
-.font-switcher-btn {
-  display: inline-flex;
+.fonts-container {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  transition: background 0.2s;
-  color: var(--text-color);
+  gap: 8px; /* الافتراضي على الشاشات الكبيرة */
 }
 
-.font-switcher-btn:hover {
-  background: rgba(0,0,0,0.05); /* ممكن تضبط حسب المود الداكن */
-}
-
-/* أيقونات الزر الرئيسي */
-.font-icon {
-  font-size: 1.4rem;
-  pointer-events: none;
-  color: var(--text-color);
-}
-
-/* السهم الصغير */
-.caret-icon {
-  font-size: 1rem;
-  transition: transform 0.3s ease;
-  pointer-events: none;
-  color: var(--text-color);
-}
-
-.caret-icon.open {
-  transform: rotate(180deg); /* يدور عند فتح القائمة */
-}
-
-/* قائمة الخطوط */
-.font-menu {
-  position: absolute;
-  top: 110%;
-  right: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 45px);
-  gap: 8px;
-  padding: 6px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px var(--card-shadow);
-  z-index: 2000;
-  background-color: var(--card-bg);
-  color: var(--text-color);
-}
-
-/* أزرار الخطوط */
 .font-btn {
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 2px solid var(--accent-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: transparent;
+  color: var(--accent-color);
+  font-weight: 600;
+  font-family: var(--main-font, 'Inter', sans-serif);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
-.font-btn:hover {
-  transform: scale(1.2);
-  box-shadow: 0 5px 12px var(--card-shadow);
+.icon-A {
+  font-size: 1rem;
+  color: inherit;
 }
 
-.font-btn.active {
-  outline: 2px solid var(--accent-color);
-  box-shadow: 0 0 6px var(--accent-color);
+.font-btn:hover { transform: scale(1.05); }
+.font-btn:active { transform: scale(0.95); }
+
+/* =========================
+   Mobile Adjustments - Slightly Smaller with More Gap
+========================= */
+@media (max-width: 480px) {
+  .fonts-container { gap: 8px; }  /* زيادة الفجوة */
+
+  .font-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 0.95rem;
+  }
+
+  .icon-A { font-size: 0.95rem; }
+}
+
+@media (max-width: 350px) {
+  .fonts-container { gap: 10px; } /* فجوة أكبر للشاشات الصغيرة جدًا */
+
+  .font-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .icon-A { font-size: 0.9rem; }
 }

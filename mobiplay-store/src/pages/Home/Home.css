@@ -1,84 +1,58 @@
 /* =========================== */
-/* Home.css - General Styles for Home Page */
+/* Home.css - General Styles */
 /* =========================== */
 
-/* ======== General Container ======== */
+/* Reset and box-sizing */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Home container */
 .home-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding-bottom: 60px;
-  font-family: inherit; /* يأخذ الخط من الثيم */
-  background-color: inherit; /* يأخذ اللون من الثيم */
-  color: inherit; /* يأخذ اللون من الثيم */
+  width: 100%;
+  font-family: inherit;
+  background-color: inherit;
+  color: inherit;
   transition: all 0.3s ease;
 }
 
-/* ======== Sections Spacing ======== */
-.home-container section {
-  padding: 60px 20px;
-  transition: padding 0.3s ease;
-}
+/* Section Titles */
 
-/* ======== Section Titles ======== */
-.home-container h1,
 .home-container h2,
 .home-container h3 {
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 20px;
   text-align: center;
-  color: var(--text-color); /* يعتمد على لون النص من الثيم */
+  color: var(--accent-color);
+  line-height: 1.3;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-/* ======== Footer ======== */
-.home-footer {
-  padding: 20px;
-  text-align: center;
-  margin-top: auto;
-  border-top: 1px solid currentColor; /* يعتمد على لون النص */
-  color: var(--text-color); /* نص الفوتر يعتمد على الثيم */
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .home-container h1 { font-size: 2.5rem; }
+  .home-container h2 { font-size: 2rem; }
+  .home-container h3 { font-size: 1.6rem; }
 }
 
-/* ======== Media Queries for Responsiveness ======== */
-
-/* عند الشاشات الصغيرة (أقل من 768px) */
 @media (max-width: 768px) {
-  .home-container section {
-    padding: 40px 10px; /* تقليل المسافات في الشاشات الصغيرة */
-  }
-
-  .home-container h1 {
-    font-size: 2rem; /* تصغير حجم العنوان الرئيسي */
-  }
-
-  .home-container h2 {
-    font-size: 1.6rem; /* تصغير حجم العناوين الثانوية */
-  }
-
-  .home-container h3 {
-    font-size: 1.4rem; /* تصغير حجم العناوين الثانوية الأصغر */
-  }
+  .home-container h1 { font-size: 2rem; }
+  .home-container h2 { font-size: 1.6rem; }
+  .home-container h3 { font-size: 1.4rem; }
 }
 
-/* عند الشاشات الصغيرة جدًا (أقل من 480px) */
 @media (max-width: 480px) {
-  .home-container section {
-    padding: 30px 10px; /* تقليل المسافات أكثر */
-  }
-
-  .home-container h1 {
-    font-size: 1.8rem; /* تصغير أكثر للعنوان الرئيسي */
-  }
-
-  .home-container h2 {
-    font-size: 1.4rem; /* تصغير العناوين الثانوية أكثر */
-  }
-
-  .home-container h3 {
-    font-size: 1.2rem; /* تصغير العناوين الأصغر */
-  }
-
-  .home-footer {
-    padding: 10px;
-  }
+  .home-container h1 { font-size: 1.8rem; }
+  .home-container h2 { font-size: 1.4rem; }
+  .home-container h3 { font-size: 1.2rem; }
 }

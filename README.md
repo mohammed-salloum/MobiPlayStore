@@ -1,71 +1,94 @@
 # 🎮 MobiPlayStore – Mobile Game Cards Store Web Application
+💼 Personal Project | June 2025
 
-### 💼 Personal Project | June 2025
+MobiPlayStore – Full-Stack Web Application
 
-MobiPlayStore is a full-featured responsive web application for selling mobile game top-up cards. Developed using React, Redux Toolkit, React Router, Context API, React Select, Bootstrap 5, and CSS3, the application provides a smooth user experience across all devices. It also includes advanced features such as shopping cart management, a product rating system, dark/light mode toggle, multi-language support (Arabic/English), and a font style switcher for enhanced readability and usability.
+Full-stack bilingual web application (Arabic/English) for purchasing mobile game top-up cards. Developed using React, Redux Toolkit, React Router, Context API, React Select, i18next, Bootstrap 5, CSS3, Node.js, Express.js, Firebase Hosting, and Google Maps API. The application includes user authentication, profile management, and a Redux-managed user-specific shopping cart. Advanced features include multi-theme support, Google Maps integration, a secure payment system, and a fully responsive modern UI.
 
----
+🚀 Live Demo & GitHub
 
-## 🚀 Live Demo  
-[🌐 View Project Online](https://mobiplaystore-syr.web.app/)
+🌐 Live Demo | 🐙 GitHub: MobiPlayStore
 
----
-## 🔧 Tech Stack
+🔧 Tech Stack
 
-* ⚛️ React
-* 🗂️ Redux Toolkit, React Context API
-* 🔄 React Router
-* 🎨 Bootstrap 5, CSS3
-* 🔌 React Select
-* 🌐 i18next for multilingual support (English/Arabic + RTL)
-* 📝 Google Fonts (Inter, Cairo) with font toggle
-* 💾 localStorage for preferences persistence (language, font, theme)
-* ☁️ Firebase Hosting for deployment
+⚛️ React
 
----
+🗂️ Redux Toolkit, React Context API
 
-  ## 🌟 Features
+🔄 React Router
 
-- 🛒 Shopping cart management with localStorage persistence  
-- ⭐ Product rating and review system  
-- 🌙 Dark and Light mode toggle with seamless UI  
-- 🌍 Multi-language support (**Arabic / English**)  
-- 🔤 Font style switcher for better readability  
-- 📱 Fully responsive design for mobile and desktop  
-- 🔄 Smooth navigation using React Router  
-- ⚛️ State management via Redux Toolkit and React Context API  
+🎨 Bootstrap 5, CSS3
 
----
+🔌 React Select
+
+🌐 i18next (Arabic/English + RTL)
+
+📝 Google Fonts (Inter, Cairo) with font toggle
+
+💾 localStorage for preferences persistence (language, font, theme)
+
+☁️ Firebase Hosting
+
+🟢 Node.js, Express.js
+
+📍 Google Maps API
+
+🌟 Features
+
+🛒 User-specific shopping cart managed with Redux and localStorage persistence
+
+🔑 User authentication and profile management
+
+⭐ Product rating and review system
+
+🌙 Multi-theme support (Dark/Light mode) with seamless UI
+
+🌍 Bilingual support (Arabic / English) with RTL
+
+📱 Fully responsive design for mobile and desktop
+
+🔄 Smooth navigation using React Router
+
+⚛️ State management via Redux Toolkit and React Context API
+
+📍 Google Maps integration for location-based features
+
+💳 Secure payment system
+
 
 ## 📸 Screenshots  
 
-| 🏠 Home – Light | 🏠 Home – Dark |
-|-----------------|----------------|
-| ![Home Light](Screenshots/light/home-HeroSection-page.PNG) <br> ![Home Light](Screenshots/light/home-FeaturesSection-page.PNG) | ![Home Dark](Screenshots/dark/home-HeroSection-page.PNG) <br> ![Home Dark](Screenshots/dark/home-FeaturesSection-page.PNG) |
+| 🏠 Home – Dark |
+|-----------------|
+| ![Home Hero Section Dark](Screenshots/dark/home-HeroSection-page.PNG) <br> ![Home Features Section Dark](Screenshots/dark/home-FeaturesSection-page.PNG) |
 
-| 🛍️ Products – Light | 🛍️ Products – Dark |
-|---------------------|---------------------|
-| ![Products Light](Screenshots/light/products-page.PNG) | ![Products Dark](Screenshots/dark/products-page.PNG) |
+| 🌟 Product Details – Dark |
+|---------------------------|
+| ![Product Details Dark](Screenshots/dark/productDetails-page1.PNG) <br> ![Product Details Dark 2](Screenshots/dark/productDetails-page2.PNG) |
 
-| 🌟 Product Details – Light | 🌟 Product Details – Dark |
-|----------------------------|---------------------------|
-| ![Product Details Light](Screenshots/light/productDetails-page.PNG) | ![Product Details Dark](Screenshots/dark/productDetails-page.PNG) |
+| 🛍️ Products – Dark |
+|---------------------|
+| ![Products Dark](Screenshots/dark/products-page.PNG) |
 
-| 🎁 Offers – Light | 🎁 Offers – Dark |
-|------------------|------------------|
-| ![Offers Light](Screenshots/light/offers-page.PNG) | ![Offers Dark](Screenshots/dark/offers-page.PNG) |
+| 🎁 Offers – Dark |
+|------------------|
+| ![Offers Dark](Screenshots/dark/offers-page.PNG) |
 
-| 🛒 Cart – Light | 🛒 Cart – Dark |
-|----------------|----------------|
-| ![Cart Light](Screenshots/light/cart-page.PNG) | ![Cart Dark](Screenshots/dark/cart-page.PNG) |
+| 🛒 Cart – Dark |
+|----------------|
+| ![Cart Dark](Screenshots/dark/cart-page.PNG) |
 
-| 💳 Checkout – Light | 💳 Checkout – Dark |
-|---------------------|---------------------|
-| ![Checkout Light](Screenshots/light/checkout-page.PNG) | ![Checkout Dark](Screenshots/dark/checkout-page.PNG) |
+| 💳 Checkout – Dark |
+|---------------------|
+| ![Checkout Dark](Screenshots/dark/checkout-page.PNG) |
 
-| 📝 Contact – Light | 📝 Contact – Dark |
-|-------------------|-------------------|
-| ![Contact Light](Screenshots/light/contact-page.PNG) | ![Contact Dark](Screenshots/dark/contact-page.PNG) |
+| 📝 Contact – Dark |
+|-------------------|
+| ![Contact Dark](Screenshots/dark/contact-page.PNG) |
+
+| 🖤 Footer |
+|-------------------|
+| ![Footer Dark](Screenshots/dark/footer-page.PNG) |
 
 ---
 
@@ -80,6 +103,6 @@ Full source code and project files available here:
 ## 👨‍💻 Author
 
 **Mohammed Salloum**  
-Full-Stack Web Developer | Django & React Specialist  
+Front-End React Developer  
 📧 mohammed.e.salloum@gmail.com  
 🔗 [LinkedIn – mohammed-salloum-dev](https://linkedin.com/in/mohammed-salloum-dev)

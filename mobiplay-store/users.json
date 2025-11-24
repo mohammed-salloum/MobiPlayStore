@@ -1,0 +1,81 @@
+[
+  {
+    "id": 1762454627138,
+    "username": "mohammed",
+    "email": "mohammed.e.salloum@gmail.com",
+    "password": "$2b$10$VcLpTovxGBBRt8d02nLZE.qY1UIKaUs4m9H065ENA.LoeVsqolgmO",
+    "avatar": "/uploads/avatars/1763394441030-720150146.jpg"
+  },
+  {
+    "id": 1762597984441,
+    "username": "emad",
+    "email": "hind.salloum@gmail.com",
+    "password": "$2b$10$09CvIFtsolJ1cpoKtzHqvuBLktPNILQl9RJCWQcfjEY2qr/rhJ/T.",
+    "avatar": "https://via.placeholder.com/120",
+    "createdAt": "2025-11-08T10:33:04.441Z"
+  },
+  {
+    "id": 1762598759192,
+    "username": "admin",
+    "email": "issa.salloum@gmail.com",
+    "password": "$2b$10$pLjmaWbuuCCyMUdc/TqDLutP8jRp20tbYKqHlaxrj3n3sSHnoQyFq",
+    "avatar": "https://via.placeholder.com/120",
+    "createdAt": "2025-11-08T10:45:59.192Z"
+  },
+  {
+    "id": 1762876506142,
+    "username": "areej",
+    "email": "areej.e.salloum@gmail.com",
+    "password": "$2b$10$Ex4.t5QZTstd8kqhKvylaesrvX6oBeoi6HtKfy40X/ZIoEuYbAW5K",
+    "avatar": "https://via.placeholder.com/120",
+    "createdAt": "2025-11-11T15:55:06.142Z"
+  },
+  {
+    "id": 1763372553615,
+    "username": "mohammed",
+    "email": "mohammed.salloum@gmail.com",
+    "password": "$2b$10$0GPtcVkVPnUUDYjeXins9eb3SmLzn.zq14H78HNu0RNnYr9Z54l3m",
+    "avatar": null,
+    "createdAt": "2025-11-17T09:42:33.615Z"
+  },
+  {
+    "id": 1763469261295,
+    "username": "mohammed Salloum",
+    "email": "mohammedsalloum@gmail.com",
+    "password": "$2b$10$4rVMgKv5RIVpt3hVPPE2M.VncygPK/tchEL2YZcK3ltPrhof6Erv2",
+    "avatar": null,
+    "createdAt": "2025-11-18T12:34:21.295Z"
+  },
+  {
+    "id": 1763469950693,
+    "username": "mohammed Salloum",
+    "email": "mohammedalloum@gmail.com",
+    "password": "$2b$10$YcT7kZmEEnd/G0IC6wqLI.7oeupCBaVf4VEev4Xi6vGVpmm0Mk1Au",
+    "avatar": null,
+    "createdAt": "2025-11-18T12:45:50.693Z"
+  },
+  {
+    "id": 1763470527113,
+    "username": "mohammed Salloum",
+    "email": "salloum@gmail.com",
+    "password": "$2b$10$Eb2IXfvlFsSaFM8mI/5NA.cl2Lfi6dUk7oHQtH75JqrQpQoQjDGku",
+    "avatar": null,
+    "createdAt": "2025-11-18T12:55:27.113Z"
+  },
+  {
+    "id": 1763471204423,
+    "username": "mohammed Salloum",
+    "email": "areej.salloum@gmail.com",
+    "password": "$2b$10$ykcgtxeDB.bAuxSasnaUIut/d00xP66vPzTNjyo3PdQmtZhHSlPk2",
+    "avatar": null,
+    "createdAt": "2025-11-18T13:06:44.423Z"
+  },
+  {
+    "id": 1763471634194,
+    "username": "mohamad salloum",
+    "email": "areejsalloum@gmail.com",
+    "password": "$2b$10$k2pymjfipOU7TZOhoEP2Z.Dbs2ZGG5xkKkSPR1kEgWamTSS.6aiwa",
+    "avatar": null,
+    "createdAt": "2025-11-18T13:13:54.194Z"
+  }
+]

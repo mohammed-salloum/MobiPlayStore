@@ -6,7 +6,7 @@
 .checkout-container {
   inline-size: min(1200px, 100%);
   margin-inline: auto;
-  padding-top: calc(var(--navbar-height, 80px) + 2rem); /* مسافة فوق العنوان */
+  padding-top: calc(var(--navbar-height, 80px) + 1.5rem); /* مسافة فوق العنوان */
   padding-bottom: 1rem;
   padding-inline: clamp(1rem, 5vw, 2rem);
   background-color: var(--bg-color);
@@ -20,8 +20,10 @@
   font-weight: 700;
   text-align: center;
   font-size: 2rem;
-  margin-block: 2rem; /* مسافة فوق وتحت */
+  margin: 1rem;
+  padding-bottom: 1.5rem;
   line-height: 1.2;
+   color: var(--accent-color);
 }
 
 /* Layout المحتوى */
@@ -41,55 +43,91 @@
   min-inline-size: 280px; /* الحد الأدنى للعمود */
   max-inline-size: 550px; /* الحد الأقصى للعرض */
 }
+/* =========================
+   رسالة السلة الفارغة - Empty Cart
+========================= */
+
+.empty-cart {
+  display: flex;
+  justify-content: center;  /* تمركز أفقي */
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(---color);
+  line-height: 1.4;
+  margin-top: 1rem; /* مسافة صغيرة تحت العنوان */
+  padding: 0.5rem 1rem;
+}
 
 /* Responsive Adjustments */
+/* =========================
+   Responsive Checkout Layout
+========================= */
 
 /* Large desktops */
 @media (min-width: 1025px) {
-  .checkout-title {
-    font-size: 2rem;
+  .checkout-content {
+    display: flex;
+    flex-direction: row; /* الأعمدة جنب بعض */
+    align-items: flex-start;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .order-summary-column {
+    order: 1; /* الملخص أول */
+  }
+  .payment-form-column {
+    order: 2;
+  }
+
+  .order-summary-column,
+  .payment-form-column {
+    flex: 1 1 45%;
+    min-inline-size: 280px;
+    max-inline-size: 550px;
   }
 }
 
-/* Tablets */
+/* Medium & small screens */
 @media (max-width: 1024px) {
-  .checkout-container {
-    padding-top: calc(var(--navbar-height, 70px) + 2rem);
-  }
-  .checkout-title {
-    font-size: 1.85rem;
-  }
   .checkout-content {
+    display: flex;
+    flex-direction: column; /* الأعمدة فوق بعض */
     gap: 1.5rem;
+  }
+
+  .order-summary-column {
+    order: 1; /* الملخص أول */
+    margin-inline: auto;
+  }
+  .payment-form-column {
+    order: 2; /* الفورم تحت */
+    margin-inline: auto;
+  }
+
+  .order-summary-column,
+  .payment-form-column {
+    width: 100%;
+    max-inline-size: 550px;
   }
 }
 
 /* Small screens / Mobiles */
 @media (max-width: 768px) {
-  .checkout-title {
-    font-size: 1.65rem;
-  }
   .checkout-content {
     gap: 1.2rem;
   }
 }
 
-/* Extra small devices / Phones */
+/* Extra small / very small devices */
 @media (max-width: 480px) {
-  .checkout-title {
-    font-size: 1.45rem;
-  }
   .checkout-content {
     gap: 1rem;
   }
 }
 
-/* Very small screens / 350px */
 @media (max-width: 350px) {
-  .checkout-title {
-    font-size: 1.3rem;
-    margin-block: 1rem;
-  }
   .checkout-content {
     gap: 0.8rem;
   }

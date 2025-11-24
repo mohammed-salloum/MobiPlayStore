@@ -1,0 +1,114 @@
+/* ==========================
+   Wrapper البطاقة
+========================== */
+.payment-confirmation-wrapper {
+  min-height: auto;           /* بدل 50vh، الحاوية تأخذ ارتفاع المحتوى فقط */
+  display: flex;
+  justify-content: center;    /* توسيط أفقي */
+  align-items: flex-start;    /* قرب البطاقة من الأعلى */
+  padding: 1rem 2rem;         /* قلل البادينغ العلوي */
+  text-align: center;
+}
+
+/* ==========================
+   البطاقة
+========================== */
+.payment-confirmation-card {
+  padding: 1.8rem 1.5rem;           /* قلل البادينغ */
+  border-radius: 16px;   
+  border:  1px solid var(--accent-color);           /* انحناءات أصغر */
+  max-width: 400px;                 /* عرض أصغر */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;                      /* مسافة أقل بين العناصر */
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.payment-confirmation-icon {
+  font-size: 60px;          /* حجم الأيقونة */
+  color: var(--icon-color); /* اللون الآن من الثيم */
+  margin-bottom: 1rem;
+}
+/* ==========================
+   عنوان التأكيد
+========================== */
+.payment-confirmation-title {
+  font-size: 1.7rem;                /* أصغر قليلاً */
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================
+   نص الرسالة
+========================== */
+.payment-confirmation-message {
+  font-size: 1rem;                  /* أصغر قليلاً */
+  color: var(--text-muted);
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+/* ==========================
+   زر الإنهاء
+========================== */
+.payment-confirmation-card .button-checkout {
+  width: 100%;
+  padding: 0.65rem 1rem;            /* أصغر قليلاً */
+  font-size: 1rem;
+  border-radius: 8px;               /* تقليل الانحناء */
+}
+
+/* ==========================
+   استجابة للشاشات المتوسطة
+========================== */
+@media (max-width: 1024px) {
+  .payment-confirmation-card {
+    max-width: 350px;
+    padding: 1.5rem 1.2rem;
+  }
+}
+
+/* ==========================
+   استجابة للشاشات الصغيرة
+========================== */
+@media (max-width: 768px) {
+  .payment-confirmation-card {
+    max-width: 90%;
+    padding: 1.2rem 1rem;
+    gap: 1rem;
+  }
+  .payment-confirmation-title {
+    font-size: 1.5rem;
+  }
+  .payment-confirmation-message {
+    font-size: 0.95rem;
+  }
+  .payment-confirmation-card .button-checkout {
+    padding: 0.55rem 0.8rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* ==========================
+   استجابة للهواتف الصغيرة جدًا
+========================== */
+@media (max-width: 480px) {
+  .payment-confirmation-card {
+    max-width: 95%;
+    padding: 1rem 0.8rem;
+    gap: 0.8rem;
+  }
+  .payment-confirmation-title {
+    font-size: 1.3rem;
+  }
+  .payment-confirmation-message {
+    font-size: 0.9rem;
+  }
+  .payment-confirmation-card .button-checkout {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.9rem;
+  }
+}

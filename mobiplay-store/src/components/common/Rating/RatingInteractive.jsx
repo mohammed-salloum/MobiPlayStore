@@ -1,4 +1,3 @@
-// RatingInteractive.jsx
 import React from "react";
 import Stars from "./Stars";
 import { useTranslation } from "react-i18next";
@@ -10,18 +9,17 @@ function RatingInteractive({
   theme = "light",
   isRTL = false,
   totalStars = 5,
-  size = 28 // حجم النجوم
+  size = 28
 }) {
   const { t } = useTranslation();
 
   return (
     <div className={`rating-interactive-wrapper ${theme}`} dir={isRTL ? "rtl" : "ltr"}>
-      <div className="rate-text">
-        {t("productDetails.rateThis")}
-      </div>
+      <div className="rate-text">{t("productDetails.rateThis")}</div>
 
       <Stars
-        interactive={allowRate}
+        interactive={true}
+       allowRate={allowRate}   // ✅ هنا
         userRating={userRating}
         onRate={onRate}
         theme={theme}

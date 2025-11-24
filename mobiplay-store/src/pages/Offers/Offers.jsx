@@ -1,6 +1,6 @@
 // src/pages/Offers/Offers.jsx
 import React from "react";
-import GenericProductPage from "../../components/common/GenericProductPage/GenericProductPage";
+import GenericProductPage from "../../components/Common/GenericProductPage/GenericProductPage";
 import { useOffers } from "../../services/api";
 
 const Offers = () => (

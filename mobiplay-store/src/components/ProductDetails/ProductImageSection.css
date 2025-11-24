@@ -6,34 +6,33 @@
   flex-direction: row;
   width: 100%;
   max-width: 1200px;
-  margin: 2rem auto; /* مسافة من الحافة + توسيط */
-  padding: 1rem 1.5rem; /* padding داخلي متناسق */
+  margin-inline: auto; /* توسيط دائم */
+  margin-block: 2rem;  /* مسافة من أعلى وأسفل */
+  padding: clamp(0.8rem, 5vw, 1.5rem); /* padding داخلي متساوي من جميع الجهات */
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  background-color: var(--card-bg);
   color: var(--text-color);
   box-sizing: border-box;
   gap: 1rem; /* فجوة بين الصورة والمعلومات */
   overflow: hidden;
+  border: 1px solid var(--card-border);
 }
 
-/* صورة المنتج كـ cover */
+/* صورة المنتج */
 .product-image-side {
   flex: 1 1 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: transparent;
-  padding: 0; /* إزالة أي padding داخلي إضافي */
+  padding: 0;
   box-sizing: border-box;
-  overflow: hidden; /* يمنع تجاوز الصورة للحاوية */
-  min-height: 300px; /* ارتفاع افتراضي على الشاشات الصغيرة */
+  overflow: hidden;
+  min-height: 300px; /* ارتفاع افتراضي */
 }
 
 .product-image-side img {
   width: 100%;
-  height: 100%;       /* يغطي كامل الحاوية */
-  object-fit: cover;  /* يملأ الحاوية ويقص الزوائد */
+  height: 100%;
+  object-fit: cover;
   border-radius: 12px;
   display: block;
 }
@@ -44,18 +43,21 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 10px; /* padding داخلي أقل */
+  padding: clamp(0.8rem, 5vw, 1.5rem); /* padding داخلي متساوي */
   gap: 10px;
   text-align: center;
   box-sizing: border-box;
 }
 
-/* اسم المنتج */
-.product-name {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 0;
+/* اسم المنتج - responsive */
+/* معلومات التقييم والاسم */
+.product-info-side .product-name-detail {
+    color: var(--accent-color);
+    font-weight: 700;
+    margin: 0;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
 }
+
 
 /* التقييم */
 .rate-product-row {
@@ -99,11 +101,14 @@
 /* =========================
    Responsive Adjustments
 ========================= */
+
+/* أجهزة متوسطة / لابتوبات */
 @media (max-width: 1024px) {
   .product-details-horizontal {
     flex-direction: column;
     max-width: 600px;
-    padding: 0.8rem 1rem;
+    padding: clamp(0.6rem, 5vw, 1.2rem);
+    gap: 0.8rem;
   }
 
   .product-image-side {
@@ -112,17 +117,19 @@
 
   .product-image-side img {
     border-radius: 12px 12px 0 0;
-    max-height: none; /* السماح للـ cover بالتمدد */
+    max-height: none;
   }
 
   .product-info-side {
-    padding: 8px;
+    padding: clamp(0.6rem, 5vw, 1.2rem);
   }
 }
 
+/* شاشات هواتف صغيرة */
 @media (max-width: 480px) {
   .product-details-horizontal {
-    padding: 0.5rem 0.8rem;
+    padding: clamp(0.5rem, 5vw, 1rem);
+    gap: 0.6rem;
   }
 
   .product-image-side {
@@ -134,6 +141,22 @@
   }
 
   .product-info-side {
-    padding: 5px;
+    padding: clamp(0.5rem, 5vw, 1rem);
+  }
+}
+
+/* شاشات صغيرة جدًا */
+@media (max-width: 350px) {
+  .product-details-horizontal {
+    padding: 0.4rem 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .product-image-side {
+    min-height: 180px;
+  }
+
+  .product-info-side {
+    padding: 0.4rem 0.5rem;
   }
 }

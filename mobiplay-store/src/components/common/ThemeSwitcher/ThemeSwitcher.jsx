@@ -1,48 +1,41 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
+// ThemeSwitcher.jsx
+import React, { useContext } from "react";
 import { ThemeContext } from "../../../context/ThemeContext";
-import { FaSun, FaMoon, FaEye, FaBookOpen, FaCaretDown } from "react-icons/fa";
+import { FaSun, FaMoon, FaEye,FaBook } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import "./ThemeSwitcher.css";
 
-function ThemeSwitcher() {
+function ThemeSwitcher({ onlyLight = false, onlyDark = false, displayInline = false }) {
   const { theme, setTheme, themes } = useContext(ThemeContext);
-  const [open, setOpen] = useState(false);
-  const ref = useRef();
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const { t, i18n } = useTranslation(); // hook لجلب الترجمة
+  const isRTL = i18n.language === "ar";
 
   const themeMap = {
     light: FaSun,
     dark: FaMoon,
     colorblind: FaEye,
-    sepia: FaBookOpen,
+    reading: FaBook,
   };
 
-  return (
-    <div className="theme-switcher" ref={ref}>
-      <button className="theme-switcher-btn" onClick={() => setOpen(!open)}>
-        {React.createElement(themeMap[theme], { className: "theme-icon" })}
-        <FaCaretDown className={`caret-icon ${open ? 'open' : ''}`} />
-      </button>
+  let displayedThemes = themes;
+  if (onlyLight) displayedThemes = themes.filter(t => t !== "dark");
+  if (onlyDark) displayedThemes = themes.filter(t => t === "dark");
 
-      {open && (
-        <div className="theme-menu">
-          {themes.map((t) => (
-            <button
-              key={t}
-              className={`theme-btn theme-${t} ${theme === t ? "active" : ""}`}
-              onClick={() => { setTheme(t); setOpen(false); }}
-            >
-              {React.createElement(themeMap[t], { className: "theme-icon" })}
-            </button>
-          ))}
-        </div>
-      )}
+  // إضافة كلاس rtl حسب اللغة
+  const containerClass = `theme-container inline ${isRTL ? "rtl" : ""}`;
+
+  return (
+    <div className={containerClass}>
+      {displayedThemes.map((th) => (
+        <button
+          key={th}
+          className={`theme-btn theme-${th} ${theme === th ? "active" : ""}`}
+          onClick={() => setTheme(th)}
+        >
+          {React.createElement(themeMap[th], { className: "theme-icon" })}
+          <span className="theme-name">{t(`themes.${th}`)}</span>
+        </button>
+      ))}
     </div>
   );
 }

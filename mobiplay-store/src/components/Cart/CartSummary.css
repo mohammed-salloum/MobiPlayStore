@@ -4,18 +4,17 @@
 .cart-summary {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding: 1.5rem;
+  gap: 1rem;
+  padding: 1rem;
   border-radius: 12px;
-  background-color: var(--bg-bg);
-  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  border: 1px solid var(--accent-color);
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   box-sizing: border-box;
-
-  width: 100% !important;
-  max-width: none !important;
+  width: 100%;
+  max-width: none;
+  min-height: auto;
 }
-
 
 /* =========================
    Total Price
@@ -25,17 +24,20 @@
   justify-content: space-between;
   align-items: center;
   font-weight: 700;
-  font-size: 1.2rem;
-  padding: 1rem;
-  border-radius: 8px;
+  font-size: 1.1rem;
   background-color: var(--bg-color);
   box-sizing: border-box;
   text-align: left;
+  border-bottom: 1px solid var(--accent-color);
 }
 
-/* دعم RTL */
 .cart-summary[dir="rtl"] .cart-total {
   text-align: right;
+}
+
+.cart-total .cart-price {
+  color: var(--accent-color);
+  font-weight: 700;
 }
 
 /* =========================
@@ -43,24 +45,55 @@
 ========================= */
 .cart-buttons {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  flex-direction: column; 
+  gap: 0.5rem;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+.cart-buttons .btn {
+  min-width: 140px;       /* الحد الأدنى للعرض */
+  max-width: 100%;
+  min-height: 40px;       /* ارتفاع ثابت احترافي */
+  padding: 0.6rem 1rem;   /* padding داخلي مناسب */
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* =========================
+   Responsive - Tablets & Mobile
+========================= */
+@media (max-width: 1024px) {
+  .cart-buttons {
+    gap: 0.6rem;
+  }
+
+  .cart-buttons .btn {
+    font-size: 0.95rem;
+    padding: 0.55rem 0.8rem; 
+    /* ارتفاع لا يتغير */
+  }
+}
+
+/* =========================
+   Responsive - Mobile Small & Landscape
+========================= */
+@media (max-width: 768px), (max-height: 500px) and (orientation: landscape) {
   .cart-summary {
-    padding: 1rem;
+    padding: 0.8rem;        
+    gap: 0.8rem;            
+  }
+
+  .cart-total {
+    font-size: 1rem;         
   }
 
   .cart-buttons {
-    gap: 0.8rem;
+    gap: 0.5rem;            
   }
-}
 
-@media (max-width: 576px) {
   .cart-buttons .btn {
-    font-size: 0.95rem;
-    padding: 0.7rem;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.6rem; 
+    /* لا نغير min-height هنا */
   }
 }

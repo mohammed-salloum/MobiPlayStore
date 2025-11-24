@@ -1,4 +1,3 @@
-// Stars.jsx
 import React, { useState } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
@@ -13,26 +12,29 @@ function Stars({
   interactive = false,
   userRating = 0,
   onRate,
+  allowRate = true, // ✅ جديد
   size = 22
 }) {
   const { t, i18n } = useTranslation();
   const [hovered, setHovered] = useState(0);
   const isArabic = i18n.language === "ar";
 
-  const displayRating = interactive ? (hovered || userRating) : rating;
   const mapStarForRTL = (star) => (isRTL ? totalStars + 1 - star : star);
 
-  const handleMouseEnter = (star) => interactive && setHovered(mapStarForRTL(star));
-  const handleMouseLeave = () => interactive && setHovered(0);
-  const handleClick = (star) => interactive && onRate && onRate(mapStarForRTL(star));
+  const handleMouseEnter = (star) => interactive && allowRate && setHovered(mapStarForRTL(star));
+  const handleMouseLeave = () => interactive && allowRate && setHovered(0);
+  const handleClick = (star) => interactive && allowRate && onRate && onRate(mapStarForRTL(star));
 
   const starsArr = [];
   for (let i = 1; i <= totalStars; i++) {
     const displayStar = mapStarForRTL(i);
     let fill = "empty";
 
-    if (displayRating >= displayStar) fill = "full";
-    else if (displayRating >= displayStar - 0.5) fill = "half";
+    // استخدام hover إذا موجود، وإلا userRating، وإلا rating
+    const effectiveRating = hovered > 0 ? hovered : userRating || rating;
+
+    if (effectiveRating >= displayStar) fill = "full";
+    else if (effectiveRating >= displayStar - 0.5) fill = "half";
 
     starsArr.push(
       <span
@@ -41,12 +43,12 @@ function Stars({
         onMouseEnter={() => handleMouseEnter(i)}
         onMouseLeave={handleMouseLeave}
         onClick={() => handleClick(i)}
-        style={{ fontSize: `${size}px` }}
+        style={{ fontSize: `${size}px`, cursor: interactive && allowRate ? "pointer" : "default" }}
         role={interactive ? "button" : "img"}
         tabIndex={interactive ? 0 : -1}
         aria-label={`${i} ${t("products.stars")}`}
         onKeyDown={(e) => {
-          if ((e.key === "Enter" || e.key === " ") && interactive) handleClick(i);
+          if ((e.key === "Enter" || e.key === " ") && interactive && allowRate) handleClick(i);
         }}
       >
         {fill === "full" && <FaStar className="star filled" />}
@@ -69,7 +71,7 @@ function Stars({
     >
       <div className="stars-and-number">
         <div className="stars">{starsArr}</div>
-        {!interactive && <span className="rating-number">{rating.toFixed(1)}</span>}
+        {!interactive && <span className="rating-number">{Number(rating).toFixed(1)}</span>}
       </div>
 
       {!interactive && reviewCount > 0 && (

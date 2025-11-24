@@ -1,80 +1,147 @@
-.language-switcher {
-  display: inline-flex;    
-  align-items: center;     
-  position: relative;      
+/* =========================
+   🌍 Languages Switcher (Themed + Responsive)
+========================= */
+
+/* Container */
+.languages-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;                     /* المسافة بين الأزرار */
+  justify-content: flex-start;
+  align-items: center;
+  direction: ltr;
 }
 
-/* زر تبديل اللغة */
-.btn-toggle-language {
+.languages-inline.rtl {
+  direction: rtl;
+}
+
+/* =========================
+   🔘 Buttons
+========================= */
+.language-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
-  padding: 0.5rem 0.7rem;
-  border-radius: 8px;
-  border: none;
-  background: var(--card-bg);
-  color: var(--text-color);
+  gap: 0.4em;                     /* مسافة بين الأيقونة والنص */
+  padding: 0.4em 0.6em;            /* حشوة مناسبة */
+  border: 0.5px solid var(--accent-color);
+  border-radius: 4px;
+  background-color: var(--bg-color, #fff);
+  color: var(--text-color, #333);
+  font-size: 0.8rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  flex: 1 1 120px;                 /* كل زر يحاول يكون 120px */
+  max-width: 140px;                 /* الحد الأقصى للزر */
+  text-align: center;               /* النص في الوسط */
+  min-width: 100px;                 /* أقل عرض */
+  white-space: nowrap;              /* منع النص من الانكسار */
+  overflow: hidden;                 /* اخفاء النص الزائد */
+  text-overflow: ellipsis;          /* تظهر نقاط ... للنص الطويل جدًا */
+  box-sizing: border-box;
+  line-height: 1;
+  transition: all 0.2s ease-in-out;
 }
 
-.btn-toggle-language:hover {
-  background: var(--secondary-color);
-  color: var(--bg-color);
-}
-
-.caret-icon {
-  font-size: 0.9rem;
-  pointer-events: none;
-  transition: transform 0.3s ease;
-  color: var(--text-color);
-}
-
-.caret-icon.open {
-  transform: rotate(180deg);
-}
-
-/* القائمة على شكل شبكة */
-.language-menu.grid-menu {
-  position: absolute;
-  top: 110%;
-  right: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 45px);
-  gap: 6px;
-  padding: 6px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px var(--card-shadow);
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  z-index: 2000;
-}
-
-/* أزرار اللغة */
-.language-btn {
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 8px;
-  background: var(--bg-color);
-  color: var(--text-color);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s, color 0.2s;
-}
-
-.language-btn:hover {
-  transform: scale(1.2);
-  box-shadow: 0 4px 10px var(--card-shadow);
+/* Hover & Focus */
+.language-btn:hover,
+.language-btn:focus {
   background-color: var(--accent-color);
-  color: var(--bg-color);
+  color: var(--sign-in-hover-text, #fff);
+  box-shadow: 0 0 6px var(--accent-color);
+  transform: translateY(-1px);
 }
 
-/* أيقونات الأعلام */
+/* Active / Selected */
+.language-btn.active,
+.language-btn:active {
+    background-color: var(--accent-color);
+      color: var(--sign-in-hover-text, #fff);
+  outline: 2px solid var(--accent-color);
+  box-shadow: 0 0 6px var(--accent-color);
+  transform: translateY(0);
+}
+
+/* =========================
+   🏳️‍🌈 Flag/Icon + Text
+========================= */
 .language-btn .fi {
-  font-size: 2.2rem; 
-  line-height: 45px; /* لمحاذاة رأسية كاملة داخل الزر */
+  font-size: 1.2rem;
+  color: inherit;
+  transition: color 0.2s ease-in-out;
+}
+
+.language-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: inherit;
+}
+
+/* =========================
+   📱 Responsive
+========================= */
+@media (max-width: 768px) {
+
+  .language-btn {
+    flex: 1 1 100px;  /* أصغر حجم للزر */
+    max-width: 120px;
+    padding: 0.35em 0.5em;
+    font-size: 0.75rem;
+  }
+
+  .language-btn .fi {
+    font-size: 1.1rem;
+  }
+
+  .language-name {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .language-btn {
+    flex: 1 1 90px;
+    max-width: 110px;
+    padding: 0.3em 0.5em;
+    font-size: 0.7rem;
+  }
+
+  .language-btn .fi {
+    font-size: 1rem;
+  }
+
+  .language-name {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .language-btn {
+    flex: 1 1 80px;
+    max-width: 100px;
+    padding: 0.25em 0.4em;
+    font-size: 0.65rem;
+  }
+
+  .language-btn .fi {
+    font-size: 0.9rem;
+  }
+
+  .language-name {
+    font-size: 0.7rem;
+  }
+}
+
+/* Landscape (الشاشات الأفقية الصغيرة) */
+@media (orientation: landscape) {
+  .languages-inline {
+    gap: 12px;
+    justify-content: flex-start;
+  }
+
+  .language-btn {
+    flex: 1 1 100px;
+    max-width: 120px;
+  }
 }

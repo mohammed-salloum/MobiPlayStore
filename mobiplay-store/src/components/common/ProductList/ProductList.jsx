@@ -1,54 +1,37 @@
-import React, { useState, Suspense, useContext, useEffect } from "react";
+import React, { Suspense, useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ThemeContext } from "../../../context/ThemeContext";
 import Spinner from "../Spinner/Spinner";
 import Pagination from "../Pagination/Pagination";
-import { useCart } from "../../../context/CartContext";
-import { calculateLocalRating } from "../../../services/calculateLocalRating";
+import { selectCartItems, addToCart, removeFromCart } from "../../../redux/slices/cartSlice";
+import ProductCard from "../ProductCard/ProductCard";
 import "./ProductList.css";
 
-const ProductCard = React.lazy(() => import("../ProductCard/ProductCard"));
-
-const ProductList = ({ items = [], title = "", itemsPerPage = 8, isRTL = false }) => {
+const ProductList = ({ 
+  items = [], 
+  title = "", 
+  totalPages = 1, 
+  serverPagination = false,
+  currentPage = 1,
+  onPageChange = () => {},
+  isRTL = false
+}) => {
   const { theme } = useContext(ThemeContext);
-  const { cartItems, addToCart, removeFromCart } = useCart();
-
-  const [currentPage, setCurrentPage] = useState(() => {
-    const params = new URLSearchParams(window.location.search);
-    const saved = parseInt(params.get("page"), 10);
-    return saved && saved > 0 ? saved : 1;
-  });
-
-  const totalPages = Math.ceil(items.length / itemsPerPage);
-
-  useEffect(() => {
-    if (currentPage > totalPages) setCurrentPage(1);
-  }, [totalPages, currentPage]);
-
-  const start = (currentPage - 1) * itemsPerPage;
-  const paginatedItems = items.slice(start, start + itemsPerPage);
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    currentPage > 1 ? params.set("page", currentPage) : params.delete("page");
-    window.history.replaceState({}, "", `${window.location.pathname}?${params}`);
-  }, [currentPage]);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
 
   const isInCart = (productId) => cartItems.some((item) => item.id === productId);
-  const getCartQuantity = (productId) =>
-    cartItems.find((item) => item.id === productId)?.quantity || 0;
+  const getCartQuantity = (productId) => cartItems.find((item) => item.id === productId)?.quantity || 0;
 
   const handleToggleCart = (product) => {
-    if (isInCart(product.id)) removeFromCart(product.id);
-    else addToCart(product, 1);
+    if (isInCart(product.id)) dispatch(removeFromCart(product.id));
+    else dispatch(addToCart({ product, quantity: 1 }));
   };
 
-  if (!items || items.length === 0) {
-    return (
-      <div className={`no-items theme-${theme}`} dir={isRTL ? "rtl" : "ltr"}>
-        {isRTL ? "لا توجد منتجات" : "No products available"}
-      </div>
-    );
-  }
+  const getRatingInfo = (product) => ({
+    ratingValue: product.rating ?? 0,
+    reviewCount: product.ratingCount ?? 0
+  });
 
   return (
     <div className={`product-list-container theme-${theme}`} dir={isRTL ? "rtl" : "ltr"}>
@@ -56,13 +39,8 @@ const ProductList = ({ items = [], title = "", itemsPerPage = 8, isRTL = false }
 
       <Suspense fallback={<Spinner />}>
         <div className="product-list-grid">
-          {paginatedItems.map((product) => {
-            const { ratingValue, reviewCount } = calculateLocalRating(
-              product.rating ?? 0,
-              product.ratingCount ?? 0,
-              product.id
-            );
-
+          {items.map((product) => {
+            const { ratingValue, reviewCount } = getRatingInfo(product);
             return (
               <ProductCard
                 key={product.id}
@@ -76,11 +54,11 @@ const ProductList = ({ items = [], title = "", itemsPerPage = 8, isRTL = false }
           })}
         </div>
 
-        {totalPages > 1 && (
+        {serverPagination && totalPages > 1 && (
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
-            onPageChange={setCurrentPage}
+            onPageChange={onPageChange}
             lang={isRTL ? "ar" : "en"}
           />
         )}

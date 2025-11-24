@@ -1,5 +1,5 @@
 /* =========================
-   Cart Items List
+   🛒 Cart Items List
 ========================= */
 .cart-items-list {
   list-style: none;
@@ -10,38 +10,51 @@
 }
 
 /* =========================
-   Cart Item
+   🧾 Cart Item
 ========================= */
 .cart-item {
   display: grid;
-  grid-template-columns: 2fr auto 1fr;
+  grid-template-columns: 2fr 1fr 1fr auto; /* الاسم - الكمية - السعر - زر الإلغاء */
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  border-radius: 12px;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
   background-color: var(--body-bg);
-  border: 1px solid var(--border-color);
-  box-sizing: border-box;
+  border: 1px solid var(--accent-color);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  width: 100%; /* مهم لتتمدد كامل مساحة الحاوية */
-  max-width: none;
+  width: 100%;
+  margin-bottom: 0.6rem;
 }
 
 .cart-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--card-shadow);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px var(--card-shadow);
 }
 
+.cart-item:not(:last-child) {
+  border-bottom:1px solid var(--accent-color);
+}
+
+/* =========================
+   📦 محتوى العنصر
+========================= */
 .cart-item-name {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9rem;
   word-break: break-word;
+  text-align: start;
 }
 
+/* =========================
+   🔢 Quantity Controls
+========================= */
 .quantity-wrapper {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .quantity-display {
@@ -52,50 +65,83 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.cart-item-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.75rem;
-}
-
-.cart-item-actions .cart-item-price {
-  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 /* =========================
-   Responsive
+   💰 السعر + زر الإلغاء
+========================= */
+.cart-item-price {
+  font-weight: 600;
+  text-align: center;
+  color: var(--accent-color);
+}
+
+.cart-item-cancel {
+  display: flex;
+  justify-content: center;
+}
+
+/* =========================
+   📱 Responsive (≤768px)
+========================= */
+/* =========================
+   📱 Responsive (≤768px)
 ========================= */
 @media (max-width: 768px) {
   .cart-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* العناصر تحت بعض */
     align-items: center;
-    text-align: center;
-    gap: 0.5rem;
-    width: 100%; /* مهم */
-  }
-
-  .cart-item-name,
-  .quantity-wrapper,
-  .cart-item-actions {
-    width: 100%;
-  }
-
-  .quantity-wrapper {
-    justify-content: center;
-  }
-
-  .cart-item-actions {
-    flex-direction: column;
+    text-align: center; /* يطبق على النصوص داخل العنصر */
     gap: 0.4rem;
+    padding: 0.5rem;
+  }
+
+  /* أزرار الكمية تظل أفقية */
+  .quantity-wrapper {
+    flex-direction: row !important;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+
+  /* زر الإلغاء بعرض كامل */
+  .cart-item-cancel {
     width: 100%;
   }
 
-  .cart-item-actions button {
+  .cart-item-cancel button {
     width: 100%;
-    min-width: 120px;
+    padding: 0.35rem 0;
+  }
+
+  /* اسم اللعبة يتوسط عند التحول للعمودي */
+  .cart-item-name {
+    text-align: center;
+  }
+}
+
+
+/* =========================
+   📱 Extra Small (≤480px)
+========================= */
+@media (max-width: 480px) {
+  .quantity-wrapper {
+    gap: 0.3rem;
+  }
+}
+
+/* =========================
+   📱 Ultra Small (≤350px)
+========================= */
+@media (max-width: 350px) {
+  .quantity-wrapper {
+    gap: 0.25rem;
+    transform: scale(0.93);
+  }
+
+  .quantity-display {
+    min-width: 22px;
+    font-size: 0.85rem;
   }
 }

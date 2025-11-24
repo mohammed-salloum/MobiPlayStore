@@ -5,14 +5,14 @@ import { LanguageContext } from "../../context/LanguageContext";
 import "./FAQItem.css";
 
 function FAQItem({ item, isActive, onToggle }) {
-  const { theme } = useContext(ThemeContext);   
-  const { language } = useContext(LanguageContext);      // اللغة الحالية
-  const isRTL = language === "ar";                       // تحديد الاتجاه
-
+  const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  const isRTL = language === "ar";
+  
   return (
     <div className={`faq-item ${isActive ? "active" : ""} ${theme} ${isRTL ? "rtl" : "ltr"}`}>
       <button className="faq-question" onClick={onToggle}>
-        {item.question}
+        <span>{item.question}</span>
         <FaChevronDown className={`faq-icon ${isActive ? "rotate" : ""}`} />
       </button>
       <div className={`faq-answer ${isActive ? "open" : ""}`}>

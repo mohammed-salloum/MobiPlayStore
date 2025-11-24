@@ -7,10 +7,9 @@
   border-radius: 12px;
   margin-bottom: 1rem;
   overflow: hidden;
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  color: var(--text-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; /* يعتمد على الثيم */
+  border: 1px solid var(--accent-color); 
+  color: var(--text-color);           /* يرث اللون */
 }
 
 /* السؤال */
@@ -28,7 +27,7 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 12px;
-  color: inherit;
+  color: var(--text-color);          /* لون النص حسب الثيم */
 }
 
 /* دعم RTL */
@@ -39,21 +38,23 @@
 /* أيقونة */
 .faq-icon {
   font-size: 1.2rem;
-  transition: transform 0.3s ease;
-  color: inherit;
+  transition: transform 0.3s ease, color 0.3s ease;
+  color: var(--icon-color);          /* لون الأيقونة حسب الثيم */
 }
 
 .faq-icon.rotate {
   transform: rotate(180deg);
 }
 
+/* الجواب */
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.4s ease;
+  transition: max-height 0.4s ease, padding 0.4s ease, color 0.3s ease, background-color 0.3s ease;
   padding: 0 1.5rem;
   font-size: 1rem;
   line-height: 1.6;
+  color: var(--accent-color);         /* لون النص حسب الثيم */  /* الخلفية حسب الثيم */
 }
 
 .faq-answer.open {

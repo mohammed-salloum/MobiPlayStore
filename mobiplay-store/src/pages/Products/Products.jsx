@@ -1,6 +1,6 @@
 // src/pages/Products/Products.jsx
 import React from "react";
-import GenericProductPage from "../../components/common/GenericProductPage/GenericProductPage";
+import GenericProductPage from "../../components/Common/GenericProductPage/GenericProductPage";
 import { useProducts } from "../../services/api";
 
 const Products = () => (

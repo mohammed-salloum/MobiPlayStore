@@ -1,20 +1,74 @@
 {
   "siteName": "MobiPlayStore",
+   
+  "titles": {
+    "home": "Home | MobiPlayStore",
+    "products": "Products | MobiPlayStore",
+    "offers": "Offers | MobiPlayStore",
+    "productDetails": "Product Details | MobiPlayStore",
+    "faq": "FAQ | MobiPlayStore",
+    "about": "About Us | MobiPlayStore",
+    "contact": "Contact Us | MobiPlayStore",
+    "cart": "Your Cart | MobiPlayStore",
+    "checkout": "Checkout | MobiPlayStore",
+    "signIn": "Login | MobiPlayStore",
+    "register": "Register | MobiPlayStore",
+    "resetPassword": "Reset Password | MobiPlayStore",
+    "settings": "Settings | MobiPlayStore",
+    "profile": "Profile | MobiPlayStore",
+    "orders": "Orders | MobiPlayStore",
+    "notFound": "Page Not Found | MobiPlayStore"
+  }
+,
   "nav": {
     "home": "Home",
     "productsLabel": "Products",
     "offersLabel": "Offers",
-    "aboutLabel": "About Us",
-    "contactLabel": "Contact Us",
-    "more": "More",
     "faqLabel": "FAQ",
     "reviewsLabel": "Reviews",
-    "cart": "Cart",
-    "itemsInCart": "Items in Cart"
+    "contactLabel": "Contact us",
+    "aboutLabel": "About us",
+    "signIn": "Sign in",
+    "settings": "Settings",
+      "profile": "Profile",
+    "orders": "Orders",
+    "logout": "Logout",
+    "user": "User"
   },
   "common": {
     "retry": "Retry"
   },
+ "profile": {
+    "title": "Profile",
+    "greeting": "Hello, {{username}}!",
+    "username": "Username",
+    "email": "Email",
+    "joined": "Joined",
+    "editProfile": "Edit Profile",
+    "save": "Save",
+    "saved": "Profile updated successfully!",
+    "notLoggedIn": "You are not logged in",
+    "uploadPhoto": "Upload Photo",
+    "updatePhoto": "Update Photo",
+    "deletePhoto": "Delete Photo",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "savePassword": "Save Password",
+    "passwordUpdated": "Password updated successfully!",
+    "cancel": "Cancel",
+    "updateFailed": "Failed to update profile",
+    "avatarRequired": "Please upload a valid image",
+    "avatarDeleted": "Avatar deleted successfully",
+    "logoutSuccess": "Logged out 👋",
+    
+  "currentPasswordRequired": "Current password is required",
+  "newPasswordRequired": "New password is required",
+  "currentPasswordIncorrect": "The current password is incorrect",
+  "passwordSameAsOld": "New password must be different from the current one",
+  "passwordTooShort": "Password must be at least 6 characters"
+  }
+,
   "products": {
     "title": "Products",
     "addToCart": "Add to Cart",
@@ -24,7 +78,7 @@
     "reviews": "Reviews",
     "review": "Review",
     "noProducts": "No products available currently.",
-    "fetchError": "Failed to load products. Please try again later."
+    "fetchError": "Something went wrong while loading products. Please try again."
   },
   "product": {
     "game": "Game",
@@ -54,57 +108,89 @@
     "addToCart": "Add to Cart",
     "updateCart": "Update Cart",
     "remove": "Remove",
-    "notFound": "Product not found"
+    "notFound": "Product not found. Please try again.",
+    "retry": "Retry"
   },
   "offers": {
-  "title": "Special Offers & Discounts",
+  "title": "Special Offers",
   "noOffers": "No offers available",
-  "fetchError": "Failed to load offers. Please try again later.",
+  "fetchError": "Something went wrong while loading offers. Please try again.",
   "viewDetails": "View Details",
   "retry": "Retry"
 },
-  "hero": {
-    "welcome": "Welcome to ",
-    "siteName": "MobiPlayStore",
-    "subtitle": "Buy top-up cards for the most popular mobile games",
-    "exploreButton": "Explore Game Cards"
-  },
+"hero": {
+  "welcome": "Discover",
+  "siteName": "MobiPlayStore",
+  "tagline": "Top up your favorite games instantly",
+  "exploreButton": "Explore Game Cards"
+},
   "features": {
-    "sectionTitle": "Why Choose MobiPlayStore?",
+    "sectionTitle": "Our Services",
     "fastDelivery": {
       "title": "Fast Delivery",
-      "text": "Instant codes delivered immediately after purchase, no waiting!"
+      "text": "Get your game cards instantly without waiting."
     },
     "securePayment": {
       "title": "Secure Payment",
-      "text": "We use the latest security standards to protect your transactions."
+      "text": "Safe and secure transactions with all payment methods."
     },
     "wideSelection": {
-      "title": "Wide Game Selection",
-      "text": "Top-up cards for PUBG, Free Fire, Call of Duty Mobile, and more."
+      "title": "Wide Selection",
+      "text": "We offer cards for all popular mobile games."
+    },
+    "support": {
+      "title": "24/7 Support",
+      "text": "Our support team is always available to help you."
     }
   },
-  "about": {
-    "title": "About MobiPlayStore",
-    "description": "MobiPlayStore is your trusted source for mobile game top-up cards. We’re passionate about delivering fast, secure, and affordable digital products for gamers around the world.",
-    "features": {
-      "selection": {
-        "title": "Wide Game Selection",
-        "text": "We offer top-ups for popular mobile games like PUBG, Free Fire, and more."
+  "happyClients": {
+    "title": "Our Clients",
+    "testimonials": [
+      {
+        "name": "John Doe",
+        "role": "CEO, Company",
+        "text": "Great platform, excellent service, always responsive support."
       },
-      "security": {
-        "title": "Safe & Secure",
-        "text": "Your transactions are protected with the latest security standards."
+      {
+        "name": "Sarah Smith",
+        "role": "Freelancer",
+        "text": "I love using this service. The experience is smooth and intuitive."
       },
-      "delivery": {
-        "title": "Instant Delivery",
-        "text": "Receive your codes instantly after payment – no waiting."
+      {
+        "name": "Ali Ahmad",
+        "role": "Developer",
+        "text": "Highly recommend! Fast, reliable, and professional."
+      },
+      {
+        "name": "Emma Johnson",
+        "role": "Designer",
+        "text": "Exceptional quality and fantastic customer support!"
       }
+    ]
+  },
+  "about": {
+    "title": "About us",
+    "description": "We aim to provide the best experience for our users through a professional team, clear vision, and distinctive mission.",
+    "team": {
+      "title": "Our Team",
+      "text": "We have a professional and specialized team to ensure top-quality services."
     },
-    "footerText": "Whether you're a casual player or a competitive gamer, MobiPlayStore is here to make your gaming experience smoother and more rewarding."
+    "mission": {
+      "title": "Our Vision",
+      "text": "We strive to deliver the best user experience at all times."
+    },
+    "values": {
+      "title": "Our Values",
+      "text": "Transparency, creativity, and commitment are the foundations of our work."
+    },
+    "speed": {
+      "title": "Our Mission",
+      "text": "We aim to provide services quickly and efficiently."
+    },
+    "footerText": "Thank you for visiting our website. We look forward to serving you with excellence."
   },
 "contact": {
-  "title": "Contact Us",
+  "title": "Contact us",
   "subtitle1": "Contact us about anything related to our company or services.",
   "subtitle2": "We'll do our best to get back to you as soon as possible.",
 "form": {
@@ -113,7 +199,7 @@
   "phoneLabel": "Phone Number",
   "phonePlaceholder": "Your phone number",
   "emailLabel": "Email",
-  "emailPlaceholder": "Your email",
+  "emailPlaceholder": "EX: example@example.com",
   "companyLabel": "Company",
   "companyPlaceholder": "Your company name",
   "subjectLabel": "Subject",
@@ -121,35 +207,104 @@
   "questionLabel": "Question",
   "questionPlaceholder": "Write your question here...",
 
-  "submitButton": "Submit",
-  "sending": "Sending...",
-  "successMessage": "✅ Thank you! Your message has been sent successfully.",
-  "errorMessage": "❌ Please fill in the form correctly.",
+"nameRequired": "Please enter your full name",
+"nameInvalid": "The name must contain 2–4 words, each word at least 3 letters, letters only",
+"nameDoubleSpaces": "Please do not use consecutive spaces; a single space between words is sufficient",
+"max50Chars": "The name must not exceed 50 characters",
 
-  "invalidEmail": "Invalid email address",
-  "invalidPhone": "Invalid phone number",
-  "nameRequired": "Name is required",
-  "nameInvalid": "Name contains invalid characters",
-  "phoneRequired": "Phone number is required",
+"phoneInvalid": "Please enter a valid phone number",
+"phonePrefixError": "Please enter a valid phone number starting with a correct prefix of Syriatel or MTN",
+  
   "emailRequired": "Email is required",
-  "subjectRequired": "Subject is required",
-  "questionRequired": "Question is required",
-  "questionInvalid": "Question contains invalid characters",
-  "companyInvalid": "Invalid company name",
-  "notEmpty": "Field cannot be empty",
+"invalidEmail": "Please enter a valid email address",
 
-  "min3Chars": "Must be at least 3 characters",
-  "max50Chars": "Must not exceed 50 characters",
-  "max100Chars": "Must not exceed 100 characters",
-  "max500Chars": "Must not exceed 500 characters"
+"companyInvalid": "Please enter a valid company name",
+"companyMin3Chars": "Company name must be at least 3 characters",
+"companyDoubleSpaces": "Please do not use consecutive spaces; a single space between words is sufficient",
+"companyMax50Chars": "Company name must not exceed 50 characters",
+
+ "subjectRequired": "Please enter the subject",
+"subjectInvalid": "Please enter a valid subject; it must not consist only of numbers, symbols, or punctuation marks",
+"subjectDoubleSpaces": "Please do not use consecutive spaces; a single space between words is sufficient",
+"subjectMin3Chars": "Subject must be at least 3 characters",
+"subjectMax100Chars": "Subject must not exceed 100 characters",
+
+"questionRequired": "Please enter your question",
+"questionInvalid":"Please enter a valid question; it must not consist only of numbers, symbols, or punctuation marks",
+"questionDoubleSpaces": "Please do not use consecutive spaces; a single space between words is sufficient",
+"questionMin3Chars": "Question must be at least 3 characters",
+"questionMax500Chars": "Question must not exceed 500 characters",
+
+  "submitButton": "Submit",
+  "sending": "Sending",
+  "successMessage": "✅ Thank you! Your message has been sent successfully",
+"errorMessage": "❌ Please fill in all required fields and complete the form correctly"
+
 },
   "info": {
     "companyName": "MobiPlayStore",
     "address": "Tartous, Syria",
     "email": "info@mobiplaystore.com",
     "phone": "+(963) 944 123 456"
-  }
+  },
+  "map": {
+  "labelDefault": "My location in Tartous",
+  "labelWithName": "Map of {{label}}",
+  "titleDefault": "Tartous Map",
+  "titleWithName": "Map — {{label}}"
 }
+},
+  "signIn": {
+    "login": {
+      "email": "Email",
+      "password": "Password",
+      "loginBtn": "Log in",
+      "resetPassword": "Reset Password",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create Account",
+      "messages": {
+     "welcomeBackUser": "Welcome, {{username}} 👋",
+        "wrongCredentials": "Invalid email or password",
+         "emailRequired": "Please enter your email",
+  "passwordRequired": "Please enter your password",
+  "invalidEmail": "Please enter a valid email"
+      }
+    },
+ "register": {
+  "username": "Username",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "registerBtn": "Register",
+  "backToLogin": "Back to Login",
+  "messages": {
+    "registerSuccess": "Account created successfully. You can now log in",
+    "emailExists": "An account with this email already exists",
+    "nameRequired": "Please enter your full name",
+    "nameInvalid": "The name must contain 2–4 words, each at least 3 letters, letters only",
+    "nameDoubleSpaces": "Please avoid using consecutive spaces, a single space between words is enough",
+    "max50Chars": "The name must not exceed 50 characters",
+    "emailRequired": "Please enter your email address",
+    "invalidEmail": "Please enter a valid email address",
+    "passwordRequired": "Please enter your password",
+    "passwordWeak": "The password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordsNotMatch": "Passwords do not match"
+  }
+},
+    "reset": {
+      "yourEmail": "Your Email",
+      "email": "Email",
+      "resetBtn": "Reset Password",
+      "backToLogin": "Back to Login",
+      "messages": {
+        "resetSent": "We've sent a password reset link to your email",
+        "noAccount": "No account found with this email",
+        "emailRequired": "Please enter your email"
+      }
+    },
+    "loading": "Loading..."
+  }
 ,
   "faq": {
     "title": "Frequently Asked Questions",
@@ -176,46 +331,21 @@
       }
     ]
   },
-  "reviews": {
-    "title": "Customer Testimonials",
-    "items": [
-      {
-        "name": "Mohammed Salloum",
-        "feedback": "Great service and fast delivery! I highly recommend.",
-        "rating": 5
-      },
-      {
-        "name": "Emad Salloum",
-        "feedback": "Very easy to use platform and excellent support.",
-        "rating": 4.5
-      },
-      {
-        "name": "Mike Johnson",
-        "feedback": "Amazing offers and perfect for mobile gamers.",
-        "rating": 5
-      },
-      {
-        "name": "Sarah Williams",
-        "feedback": "Fast response and smooth purchase experience.",
-        "rating": 4.5
-      }
-    ]
-  },
   "footer": {
     "usefulLinks": "Useful Links",
     "storeName": "MobiPlayStore",
     "city": "Tartous",
     "country": "Syria",
-    "aboutUs": "About Us",
-    "aboutText": "MobiPlayStore offers fast, secure top-ups for popular mobile games like PUBG and Free Fire. Instant delivery and reliable transactions for all gamers.",
-    "connect": "Connect With Us",
-    "allRightsReserved": "Copyright © 2025 MobiPlayStore - All rights reserved",
+    "aboutUs": "About us",
+    "aboutText": "MobiPlayStore offers fast, secure top-ups for popular mobile games. Instant delivery and reliable transactions for all gamers.",
+    "connect": "Connect with us",
+    "allRightsReserved": "Copyright © 2025 MobiPlayStore",
     "poweredBy": "Powered by",
     "freeWebsite": "Free Website"
   },
   "home": "Home",
-  "aboutLabel": "About Us",
-  "contactLabel": "Contact Us",
+  "aboutLabel": "About us",
+  "contactLabel": "Contact us",
   
   "cart": {
     "title": "Your Cart",
@@ -224,38 +354,84 @@
     "cancel": "Cancel",
     "total": "Total",
     "proceedToCheckout": "Proceed to Checkout",
-    "clearCart": "Clear Cart"
+    "clearCart": "Clear Cart",
+    "itemsCount_one": "You have {{count}} item",
+    "itemsCount_other": "You have {{count}} items"
   },
-  "checkout": {
-    "title": "Checkout",
-    "emptyMessage": "Your cart is empty. Please add items before checkout.",
-    "orderSummary": "Order Summary",
-    "total": "Total",
-    "paymentDetails": "Payment Details",
-    "fullName": "Full Name",
-    "fullNamePlaceholder": "Mohammed Salloum",
-    "email": "Email Address",
-    "emailPlaceholder": "example@example.com",
-    "shippingAddress": "Shipping Address",
-    "addressPlaceholder": "123 Main Street, City, Country",
-    "paymentMethod": "Payment Method",
-    "paymentOptions": {
-      "credit-card": "Credit Card",
-      "paypal": "PayPal",
-      "bank-transfer": "Bank Transfer"
-    },
-    "confirmPayment": "Confirm Payment",
-    "backToCart": "Back to Cart",
-    "processing": "Processing...",
-    "paymentSuccess": "🎉 Thank you for your purchase!",
-    "confirmationMessage": "Here is a summary of your order:",
-    "finish": "Finish",
-    "fillAllFields": "Please fill in all required fields."
+"checkout": {
+  "title": "Checkout",
+  "emptyMessage": "Your cart is empty. Please add items before proceeding to checkout.",
+  "orderSummary": "Order Summary",
+  "total": "Total:",
+  "paymentDetails": "Payment Details",
+  "fullName": "Full Name",
+  "fullNamePlaceholder": "Enter your full name",
+  "email": "Email Address",
+  "emailPlaceholder": "EX: example@example.com",
+  "shippingAddress": "Shipping Address",
+  "addressPlaceholder": "Enter your full address including city and country",
+  "paymentMethod": "Payment Method",
+  "selectPayment": "Select a payment method",
+
+  "paymentOptions": {
+    "credit-card": "Credit Card",
+    "paypal": "PayPal",
+    "bank-transfer": "Bank Transfer"
   },
+
+  "nameRequired": "Please enter your full name",
+  "nameInvalid": "Name must contain 2–4 words, each with at least 3 letters, letters only",
+  "nameDoubleSpaces": "Please avoid using consecutive spaces. Use a single space between words",
+  "max50Chars": "Name must not exceed 50 characters",
+
+  "emailRequired": "Please enter your email address",
+  "invalidEmail": "Please enter a valid email address",
+
+  "addressRequired": "Please enter your shipping address",
+    "addressInvalid":"Please enter a valid question; it must not consist only of numbers, symbols, or punctuation marks",
+  "addressMin10": "Address must be at least 10 characters long",
+  "addressMax200": "Address must not exceed 200 characters",
+  "addressDoubleSpaces": "Please avoid using consecutive spaces. Use a single space between words",
+
+  "paymentRequired": "Please select a payment method",
+
+  "confirmPayment": "Confirm Payment",
+  "backToCart": "Back to Cart",
+  "processing": "Processing...",
+  "paymentSuccess": "Successful!",
+ "confirmationMessage": "Payment completed! Thank you for using our service 🎉🥳",
+  "finish": "Finish",
+  "fillAllFields": "❌ Please fill in all required fields and complete the form correctly",
+
+    "emptyCart": "Your cart is empty."
+},
   "pagination": {
     "prev": "Prev",
     "next": "Next"
+  },
+  "settings": {
+    "title": "Settings",
+    "fontSize": "Font Size",
+    "themes": "Themes",
+    "languages": "Languages"
+  },
+  "themes": {
+    "light": "Light",
+    "dark": "Dark",
+    "colorblind": "Blind",
+    "reading": "Reading"
+  },
+    "languages": {
+    "en": "English",
+    "ar": "Arabic"
+  },
+
+  "loginRequired": {
+    "message": "You must log in to continue",
+    "confirm": "Log in now",
+    "cancel": "Cancel"
   }
+
   }
 
 

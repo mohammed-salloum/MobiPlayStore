@@ -4,9 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 
 import { LanguageProvider } from "./context/LanguageContext";
 import { ThemeProvider } from "./context/ThemeContext";
-import { CartProvider } from "./context/CartContext";
+import { FontProvider } from "./context/FontContext";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import { Provider as ReduxProvider } from "react-redux";
+import store from "./redux/store/store"; // 🟢 ملف Redux الأساسي
 
 import App from "./App";
 
@@ -16,14 +19,13 @@ import "./index.css";
 import "./App.css";
 
 // ===== Initialize React Query Client =====
-// Configures global defaults for server-state management
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 5 * 60 * 1000,   // Data stays "fresh" for 5 minutes
-      cacheTime: 30 * 60 * 1000, // Cache persists for 30 minutes
+      cacheTime: 30 * 60 * 1000,  // Cache persists for 30 minutes
       refetchOnWindowFocus: false, // Prevent refetching on tab/window focus
-      retry: 1,                   // Retry failed requests only once
+      retry: 1,                    // Retry failed requests only once
     },
   },
 });
@@ -32,22 +34,18 @@ const queryClient = new QueryClient({
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 // ===== Render Application =====
-// Wraps the App component with:
-// - BrowserRouter: enables client-side routing
-// - LanguageProvider: manages multilingual support
-// - ThemeProvider: manages light/dark theme state
-// - CartProvider: manages shopping cart state
-// - QueryClientProvider: provides React Query for server data caching
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <LanguageProvider>
         <ThemeProvider>
-          <CartProvider>
+          <FontProvider>
             <QueryClientProvider client={queryClient}>
-              <App />
+              <ReduxProvider store={store}> {/* 🟢 غلفنا App بالـ Redux */}
+                <App />
+              </ReduxProvider>
             </QueryClientProvider>
-          </CartProvider>
+          </FontProvider>
         </ThemeProvider>
       </LanguageProvider>
     </BrowserRouter>

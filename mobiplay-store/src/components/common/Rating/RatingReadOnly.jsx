@@ -1,4 +1,3 @@
-// RatingReadOnly.jsx
 import React from "react";
 import Stars from "./Stars";
 import { useTranslation } from "react-i18next";
@@ -10,7 +9,7 @@ function RatingReadOnly({
   totalStars = 5,
   size = 22
 }) {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
 
   return (
@@ -20,7 +19,7 @@ function RatingReadOnly({
       totalStars={totalStars}
       isRTL={isRTL}
       theme={theme}
-      interactive={false} // قراءة فقط
+      interactive={false}
       size={size}
     />
   );

@@ -1,41 +1,44 @@
 /* =========================
-   Professional Order Summary Card - Single Row
+   Professional Order Summary Card - Grid Layout with Quantity Badge on Image
 ========================= */
 .order-summary-card {
   border-radius: 16px;
   padding: 24px;
   background-color: var(--bg-bg);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+   border: 1px solid var(--accent-color);
   transition: all 0.3s ease;
   box-sizing: border-box;
+  max-height: 80vh; /* أقصى ارتفاع للبطاقة */
+  display: flex;
+  flex-direction: column;
 }
 
 /* Title */
 .order-summary-title {
-  font-size: 1.9rem;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: 700;
   text-align: center;
   margin-bottom: 24px;
-  color: var(--text-color);
+  color: var(--accent-color);
 }
 
-/* Items list */
+/* Items list - scrollable */
 .order-items-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  overflow-y: auto;  /* تفعيل السكول */
+  flex: 1;            /* يملأ المساحة المتبقية داخل البطاقة */
 }
 
-/* Single item */
+/* Single item - Grid */
 .order-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* صورة+Badge | اسم اللعبة | السعر */
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap; /* البقاء على سطر واحد */
+  gap: 12px;
   background-color: var(--bg-color);
   border-radius: 12px;
   padding: 12px 16px;
@@ -43,67 +46,74 @@
 }
 
 .order-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px var(--card-shadow);
 }
 
-/* Item info */
-.order-item-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex: 1;
-  min-width: 0; /* للسماح بالتصغير عند الحاجة */
+/* Image container for badge */
+.order-item-img-container {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+  min-width: 50px; /* حد أدنى للصورة */
+  min-height: 50px;
 }
 
 /* Image */
 .order-item-img {
-  width: 50px;
-  height: 50px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 8px;
-  flex-shrink: 0; /* لا ينكمش */
+}
+
+/* Quantity badge slightly above bottom of image, centered horizontally */
+.order-item-qty-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--accent-color);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 2px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  max-width: 80%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* RTL support */
+[dir="rtl"] .order-item-qty-badge {
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* Name */
 .order-item-name {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--text-color);
-  flex: 1; /* يأخذ كل المساحة المتاحة */
-  min-width: 0; /* للسماح بالقص عند الحاجة */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Quantity badge */
-.order-item-qty-badge {
-  background-color: var(--primary-color);
-  color: #fff;
-  font-weight: 700;
-  font-size: 0.85rem;
-  padding: 4px 10px;
-  border-radius: 12px;
-  min-width: 32px;
-  text-align: center;
-  flex-shrink: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* Price */
 .order-item-price {
   font-weight: 700;
   font-size: 1rem;
-  color: var(--primary-color);
-  flex-shrink: 0;
-  white-space: nowrap;
+  color: var(--accent-color);
   text-align: right;
-  margin-left: 16px;
+  white-space: nowrap;
 }
 
 [dir="rtl"] .order-item-price {
-  margin-left: 0;
-  margin-right: 16px;
+  text-align: left;
 }
 
 /* Total */
@@ -113,9 +123,21 @@
   font-weight: 700;
   font-size: 1.3rem;
   padding-top: 16px;
-  border-top: 2px solid var(--border-color);
+  border-top:  1px solid var(--accent-color);
   margin-top: 12px;
   color: var(--text-color);
+}
+
+/* السعر فقط */
+.total-amount {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--accent-color);
+  text-align: right;
+}
+
+[dir="rtl"] .total-amount {
+  text-align: left;
 }
 
 /* =========================
@@ -123,14 +145,31 @@
 ========================= */
 @media (max-width: 480px) {
   .order-item {
-    flex-direction: column; /* تتحول للعمود فقط على الهواتف */
-    align-items: flex-start;
-    gap: 6px;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    gap: 8px;
   }
 
-  .order-item-img { width: 35px; height: 35px; }
-  .order-item-name { font-size: 0.85rem; white-space: normal; }
-  .order-item-qty-badge { font-size: 0.8rem; }
-  .order-item-price { font-size: 0.85rem; margin-left: 0; }
-}
+  .order-item-name {
+    font-size: 0.9rem;
+  }
 
+  .order-item-price {
+    grid-column: 2;
+    font-size: 0.85rem;
+  }
+
+  .order-item-img-container {
+    width: 60px;  /* أقل تصغير للصورة */
+    height: 60px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .order-item-qty-badge {
+    font-size: 0.6rem;
+    padding: 1px 4px;
+    bottom: 6px;
+    max-width: 90%;
+  }
+}

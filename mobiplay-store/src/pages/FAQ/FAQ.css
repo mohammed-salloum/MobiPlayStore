@@ -1,57 +1,53 @@
 :root {
-  --navbar-height: 60px; /* ارتفاع الـ Navbar */
+  --navbar-height: 60px;
 }
 
 /* الحاوية الرئيسية */
 .faq-container {
   max-width: 800px;
-  margin: calc(var(--navbar-height) + 3rem) auto 2rem auto; /* المسافة الافتراضية */
-  padding: 1.5rem;
+  margin: calc(var(--navbar-height) + 0.5rem) auto 2rem auto; /* أقرب للناف */
+  padding: 2rem;
   border-radius: 12px;
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* العنوان */
 .faq-title {
   text-align: center;
   font-weight: bold;
-  margin-bottom: 2rem;
+  color: var(--accent-color);
+  margin-bottom: 2.5rem;
   letter-spacing: 1px;
-  color: inherit;
-  font-size: clamp(1.2rem, 2.5vw, 2rem);
+ font-size: clamp(1.4rem, 2.5vw, 2.6rem);
 }
 
-/* =====================
-   Media Queries
-===================== */
 
-/* تابلت وأجهزة وسط */
+/* تابلت */
 @media (max-width: 1024px) {
   .faq-container {
-    margin: calc(var(--navbar-height) + 4rem) auto 2rem auto; /* نزود شوي */
+    margin: calc(var(--navbar-height) + 0.8rem) auto 1.5rem auto;
   }
 }
 
 /* موبايل عمودي */
 @media (max-width: 768px) {
   .faq-container {
-    margin: calc(var(--navbar-height) + 5rem) auto 1.5rem auto; /* نزود أكتر */
+    margin: calc(var(--navbar-height) + 0.5rem) auto 1.2rem auto;
   }
 }
 
 /* موبايل صغير جدًا */
 @media (max-width: 480px) {
   .faq-container {
-    margin: calc(var(--navbar-height) + 6rem) auto 1rem auto;
+    margin: calc(var(--navbar-height) + 0.3rem) auto 1rem auto; /* قريب جدًا من الناف */
     padding: 1rem;
   }
 }
 
-/* Landscape على الموبايل (عرض أكبر من الارتفاع) */
+/* Landscape على الموبايل */
 @media (max-height: 480px) and (orientation: landscape) {
   .faq-container {
-    margin: calc(var(--navbar-height) + 3rem) auto 1rem auto;
+    margin: calc(var(--navbar-height) + 0.3rem) auto 1rem auto;
   }
 }

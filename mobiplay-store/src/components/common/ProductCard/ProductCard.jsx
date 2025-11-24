@@ -1,39 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import Button from "../Button/Button";
 import RatingReadOnly from "../Rating/RatingReadOnly";
 import { formatUSD } from "../../../services/api";
-import { calculateLocalRating } from "../../../services/calculateLocalRating";
+import { selectReviews } from "../../../redux/slices/reviewsSlice";
 import "./ProductCard.css";
 
 function ProductCard({ product, isRTL = false, inCart = false, onToggleCart }) {
   const { t } = useTranslation();
+  const reviews = useSelector(selectReviews);
 
   const price = Number(product.price) || 0;
   const discountedPrice = Number(product.discountedPrice ?? price);
   const discount = Number(product.discount ?? 0);
 
-  // ✅ القيم المبدئية من البيانات الأساسية
-  const { ratingValue: initialValue, reviewCount: initialCount } =
-    calculateLocalRating(
-      product.rating ?? 0,
-      product.ratingCount ?? 0,
-      product.id
-    );
+  const reviewData = reviews[product.id] || {
+    userRating: 0,
+    avgRating: Number(product.rating ?? 0),
+    ratingCount: Number(product.ratingCount ?? 0),
+  };
 
-  // ✅ التحقق من وجود قيم مخزنة بالـ localStorage
-  const storedRating = Number(localStorage.getItem(`rating_${product.id}`));
-  const storedCount = Number(localStorage.getItem(`ratingCount_${product.id}`));
-  const storedAvg = Number(localStorage.getItem(`avgRating_${product.id}`));
-
-  // ✅ اختيار القيم النهائية
-  const ratingValue = storedAvg || initialValue;
-  const reviewCount = storedCount || initialCount;
+  const ratingValue = Number(reviewData.avgRating) || 0;
+  const reviewCount = Number(reviewData.ratingCount) || 0;
 
   return (
     <div className={`product-card ${isRTL ? "rtl" : "ltr"}`}>
-      {/* الصورة والبادج */}
+      {/* صورة المنتج */}
       <div className="image-wrapper">
         <img
           src={product.img}
@@ -50,28 +44,31 @@ function ProductCard({ product, isRTL = false, inCart = false, onToggleCart }) {
 
       {/* المحتوى */}
       <div className="content-wrapper">
-        <h5 className="product-name">{product.name}</h5>
+        {/* اسم المنتج */}
+        <p className="product-name">{product.name}</p>
 
-        <div className="price-rating-wrapper">
+        {/* السعر + التقييم (وسط البطاقة) */}
+        <div className="info-section">
           <div className={`price-wrapper ${isRTL ? "ar" : "en"}`}>
-            {discount > 0 && (
-              <span className="old-price">{formatUSD(price)}</span>
-            )}
+            {discount > 0 && <span className="old-price">{formatUSD(price)}</span>}
             <span className="new-price">{formatUSD(discountedPrice)}</span>
           </div>
 
-          <RatingReadOnly rating={ratingValue} reviewCount={reviewCount} />
+          <div className="rating-wrapper">
+            <RatingReadOnly rating={ratingValue} reviewCount={reviewCount} theme="light" />
+       
+          </div>
         </div>
 
+        {/* أزرار السلة */}
         <div className={`cart-buttons ${isRTL ? "rtl" : "ltr"}`}>
           <Button
             onClick={onToggleCart}
             variant={inCart ? "remove-cart" : "add-cart"}
           >
-            {inCart
-              ? t("products.removeFromCart")
-              : t("products.addToCart")}
+            {inCart ? t("products.removeFromCart") : t("products.addToCart")}
           </Button>
+
           <Button as={Link} to={`/product/${product.id}`} variant="details">
             {t("products.details")}
           </Button>

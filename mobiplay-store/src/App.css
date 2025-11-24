@@ -1,65 +1,71 @@
 /* =========================
-   App.css - Global container styles
-   Defines main layout wrapper and responsiveness
+   App Container
 ========================= */
-
 .app-container {
-  width: 100%;
-  max-width: 100%;       /* Allow full width usage */
-  margin: 0 auto;
-  padding-inline: 1rem;  /* Prevent content from sticking to edges */
+  width: 100%;           /* بدل 100vw */
+  max-width: 100%;       /* بدل 100vw */
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;     /* Full viewport height */
-  box-sizing: border-box;
+  min-height: 100vh;
+  padding-inline: 1rem;
+  padding-top: 70px;
 }
 
 .app-content {
-  flex: 1;               /* Take remaining vertical space */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2rem;             /* Spacing between sections */
+  gap: 2rem;
   width: 100%;
-  box-sizing: border-box;
+  min-width: 0;
 }
 
+/* =========================
+   Footer
+========================= */
 footer {
-  margin-top: auto;      /* Push footer to the bottom */
+  margin-top: auto;
+}
+
+/* =========================
+   Sections
+========================= */
+section {
+  padding-inline: 1rem;
+  max-width: 100vw;
+  width: 100%;
+  min-width: 0;
 }
 
 /* =========================
    Responsive Adjustments
-   Ensures proper spacing and layout on smaller screens
 ========================= */
 @media (max-width: 1024px) {
   .app-container {
-    padding-inline: 1rem; /* Adjust padding for medium screens */
+    padding-inline: 1rem;
+    padding-top: 60px; /* ارتفاع Navbar أصغر للشاشات المتوسطة */
   }
 }
 
 @media (max-width: 768px) {
   .app-container {
-    max-width: 100%;       /* Expand fully */
-    padding-inline: 0.8rem; /* Reduce side spacing */
+    padding-inline: 0.8rem;
+    padding-top: 60px;
+  }
+
+  .app-content {
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .app-container {
-    padding-inline: 0.5rem; /* Minimal side spacing on small devices */
+    padding-inline: 0.5rem;
+    padding-top: 50px;
   }
-}
 
-/* =========================
-   Theme support
-   Dynamically change colors based on active theme
-========================= */
-body[data-theme="dark"] .app-container {
-  background-color: #121212;
-  color: #f0f0f0;
-}
-
-body[data-theme="light"] .app-container {
-  background-color: #f5f5f5;
-  color: #1c1c1c;
-}
+  .app-content {
+    gap: 1rem;
+  }
+}  

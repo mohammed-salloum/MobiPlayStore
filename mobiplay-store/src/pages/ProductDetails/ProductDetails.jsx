@@ -1,11 +1,13 @@
+// src/pages/Cart/ProductDetails.jsx
 import React, { useContext, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import Spinner from "../../components/common/Spinner/Spinner";
+import Spinner from "../../components/Common/Spinner/Spinner";
 import { ThemeContext } from "../../context/ThemeContext";
-import { useCart } from "../../context/CartContext";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, removeFromCart, selectCartItems } from "../../redux/slices/cartSlice";
+import { setRating, selectReviews } from "../../redux/slices/reviewsSlice";
 import { useProductById, calculateDiscountedPrice } from "../../services/api";
-import { calculateLocalRating } from "../../services/calculateLocalRating";
 import ProductImageSection from "../../components/ProductDetails/ProductImageSection";
 import ProductInfoSection from "../../components/ProductDetails/ProductInfoSection";
 import "./ProductDetails.css";
@@ -18,9 +20,12 @@ function ProductDetails() {
   const { id } = useParams();
   const productId = Number(id);
   const navigate = useNavigate();
-  const { cartItems, addToCart, removeFromCart } = useCart();
-  const { data: product, isLoading } = useProductById(productId);
+  const dispatch = useDispatch();
 
+  const cartItems = useSelector(selectCartItems);
+  const reviews = useSelector(selectReviews);
+
+  const { data: product, isLoading } = useProductById(productId);
   const [quantity, setQuantity] = useState(1);
 
   // تحديث الكمية إذا كان المنتج موجود بالسلة
@@ -29,14 +34,24 @@ function ProductDetails() {
     if (cartItem) setQuantity(cartItem.quantity);
   }, [cartItems, productId]);
 
+  // دالة لإعادة المحاولة (مثلاً إعادة تحميل الصفحة أو fetch)
+  const handleRetry = () => {
+    navigate(0); // إعادة تحميل الصفحة الحالية
+  };
+
+  // رسالة خطأ للـ Invalid ID
   if (isNaN(productId)) {
     return (
-      <div className={`product-error theme-${theme} ${isRTL ? "rtl" : "ltr"}`}>
-        {t("productDetails.invalidId")}
+      <div className={`product-error-wrapper theme-${theme} ${isRTL ? "rtl" : "ltr"}`}>
+        <div className="product-error">
+          <p>{t("productDetails.invalidId")}</p>
+          <button onClick={handleRetry}>{t("productDetails.retry")}</button>
+        </div>
       </div>
     );
   }
 
+  // عرض Spinner أثناء التحميل
   if (isLoading)
     return (
       <div className={`spinner-wrapper theme-${theme} ${isRTL ? "rtl" : "ltr"}`}>
@@ -44,52 +59,64 @@ function ProductDetails() {
       </div>
     );
 
+  // رسالة خطأ إذا لم يُوجد المنتج
   if (!product)
     return (
-      <div className={`product-error theme-${theme} ${isRTL ? "rtl" : "ltr"}`}>
-        {t("productDetails.notFound")}
+      <div className={`product-error-wrapper theme-${theme} ${isRTL ? "rtl" : "ltr"}`}>
+        <div className="product-error">
+          <p>{t("productDetails.notFound")}</p>
+          <button onClick={handleRetry}>{t("productDetails.retry")}</button>
+        </div>
       </div>
     );
 
-  const qty = Number(quantity) || 1;
-  const discountedPrice =
-    product.discountedPrice ?? calculateDiscountedPrice(product.price, product.discount ?? 0);
+  const qty = Math.max(Number(quantity) || 1, 1);
+  const finalPrice = calculateDiscountedPrice(product.price, product.discount ?? 0);
   const cartItem = cartItems.find((item) => item.id === productId);
 
-  // حساب التقييم المحلي
-  const { ratingValue, reviewCount } = calculateLocalRating(
-    product.rating ?? 0,
-    product.ratingCount ?? 0,
-    productId
-  );
+  // قراءة التقييمات من Redux
+  const userRating = reviews[productId] ?? 0;
+  const avgRating = Number(product.rating ?? 0);
+  const reviewCount = Number(product.ratingCount ?? 0);
+
+  const handleRate = (value) => {
+    if (!isNaN(value) && value >= 0 && value <= 5) {
+      dispatch(setRating({ productId, rating: value }));
+    }
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ product, quantity: qty }));
+  };
+
+  const handleRemoveFromCart = () => {
+    dispatch(removeFromCart(productId));
+  };
 
   return (
     <div className={`product-details-page theme-${theme} ${isRTL ? "rtl" : "ltr"}`}>
-      {/* عرض صورة المنتج والتقييم */}
       <ProductImageSection
         product={product}
-        avgRating={ratingValue}
+        avgRating={avgRating}
         ratingCount={reviewCount}
-        onRate={(value) => {
-          if (!isNaN(value) && value >= 0 && value <= 5) {
-            localStorage.setItem(`rating_${productId}`, value);
-          }
-        }}
+        userRating={userRating}
+        onRate={handleRate}
         theme={theme}
         isRTL={isRTL}
       />
 
-      {/* عرض تفاصيل المنتج والكمية وأزرار السلة + زر العودة */}
       <ProductInfoSection
         product={product}
         quantity={qty}
         setQuantity={setQuantity}
         cartItem={cartItem}
-        onAddToCart={() => addToCart(product, qty)}
-        onRemoveFromCart={() => removeFromCart(productId)}
+        onAddToCart={handleAddToCart}
+        onRemoveFromCart={handleRemoveFromCart}
         onBack={() => navigate(-1)}
         theme={theme}
         isRTL={isRTL}
+        disableButtons={isLoading}
+        finalPrice={finalPrice}
       />
     </div>
   );

@@ -1,31 +1,48 @@
 // src/components/Checkout/PaymentConfirmation.jsx
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
-import Button from '../common/Button/Button';
+import { useNavigate } from "react-router-dom";
+import { FaCheckCircle } from "react-icons/fa";
+import Button from "../Common/Button/Button";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../../redux/slices/cartSlice";
+import "./PaymentConfirmation.css";
 
-function PaymentConfirmation({ cartItems, total, onFinish, isRTL }) {
+function PaymentConfirmation({ isRTL }) {
   const { theme } = useContext(ThemeContext);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  const handleFinish = () => {
+    dispatch(clearCart()); // مسح السلة من Redux
+    localStorage.removeItem("paymentDone"); // إزالة العلم من التخزين المحلي
+    navigate("/", { replace: true }); // الرجوع للصفحة الرئيسية
+  };
 
   return (
-    <div className={`payment-form-card theme-${theme}`} dir={isRTL ? "rtl" : "ltr"}>
-      <h4 className="payment-form-title">{t("checkout.paymentSuccess")}</h4>
-      <p>{t("checkout.confirmationMessage")}</p>
-      <ul>
-        {cartItems.map(item => (
-          <li key={item.id}>
-            {item.name} x {item.quantity} - ${item.price * item.quantity}
-          </li>
-        ))}
-      </ul>
-      <p>
-        <strong>{t("checkout.total")}: </strong>${total}
-      </p>
+    <div
+      className={`payment-confirmation-wrapper theme-${theme}`}
+      dir={isRTL ? "rtl" : "ltr"}
+    >
+      <div className="payment-confirmation-card">
+        <FaCheckCircle className="payment-confirmation-icon" />
+        <h4 className="payment-confirmation-title">
+          {t("checkout.paymentSuccess")}
+        </h4>
+        <p className="payment-confirmation-message">
+          {t("checkout.confirmationMessage")}
+        </p>
 
-      <Button variant="checkout" fullWidth onClick={onFinish}>
-        {t("checkout.finish")}
-      </Button>
+        <Button variant="checkout" fullWidth onClick={handleFinish}>
+          {t("checkout.finish")}
+        </Button>
+      </div>
     </div>
   );
 }

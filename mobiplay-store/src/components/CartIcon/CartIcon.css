@@ -19,14 +19,14 @@
 }
 
 .cart-icon {
-  color: var(--icon-color);
+  color: var(--icon-color); /* اللون الأساسي حسب الثيم */
   transition: transform 0.3s ease, color 0.3s ease;
+  cursor: pointer;
 }
 
-.cart-link:hover .cart-icon {
-  color: var(--primary-color);
+.cart-icon:hover {
+  transform: scale(1.1);
 }
-
 /* =========================
    Icon Sizes
 ========================= */

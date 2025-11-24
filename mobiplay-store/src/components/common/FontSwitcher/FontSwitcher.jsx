@@ -1,58 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FaFont, FaPenFancy, FaCode, FaRegKeyboard, FaCaretDown } from 'react-icons/fa';
-import './FontSwitcher.css';
+import React, { useContext } from "react";
+import "./FontSwitcher.css";
+import { FontContext } from "../../../context/FontContext";
 
-const fonts = [
-  { className: 'inter', fontFamily: "'Inter', sans-serif", icon: FaFont },          // عصري ونظيف للنصوص العادية
-  { className: 'playfair', fontFamily: "'Playfair Display', serif", icon: FaPenFancy }, // كلاسيكي وأنيق للعناوين
-  { className: 'poppins', fontFamily: "'Poppins', sans-serif", icon: FaCode },     // مستدير وواضح، يعطي إحساس عصري
-  { className: 'tajawal', fontFamily: "'Tajawal', sans-serif", icon: FaRegKeyboard },  // ممتاز للنصوص العربية الحديثة
-];
+const MAX_OFFSET = 1; // أقصى فرق عن الافتراضي
+const DELTA = 0.5;       // كل ضغطة تغير 1px
 
-const FontSwitcher = () => {
-  const storedFont = localStorage.getItem("selectedFont") || "inter";
-  const initialIndex = fonts.findIndex(f => f.className === storedFont);
-  const [current, setCurrent] = useState(initialIndex >= 0 ? initialIndex : 0);
-  const [open, setOpen] = useState(false);
-  const ref = useRef();
+const FontSwitcher = ({ defaultSize = 15 }) => {
+  const { fontSize, setFontSize } = useContext(FontContext);
 
-  useEffect(() => {
-    // إزالة أي خطوط سابقة وإضافة الخط الحالي عن طريق متغير CSS
-    document.body.style.setProperty('--main-font', fonts[current].fontFamily);
-    localStorage.setItem("selectedFont", fonts[current].className);
-  }, [current]);
+  const handleSizeClick = (type) => {
+    let newSize = fontSize;
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    if (type === "reset") newSize = defaultSize;
+    if (type === "increase" && fontSize < defaultSize + MAX_OFFSET) newSize += DELTA;
+    if (type === "decrease" && fontSize > defaultSize - MAX_OFFSET) newSize -= DELTA;
+
+    setFontSize(newSize);
+    document.documentElement.style.setProperty("--main-font-size", `${newSize}px`);
+  };
 
   return (
-    <div className="font-switcher" ref={ref}>
-      <button
-        className="font-switcher-btn"
-        onClick={() => setOpen(!open)}
-      >
-        {React.createElement(fonts[current].icon, { className: "font-icon" })}
-        <FaCaretDown className={`caret-icon ${open ? 'open' : ''}`} />
-      </button>
-
-      {open && (
-        <div className="font-menu">
-          {fonts.map((f, idx) => (
-            <button
-              key={f.className}
-              className={`font-btn ${idx === current ? 'active' : ''}`}
-              onClick={() => { setCurrent(idx); setOpen(false); }}
-            >
-              {React.createElement(f.icon, { className: "font-icon" })}
-            </button>
-          ))}
-        </div>
-      )}
+    <div className="fonts-container">
+      <button className="font-btn" onClick={() => handleSizeClick("increase")}>A+</button>
+      <button className="font-btn" onClick={() => handleSizeClick("reset")}>A</button>
+      <button className="font-btn" onClick={() => handleSizeClick("decrease")}>A-</button>
     </div>
   );
 };

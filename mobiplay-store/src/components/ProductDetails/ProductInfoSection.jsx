@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Button from "../common/Button/Button";
+import { useDispatch } from "react-redux";
+import Button from "../Common/Button/Button";
 import { useTranslation } from "react-i18next";
 import { formatUSD } from "../../services/api";
+import { addToCart, setQuantityExact, removeFromCart } from "../../redux/slices/cartSlice";
 import "./ProductInfoSection.css";
 
 function ProductInfoSection({
@@ -9,13 +11,12 @@ function ProductInfoSection({
   quantity,
   setQuantity,
   cartItem,
-  onAddToCart,
-  onRemoveFromCart,
   onBack,
   theme,
   isRTL,
 }) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const [description, setDescription] = useState(product.description || "");
 
   useEffect(() => {
@@ -29,6 +30,20 @@ function ProductInfoSection({
   const handleQuantityChange = (newQty) => {
     if (newQty < 1) return;
     setQuantity(newQty);
+  };
+
+  const handleAddOrUpdate = () => {
+    if (cartItem) {
+      // تحديث الكمية بالضبط
+      dispatch(setQuantityExact({ id: product.id, quantity }));
+    } else {
+      // إضافة المنتج للمرة الأولى
+      dispatch(addToCart({ product, quantity }));
+    }
+  };
+
+  const handleRemove = () => {
+    if (cartItem) dispatch(removeFromCart(product.id));
   };
 
   return (
@@ -53,9 +68,14 @@ function ProductInfoSection({
 
       {/* اختيار الكمية */}
       <div className={`quantity-wrapper ${isRTL ? "rtl" : "ltr"}`}>
-        <span className="quantity-label">{t("productDetails.quantity")}:</span>
-        <div className="quantity-controls">
-          <Button variant="quantity" onClick={() => handleQuantityChange(quantity - 1)}>-</Button>
+        <strong className="quantity-label">{t("productDetails.quantity")}:</strong>
+        <div className={`quantity-controls ${isRTL ? "rtl" : "ltr"}`}>
+          <Button
+            variant="quantity"
+            onClick={() => handleQuantityChange(quantity - 1)}
+          >
+            -
+          </Button>
           <input
             type="number"
             className="qty-input"
@@ -63,7 +83,12 @@ function ProductInfoSection({
             min="1"
             onChange={(e) => handleQuantityChange(Number(e.target.value) || 1)}
           />
-          <Button variant="quantity" onClick={() => handleQuantityChange(quantity + 1)}>+</Button>
+          <Button
+            variant="quantity"
+            onClick={() => handleQuantityChange(quantity + 1)}
+          >
+            +
+          </Button>
         </div>
       </div>
 
@@ -72,19 +97,23 @@ function ProductInfoSection({
         <strong>{t("productDetails.totalPrice")}:</strong> {formattedTotalPrice}
       </p>
 
-      {/* أزرار السلة + زر العودة */}
-      <div className={`cart-buttons ${cartItem ? "has-cart" : ""}`}>
+      {/* أزرار السلة */}
+      <div className="cart-buttons">
         <Button
-          variant="add-cart"
-          onClick={onAddToCart}
+          variant="primary"
+          onClick={handleAddOrUpdate}
           fullWidth
           disabled={quantity < 1}
         >
           {cartItem ? t("productDetails.updateCart") : t("productDetails.addToCart")}
         </Button>
-        <Button variant="remove-cart" onClick={onRemoveFromCart}>
-          {t("productDetails.remove")}
-        </Button>
+
+        {cartItem && (
+          <Button variant="remove-cart" onClick={handleRemove}>
+            {t("productDetails.remove")}
+          </Button>
+        )}
+
         <Button variant="back" onClick={onBack}>
           {isRTL ? "← " : "→ "} {t("productDetails.back")}
         </Button>
