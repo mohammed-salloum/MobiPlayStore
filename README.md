@@ -62,9 +62,9 @@ Full-stack bilingual web application (Arabic/English) for purchasing mobile game
 |-----------------|
 | ![Home Hero Section Dark](Screenshots/dark/home-HeroSection-page.PNG) <br> ![Home Features Section Dark](Screenshots/dark/home-FeaturesSection-page.PNG) |
 
-| 🌟 Product Details – Dark |
-|---------------------------|
-| ![Product Details Dark](Screenshots/dark/productDetails-page1.PNG) <br> ![Product Details Dark 2](Screenshots/dark/productDetails-page2.PNG) |
+| 🖤 Footer |
+|-------------------|
+| ![Footer Dark](Screenshots/dark/footer-page.PNG) |
 
 | 🛍️ Products – Dark |
 |---------------------|
@@ -73,6 +73,10 @@ Full-stack bilingual web application (Arabic/English) for purchasing mobile game
 | 🎁 Offers – Dark |
 |------------------|
 | ![Offers Dark](Screenshots/dark/offers-page.PNG) |
+
+| 🌟 Product Details – Dark |
+|---------------------------|
+| ![Product Details Dark](Screenshots/dark/productDetails-page1.PNG) <br> ![Product Details Dark 2](Screenshots/dark/productDetails-page2.PNG) |
 
 | 🛒 Cart – Dark |
 |----------------|
@@ -85,10 +89,6 @@ Full-stack bilingual web application (Arabic/English) for purchasing mobile game
 | 📝 Contact – Dark |
 |-------------------|
 | ![Contact Dark](Screenshots/dark/contact-page.PNG) |
-
-| 🖤 Footer |
-|-------------------|
-| ![Footer Dark](Screenshots/dark/footer-page.PNG) |
 
 ---
 
