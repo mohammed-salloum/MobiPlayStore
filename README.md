@@ -5,9 +5,13 @@ MobiPlayStore – Full-Stack Web Application
 
 Full-stack bilingual web application (Arabic/English) for purchasing mobile game top-up cards. Developed using React, Redux Toolkit, React Router, Context API, React Select, i18next, Bootstrap 5, CSS3, Node.js, Express.js, Firebase Hosting, and Google Maps API. The application includes user authentication, profile management, and a Redux-managed user-specific shopping cart. Advanced features include multi-theme support, Google Maps integration, a secure payment system, and a fully responsive modern UI.
 
+---
+
 🚀 Live Demo & GitHub
 
 🌐 Live Demo | 🐙 GitHub: MobiPlayStore
+
+---
 
 🔧 Tech Stack
 
@@ -33,6 +37,8 @@ Full-stack bilingual web application (Arabic/English) for purchasing mobile game
 
 📍 Google Maps API
 
+---
+
 🌟 Features
 
 🛒 User-specific shopping cart managed with Redux and localStorage persistence
@@ -55,6 +61,7 @@ Full-stack bilingual web application (Arabic/English) for purchasing mobile game
 
 💳 Secure payment system
 
+---
 
 ## 📸 Screenshots  
 
