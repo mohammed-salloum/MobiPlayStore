@@ -1,4 +1,4 @@
-# 🎮 MobiPlayStore – Mobile Game Cards Store Web Application
+# 🎮 MobiPlayStore – Full-Stack Mobile Game Cards Web App
 💼 Personal Project | June 2025
 
 **MobiPlayStore** is a full-stack bilingual web application (Arabic / English) for purchasing mobile game top-up cards.  
