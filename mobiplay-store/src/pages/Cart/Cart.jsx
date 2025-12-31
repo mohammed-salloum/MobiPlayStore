@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -10,11 +10,12 @@ import CartIcon from "../../components/CartIcon/CartIcon";
 import "./Cart.css";
 
 function Cart() {
-  const cartItems = useSelector((state) => state.cart.items);
-  const { theme } = useContext(ThemeContext);
+  const cartItems = useSelector((state) => state.cart.items); // Get cart items from Redux
+  const { theme } = useContext(ThemeContext); // Current theme (light/dark)
   const { t, i18n } = useTranslation();
-  const isRTL = i18n.language === "ar";
+  const isRTL = i18n.language === "ar"; // Check if RTL
 
+  // If cart is empty, show empty cart message
   if (!cartItems || cartItems.length === 0) {
     return (
       <div className={`cart-empty theme-${theme}`} dir={isRTL ? "rtl" : "ltr"}>
@@ -34,14 +35,16 @@ function Cart() {
     );
   }
 
+  // Main cart layout when items exist
   return (
     <div className={`cart-container theme-${theme}`} dir={isRTL ? "rtl" : "ltr"}>
+      {/* Cart title with icon */}
       <h2 className="cart-title">
         <CartIcon size="medium" wrapper="div" showBadge={false} /> {t("cart.title")}
       </h2>
 
       <div className="cart-main">
-        {/* العناصر */}
+        {/* Left: List of cart items */}
         <div className="cart-left">
           <ul className="cart-items-list">
             {cartItems.map((item) => (
@@ -50,7 +53,7 @@ function Cart() {
           </ul>
         </div>
 
-        {/* الملخص */}
+        {/* Right: Cart summary */}
         <div className="cart-right">
           <CartSummary theme={theme} />
         </div>

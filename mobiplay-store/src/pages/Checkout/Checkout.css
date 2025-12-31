@@ -1,21 +1,29 @@
-/* =========================
-   checkout.css - صفحة Checkout
-========================= */
+/* =========================================================
+   checkout.css – Checkout Page Styles
+   - Controls layout, spacing, and responsiveness
+   - Supports RTL/LTR, theming, and adaptive layouts
+========================================================= */
 
-/* Wrapper رئيسي */
+/* =========================================================
+   Main Wrapper
+   - Centers the checkout page
+   - Adds spacing below the navbar
+========================================================= */
 .checkout-container {
-  inline-size: min(1200px, 100%);
-  margin-inline: auto;
-  padding-top: calc(var(--navbar-height, 80px) + 1.5rem); /* مسافة فوق العنوان */
+  inline-size: min(1200px, 100%); /* Constrain width on large screens */
+  margin-inline: auto;           /* Center horizontally */
+  padding-top: calc(var(--navbar-height, 80px) + 1.5rem); /* Space below navbar */
   padding-bottom: 1rem;
-  padding-inline: clamp(1rem, 5vw, 2rem);
+  padding-inline: clamp(1rem, 5vw, 2rem); /* Responsive horizontal padding */
   background-color: var(--bg-color);
   color: var(--text-color);
   box-sizing: border-box;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s; /* Smooth theme switching */
 }
 
-/* العنوان */
+/* =========================================================
+   Page Title
+========================================================= */
 .checkout-title {
   font-weight: 700;
   text-align: center;
@@ -23,60 +31,66 @@
   margin: 1rem;
   padding-bottom: 1.5rem;
   line-height: 1.2;
-   color: var(--accent-color);
+  color: var(--accent-color);
 }
 
-/* Layout المحتوى */
+/* =========================================================
+   Checkout Content Layout
+   - Wraps payment form and order summary
+========================================================= */
 .checkout-content {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap;               /* Allows wrapping on smaller screens */
   gap: 1.5rem;
   justify-content: center;
   max-inline-size: 1200px;
   margin-inline: auto;
 }
 
-/* الأعمدة */
+/* =========================================================
+   Columns (Order Summary & Payment Form)
+========================================================= */
 .order-summary-column,
 .payment-form-column {
-  flex: 1 1 45%; /* يسمح بالتمدد قليلاً */
-  min-inline-size: 280px; /* الحد الأدنى للعمود */
-  max-inline-size: 550px; /* الحد الأقصى للعرض */
+  flex: 1 1 45%;                 /* Flexible two-column layout */
+  min-inline-size: 280px;        /* Minimum column width */
+  max-inline-size: 550px;        /* Prevents overly wide columns */
 }
-/* =========================
-   رسالة السلة الفارغة - Empty Cart
-========================= */
 
+/* =========================================================
+   Empty Cart Message
+   - Displayed when no items exist in cart
+========================================================= */
 .empty-cart {
   display: flex;
-  justify-content: center;  /* تمركز أفقي */
+  justify-content: center;       /* Horizontal centering */
   text-align: center;
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(---color);
+  color: var(--text-color);
   line-height: 1.4;
-  margin-top: 1rem; /* مسافة صغيرة تحت العنوان */
+  margin-top: 1rem;              /* Space below title */
   padding: 0.5rem 1rem;
 }
 
-/* Responsive Adjustments */
-/* =========================
-   Responsive Checkout Layout
-========================= */
+/* =========================================================
+   Responsive Layout Adjustments
+========================================================= */
 
 /* Large desktops */
 @media (min-width: 1025px) {
   .checkout-content {
-    display: flex;
-    flex-direction: row; /* الأعمدة جنب بعض */
+    flex-direction: row;         /* Side-by-side columns */
     align-items: flex-start;
     gap: 1.5rem;
     justify-content: center;
   }
 
+  /* Column order for desktop */
   .order-summary-column {
-    order: 1; /* الملخص أول */
+    order: 1;
   }
+
   .payment-form-column {
     order: 2;
   }
@@ -89,20 +103,22 @@
   }
 }
 
-/* Medium & small screens */
+/* Medium & small screens (Tablets) */
 @media (max-width: 1024px) {
   .checkout-content {
-    display: flex;
-    flex-direction: column; /* الأعمدة فوق بعض */
+    flex-direction: column;      /* Stack columns vertically */
     gap: 1.5rem;
   }
 
+  /* Order summary appears first */
   .order-summary-column {
-    order: 1; /* الملخص أول */
+    order: 1;
     margin-inline: auto;
   }
+
+  /* Payment form below summary */
   .payment-form-column {
-    order: 2; /* الفورم تحت */
+    order: 2;
     margin-inline: auto;
   }
 
@@ -120,13 +136,14 @@
   }
 }
 
-/* Extra small / very small devices */
+/* Extra small devices */
 @media (max-width: 480px) {
   .checkout-content {
     gap: 1rem;
   }
 }
 
+/* Very small devices */
 @media (max-width: 350px) {
   .checkout-content {
     gap: 0.8rem;

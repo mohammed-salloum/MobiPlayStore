@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaBolt, FaUsers, FaBullseye, FaLightbulb } from "react-icons/fa";
 import { ThemeContext } from "../../context/ThemeContext";
@@ -7,12 +7,13 @@ import FeatureCard from "../../components/Common/FeatureCard/FeatureCard";
 import "./AboutUs.css";
 
 function AboutUs() {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext); // Get current theme
   const { t, i18n } = useTranslation();
-  const isRTL = i18n.language === "ar";
+  const isRTL = i18n.language === "ar"; // Check if language is RTL
 
   const [aboutFeatures, setAboutFeatures] = useState([]);
 
+  // Initialize feature cards from translations
   useEffect(() => {
     setAboutFeatures([
       {
@@ -40,9 +41,13 @@ function AboutUs() {
 
   return (
     <section className={`about-section ${theme}`} dir={isRTL ? "rtl" : "ltr"}>
+      {/* Section Title */}
       <h2 className="about-title">{t("about.title")}</h2>
+
+      {/* Lead Text */}
       <p className="about-lead-text">{t("about.description")}</p>
 
+      {/* Features Carousel */}
       <Carousel rtl={isRTL}>
         {aboutFeatures.map((feat, index) => (
           <FeatureCard
@@ -54,6 +59,7 @@ function AboutUs() {
         ))}
       </Carousel>
 
+      {/* Footer Text */}
       <div className="footer-text">
         <p>{t("about.footerText")}</p>
       </div>

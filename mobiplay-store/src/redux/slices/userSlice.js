@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // ================== Initial State ==================
+// Load saved user and token from localStorage
 const savedUser = JSON.parse(localStorage.getItem("user")) || null;
 const savedToken = localStorage.getItem("token") || null;
 
@@ -34,18 +35,18 @@ export const updateUserAsync = createAsyncThunk(
         }
       );
 
-      // حالة النجاح
+      // Success case
       if (res.data.code === "updateSuccess") {
         return { code: "updateSuccess", user: res.data.user };
       }
 
-      // أي خطأ من السيرفر
+      // Any server error
       return rejectWithValue({
         code: res.data.code || "updateFailed",
-        message: res.data.code || "updateFailed", // الرسالة تظهر بالواجهة فقط
+        message: res.data.code || "updateFailed", // UI message
       });
     } catch (err) {
-      // network errors أو أي خطأ غير متوقع
+      // Network errors or unexpected errors
       const errorData = err.response?.data;
       return rejectWithValue({
         code: errorData?.code || "updateFailed",
@@ -60,12 +61,14 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    // Login action
     login: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
       localStorage.setItem("user", JSON.stringify(action.payload.user));
       localStorage.setItem("token", action.payload.token);
     },
+    // Logout action
     logout: (state) => {
       state.user = null;
       state.token = null;
@@ -77,10 +80,12 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // Pending state when updating user
       .addCase(updateUserAsync.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
+      // Fulfilled state when update succeeds
       .addCase(updateUserAsync.fulfilled, (state, action) => {
         state.loading = false;
         if (action.payload.code === "updateSuccess") {
@@ -89,11 +94,12 @@ const userSlice = createSlice({
           state.error = null;
         }
       })
+      // Rejected state when update fails
       .addCase(updateUserAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message || "updateFailed";
 
-        // إذا انتهت صلاحية التوكن أو لا يوجد توكن
+        // If token expired or missing
         if (action.payload?.code === "tokenExpired" || action.payload?.code === "noToken") {
           state.user = null;
           state.token = null;

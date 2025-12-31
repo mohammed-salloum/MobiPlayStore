@@ -1,109 +1,114 @@
 # 🎮 MobiPlayStore – Mobile Game Cards Store Web Application
 💼 Personal Project | June 2025
 
-MobiPlayStore – Full-Stack Web Application
+**MobiPlayStore** is a full-stack bilingual web application (Arabic / English) for purchasing mobile game top-up cards.  
+The project is built using a modern and scalable architecture with a strong focus on performance, accessibility, and user experience.
 
-Full-stack bilingual web application (Arabic/English) for purchasing mobile game top-up cards. Developed using React, Redux Toolkit, React Router, Context API, React Select, i18next, Bootstrap 5, CSS3, Node.js, Express.js, Firebase Hosting, and Google Maps API. The application includes user authentication, profile management, and a Redux-managed user-specific shopping cart. Advanced features include multi-theme support, Google Maps integration, a secure payment system, and a fully responsive modern UI.
-
----
-
-🚀 Live Demo & GitHub
-
-🌐 Live Demo | 🐙 GitHub: MobiPlayStore
+The application includes user authentication, profile management, and a Redux-managed user-specific shopping cart. Advanced features include multi-theme support, Google Maps integration, a secure payment system, and a fully responsive modern UI.
 
 ---
 
-🔧 Tech Stack
+## 🚀 Live Demo
 
-⚛️ React
-
-🗂️ Redux Toolkit, React Context API
-
-🔄 React Router
-
-🎨 Bootstrap 5, CSS3
-
-🔌 React Select
-
-🌐 i18next (Arabic/English + RTL)
-
-📝 Google Fonts (Inter, Cairo) with font toggle
-
-💾 localStorage for preferences persistence (language, font, theme)
-
-☁️ Firebase Hosting
-
-🟢 Node.js, Express.js
-
-📍 Google Maps API
+🌐 **[Live Demo](https://mobiplaystore-syr.web.app/)**
 
 ---
 
-🌟 Features
+## 🔧 Tech Stack
 
-🛒 User-specific shopping cart managed with Redux and localStorage persistence
-
-🔑 User authentication and profile management
-
-⭐ Product rating and review system
-
-🌙 Multi-theme support (Dark/Light mode) with seamless UI
-
-🌍 Bilingual support (Arabic / English) with RTL
-
-📱 Fully responsive design for mobile and desktop
-
-🔄 Smooth navigation using React Router
-
-⚛️ State management via Redux Toolkit and React Context API
-
-📍 Google Maps integration for location-based features
-
-💳 Secure payment system
+- ⚛️ React  
+- 🗂️ Redux Toolkit, React Context API  
+- 🔄 React Router  
+- 🎨 Bootstrap 5, CSS3  
+- 🔌 React Select  
+- 🌐 i18next (Arabic / English + RTL)  
+- 📝 Google Fonts (Inter, Cairo) with font toggle  
+- 💾 localStorage (language, font, theme persistence)  
+- ☁️ Firebase Hosting  
+- 🟢 Node.js, Express.js  
+- 📍 Google Maps API  
 
 ---
 
-## 📸 Screenshots  
+## 🌟 Features
 
-| 🏠 Home – Dark |
-|-----------------|
-| ![Home Hero Section Dark](Screenshots/dark/home-HeroSection-page.PNG) <br> ![Home Features Section Dark](Screenshots/dark/home-FeaturesSection-page.PNG) |
+- 🛒 User-specific shopping cart managed with Redux and localStorage persistence  
+- 🔑 User authentication and profile management  
+- ⭐ Product rating and review system  
+- 🌙 Advanced multi-theme support (Light, Dark, Reading, Colorblind-friendly modes)
+- 🌍 Bilingual support (Arabic / English) with full RTL handling  
+- 📱 Fully responsive design (mobile & desktop)  
+- 🔄 Smooth navigation using React Router  
+- ⚛️ State management via Redux Toolkit and React Context API  
+- 📍 Google Maps integration for location-based features  
+- 💳 Secure payment system  
+
+---
+
+## 📸 Screenshots – Dark Mode
+
+| 🏠 Home |
+|----------|
+| ![Home Hero Section](Screenshots/dark/home-HeroSection-page.PNG) <br> ![Home Features Section](Screenshots/dark/home-FeaturesSection-page.PNG) |
 
 | 🖤 Footer |
-|-------------------|
-| ![Footer Dark](Screenshots/dark/footer-page.PNG) |
+|-----------|
+| ![Footer](Screenshots/dark/footer-page.PNG) |
 
-| 🛍️ Products – Dark |
-|---------------------|
-| ![Products Dark](Screenshots/dark/products-page.PNG) |
+| 🛍️ Products |
+|-------------|
+| ![Products](Screenshots/dark/products-page.PNG) |
 
-| 🎁 Offers – Dark |
+| 🎁 Offers |
+|-----------|
+| ![Offers](Screenshots/dark/offers-page.PNG) |
+
+| 🌟 Product Details |
 |------------------|
-| ![Offers Dark](Screenshots/dark/offers-page.PNG) |
+| ![Product Details 1](Screenshots/dark/productDetails-page1.PNG) <br> ![Product Details 2](Screenshots/dark/productDetails-page2.PNG) |
 
-| 🌟 Product Details – Dark |
-|---------------------------|
-| ![Product Details Dark](Screenshots/dark/productDetails-page1.PNG) <br> ![Product Details Dark 2](Screenshots/dark/productDetails-page2.PNG) |
+| 🛒 Cart |
+|---------|
+| ![Cart](Screenshots/dark/cart-page.PNG) |
 
-| 🛒 Cart – Dark |
-|----------------|
-| ![Cart Dark](Screenshots/dark/cart-page.PNG) |
+| 💳 Checkout |
+|-------------|
+| ![Checkout](Screenshots/dark/checkout-page.PNG) |
 
-| 💳 Checkout – Dark |
-|---------------------|
-| ![Checkout Dark](Screenshots/dark/checkout-page.PNG) |
+| 📝 Contact Us |
+|------------|
+| ![Contact Us](Screenshots/dark/contact-page.PNG) |
 
-| 📝 Contact – Dark |
+| ℹ️ About Us |
+|------------|
+| ![About Us](Screenshots/dark/about-page.PNG) |
+
+| 🔑 Sign In / Login |
 |-------------------|
-| ![Contact Dark](Screenshots/dark/contact-page.PNG) |
+| ![Sign In](Screenshots/dark/signin-page.PNG) |
 
----
+| 🆕 Register / Create Account |
+|----------------------------|
+| ![Register](Screenshots/dark/register-page.PNG) |
+
+| 🔄 Reset Password |
+|-----------------|
+| ![Reset Password](Screenshots/dark/reset-password-page.PNG) |
+
+| 👤 Profile |
+|-----------|
+| ![Profile](Screenshots/dark/profile-page.PNG) |
+
+| ⚙️ Settings |
+|------------|
+| ![Settings](Screenshots/dark/settings-page.PNG) |
+
 
 ## 📂 Repository
 
-Full source code and project files available here:
+Full source code and project files are available here:
 
-[🔗 MobiPlayStore — GitHub Repository](https://github.com/mohammed-salloum/MobiPlayStore)
+👉 [MobiPlayStore — GitHub Repository](https://github.com/mohammed-salloum/MobiPlayStore)
 
 ---
 
@@ -111,5 +116,6 @@ Full source code and project files available here:
 
 **Mohammed Salloum**  
 Front-End React Developer  
-📧 mohammed.e.salloum@gmail.com  
-🔗 [LinkedIn – mohammed-salloum-dev](https://linkedin.com/in/mohammed-salloum-dev)
+
+📧 Email: mohammed.e.salloum@gmail.com  
+🔗 LinkedIn: https://linkedin.com/in/mohammed-salloum-dev

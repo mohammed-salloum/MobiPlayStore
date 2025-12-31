@@ -1,95 +1,110 @@
 /* =========================
    Global Reset & Overflow Fix
+   - Ensures consistent box-sizing and removes default margin/padding
+   - Prevents horizontal scroll by avoiding 100vw usage
 ========================= */
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  box-sizing: border-box; /* Include padding/border in element width/height */
+  margin: 0;              /* Remove default margin */
+  padding: 0;             /* Remove default padding */
 }
 
 html, body {
-  width: 100%;       /* ✅ بدل 100vw */
-  overflow-x: hidden; 
-  font-family: var(--main-font, 'Inter', sans-serif);
-  font-size: var(--main-font-size);
-  scroll-behavior: smooth;
-  min-height: 100%;
-  background-color: var(--bg-color, #fff);
+  width: 100%;                /* Full width, safer than 100vw to prevent overflow */
+  overflow-x: hidden;         /* Prevent horizontal scroll */
+  font-family: var(--main-font, 'Inter', sans-serif); /* Base font */
+  font-size: var(--main-font-size);                   /* Base font size */
+  scroll-behavior: smooth;    /* Smooth scrolling for anchor links */
+  min-height: 100%;           /* Ensure body fills viewport */
+  background-color: var(--bg-color, #fff); /* Default background color */
 }
-
 
 /* =========================
    Text & Typography
+   - Normalizes text styles for headings, paragraphs, spans, links, and list items
 ========================= */
 h1, h2, h3, h4, h5, h6, p, span, a, li {
-  font-weight: normal;
-  line-height: 1.5;
-  color: inherit;
-  text-decoration: none;
+  font-weight: normal;        /* Remove bold defaults */
+  line-height: 1.5;           /* Improve readability */
+  color: inherit;             /* Inherit parent color */
+  text-decoration: none;      /* Remove default underlines */
 }
 
 /* =========================
    Links & Buttons
+   - Ensures consistent styles for interactive elements
 ========================= */
 a {
-  color: inherit;
-  text-decoration: none;
+  color: inherit;             /* Inherit text color */
+  text-decoration: none;      /* Remove underline */
 }
 
 button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
+  background: none;           /* Remove default button background */
+  border: none;               /* Remove default border */
+  cursor: pointer;            /* Pointer cursor on hover */
+  font-family: inherit;       /* Inherit font from parent */
+  font-size: inherit;         /* Inherit font size */
 }
 
 /* =========================
    Forms & Inputs
+   - Reset styling for input elements
 ========================= */
 input, textarea, select, button {
   font-family: inherit;
   font-size: inherit;
-  outline: none;
-  border: none;
-  background: none;
+  outline: none;              /* Remove focus outline */
+  border: none;               /* Remove default borders */
+  background: none;           /* Remove default background */
 }
 
 /* =========================
    Images & Media
+   - Make media responsive and block-level by default
 ========================= */
 img, video {
-  max-width: 100%;
-  height: auto;
-  display: block;
+  max-width: 100%;  /* Prevent overflow */
+  height: auto;     /* Maintain aspect ratio */
+  display: block;   /* Remove inline spacing issues */
 }
 
 /* =========================
    Lists
+   - Remove default bullets/numbers
 ========================= */
 ul, ol {
   list-style: none;
 }
 
-/* Scrollbar Styling */
+/* =========================
+   Scrollbar Styling
+   - Customizes scrollbar for Webkit browsers and Firefox
+========================= */
 ::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: var(--scroll-thumb);
-  border-radius: 10px;
-}
-::-webkit-scrollbar-track {
-  background-color: var(--scroll-track);
+  width: 8px; /* Scrollbar thickness */
 }
 
-/* Firefox */
+::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb); /* Scrollbar handle */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--scroll-track); /* Scrollbar track */
+}
+
+/* Firefox scrollbar styling */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--scroll-thumb) var(--scroll-track);
 }
+
+/* =========================
+   Miscellaneous Fixes
+========================= */
 .nav-content .arrow {
-  display: none !important;
+  display: none !important; /* Hide arrow icons in nav content if not needed */
 }

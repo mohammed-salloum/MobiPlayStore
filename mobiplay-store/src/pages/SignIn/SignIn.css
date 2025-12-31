@@ -1,5 +1,5 @@
 /* =========================
-   صفحة تسجيل الدخول
+   Sign In Page Container
 ========================= */
 .auth-page {
   display: flex;
@@ -13,7 +13,7 @@
 }
 
 /* =========================
-   حاوية الفورم
+   Form Container
 ========================= */
 .auth-container {
   padding: 1rem 1.5rem;
@@ -37,7 +37,7 @@
 }
 
 /* =========================
-   الحقول
+   Input Fields
 ========================= */
 .auth-container input {
   width: 100%;
@@ -52,20 +52,20 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* إذا الصفحة LTR */
+/* LTR input direction */
 .auth-page[dir="ltr"] .auth-container input {
   direction: ltr;
   text-align: left;
   padding-left: 0.5rem;
-  padding-right: 2.5rem; /* مساحة للأيقونة */
+  padding-right: 2.5rem; /* space for eye icon */
 }
 
-/* إذا الصفحة RTL */
+/* RTL input direction */
 .auth-page[dir="rtl"] .auth-container input {
   direction: rtl;
   text-align: right;
   padding-right: 0.5rem;
-  padding-left: 2.5rem; /* مساحة للأيقونة */
+  padding-left: 2.5rem; /* space for eye icon */
 }
 
 .auth-container input:focus {
@@ -75,7 +75,7 @@
 }
 
 /* =========================
-   حقل الباسوورد مع أيقونة العين
+   Password field with toggle icon
 ========================= */
 .password-wrapper {
   position: relative;
@@ -92,7 +92,7 @@
   font-size: 1.1rem;
 }
 
-/* موقع الأيقونة حسب اللغة */
+/* Eye icon position based on language */
 .auth-page[dir="ltr"] .toggle-eye {
   right: 0.8rem;
 }
@@ -102,7 +102,7 @@
 }
 
 /* =========================
-   زر الإرسال
+   Submit Button
 ========================= */
 .auth-container button,
 .auth-submit-btn {
@@ -140,7 +140,7 @@
 }
 
 /* =========================
-   الرسائل تحت الحقول
+   Field Error Messages
 ========================= */
 .auth-message {
   margin: 0.4rem 0;
@@ -154,7 +154,7 @@
 }
 
 /* =========================
-   روابط التنقل
+   Navigation Links (login/register/reset)
 ========================= */
 .link-text {
   text-align: start;
@@ -190,7 +190,7 @@
 }
 
 /* =========================
-   رسائل الترحيب (toast)
+   Toast Message (Welcome)
 ========================= */
 .toast-message {
   position: fixed;
@@ -217,7 +217,7 @@
 }
 
 /* =========================
-   responsive للموبايل
+   Mobile Responsive
 ========================= */
 @media (max-width: 480px) {
   .auth-container {

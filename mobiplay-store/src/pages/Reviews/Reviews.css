@@ -1,12 +1,18 @@
+/* =========================
+   Reviews Page Container
+========================= */
 .reviews-container {
   max-width: 900px;
-  margin: 120px auto 3rem auto; /* مسافة كافية من Nav */
+  margin: 120px auto 3rem auto; /* Enough space from Nav */
   padding: 20px 1.5rem;
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* =========================
+   Reviews Page Title
+========================= */
 .reviews-title {
   text-align: center;
   font-weight: bold;
@@ -16,6 +22,9 @@
   color: inherit;
 }
 
+/* =========================
+   Reviews Grid Layout
+========================= */
 .reviews-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -23,7 +32,9 @@
   justify-items: center;
 }
 
-/* Responsive */
+/* =========================
+   Responsive Styles
+========================= */
 @media (max-width: 768px) {
   .reviews-container {
     margin-top: 80px;
@@ -32,12 +43,12 @@
     font-size: 1.5rem;
   }
   .reviews-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column on tablet */
   }
 }
 
 @media (max-width: 480px) {
   .reviews-title {
-    font-size: 1.4rem;
+    font-size: 1.4rem; /* Slightly smaller for mobile */
   }
 }

@@ -6,7 +6,7 @@ export function detectLanguageFromDomain() {
 
     // Map of specific hostnames (or parts of hostnames) to language codes
     const domainLangMap = {
-      'syr.web.app': 'ar', // Arabic for Syrian subdomain
+      'ae.web.app': 'ar', // Arabic for Syrian subdomain
       'us.web.app': 'en',  // English for US subdomain
     };
 

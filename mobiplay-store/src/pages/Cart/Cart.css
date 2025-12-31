@@ -1,53 +1,60 @@
-/* =========================
+/* =========================================================
    Empty Cart Layout
-========================= */
+   - Styles the view shown when the cart has no items
+   - Centers content vertically and horizontally
+========================================================= */
 .cart-empty {
-  min-height: 60vh;
+  min-height: 60vh; /* Ensures sufficient vertical space */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: calc(8rem + 1rem) 2rem 2rem 2rem; /* padding-top بدل margin-top */
+  padding: calc(8rem + 1rem) 2rem 2rem 2rem; /* Top padding instead of margin-top to avoid layout shifts */
   text-align: center;
   background-color: var(--bg-color);
   color: var(--text-color);
-  gap: 1rem;
-  transition: background-color 0.3s, color 0.3s;
+  gap: 1rem; /* Space between elements */
+  transition: background-color 0.3s, color 0.3s; /* Smooth theme transitions */
   opacity: 0;
-  animation: fadeIn 0.5s forwards;
+  animation: fadeIn 0.5s forwards; /* Fade-in animation on load */
 }
 
+/* Icon container for empty cart */
 .empty-cart-icon {
   margin-bottom: 1rem;
 }
 
+/* Large cart icon sizing (responsive) */
 .empty-cart-icon .cart-icon-xlarge .cart-icon {
-  font-size: clamp(80px, 15vw, 160px);
+  font-size: clamp(80px, 15vw, 160px); /* Scales icon based on viewport width */
 }
 
+/* Empty cart message text */
 .empty-message {
   font-size: clamp(1rem, 1.5vw, 1.5rem);
   margin: 0;
   line-height: 1.4;
 }
 
-/* =========================
+/* =========================================================
    Cart Page Layout
-========================= */
+   - Main container for cart page content
+========================================================= */
 .cart-container {
-  max-width: 1100px;
-  padding: 6rem 1.5rem 1.5rem 1.5rem;
+  max-width: 1100px; /* Limits content width on large screens */
+  padding: 6rem 1.5rem 1.5rem 1.5rem; /* Top padding accounts for header */
   background-color: var(--bg-color);
   color: var(--text-color);
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2rem; /* Space between major sections */
   opacity: 0;
   animation: fadeIn 0.5s forwards;
   box-sizing: border-box;
-  margin: 0 auto;
+  margin: 0 auto; /* Center container horizontally */
 }
 
+/* Cart page title */
 .cart-title {
   display: flex;
   align-items: center;
@@ -58,30 +65,37 @@
   color: var(--accent-color);
 }
 
+/* Icon spacing inside title */
 .cart-title .cart-icon {
   margin-right: 0.5rem;
 }
 
-/* ======= Main Cart: Left & Right ======= */
+/* =========================================================
+   Main Cart Layout (Left: Items | Right: Summary)
+========================================================= */
 .cart-main {
   display: flex;
-  gap: 2rem; /* المسافة بين الأعمدة عند الوضع الأفقي */
+  gap: 2rem; /* Horizontal spacing between columns */
   flex-wrap: nowrap;
 }
 
+/* Left column: Cart items list */
 .cart-left {
-  flex: 2;
+  flex: 2; /* Takes more space than summary */
   min-width: 250px;
-  max-height: calc(100vh - 10rem);
-  overflow-y: auto;
+  max-height: calc(100vh - 10rem); /* Prevents overflow beyond viewport */
+  overflow-y: auto; /* Enables vertical scrolling */
   padding: 0.5rem;
   box-sizing: border-box;
   background-color: var(--bg-color);
   color: var(--text-color);
+
+  /* Custom scrollbar styling (Firefox) */
   scrollbar-width: thin;
   scrollbar-color: var(--scroll-thumb) var(--scroll-track);
 }
 
+/* Custom scrollbar (WebKit browsers) */
 .cart-left::-webkit-scrollbar {
   width: 10px;
 }
@@ -96,31 +110,34 @@
   border: 2px solid var(--scroll-track);
 }
 
+/* Wrapper for cart item components */
 .cart-items-list {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
+/* Right column: Cart summary */
 .cart-right {
   flex: 1;
   min-width: 250px;
   align-self: flex-start;
-  position: sticky;
-  top: 8rem;
+  position: sticky; /* Keeps summary visible while scrolling */
+  top: 8rem; /* Offset from top (below header) */
   padding: 0.5rem;
   box-sizing: border-box;
 }
 
-/* =========================
-   Cart Buttons (موحدة الحجم)
-========================= */
+/* =========================================================
+   Cart Buttons (Unified Sizing)
+========================================================= */
 .cart-buttons {
   display: flex;
-  flex-direction: column; /* الوضع العمودي عند الشاشات الصغيرة */
+  flex-direction: column; /* Vertical layout for smaller screens */
   gap: 1rem;
 }
 
+/* Shared button styles */
 .cart-buttons .btn {
   width: 100%;
   max-width: 100%;
@@ -134,19 +151,21 @@
   box-sizing: border-box;
 }
 
+/* Hover effect without vertical movement */
 .cart-buttons .btn:hover:not(.disabled) {
-  transform: none; /* إزالة translateY */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transform: none; /* Prevents translateY jump */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* =========================
-   Responsive - Portrait + Landscape
-========================= */
+/* =========================================================
+   Responsive Layouts
+   - Tablet, Mobile, Portrait & Landscape handling
+========================================================= */
 @media (max-width: 1024px) {
   .cart-main {
-    flex-direction: column;
+    flex-direction: column; /* Stack columns vertically */
     align-items: stretch;
-    gap: 0.75rem; /* مسافة أقل عند العمودي */
+    gap: 0.75rem;
   }
 
   .cart-left,
@@ -160,14 +179,14 @@
   }
 
   .cart-right {
-    position: relative;
+    position: relative; /* Disable sticky behavior */
     top: 0;
   }
 }
 
 @media (max-width: 768px) {
   .cart-main {
-    gap: 0.5rem; /* أصغر مسافة للشاشات المتوسطة */
+    gap: 0.5rem;
   }
 
   .cart-left {
@@ -211,15 +230,15 @@
   }
 }
 
-/* Landscape صغير جدًا */
+/* Very small landscape screens */
 @media (max-height: 500px) and (orientation: landscape) {
   .cart-left,
   .cart-right {
-    max-height: 60vh; /* يضمن أن لا تتجاوز الأعمدة الارتفاع */
+    max-height: 60vh; /* Prevents columns from exceeding viewport height */
   }
 
   .cart-main {
-    gap: 0.5rem; /* يقلل المسافة عند اللاندسكيب */
+    gap: 0.5rem;
   }
 
   .empty-message {
@@ -227,9 +246,11 @@
   }
 }
 
-/* =========================
+/* =========================================================
    Animations
-========================= */
+========================================================= */
 @keyframes fadeIn {
-  to { opacity: 1; }
+  to {
+    opacity: 1; /* Final visible state */
+  }
 }

@@ -1,5 +1,5 @@
 // SignIn.jsx
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
@@ -23,13 +23,15 @@ function SignIn() {
   const location = useLocation();
   const fromCart = location.state?.fromCart || false;
 
+  // Determine view based on path (login / register / reset)
   const getViewFromPath = (path) => (path === "reset-password" ? "reset" : path || "login");
   const [view, setView] = useState(getViewFromPath(subPath));
   const [loading, setLoading] = useState(false);
   const [formMessage, setFormMessage] = useState({ key: "", type: "", values: {} });
   const [showPassword, setShowPassword] = useState(false);
-  const [toastMessage, setToastMessage] = useState(""); // رسالة الترحيب
+  const [toastMessage, setToastMessage] = useState(""); // Welcome toast
 
+  // Define validation schemas using yup
   const schema = useMemo(() => {
     const loginSchema = yup.object().shape({
       email: yup.string().trim().email(t("signIn.login.messages.invalidEmail")).required(t("signIn.login.messages.emailRequired")),
@@ -72,6 +74,7 @@ function SignIn() {
     defaultValues: { username: "", email: "", password: "", confirmPassword: "" },
   });
 
+  // Clear errors when fields are modified
   useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name) {
@@ -82,6 +85,7 @@ function SignIn() {
     return () => subscription.unsubscribe();
   }, [watch, clearErrors]);
 
+  // Re-validate fields on language change
   useEffect(() => {
     Object.keys(errors).forEach((field) => {
       const value = getValues(field);
@@ -91,6 +95,7 @@ function SignIn() {
     });
   }, [i18n.language, errors, schema, getValues, setError, clearErrors]);
 
+  // Merge guest cart into logged-in user cart
   const mergeGuestCartWithUser = (userId) => {
     const guestCart = JSON.parse(localStorage.getItem("cart_guest")) || [];
     const userCartKey = `cart_${userId}`;
@@ -105,6 +110,7 @@ function SignIn() {
     localStorage.removeItem("cart_guest");
   };
 
+  // Handle form submission
   const onSubmit = async (data) => {
     setLoading(true);
     setFormMessage({ key: "", type: "", values: {} });
@@ -126,6 +132,7 @@ function SignIn() {
       switch (view) {
         case "login":
           if (code === "loginSuccess") {
+            // Update Redux user state and merge guest data
             dispatch(reduxLogin({ user: res.data.user, token: res.data.token }));
             mergeGuestCartWithUser(res.data.user.id);
             dispatch(mergeGuestReviews(res.data.user.id));
@@ -163,6 +170,7 @@ function SignIn() {
 
       setLoading(false);
 
+      // Redirect after successful login
       if (view === "login" && code === "loginSuccess") {
         setTimeout(() => {
           if (fromCart) navigate(`/${lang}/cart`);
@@ -176,6 +184,7 @@ function SignIn() {
     }
   };
 
+  // Switch between login, register, and reset views
   const changeView = (newView) => {
     setFormMessage({ key: "", type: "", values: {} });
     setView(newView);
@@ -188,7 +197,7 @@ function SignIn() {
   return (
     <div className="auth-page" dir={isRTL ? "rtl" : "ltr"}>
       <div className="auth-container">
-        {/* toast message فقط للترحيب */}
+        {/* Toast message for welcome */}
         {toastMessage && <div className="toast-message">{toastMessage}</div>}
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -260,7 +269,7 @@ function SignIn() {
                   : t("signIn.reset.resetBtn")}
           </button>
 
-          {/* رسالة عامة أسفل الفورم */}
+          {/* General form message */}
           {formMessage.key && (
             <div className={`form-message ${formMessage.type}`}>
               {t(formMessage.key, formMessage.values)}
@@ -268,7 +277,7 @@ function SignIn() {
           )}
         </form>
 
-        {/* روابط التنقل بين الصفحات */}
+        {/* Links to switch between views */}
         {view === "login" && (
           <>
             <p className="link-text single-link">

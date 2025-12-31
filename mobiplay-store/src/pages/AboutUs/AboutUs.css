@@ -1,32 +1,36 @@
 /* =======================
-   About Section
+   About Section Container
 ======================= */
 .about-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* العنوان يبدأ من الأعلى */
-  padding: 100px 20px 40px; /* top كبير، bottom أصغر */
+  justify-content: flex-start; /* Title starts from top */
+  padding: 100px 20px 40px; /* larger top, smaller bottom */
   background-color: var(--bg-color);
   color: var(--text-color);
   width: 100%;
   box-sizing: border-box;
   overflow: visible;
-  gap: 20px; /* المسافة بين العناصر */
+  gap: 20px; /* spacing between elements */
   min-height: 60vh;
-  scroll-margin-top: 100px; /* مناسب للـ anchor links */
+  scroll-margin-top: 100px; /* for anchor links */
 }
 
-/* العنوان */
+/* =======================
+   Section Title
+======================= */
 .about-title {
   font-weight: bold;
   text-align: center;
   color: var(--accent-color);
   letter-spacing: 1px;
-  font-size: clamp(1.4rem, 2.5vw, 2.6rem); /* حجم متجاوب بالكامل */
+  font-size: clamp(1.4rem, 2.5vw, 2.6rem); /* fully responsive */
 }
 
-/* النص الرئيسي */
+/* =======================
+   Lead Text / Description
+======================= */
 .about-lead-text {
   font-size: 1.125rem;
   color: var(--text-color);
@@ -36,7 +40,9 @@
   opacity: 0.9;
 }
 
-/* الفوتر */
+/* =======================
+   Footer Text
+======================= */
 .footer-text {
   font-size: 1rem;
   color: var(--footer-color);
@@ -45,10 +51,10 @@
 }
 
 /* =======================
-   Responsive
+   Responsive Styles
 ======================= */
 
-/* تابلت وأجهزة وسط */
+/* Tablet and medium devices */
 @media (max-width: 1024px) {
   .about-section {
     padding: 90px 15px 35px;
@@ -56,19 +62,19 @@
   }
 }
 
-/* الموبايل العمودي */
+/* Vertical mobile devices */
 @media (max-width: 767px) {
   .about-section {
-    padding: 100px 10px 30px; /* زيادة المسافة العليا لتوازن العنوان */
+    padding: 100px 10px 30px; /* more top padding to balance title */
     scroll-margin-top: 100px;
   }
   .about-lead-text {
     font-size: 1rem;
-    line-height: 1.55; /* راحة أكثر للقراءة */
+    line-height: 1.55; /* easier reading */
   }
 }
 
-/* الموبايل الصغير جدًا */
+/* Very small mobile */
 @media (max-width: 480px) {
   .about-section {
     padding: 90px 10px 25px;
@@ -80,7 +86,7 @@
   }
 }
 
-/* الموبايل الصغير جدًا جدًا */
+/* Extremely small devices */
 @media (max-width: 350px) {
   .about-section {
     padding: 80px 10px 20px;
@@ -88,13 +94,13 @@
   }
 }
 
-/* الشاشات الكبيرة جدًا */
+/* Extra large screens */
 @media (min-width: 1440px) {
   .about-title {
-    letter-spacing: 2px; /* فخامة أكبر للعنوان */
+    letter-spacing: 2px; /* more elegant title */
   }
   .about-lead-text {
-    line-height: 1.75; /* نص أكثر تنفسًا */
+    line-height: 1.75; /* more breathing space */
     font-size: 1.2rem;
   }
 }

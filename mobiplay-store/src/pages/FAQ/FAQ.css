@@ -1,51 +1,65 @@
+/* =========================================================
+   Global Variables
+   - Shared layout values
+========================================================= */
 :root {
-  --navbar-height: 60px;
+  --navbar-height: 60px;          /* Default navbar height */
 }
 
-/* الحاوية الرئيسية */
+/* =========================================================
+   FAQ Main Container
+   - Wraps all FAQ content
+   - Centers layout and applies theme colors
+========================================================= */
 .faq-container {
-  max-width: 800px;
-  margin: calc(var(--navbar-height) + 0.5rem) auto 2rem auto; /* أقرب للناف */
+  max-width: 800px;              /* Optimal reading width */
+  margin: calc(var(--navbar-height) + 0.5rem) auto 2rem auto; /* Offset below navbar */
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: 12px;           /* Soft rounded corners */
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
 }
 
+/* =========================================================
+   Page Title
+========================================================= */
 .faq-title {
   text-align: center;
   font-weight: bold;
   color: var(--accent-color);
   margin-bottom: 2.5rem;
   letter-spacing: 1px;
- font-size: clamp(1.4rem, 2.5vw, 2.6rem);
+  font-size: clamp(1.4rem, 2.5vw, 2.6rem);
 }
 
+/* =========================================================
+   Responsive Spacing Adjustments
+========================================================= */
 
-/* تابلت */
+/* Tablet devices */
 @media (max-width: 1024px) {
   .faq-container {
     margin: calc(var(--navbar-height) + 0.8rem) auto 1.5rem auto;
   }
 }
 
-/* موبايل عمودي */
+/* Portrait mobile devices */
 @media (max-width: 768px) {
   .faq-container {
     margin: calc(var(--navbar-height) + 0.5rem) auto 1.2rem auto;
   }
 }
 
-/* موبايل صغير جدًا */
+/* Very small mobile devices */
 @media (max-width: 480px) {
   .faq-container {
-    margin: calc(var(--navbar-height) + 0.3rem) auto 1rem auto; /* قريب جدًا من الناف */
-    padding: 1rem;
+    margin: calc(var(--navbar-height) + 0.3rem) auto 1rem auto; /* Closer to navbar */
+    padding: 1rem;             /* Reduced padding for small screens */
   }
 }
 
-/* Landscape على الموبايل */
+/* Mobile landscape orientation */
 @media (max-height: 480px) and (orientation: landscape) {
   .faq-container {
     margin: calc(var(--navbar-height) + 0.3rem) auto 1rem auto;

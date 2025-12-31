@@ -1,53 +1,63 @@
 /* =========================
    App Container
+   - Handles main layout and spacing of the app
+   - Uses flex column to allow footer to stick at bottom
+   - Padding accounts for fixed Navbar height
 ========================= */
 .app-container {
-  width: 100%;           /* بدل 100vw */
-  max-width: 100%;       /* بدل 100vw */
-  overflow-x: hidden;
-  display: flex;
+  width: 100%;           /* Full width, avoids using 100vw to prevent horizontal scroll issues */
+  max-width: 100%;       /* Ensures no overflow beyond viewport */
+  overflow-x: hidden;    /* Prevent horizontal scrolling */
+  display: flex;         /* Flex column layout */
   flex-direction: column;
-  min-height: 100vh;
-  padding-inline: 1rem;
-  padding-top: 70px;
+  min-height: 100vh;     /* Full viewport height to push footer to bottom */
+  padding-inline: 1rem;  /* Horizontal padding */
+  padding-top: 70px;     /* Space for fixed Navbar */
 }
 
 .app-content {
-  flex: 1;
+  flex: 1;                      /* Takes up remaining space above footer */
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2rem;                     /* Vertical spacing between sections */
   width: 100%;
-  min-width: 0;
+  min-width: 0;                  /* Prevents overflow in flex children */
 }
 
 /* =========================
    Footer
+   - Ensures footer stays at bottom of container
 ========================= */
 footer {
-  margin-top: auto;
+  margin-top: auto; /* Pushes footer to bottom in flex container */
 }
 
 /* =========================
    Sections
+   - Standardizes section padding and width
+   - Prevents horizontal overflow
 ========================= */
 section {
-  padding-inline: 1rem;
-  max-width: 100vw;
+  padding-inline: 1rem; /* Horizontal spacing inside sections */
+  max-width: 100vw;     /* Prevents sections from exceeding viewport width */
   width: 100%;
-  min-width: 0;
+  min-width: 0;         /* Helps with flex child overflow issues */
 }
 
 /* =========================
    Responsive Adjustments
+   - Adjusts padding and spacing for smaller screens
 ========================= */
+
+/* Medium screens (laptops / tablets) */
 @media (max-width: 1024px) {
   .app-container {
     padding-inline: 1rem;
-    padding-top: 60px; /* ارتفاع Navbar أصغر للشاشات المتوسطة */
+    padding-top: 60px; /* Smaller navbar height for medium screens */
   }
 }
 
+/* Small screens (tablets / large phones) */
 @media (max-width: 768px) {
   .app-container {
     padding-inline: 0.8rem;
@@ -55,17 +65,18 @@ section {
   }
 
   .app-content {
-    gap: 1.5rem;
+    gap: 1.5rem; /* Reduce spacing between sections */
   }
 }
 
+/* Extra small screens (mobile) */
 @media (max-width: 480px) {
   .app-container {
     padding-inline: 0.5rem;
-    padding-top: 50px;
+    padding-top: 50px; /* Smaller navbar for mobile */
   }
 
   .app-content {
-    gap: 1rem;
+    gap: 1rem; /* Tighten vertical spacing for mobile */
   }
-}  
+}

@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// احصل على المستخدم الحالي أو guest
+// Get the current user or guest
 const savedUser = JSON.parse(localStorage.getItem("user"));
 const userId = savedUser ? savedUser.id : null;
 
+// Helper to get cart from localStorage (user or guest)
 const getCartFromStorage = (id) => {
   const key = id ? `cart_${id}` : "cart_guest";
   try {
@@ -23,11 +24,12 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    // Set user ID (login or logout)
     setUser: (state, action) => {
       const newUserId = action.payload;
 
       if (!newUserId) {
-        // تسجيل خروج → حفظ السلة الحالية ثم استرجاع سلة guest
+        // Logout → save current cart then load guest cart
         const key = state.userId ? `cart_${state.userId}` : "cart_guest";
         localStorage.setItem(key, JSON.stringify(state.items));
 
@@ -36,7 +38,7 @@ const cartSlice = createSlice({
         return;
       }
 
-      // تسجيل دخول → دمج سلة guest مع سلة المستخدم
+      // Login → merge guest cart with user cart
       const guestCart = getCartFromStorage(null);
       const userCart = getCartFromStorage(newUserId);
 
@@ -54,12 +56,14 @@ const cartSlice = createSlice({
       localStorage.removeItem("cart_guest");
     },
 
+    // Directly set cart items
     setCartItemsDirect: (state, action) => {
       state.items = action.payload;
       const key = state.userId ? `cart_${state.userId}` : "cart_guest";
       localStorage.setItem(key, JSON.stringify(state.items));
     },
 
+    // Add a product to the cart
     addToCart: (state, action) => {
       const { product, quantity = 1 } = action.payload;
       const existing = state.items.find(i => i.id === product.id);
@@ -70,6 +74,7 @@ const cartSlice = createSlice({
       localStorage.setItem(key, JSON.stringify(state.items));
     },
 
+    // Set exact quantity of a cart item
     setQuantityExact: (state, action) => {
       const { id, quantity } = action.payload;
       const existing = state.items.find(i => i.id === id);
@@ -79,12 +84,14 @@ const cartSlice = createSlice({
       localStorage.setItem(key, JSON.stringify(state.items));
     },
 
+    // Remove an item from the cart
     removeFromCart: (state, action) => {
       state.items = state.items.filter(i => i.id !== action.payload);
       const key = state.userId ? `cart_${state.userId}` : "cart_guest";
       localStorage.setItem(key, JSON.stringify(state.items));
     },
 
+    // Clear the entire cart
     clearCart: (state) => {
       state.items = [];
       const key = state.userId ? `cart_${state.userId}` : "cart_guest";

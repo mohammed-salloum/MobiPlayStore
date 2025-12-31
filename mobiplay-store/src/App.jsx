@@ -1,15 +1,19 @@
-import React, { useEffect, Suspense, useState } from "react";
+import { useEffect, Suspense, useState } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSelector, useDispatch } from "react-redux";
 
+// ===== Layout Components =====
 import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
 import SettingsModal from "./components/SettingsModal/SettingsModal";
 import LanguageHandler from "./components/Common/LanguageHandler/LanguageHandler";
-import useScrollToTop from "./hooks/useScrollToTop";
-import useAutoPageTitle from "./hooks/useAutoPageTitle";
 
+// ===== Custom Hooks =====
+import useScrollToTop from "./hooks/useScrollToTop"; // Scrolls to top on route change
+import useAutoPageTitle from "./hooks/useAutoPageTitle"; // Dynamically updates page title
+
+// ===== Pages =====
 import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
@@ -23,11 +27,17 @@ import Reviews from "./pages/Reviews/Reviews";
 import SignIn from "./pages/SignIn/SignIn";
 import Profile from "./pages/Profile/Profile";
 
+// ===== Notifications =====
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// ===== Route Protection =====
 import ProtectedRoute from "./components/Common/ProtectedRoute/ProtectedRoute.jsx";
+
+// ===== API hooks =====
 import { useProducts, useOffers } from "./services/api";
+
+// ===== Services =====
 import { loadUserData, handleLogout } from "./services/cartService";
 
 // ===== Redux slices =====
@@ -35,73 +45,82 @@ import { selectUser, login } from "./redux/slices/userSlice";
 import { setUser, selectCartItems } from "./redux/slices/cartSlice";
 import { setReviewsDirect } from "./redux/slices/reviewsSlice";
 
-
 function App() {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   // ===== Redux state =====
-  const user = useSelector(selectUser);
-  const cartItems = useSelector(selectCartItems);
+  const user = useSelector(selectUser);        // Currently logged-in user
+  const cartItems = useSelector(selectCartItems); // Items in cart
 
   // ===== Local state =====
-  const [showSettings, setShowSettings] = useState(false);
-  const [language, setLanguage] = useState("en");
-  const [theme, setTheme] = useState("light");
-  const [fontSize, setFontSize] = useState(16);
-  const [fontFamily, setFontFamily] = useState("'Inter', sans-serif");
+  const [showSettings, setShowSettings] = useState(false); // Settings modal visibility
+  const [language, setLanguage] = useState("en");          // Current app language
+  const [theme, setTheme] = useState("light");            // Theme (light/dark)
+  const [fontSize, setFontSize] = useState(16);           // Base font size
+  const [fontFamily, setFontFamily] = useState("'Inter', sans-serif"); // Font family
 
-  useScrollToTop();
-  useAutoPageTitle({ skip: showSettings });
+  // ===== Custom Hooks =====
+  useScrollToTop(); // Scrolls to top on route change
+  useAutoPageTitle({ skip: showSettings }); // Updates page title unless settings modal is open
 
-  // ===== Set font based on language =====
+  // ===== Font Management based on Language =====
   const getFontByLanguage = (lang) =>
     lang === "ar" ? "'Cairo', sans-serif" : "'Inter', sans-serif";
 
   useEffect(() => {
     const family = getFontByLanguage(language);
     setFontFamily(family);
+
+    // Apply font and font size to root element
     document.documentElement.style.setProperty("--main-font", family);
     document.documentElement.style.setProperty("--main-font-size", `${fontSize}px`);
+
+    // Persist font settings in localStorage
     localStorage.setItem("fontSize", fontSize);
     localStorage.setItem("fontFamily", family);
   }, [language, fontSize]);
 
-  // ===== Invalidate queries when language changes =====
+  // ===== Invalidate cached queries on language change =====
   useEffect(() => {
     queryClient.invalidateQueries(["products"]);
     queryClient.invalidateQueries(["offers"]);
   }, [language, queryClient]);
 
+  // ===== Fetch initial data =====
   useProducts();
   useOffers();
 
-  // ===== Load user data / reset cart & reviews on logout =====
-useEffect(() => {
-  if (user) {
-    // المستخدم سجل دخول → تحميل سلة وتقييمات
-    loadUserData(user, dispatch);
-  } else {
-    // تسجيل خروج → استرجاع guest
-    dispatch(setUser(null)); // ← استعمل setUser بدل setCartUser
-    const guestCart = JSON.parse(localStorage.getItem("cart_guest")) || [];
-    dispatch(setReviewsDirect(JSON.parse(localStorage.getItem("reviews_guest")) || {}));
-  }
-}, [user, dispatch]);
-
+  // ===== Load user data or reset cart/reviews on logout =====
+  useEffect(() => {
+    if (user) {
+      // User is logged in → load cart and reviews
+      loadUserData(user, dispatch);
+    } else {
+      // User logged out → revert to guest data
+      dispatch(setUser(null));
+      const guestCart = JSON.parse(localStorage.getItem("cart_guest")) || [];
+      dispatch(setReviewsDirect(JSON.parse(localStorage.getItem("reviews_guest")) || {}));
+    }
+  }, [user, dispatch]);
 
   return (
     <div data-theme={theme} dir={language === "ar" ? "rtl" : "ltr"} className="app">
-     <Navbar 
+      {/* ===== Navbar with Settings & Logout ===== */}
+      <Navbar 
         openSettings={() => setShowSettings(true)} 
         onLogout={() => handleLogout(cartItems, dispatch, navigate, language)} 
       /> 
 
+      {/* ===== Main Routes ===== */}
       <main className="main-content">
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
+            {/* Redirect root path to language-specific home */}
             <Route path="/" element={<Navigate to={`/${language}/`} replace />} />
+
+            {/* All language-handled routes */}
             <Route path="/:lang/*" element={<LanguageHandler />}>
               <Route index element={<Home />} />
               <Route path="products" element={<Products />} />
@@ -109,6 +128,8 @@ useEffect(() => {
               <Route path="offers" element={<Offers />} />
               <Route path="faq" element={<FAQ />} />
               <Route path="reviews" element={<Reviews />} />
+
+              {/* Protected cart route */}
               <Route
                 path="cart"
                 element={
@@ -117,12 +138,15 @@ useEffect(() => {
                   </ProtectedRoute>
                 }
               />
+
               <Route path="contact-us" element={<ContactUs />} />
               <Route path="about-us" element={<AboutUs />} />
               <Route path="login" element={<SignIn />} />
               <Route path="register" element={<SignIn />} />
               <Route path="reset-password" element={<SignIn />} />
               <Route path="checkout" element={<Checkout />} />
+
+              {/* Profile route redirects to login if not authenticated */}
               <Route
                 path="profile"
                 element={user ? <Profile /> : <Navigate to={`/${language}/login`} replace />}
@@ -132,8 +156,10 @@ useEffect(() => {
         </Suspense>
       </main>
 
+      {/* ===== Footer ===== */}
       <Footer />
 
+      {/* ===== Settings Modal ===== */}
       {showSettings && (
         <SettingsModal
           onClose={() => setShowSettings(false)}
@@ -142,6 +168,7 @@ useEffect(() => {
         />
       )}
 
+      {/* ===== Toast Notifications ===== */}
       <ToastContainer
         position="bottom-right"
         autoClose={3000}

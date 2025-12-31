@@ -1,17 +1,21 @@
 /* =========================
    Global Theme Variables (Base)
+   - Defines core design tokens: fonts, colors, spacing, shadows, icons
+   - Supports multiple themes (light, dark, colorblind, reading)
 ========================= */
 :root {
 
   /* =========================
-     الخطوط
-  ========================= */
+     Fonts
+     - LTR/RTL font families and scalable base font size
+  ========================== */
   --main-font-ltr: 'Inter', sans-serif;
   --main-font-rtl: 'Cairo', sans-serif;
   --main-font-size: clamp(16px, 1.2vw, 17px);
 
   /* =========================
-     الألوان الأساسية المشتركة
+     Base Colors
+     - Default colors for background, text, accent, hover states
   ========================== */
   --bg-color: #f5f5f5;
   --text-color: #1c1c1c;
@@ -19,13 +23,15 @@
   --hover-bg: #eaeaea;
 
   /* =========================
-     أحجام موحدة
+     Unified Sizes
+     - Icon size, font size, spacing
   ========================== */
   --icon-size: clamp(0.8rem, 1.2vw, 1.5rem);
   --font-size: clamp(0.7rem, 0.9vw, 0.9rem);
 
   /* =========================
      Card Shadows
+     - Opacity levels for different themes / accessibility
   ========================== */
   --card-shadow-opacity-light: 0.08;
   --card-shadow-opacity-dark: 0.6;
@@ -33,6 +39,7 @@
 
   /* =========================
      Common UI
+     - Border radius, default transitions, spacing
   ========================== */
   --border-radius: 6px;
   --transition-default: 0.3s ease;
@@ -40,6 +47,7 @@
 
   /* =========================
      Stars & Feedback
+     - Colors for ratings and feedback text
   ========================== */
   --star-empty: #cbd5e1;
   --star-filled: #f59e0b;
@@ -47,34 +55,43 @@
 
   /* =========================
      Spinner
+     - Default spinner color
   ========================== */
   --spinner-color: #2563eb;
 
-/* =========================
-   Automatic RTL/LTR font assignment
-========================= */
-body[dir="ltr"] { --main-font: var(--main-font-ltr); }
-body[dir="rtl"] { --main-font: var(--main-font-rtl); }
+  /* =========================
+     Automatic RTL/LTR font assignment
+     - Dynamically sets --main-font based on page direction
+  ========================== */
+  body[dir="ltr"] { --main-font: var(--main-font-ltr); }
+  body[dir="rtl"] { --main-font: var(--main-font-rtl); }
+
+  /* =========================
+     Theme Specific Variables
+     - Overrides base tokens for each theme
+  ========================== */
 
 /* =========================
-   Theme Specific Variables
+   🌞 Light Theme
+   - Base colors, components, and UI elements for light mode
 ========================= */
-
-/* 🌞 Light Theme */
 body[data-theme="light"] {
+  /* Background & Inputs */
   --bg-color: #ffffff;
   --input-bg: #ffffff;
   --input-text: #1c1c1c;
 
+  /* Primary & Secondary Colors */
   --primary-color: #2563eb;
   --secondary-color: #10b981;
   --border-color: #e5e7eb;
   --card-bg: #ffffff;
-    --card-border: #2563eb; 
+  --card-border: #2563eb;
   --card-shadow: rgba(0,0,0,var(--card-shadow-opacity-light));
   --icon-color: #2563eb;
   --spinner-color: #2563eb;
 
+  /* Error & Hover States */
   --error-color: #dc2626;
   --primary-hover: #1d4ed8;
 
@@ -82,7 +99,7 @@ body[data-theme="light"] {
   --dropdown-bg: #f9fafb;
   --dropdown-hover-bg: #e5e7eb;
   --dropdown-selected-bg: #2563eb;
-  --dropdown-text: #1c1c1c;
+  --dropdown-text: #1c1c1c; 
   --selected-text-color: #ffffff;
 
   /* Navbar */
@@ -90,12 +107,13 @@ body[data-theme="light"] {
   --navbar-text: #1c1c1c;
   --navbar-icon: #2563eb;
 
-     /* Sign In Button - Themed */
-  --sign-in-color: #2563eb;       /* زر أزرق */
-  --sign-in-hover-color: #1d4ed8; /* لون عند Hover */
-  --sign-in-hover-text: #ffffff;  /* نص أبيض عند Hover */  
-         --sign-in-disabled: #ccc; /* رمادي فاتح يتماشى مع الثيم الفاتح */
-  /* Social media brand colors */
+  /* Sign In Button */
+  --sign-in-color: #2563eb;
+  --sign-in-hover-color: #1d4ed8;
+  --sign-in-hover-text: #ffffff;
+  --sign-in-disabled: #ccc;
+
+  /* Social Media Brand Colors */
   --social-facebook: #1877f2;
   --social-x: #000000;
   --social-linkedin: #0a66c2;
@@ -103,43 +121,44 @@ body[data-theme="light"] {
   --social-instagram: #e4405f;
   --social-pinterest: #bd081c;
 
-   /* Scrollbar */
-  --scroll-thumb: rgba(37, 99, 235, 0.45); /* أزرق ناعم */
-  --scroll-track: rgba(0, 0, 0, 0.05);     /* رمادي فاتح */
+  /* Scrollbar */
+  --scroll-thumb: rgba(37, 99, 235, 0.45);
+  --scroll-track: rgba(0, 0, 0, 0.05);
 
-    /* Clients Section */
+  /* Clients Section */
   --clients-arrow-color: #2563eb;
   --clients-arrow-hover: #1d4ed8;
   --clients-dots-color: #d1d5db;
   --clients-dots-active: #2563eb;
-   --clients-text-color: #1c1c1c; 
-  --clients-name-color: #2563eb;  /* الاسم حسب الثيم */
+  --clients-text-color: #1c1c1c;
+  --clients-name-color: #2563eb;
   --clients-role-color: #333333;
 
-    /* Links */
-  --link-color: #2563eb; /* أزرق أساسي */
-  --link-hover: #1d4ed8; /* أزرق أغمق عند المرور */
+  /* Links */
+  --link-color: #2563eb;
+  --link-hover: #1d4ed8;
 
-    /* Form Messages*/
-   --form-success-bg: #d4edda;
+  /* Form Messages */
+  --form-success-bg: #d4edda;
   --form-success-text: #155724;
   --form-success-border: #c3e6cb;
-
   --form-error-bg: #f8d7da;
   --form-error-text: #721c24;
   --form-error-border: #f5c6cb;
 }
 
+
 /* 🌚 Dark Theme */
 body[data-theme="dark"] {
+  /* Background & Inputs */
   --bg-color: #0f172a;
   --text-color: #f8fafc;
   --input-bg: #1e293b;
   --input-text: #f8fafc;
 
-  /* الألوان الأساسية */
-  --primary-color: #e6c34d;       /* ذهبي لطيف على العين */
-  --primary-hover: #f0d25f;       /* نسخة أخف عند Hover */
+  /* Primary & Secondary Colors */
+  --primary-color: #e6c34d;
+  --primary-hover: #f0d25f;
   --secondary-color: #22d3ee;
   --accent-color: #e6c34d;
   --border-color: #334155;
@@ -148,7 +167,6 @@ body[data-theme="dark"] {
   --card-shadow: rgba(0,0,0,var(--card-shadow-opacity-dark));
   --icon-color: var(--accent-color);
   --spinner-color: #e6c34d;
-
   --error-color: #f87171;
 
   /* Dropdowns */
@@ -162,11 +180,12 @@ body[data-theme="dark"] {
   --navbar-text: #f8fafc;
   --navbar-icon: #e6c34d;
 
-    /* Sign In Button */
-  --sign-in-color: #e6c34d;       /* زر ذهبي لطيف */
-  --sign-in-hover-color: #f0d25f; /* لون عند Hover */
-  --sign-in-hover-text: #ffffff;  /* نص أبيض عند Hover */
-     --sign-in-disabled: #555;
+  /* Sign In Button */
+  --sign-in-color: #e6c34d;
+  --sign-in-hover-color: #f0d25f;
+  --sign-in-hover-text: #ffffff;
+  --sign-in-disabled: #555;
+
   /* Stars & Feedback */
   --star-empty: #475569;
   --star-filled: #e6c34d;
@@ -181,7 +200,7 @@ body[data-theme="dark"] {
   --social-pinterest: #bd081c;
 
   /* Scrollbar */
-  --scroll-thumb: rgba(230, 195, 77, 0.45); /* ذهبي ناعم */
+  --scroll-thumb: rgba(230, 195, 77, 0.45);
   --scroll-track: rgba(255, 255, 255, 0.08);
 
   /* Clients Section */
@@ -198,64 +217,60 @@ body[data-theme="dark"] {
   --link-hover: #f0d25f;
 
   
-    /* Form Messages*/
-  --form-success-bg: #1e3a1e;        /* أخضر غامق */
-  --form-success-text: #d1fae5;      /* أخضر فاتح للنص */
-  --form-success-border: #10b981;    /* أخضر حدود */
-
-  --form-error-bg: #58151c;          /* أحمر غامق */
-  --form-error-text: #fee2e2;        /* أحمر فاتح للنص */
+  /* Form Messages*/
+  --form-success-bg: #1e3a1e;
+  --form-success-text: #d1fae5;
+  --form-success-border: #10b981;
+  --form-error-bg: #58151c;
+  --form-error-text: #fee2e2;
   --form-error-border: #f87171; 
-
 }
 
 /* 🎨 Colorblind-Friendly Full Gray Theme */
 body[data-theme="colorblind"] {
-  /* 🩶 الأساسيات */
-  --bg-color: #e0e0e0;            /* خلفية عامة رمادية فاتحة */
-  --text-color: #222222;          /* نص داكن */
-  --input-bg: #f0f0f0;            /* حقول الإدخال */
+  /* Background & Inputs */
+  --bg-color: #e0e0e0;
+  --text-color: #222222;      
+  --input-bg: #f0f0f0;  
   --input-text: #222222;
 
-  /* 🎛️ ألوان الواجهة */
-  --primary-color: #555555;       /* أزرار أساسية */
-  --secondary-color: #777777;     /* أزرار ثانوية */
-  --accent-color: #333333;        /* عناصر بارزة */
-  --border-color: #bbbbbb;        /* حدود */
+   /* Primary & Secondary Colors */
+  --primary-color: #555555;
+  --secondary-color: #777777;
+  --accent-color: #333333;
+  --border-color: #bbbbbb;
   --card-bg: #dcdcdc; 
-
   --card-border: #4b5563;
   --card-shadow: rgba(0,0,0,0.05);
   --icon-color: #333333;
   --spinner-color: #555555;
-
-  /* ⚠️ التنبيهات */
-  --error-color: #555555;         /* بدل الأحمر، رمادي داكن للتناسق الكامل */
+  --error-color: #555555;
   --primary-hover: #444444;
 
-  /* ⬇️ القوائم المنسدلة */
+  /* Dropdowns */
   --dropdown-bg: #e0e0e0;
   --dropdown-hover-bg: #cccccc;
   --dropdown-selected-bg: #555555;
   --dropdown-text: #222222;
   --selected-text-color: #f5f5f5;
 
-  /* 🧭 الشريط العلوي */
+  /* Navbar */
   --navbar-bg: #e0e0e0;
   --navbar-text: #222222;
   --navbar-icon: #444444;
 
-  /* 🔐 زر تسجيل الدخول */
-    --sign-in-color: #555555;        /* لون الزر الرمادي */
-  --sign-in-hover-color: #777777;  /* عند Hover */
-  --sign-in-hover-text: #ffffff;   /* نص أبيض عند Hover */
-    --sign-in-disabled: #888;
-  /* ⭐ التقييمات والتغذية الراجعة */
+  /* Sign In Button */
+  --sign-in-color: #555555;
+  --sign-in-hover-color: #777777;
+  --sign-in-hover-text: #ffffff;
+  --sign-in-disabled: #888;
+
+  /* Stars & Feedback */
   --star-empty: #aaaaaa;
   --star-filled: #555555;
   --feedback-color: #222222;
 
-  /* 🌐 وسائل التواصل */
+  /* Social media brand colors */
   --social-facebook: #555555;
   --social-x: #555555;
   --social-linkedin: #555555;
@@ -263,54 +278,53 @@ body[data-theme="colorblind"] {
   --social-instagram: #555555;
   --social-pinterest: #555555;
 
-  /* 🖱️ شريط التمرير */
+  /* Scrollbar */
   --scroll-thumb: rgba(85,85,85,0.5);
   --scroll-track: rgba(0,0,0,0.08);
 
-    /* Clients Section */
+  /* Clients Section */
   --clients-arrow-color: #555555;
   --clients-arrow-hover: #333333;
- --clients-dots-color: #777777;
+  --clients-dots-color: #777777;
   --clients-dots-active: #555555;
-   --clients-text-color: #222222;
+  --clients-text-color: #222222;
   --clients-name-color: #222222;
-   --clients-role-color: #555555;
+  --clients-role-color: #555555;
 
      /* Links */
-  --link-color: #333333; /* رمادي داكن واضح */
-  --link-hover: #555555; /* أفتح قليلًا عند hover */
+  --link-color: #333333;
+  --link-hover: #555555;
 
   
     /* Form Messages*/
-  --form-success-bg: #dcdcdc;       /* رمادي فاتح */
-  --form-success-text: #222222;     /* نص داكن */
-  --form-success-border: #555555;   /* حدود رمادية داكنة */
-
-  --form-error-bg: #cccccc;         /* رمادي متوسط */
-  --form-error-text: #333333;       /* نص داكن جدًا */
-  --form-error-border: #555555;     /* حدود داكنة */
-
+  --form-success-bg: #dcdcdc;
+  --form-success-text: #222222;
+  --form-success-border: #555555;
+  --form-error-bg: #cccccc;
+  --form-error-text: #333333;
+  --form-error-border: #555555;
 }
 
 /* 📖 Reading Theme - Eye-Friendly & Elegant */
 body[data-theme="reading"] {
-  --bg-color: #fdf6e3;        /* خلفية شبيهة بالورق مع دفء خفيف */
-  --text-color: #3b3a36;      /* نص داكن معتدل لطيف للعين */
-  --input-bg: #f9f3e7;        /* حقل إدخال قريب من الخلفية */
+ /* Background & Inputs */
+  --bg-color: #fdf6e3;
+  --text-color: #3b3a36;
+  --input-bg: #f9f3e7;
   --input-text: #3b3a36;
 
-  --primary-color: #cfa76f;   /* أصفر دافئ وراقي للأزرار والعناصر المهمة */
-  --secondary-color: #a1b29d; /* أخضر هادئ للزينة أو العناصر الثانوية */
-  --accent-color: #cfa76f;    /* أيقونات وأزرار بارزة */
-  --border-color: #e6e2d3;    /* حدود ناعمة للبطاقات والمدخلات */
-  --card-bg: #f9f3e7;         /* بطاقات مشابهة للخلفية */
+/* Primary & Secondary Colors */
+  --primary-color: #cfa76f;
+  --secondary-color: #a1b29d;
+  --accent-color: #cfa76f;
+  --border-color: #e6e2d3;
+  --card-bg: #f9f3e7;
   --card-border: #cfa76f;
-  --card-shadow: rgba(0,0,0,0.04); /* ظل خفيف ومريح */
-  --icon-color: #cfa76f;      /* أيقونات متناسقة */
-  --spinner-color: #cfa76f;   /* لون عناصر التحميل */
-
-  --error-color: #b91c1c;     /* لون التحذيرات */
-  --primary-hover: #d8b26b;   /* تأثير Hover للأزرار */
+  --card-shadow: rgba(0,0,0,0.04);
+  --icon-color: #cfa76f;
+  --spinner-color: #cfa76f;
+  --error-color: #b91c1c;
+  --primary-hover: #d8b26b;
 
   /* Dropdowns */
   --dropdown-bg: #f9f3e7;
@@ -324,29 +338,30 @@ body[data-theme="reading"] {
   --navbar-text: #3b3a36;
   --navbar-icon: #cfa76f;
 
-  /* Sign In Button - Themed */
-  --sign-in-color: #cfa76f;        /* زر ذهبي دافئ */
-  --sign-in-hover-color: #d8b26b;  /* عند Hover */
+  /* Sign In Button*/
+  --sign-in-color: #cfa76f;
+  --sign-in-hover-color: #d8b26b;
   --sign-in-hover-text: #ffffff; 
-     --sign-in-disabled: #d8b26b;
+  --sign-in-disabled: #d8b26b;
+
   /* Stars & Feedback */
   --star-empty: #d6c69b;
   --star-filled: #cfa76f;
   --feedback-color: #3b3a36;
 
 /* Social media colors*/
---social-facebook: #3b5998; /* أزرق متوسط، واضح على خلفية فاتحة */
+--social-facebook: #3b5998;
 --social-x: #555555;
---social-linkedin: #0a66c2; /* أزرق هادئ */
+--social-linkedin: #0a66c2;
 --social-youtube: #d95c4a;
 --social-instagram: #d88b9c;
 --social-pinterest: #b87a6f;
 
  /* Scrollbar */
-  --scroll-thumb: rgba(207, 167, 111, 0.45); /* أصفر ورقي */
-  --scroll-track: rgba(59, 58, 54, 0.1);     /* بني باهت */
+  --scroll-thumb: rgba(207, 167, 111, 0.45);
+  --scroll-track: rgba(59, 58, 54, 0.1);
 
-    /* Clients Section */
+  /* Clients Section */
   --clients-arrow-color: #cfa76f;
   --clients-arrow-hover: #d8b26b;
   --clients-dots-color: #d6c69b;
@@ -355,19 +370,17 @@ body[data-theme="reading"] {
   --clients-name-color: #cfa76f;
   --clients-role-color: #575148; 
 
-    /* Links */
-  --link-color: #cfa76f; /* أصفر ذهبي متناسق مع الأزرار */
-  --link-hover: #d8b26b; /* درجة أفتح عند hover */
+  /* Links */
+  --link-color: #cfa76f;
+  --link-hover: #d8b26b;
 
   
-    /* Form Messages*/
-  --form-success-bg: #f9f3e7;       /* ألوان هادئة */
+  /* Form Messages*/
+  --form-success-bg: #f9f3e7;
   --form-success-text: #3b3a36;
   --form-success-border: #cfa76f;
-
-  --form-error-bg: #fcebea;         /* أحمر خفيف */
+  --form-error-bg: #fcebea;
   --form-error-text: #b91c1c;
   --form-error-border: #f0a6a6;
 }
-
 }

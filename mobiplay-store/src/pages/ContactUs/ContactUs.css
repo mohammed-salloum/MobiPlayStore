@@ -1,26 +1,36 @@
-/* ==============================
-   🧱 الكونتينر العام
-============================== */
+/* =========================================================
+   🧱 Main Container
+   - Global wrapper for the Contact Us page
+   - Centers content and applies theme-based colors
+========================================================= */
 .container {
   width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
+  max-width: 1280px;              /* Prevents excessive width on large screens */
+  margin: 0 auto;                /* Center horizontally */
   padding: clamp(2rem, 5vw, 4rem);
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme switch */
   box-sizing: border-box;
 }
 
-/* ==============================
-   🌍 الاتجاه
-============================== */
-.rtl { direction: rtl; text-align: right; }
-.ltr { direction: ltr; text-align: left; }
+/* =========================================================
+   🌍 Text Direction Utilities (RTL / LTR)
+   - Controlled via language selection
+========================================================= */
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
 
-/* ==============================
-   🏷️ العنوان الرئيسي
-============================== */
+.ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+/* =========================================================
+   🏷️ Main Page Title
+========================================================= */
 .contact-title {
   font-weight: bold;
   color: var(--accent-color);
@@ -28,26 +38,29 @@
   margin-bottom: 2.5rem;
   letter-spacing: 1px;
   font-size: clamp(1.4rem, 2.5vw, 2.6rem);
-  text-align: inherit; /* يتبع الاتجاه */
+  text-align: inherit;            /* Inherits alignment from RTL/LTR */
 }
 
-/* ==============================
-   🧩 توزيع المحتوى
-============================== */
+/* =========================================================
+   🧩 Content Layout
+   - Splits page into form and info/map sections
+========================================================= */
 .contact-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 2rem;
-  flex-wrap: wrap;
+  flex-wrap: wrap;                /* Allows wrapping on smaller screens */
   width: 100%;
 }
 
+/* Left side: Contact form */
 .contact-form-side {
-  flex: 1 1 55%;
-  min-width: 320px;
+  flex: 1 1 55%;                  /* Takes more space than info section */
+  min-width: 320px;               /* Ensures usability on smaller screens */
 }
 
+/* Right side: Contact info + map */
 .contact-info-side {
   flex: 1 1 40%;
   display: flex;
@@ -55,17 +68,20 @@
   gap: 1.5rem;
 }
 
-/* ==============================
-   📱 تجاوب كامل
-============================== */
+/* =========================================================
+   📱 Fully Responsive Behavior
+========================================================= */
+
+/* Tablets and smaller laptops */
 @media (max-width: 1024px) {
   .contact-wrapper {
-    flex-direction: column;
-    align-items: stretch; /* لتجنب الفجوات */
+    flex-direction: column;       /* Stack sections vertically */
+    align-items: stretch;         /* Avoid unwanted gaps */
     gap: 1.5rem;
   }
 }
 
+/* Medium screens */
 @media (max-width: 992px) {
   .contact-form-side,
   .contact-info-side {
@@ -73,13 +89,15 @@
     max-width: 100%;
   }
 }
+
+/* Mobile devices */
 @media (max-width: 768px) {
   .container {
     padding: clamp(1.5rem, 5vw, 2.5rem);
   }
 
   .contact-title {
-    margin-top: clamp(0.8rem, 2vw, 1.5rem); /* 🧩 مسافة مرنة فوق العنوان */
+    margin-top: clamp(0.8rem, 2vw, 1.5rem); /* Flexible spacing above title */
     margin-bottom: clamp(1.5rem, 3vw, 2rem);
   }
 
@@ -92,13 +110,14 @@
   }
 }
 
+/* Small mobile devices */
 @media (max-width: 480px) {
   .container {
     padding: clamp(1rem, 4vw, 2rem);
   }
 
   .contact-title {
-    margin-top: clamp(1rem, 3vw, 1.8rem); /* 🧱 مسافة مريحة للموبايل */
+    margin-top: clamp(1rem, 3vw, 1.8rem);   /* Comfortable spacing for mobile */
     margin-bottom: clamp(1.2rem, 2.5vw, 1.8rem);
   }
 
@@ -111,13 +130,14 @@
   }
 }
 
+/* Very small devices */
 @media (max-width: 350px) {
   .container {
     padding: 0.8rem;
   }
 
   .contact-title {
-    margin-top: 1rem; /* 📱 مسافة ثابتة للأجهزة الصغيرة جدًا */
+    margin-top: 1rem;             /* Fixed spacing for very small screens */
     margin-bottom: 1.2rem;
   }
 
