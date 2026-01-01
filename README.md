@@ -49,59 +49,59 @@ The application includes user authentication, profile management, and a Redux-ma
 
 | 🏠 Home |
 |----------|
-| ![Home Hero Section](screenshots/dark/home-HeroSection-page.PNG) <br> ![Home Features Section](screenshots/dark/home-FeaturesSection-page.PNG) |
+| ![Home Hero Section](screenshots/dark/home-HeroSection-page.png) <br> ![Home Features Section](screenshots/dark/home-FeaturesSection-page.png) |
 
 | 🖤 Footer |
 |-----------|
-| ![Footer](screenshots/dark/footer-page.PNG) |
+| ![Footer](screenshots/dark/footer-page.png) |
 
 | 🛍️ Products |
 |-------------|
-| ![Products](screenshots/dark/products-page.PNG) |
+| ![Products](screenshots/dark/products-page.png) |
 
 | 🎁 Offers |
 |-----------|
-| ![Offers](screenshots/dark/offers-page.PNG) |
+| ![Offers](screenshots/dark/offers-page.png) |
 
 | 🌟 Product Details |
 |------------------|
-| ![Product Details 1](screenshots/dark/productDetails-page1.PNG) <br> ![Product Details 2](screenshots/dark/productDetails-page2.PNG) |
+| ![Product Details 1](screenshots/dark/productDetails-page1.png) <br> ![Product Details 2](screenshots/dark/productDetails-page2.png) |
 
 | 🛒 Cart |
 |---------|
-| ![Cart](screenshots/dark/cart-page.PNG) |
+| ![Cart](screenshots/dark/cart-page.png) |
 
 | 💳 Checkout |
 |-------------|
-| ![Checkout](screenshots/dark/checkout-page.PNG) |
+| ![Checkout](screenshots/dark/checkout-page.png) |
 
 | 📝 Contact Us |
 |------------|
-| ![Contact Us](screenshots/dark/contact-page.PNG) |
+| ![Contact Us](screenshots/dark/contact-page.png) |
 
 | ℹ️ About Us |
 |------------|
-| ![About Us](screenshots/dark/about-page.PNG) |
+| ![About Us](screenshots/dark/about-page.png) |
 
 | 🔑 Sign In / Login |
 |-------------------|
-| ![Sign In](screenshots/dark/signin-page.PNG) |
+| ![Sign In](screenshots/dark/signin-page.png) |
 
 | 🆕 Register / Create Account |
 |----------------------------|
-| ![Register](screenshots/dark/register-page.PNG) |
+| ![Register](screenshots/dark/register-page.png) |
 
 | 🔄 Reset Password |
 |-----------------|
-| ![Reset Password](screenshots/dark/reset-password-page.PNG) |
+| ![Reset Password](screenshots/dark/reset-password-page.png) |
 
 | 👤 Profile |
 |-----------|
-| ![Profile](screenshots/dark/profile-page.PNG) |
+| ![Profile](screenshots/dark/profile-page.png) |
 
 | ⚙️ Settings |
 |------------|
-| ![Settings](screenshots/dark/settings-page.PNG) |
+| ![Settings](screenshots/dark/settings-page.png) |
 
 
 ## 📂 Repository
