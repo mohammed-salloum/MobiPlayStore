@@ -1,0 +1,80 @@
+/* Stars.css */
+.stars-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+  font-family: var(--main-font);
+  gap: 2px;
+}
+
+.stars-wrapper.interactive {
+  cursor: pointer;
+}
+
+.stars-wrapper.rtl {
+  direction: rtl;
+}
+
+.star-wrapper {
+  display: inline-flex;
+  transition: transform 0.2s ease, color 0.2s ease;
+  vertical-align: middle;
+  outline: none;
+}
+
+.star-wrapper:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.stars-wrapper.interactive .star-wrapper:hover,
+.stars-wrapper.interactive .star-wrapper:hover ~ .star-wrapper,
+.stars-wrapper.interactive .star-wrapper:active {
+  transform: scale(1.2);
+}
+
+.rtl-half {
+  display: inline-flex;
+  transform: scaleX(-1);
+  vertical-align: middle;
+}
+
+.star,
+.star.filled,
+.star.half {
+  vertical-align: middle;
+}
+
+.star {
+  color: var(--star-empty);
+  transition: color 0.2s;
+}
+
+.star.filled,
+.star.half {
+  color: var(--star-filled);
+}
+
+.stars-and-number {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.stars-wrapper.rtl .stars-and-number {
+  flex-direction: row-reverse;
+}
+
+.rating-number {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--feedback-color);
+}
+
+.review-count {
+  font-size: 0.75rem;
+  color: var(--secondary-color);
+  margin-top: 2px;
+  text-align: center;
+}

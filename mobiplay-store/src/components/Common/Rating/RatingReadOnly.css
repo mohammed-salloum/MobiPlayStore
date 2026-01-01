@@ -1,0 +1,53 @@
+/* StarsReadOnly.css */
+.stars-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--main-font);
+}
+
+.stars-wrapper .stars {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.stars-wrapper.rtl .stars {
+  flex-direction: row-reverse;
+}
+
+.star-wrapper {
+  width: var(--star-size, 22px);
+  height: var(--star-size, 22px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.star {
+  color: var(--star-empty);
+  font-size: var(--star-size, 22px);
+  transition: color 0.2s ease;
+}
+
+.star.filled,
+.star.half {
+  color: var(--star-filled);
+}
+
+.stars-wrapper.rtl .star.half {
+  transform: scaleX(-1);
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.rating-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--feedback-color);
+  text-align: center;
+  margin-top: 4px;
+}

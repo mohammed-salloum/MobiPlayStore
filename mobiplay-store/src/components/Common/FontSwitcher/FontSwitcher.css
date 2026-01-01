@@ -1,0 +1,61 @@
+/* =========================
+   Fonts Switcher - Responsive with More Gap on Mobile
+========================= */
+
+.fonts-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* الافتراضي على الشاشات الكبيرة */
+}
+
+.font-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 2px solid var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: var(--accent-color);
+  font-weight: 600;
+  font-family: var(--main-font, 'Inter', sans-serif);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.icon-A {
+  font-size: 1rem;
+  color: inherit;
+}
+
+.font-btn:hover { transform: scale(1.05); }
+.font-btn:active { transform: scale(0.95); }
+
+/* =========================
+   Mobile Adjustments - Slightly Smaller with More Gap
+========================= */
+@media (max-width: 480px) {
+  .fonts-container { gap: 8px; }  /* زيادة الفجوة */
+
+  .font-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 0.95rem;
+  }
+
+  .icon-A { font-size: 0.95rem; }
+}
+
+@media (max-width: 350px) {
+  .fonts-container { gap: 10px; } /* فجوة أكبر للشاشات الصغيرة جدًا */
+
+  .font-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .icon-A { font-size: 0.9rem; }
+}

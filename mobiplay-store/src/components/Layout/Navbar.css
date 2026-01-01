@@ -1,0 +1,767 @@
+/* =========================
+   Navbar Base Styles
+========================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--navbar-bg);
+  color: var(--navbar-text);
+  font-family: var(--main-font, 'Inter', sans-serif);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  height: 64px;
+  line-height: 64px;
+}
+
+/* =========================
+   Navbar Container
+========================= */
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1300px;
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 5%, 2.5rem);
+  gap: 1rem;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+/* =========================
+   Brand / Logo
+========================= */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+  font-weight: 700;
+  color: var(--navbar-icon);
+  text-decoration: none;
+  transition: color 0.3s, transform 0.2s;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.navbar-brand:visited,
+.navbar-brand:active,
+.navbar-brand:focus {
+  color: var(--navbar-icon);
+  text-decoration: none;
+}
+
+.navbar-brand svg {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  flex-shrink: 0;
+  color: var(--icon-color);
+  transition: color 0.3s, transform 0.3s ease;
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus:hover {
+  color: var(--accent-color);
+  transform: scale(1.05);
+}
+
+.navbar-brand:hover svg,
+.navbar-brand:focus:hover svg {
+  color: var(--accent-color);
+  transform: scale(1.08);
+}
+
+/* =========================
+   Navbar Links & Content
+========================= */
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.navbar-links li a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  outline: none !important;
+  color: var(--navbar-text);
+  font-weight: 600;
+  font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  position: relative;
+  transition: color 0.3s, transform 0.2s, background 0.3s;
+  line-height: 1;
+}
+
+.navbar-links li a:hover,
+.navbar-links li a.active {
+  color: var(--accent-color);
+}
+
+.navbar-links li a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease;
+}
+
+.navbar-links li a:hover::after,
+.navbar-links li a.active::after {
+  width: 100%;
+}
+
+/* =========================
+   Navbar Tools
+========================= */
+.navbar-tools {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  height: 100%;
+  line-height: 1;
+}
+
+.navbar-tools > * {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* =========================
+   Hamburger Menu Toggle
+========================= */
+.menu-toggle {
+  display: none;
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--icon-color);
+  z-index: 10001;
+  transition: transform 0.2s;
+  line-height: 1;
+  right: 1rem;
+  left: auto;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* =========================
+   Overlay for Mobile Menu
+========================= */
+.navbar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease;
+  z-index: 999;
+}
+
+.navbar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* =========================
+   Settings Button
+========================= */
+.settings-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  line-height: 1;
+}
+
+.settings-btn .settings-icon {
+  color: var(--icon-color);
+  width: 1.2em;
+  height: 1.2em;
+  transition: transform 0.2s;
+}
+
+.settings-btn .settings-text {
+  color: var(--text-color);
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: color 0.3s;
+}
+
+.settings-btn:hover .settings-text {
+  color: var(--accent-color);
+}
+
+.settings-btn:hover .settings-icon {
+  transform: scale(1.1);
+}
+
+@media (max-width: 1199px) {
+  .settings-text { display: none !important; }
+}
+
+/* =========================
+   Unified Sign In Button
+========================= */
+.unified-signin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.6rem; 
+  font-size: 0.8rem;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  border: 2px solid var(--sign-in-color);
+  color: var(--sign-in-color);
+  background: transparent;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.unified-signin:hover {
+  background-color: var(--sign-in-color);
+  color: var(--sign-in-hover-text);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+@media (min-width: 1200px) {
+  .unified-signin .signin-text { display: inline; }
+  .unified-signin .signin-icon { display: none; }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .unified-signin {
+    border-radius: 8px;
+    padding: 0.4rem;
+  }
+  .unified-signin .signin-text { display: none; }
+  .unified-signin .signin-icon { display: inline; font-size: 1.2rem; }
+}
+
+@media (max-width: 991px) {
+  .unified-signin { display: none; }
+}
+
+/* =========================
+   Mobile Sign In inside Hamburger Menu
+========================= */
+.mobile-signin {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid var(--sign-in-color);
+  color: var(--sign-in-color);
+  background: transparent;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.mobile-signin svg {
+  font-size: 1.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.mobile-signin:hover {
+  background-color: var(--sign-in-color);
+  color: var(--sign-in-hover-text);
+  transform: scale(1.05);
+}
+
+@media (max-width: 991px) {
+  .mobile-signin { display: inline-flex; }
+}
+
+/* =========================
+   Responsive Adjustments
+========================= */
+@media (max-width: 1200px) {
+  .navbar-container {
+    padding-inline: clamp(2rem, 5%, 3rem);
+    gap: 0.5rem;
+  }
+
+  .navbar-links { gap: 0.3rem; }
+
+  .navbar-links li a {
+    font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+    padding: 0.4rem 0.7rem;
+  }
+
+  .navbar-brand { font-size: clamp(1.3rem, 1.8vw, 1.7rem); }
+  .navbar-tools > * { font-size: 1.1rem; }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .navbar-links { gap: 0.2rem; }
+  .navbar-container { padding-inline: clamp(1.8rem, 4%, 2.5rem); gap: 0.4rem; }
+  .navbar-brand { font-size: clamp(1.4rem, 1.8vw, 1.7rem); }
+  .navbar-tools > * { font-size: 1.05rem; }
+}
+
+/* =========================
+   Small Screens ≤991px
+========================= */
+@media (max-width: 991px) {
+  .menu-toggle { display: block; font-size: clamp(1.4rem,2vw,1.7rem); }
+  .navbar-container { justify-content: space-between; padding-inline: clamp(1.2rem,5%,1.8rem); gap: 0.4rem; }
+  .navbar-tools { gap: 0.25rem; }
+  .navbar-tools > * { font-size: 0.95rem; }
+  .navbar-brand { font-size: clamp(1.5rem, 2.5vw, 1.8rem); }
+  .navbar-brand svg { font-size: clamp(1.5rem,2.2vw,1.8rem); }
+
+  .navbar-content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: auto;
+    height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 3.5rem clamp(1.2rem,5%,1.8rem);
+    background-color: var(--navbar-bg);
+    z-index: 10000;
+    transform: translateX(100%);
+    opacity: 0;
+    overflow-y: auto;
+  }
+
+  .navbar-content.open {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 1.2s cubic-bezier(0.77,0,0.175,1), opacity 1s ease;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar-links li a {
+    font-size: 1rem;
+    padding: 0.5rem clamp(1rem,5%,1.5rem);
+    width: 100%;
+  }
+}
+/* =========================
+   Extra Small Screens ≤480px
+========================= */
+@media (max-width: 480px) {
+  .navbar-container,
+  .navbar-content {
+    padding-inline: clamp(1rem, 5%, 1.5rem);
+  }
+
+  .navbar-links li a {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.9rem;
+  }
+
+  .navbar-tools {
+    gap: 0.25rem; /* الفجوة بين الأدوات */
+  }
+
+  .navbar-tools > * {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .menu-toggle {
+    font-size: 1.4rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .navbar-brand svg {
+    font-size: 1.5rem;
+  }
+}
+
+/* =========================
+   Extra Extra Small Screens ≤350px
+========================= */
+
+/* =========================
+   Extra Extra Small Screens ≤350px
+========================= */
+@media (max-width: 350px) {
+  .navbar-container,
+  .navbar-content {
+    display: flex;
+    align-items: center;
+    padding-inline: 0.6rem; /* يعطي فجوة من اليمين واليسار */
+    overflow: visible;
+    box-sizing: border-box; /* تأكد أن الحشو محسوب ضمن العرض */
+  }
+
+  /* تجنب التصاق الأدوات بالحواف */
+  .navbar-tools {
+    gap: 0.25rem; /* الفجوة بين الأدوات */
+    margin-inline: 0.3rem; /* مسافة إضافية من الحافة اليمنى/اليسرى */
+  }
+
+  .navbar-tools > * {
+    font-size: 0.85rem;
+  }
+
+  .navbar-brand {
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .navbar-brand svg {
+    font-size: 1.2rem;
+  }
+
+  .menu-toggle {
+    font-size: 1rem;
+    display: block;
+    z-index: 10001; /* أعلى من قائمة الهامبرغر */
+  }
+
+  /* LTR: الهامبرغر/الأدوات على اليمين مع فجوة ثابتة */
+  [dir="ltr"] .navbar-brand { margin-right: 0.5rem; }
+  [dir="ltr"] .menu-toggle,
+  [dir="ltr"] .navbar-tools { margin-left: auto; }
+
+  /* RTL: الهامبرغر/الأدوات على اليسار مع فجوة ثابتة */
+  [dir="rtl"] .navbar-brand { margin-left: 0.5rem; }
+  [dir="rtl"] .menu-toggle,
+  [dir="rtl"] .navbar-tools { margin-right: auto; }
+
+  .navbar-links li a {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.5rem;
+    flex-shrink: 0;
+  }
+}
+
+/* =========================
+   Landscape Mode ≤991px
+========================= */
+/* Landscape ≤991px */
+@media (max-width: 991px) and (orientation: landscape) {
+  body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%; /* إضافة هذا يمنع أي scroll */
+  }
+
+  .navbar-content {
+    width: 100vw;
+    height: 100vh;      /* كامل ارتفاع الشاشة */
+    max-height: 100vh;  /* يمنع overflow إضافي */
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateX(100%);
+    opacity: 0;
+    overflow-y: auto;   /* فقط داخل الهامبرغر */
+  }
+
+  .navbar-content.open {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* =========================
+   ✅ Unified RTL Support
+========================= */
+[dir="rtl"] .menu-toggle { right: auto; left: 1rem; }
+
+@media (max-width: 991px) {
+  [dir="rtl"] .navbar-content {
+    right: auto;
+    left: 0;
+    transform: translateX(-100%);
+  }
+
+  [dir="rtl"] .navbar-content.open { transform: translateX(0); }
+}
+
+@media (max-width: 991px) and (orientation: landscape) {
+  [dir="rtl"] .navbar-content {
+    right: auto;
+    left: 0;
+    transform: translateX(-100%);
+    border-left: none;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+
+  [dir="rtl"] .navbar-content.open { transform: translateX(0); }
+  [dir="rtl"] .navbar-content:not(.open) { transition: none; }
+}
+
+/* =========================
+   Navbar Content Scroll + Fixed Body
+========================= */
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+.navbar-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb) var(--scroll-track);
+}
+
+.navbar-content::-webkit-scrollbar { width: 8px; }
+.navbar-content::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb);
+  border-radius: 10px;
+}
+.navbar-content::-webkit-scrollbar-track { background-color: var(--scroll-track); }
+
+@media (max-width: 991px) and (orientation: landscape) {
+  .navbar-content {
+    height: 100vh;
+    overflow-y: scroll;
+  }
+}
+/* =========================
+   User Avatar Button (مثل Sign In)
+========================= */
+.user-menu .avatar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%; /* دائرة كاملة بدل 8px */
+  border: 1px solid var(--sign-in-color);
+   color: var(--sign-in-color);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.user-menu .avatar-btn img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* دائرة كاملة بدل 6px */
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.user-menu .avatar-btn:hover {
+  border-color: var(--accent-color);
+}
+
+.user-menu .avatar-btn:hover img {
+  transform: scale(1.05);
+}
+
+/* =========================
+   User Dropdown Menu
+========================= */
+.user-menu {
+  position: relative; /* لتحديد موضع dropdown بالنسبة للزر */
+}
+
+.user-menu .dropdown {
+  position: absolute;
+  top: 110%; /* أسفل الزر */
+  left: 50%; /* توسيط الدروب داون أسفل الزر */
+  transform: translateX(-50%) translateY(-10px); /* تحريك بسيط قبل الظهور */
+  display: flex;
+  flex-direction: column;
+  background-color: var(--navbar-bg);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  min-width: 160px;
+  z-index: 1001;
+  padding: 0.4rem 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+.user-menu .dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0); /* يظهر أسفل الزر */
+}
+
+.user-menu .dropdown a,
+.user-menu .dropdown button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* مسافة بين الأيقونة والنص */
+  padding: 0.45rem 1rem;
+  text-align: start;
+  font-size: 0.9rem;
+  color: var(--navbar-text);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.user-menu .dropdown a:hover,
+.user-menu .dropdown button:hover {
+  background-color: var(--accent-color);
+  color: #fff; /* النص يصبح أبيض */
+}
+
+/* أيقونة تتغير للـ hover */
+.user-menu .dropdown a:hover .dropdown-icon,
+.user-menu .dropdown button:hover .dropdown-icon {
+  color: #fff; /* الأيقونة تصبح أبيض عند hover */
+}
+
+.user-menu .dropdown a .dropdown-icon,
+.user-menu .dropdown button .dropdown-icon {
+  color: var(--sign-in-color);
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+/* =========================
+   RTL Support
+========================= */
+/* إزالة أي overrides تؤثر على محاذاة dropdown في RTL */
+[dir="rtl"] .user-menu .dropdown {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%) translateY(-10px);
+}
+
+[dir="rtl"] .user-menu .dropdown.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* =========================
+   Responsive User Avatar + Navbar Tools Gap
+========================= */
+.navbar-tools {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.4rem, 1vw, 0.8rem); /* مسافة متساوية ديناميكية */
+}
+
+.user-menu .avatar-btn {
+  width: clamp(32px, 4vw, 42px);  /* حجم ديناميكي حسب الشاشة */
+  height: clamp(32px, 4vw, 42px);
+  margin: 0; /* إزالة أي التلاصق */
+}
+
+.user-menu .avatar-btn img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* =========================
+   تعديل للهوامش بين الأدوات
+========================= */
+.navbar-tools > * {
+  margin: 0; /* أي أدوات أخرى مثل Cart أو Settings */
+  flex-shrink: 0;
+}
+
+/* Media Queries لمزيد من التحكم */
+@media (max-width: 1199px) {
+  .user-menu .avatar-btn {
+    width: clamp(30px, 4.5vw, 38px);
+    height: clamp(30px, 4.5vw, 38px);
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar-tools {
+    gap: clamp(0.3rem, 3vw, 0.6rem);
+  }
+
+  .user-menu .avatar-btn {
+    width: clamp(28px, 5vw, 36px);
+    height: clamp(28px, 5vw, 36px);
+  }
+}
+
+@media (max-width: 480px) {
+  .user-menu .avatar-btn {
+    width: clamp(26px, 6vw, 32px);
+    height: clamp(26px, 6vw, 32px);
+  }
+  .navbar-tools {
+    gap: clamp(0.25rem, 4vw, 0.5rem);
+  }
+}

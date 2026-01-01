@@ -1,0 +1,224 @@
+import React, { useState, useEffect, useRef, useCallback, useContext } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { ThemeContext } from "../../context/ThemeContext";
+import { LanguageContext } from "../../context/LanguageContext";
+import { FontContext } from "../../context/FontContext";
+import { FaGamepad, FaBars, FaTimes, FaUserCircle, FaUser } from "react-icons/fa";
+import { FiSettings, FiLogOut } from "react-icons/fi";
+import CartIcon from "../CartIcon/CartIcon";
+import { useTranslation } from "react-i18next";
+import { selectUser, logout } from "../../redux/slices/userSlice";
+import "./Navbar.css";
+
+function Navbar({ openSettings }) {
+  const { t } = useTranslation();
+  const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  const { fontSize, fontFamily } = useContext(FontContext);
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isRTL = language === "ar";
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  const menuBtnRef = useRef(null);
+  const settingsBtnRef = useRef(null);
+  const navContentRef = useRef(null);
+  const userMenuRef = useRef(null);
+
+  const navLinks = [
+    { path: "", label: t("nav.home") },
+    { path: "products", label: t("nav.productsLabel") },
+    { path: "offers", label: t("nav.offersLabel") },
+    { path: "faq", label: t("nav.faqLabel") },
+    { path: "contact-us", label: t("nav.contactLabel") },
+    { path: "about-us", label: t("nav.aboutLabel") },
+  ];
+
+  const closeMenu = () => {
+    if (document.activeElement) document.activeElement.blur();
+    setIsOpen(false);
+    setUserMenuOpen(false);
+    menuBtnRef.current?.focus({ preventScroll: true });
+  };
+
+  const toggleMenu = () => {
+    setIsOpen(prev => {
+      const newState = !prev;
+      if (!prev && navContentRef.current) {
+        setTimeout(() => navContentRef.current.scrollTop = 0, 0);
+      }
+      return newState;
+    });
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    setUserMenuOpen(false);
+    navigate(`/${language}/login`, { replace: true });
+  };
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+  const isHomeActive = () => {
+    const homePath = `/${language}/`;
+    return location.pathname === homePath || location.pathname === `/${language}`;
+  };
+
+  const handleScroll = useCallback(() => setScrolled(window.scrollY > 50), []);
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty("--main-font-size", `${fontSize}px`);
+    document.documentElement.style.setProperty("--main-font", fontFamily);
+  }, [fontSize, fontFamily]);
+
+  useEffect(() => {
+    document.body.dataset.theme = theme;
+  }, [theme]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.pathname]);
+
+  // غلق dropdown عند الضغط خارجها
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // منع التمرير على body مع السماح بالتمرير داخل الهامبرغر
+useEffect(() => {
+  const navContent = navContentRef.current;
+  if (!isOpen || !navContent) return;
+
+  let startY = 0;
+
+  const touchStart = (e) => {
+    startY = e.touches[0].clientY;
+  };
+
+  const touchMove = (e) => {
+    const currentY = e.touches[0].clientY;
+    const atTop = navContent.scrollTop === 0;
+    const atBottom = navContent.scrollHeight - navContent.scrollTop <= navContent.clientHeight;
+
+    // منع تمرير body إذا كان عندنا تجاوز للنهاية أو البداية
+    if ((atTop && currentY > startY) || (atBottom && currentY < startY)) {
+      e.preventDefault();
+    }
+    e.stopPropagation(); // السماح بالتمرير داخل القائمة
+  };
+
+  document.body.style.overflow = "hidden"; // منع التمرير العام
+  navContent.addEventListener("touchstart", touchStart, { passive: false });
+  navContent.addEventListener("touchmove", touchMove, { passive: false });
+
+  return () => {
+    document.body.style.overflow = "";
+    navContent.removeEventListener("touchstart", touchStart);
+    navContent.removeEventListener("touchmove", touchMove);
+  };
+}, [isOpen]); 
+
+  return (
+    <>
+      <div className={`navbar-overlay ${isOpen ? "show" : ""} ${theme}`} onClick={closeMenu} tabIndex={-1} />
+      <nav className={`navbar ${theme} ${scrolled ? "scrolled" : ""}`} dir={isRTL ? "rtl" : "ltr"}>
+        <div className="navbar-container">
+          <NavLink
+            to={`/${language}/`}
+            className={isHomeActive() ? "active navbar-brand" : "navbar-brand"}
+            end
+            onClick={() => { closeMenu(); scrollToTop(); }}
+          >
+            <FaGamepad /> {t("siteName")}
+          </NavLink>
+
+          <div ref={navContentRef} id="navbar-menu" className={`navbar-content ${isOpen ? "open" : ""}`} role="dialog" aria-modal={isOpen}>
+            <ul className="navbar-links">
+              {navLinks.map(({ path, label }, index) => {
+                const fullPath = `/${language}${path ? `/${path}` : "/"}`;
+                return (
+                  <li key={path || index} style={{ transitionDelay: `${index * 0.05}s` }}>
+                    <NavLink
+                      to={fullPath}
+                      className={({ isActive }) => (path === "" && isHomeActive() ? "active" : isActive ? "active" : "")}
+                      end={path === ""}
+                      onClick={() => { closeMenu(); if (location.pathname === fullPath) scrollToTop(); }}
+                    >
+                      {label}
+                    </NavLink>
+                  </li>
+                );
+              })}
+            </ul>
+
+            {!user && (
+              <NavLink to={`/${language}/login`} className="mobile-signin" onClick={() => { closeMenu(); scrollToTop(); }}>
+                <FaUserCircle className="signin-icon" />
+                <span className="signin-text">{t("nav.signIn")}</span>
+              </NavLink>
+            )}
+          </div>
+
+          <div className="navbar-tools">
+            <CartIcon collapseNavbar={() => { closeMenu(); scrollToTop(); }} onClick={() => { if (!user) navigate(`/${language}/login`); }} />
+
+            {user ? (
+              <div className="user-menu" ref={userMenuRef}>
+                <button className="avatar-btn" onClick={(e) => { e.stopPropagation(); setUserMenuOpen(prev => !prev); }} aria-label="User menu">
+                  {user.avatar && !user.avatar.includes("placeholder") ? (
+                    <img src={user.avatar} alt={user.username || "User Avatar"} className="navbar-avatar" />
+                  ) : (
+                    <FaUserCircle size={32} />
+                  )}
+                </button>
+                {userMenuOpen && (
+                  <div className="dropdown show">
+                    <NavLink to={`/${language}/profile`} className="dropdown-item" onClick={() => setUserMenuOpen(false)}>
+                      <FaUser className="dropdown-icon" /> {t("nav.profile")}
+                    </NavLink>
+                    <button className="dropdown-item" onClick={handleLogout}>
+                      <FiLogOut className="dropdown-icon" /> {t("nav.logout")}
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <NavLink to={`/${language}/login`} className="unified-signin" aria-label={t("nav.signIn")} onClick={scrollToTop}>
+                <FaUserCircle className="signin-icon" />
+                <span className="signin-text">{t("nav.signIn")}</span>
+              </NavLink>
+            )}
+
+            <button type="button" ref={settingsBtnRef} className="settings-btn" onClick={(e) => { e.preventDefault(); e.stopPropagation(); openSettings(); settingsBtnRef.current?.focus({ preventScroll: true }); }} aria-label="Settings">
+              <FiSettings className="settings-icon" />
+              <span className="settings-text">{t("nav.settings") || "Settings"}</span>
+            </button>
+
+            <button type="button" ref={menuBtnRef} className="menu-toggle" onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleMenu(); }} aria-label={isOpen ? "Close menu" : "Open menu"} aria-expanded={isOpen} aria-controls="navbar-menu">
+              {isOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
+            </button>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
+}
+
+export default Navbar;
