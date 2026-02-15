@@ -1,20 +1,26 @@
 /* =========================
    🛒 Cart Items List
+   ---------------------
+   Wrapper for the entire list of cart items.
+   Removes default list styles and ensures full width.
 ========================= */
 .cart-items-list {
-  list-style: none;
+  list-style: none;      /* Remove bullets */
   margin: 0;
   padding: 0;
   width: 100%;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Include padding/border in width */
 }
 
 /* =========================
-   🧾 Cart Item
+   🧾 Individual Cart Item
+   ---------------------
+   Uses CSS Grid to align name, quantity, price, and remove button.
+   Adds hover effect and spacing for better UX.
 ========================= */
 .cart-item {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr auto; /* الاسم - الكمية - السعر - زر الإلغاء */
+  grid-template-columns: 2fr 1fr 1fr auto; /* Name | Quantity | Price | Cancel */
   align-items: center;
   gap: 0.75rem;
   padding: 0.6rem 1rem;
@@ -27,26 +33,30 @@
 }
 
 .cart-item:hover {
-  transform: translateY(-1px);
+  transform: translateY(-1px); /* Slight lift on hover */
   box-shadow: 0 2px 8px var(--card-shadow);
 }
 
 .cart-item:not(:last-child) {
-  border-bottom:1px solid var(--accent-color);
+  border-bottom:1px solid var(--accent-color); /* Separator for items */
 }
 
 /* =========================
-   📦 محتوى العنصر
+   📦 Cart Item Content
+   ---------------------
+   Styles for the product name
 ========================= */
 .cart-item-name {
   font-weight: 600;
   font-size: 0.9rem;
-  word-break: break-word;
+  word-break: break-word; /* Prevent long names from overflowing */
   text-align: start;
 }
 
 /* =========================
    🔢 Quantity Controls
+   ---------------------
+   Wrapper for increment/decrement buttons and display
 ========================= */
 .quantity-wrapper {
   display: flex;
@@ -69,7 +79,9 @@
 }
 
 /* =========================
-   💰 السعر + زر الإلغاء
+   💰 Price & Remove Button
+   ---------------------
+   Styles for the price and cancel button container
 ========================= */
 .cart-item-price {
   font-weight: 600;
@@ -84,28 +96,27 @@
 
 /* =========================
    📱 Responsive (≤768px)
-========================= */
-/* =========================
-   📱 Responsive (≤768px)
+   ---------------------
+   Stack items vertically for smaller screens
 ========================= */
 @media (max-width: 768px) {
   .cart-item {
     display: flex;
-    flex-direction: column; /* العناصر تحت بعض */
+    flex-direction: column; /* Stack elements vertically */
     align-items: center;
-    text-align: center; /* يطبق على النصوص داخل العنصر */
+    text-align: center; /* Center text inside */
     gap: 0.4rem;
     padding: 0.5rem;
   }
 
-  /* أزرار الكمية تظل أفقية */
+  /* Keep quantity buttons horizontal */
   .quantity-wrapper {
     flex-direction: row !important;
     justify-content: center;
     gap: 0.4rem;
   }
 
-  /* زر الإلغاء بعرض كامل */
+  /* Cancel button full width */
   .cart-item-cancel {
     width: 100%;
   }
@@ -115,29 +126,28 @@
     padding: 0.35rem 0;
   }
 
-  /* اسم اللعبة يتوسط عند التحول للعمودي */
+  /* Center product name when stacked */
   .cart-item-name {
     text-align: center;
   }
 }
 
-
 /* =========================
-   📱 Extra Small (≤480px)
+   📱 Extra Small Screens (≤480px)
 ========================= */
 @media (max-width: 480px) {
   .quantity-wrapper {
-    gap: 0.3rem;
+    gap: 0.3rem; /* Reduce spacing slightly */
   }
 }
 
 /* =========================
-   📱 Ultra Small (≤350px)
+   📱 Ultra Small Screens (≤350px)
 ========================= */
 @media (max-width: 350px) {
   .quantity-wrapper {
     gap: 0.25rem;
-    transform: scale(0.93);
+    transform: scale(0.93); /* Slight shrink to fit very small screens */
   }
 
   .quantity-display {

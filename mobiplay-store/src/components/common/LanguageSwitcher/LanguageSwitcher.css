@@ -2,18 +2,18 @@
    🌍 Languages Switcher (Themed + Responsive)
 ========================= */
 
-/* Container */
+/* Container for all language buttons */
 .languages-inline {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;                     /* المسافة بين الأزرار */
+  gap: 12px;                     /* Space between buttons */
   justify-content: flex-start;
   align-items: center;
-  direction: ltr;
+  direction: ltr;                 /* Default LTR layout */
 }
 
 .languages-inline.rtl {
-  direction: rtl;
+  direction: rtl;                 /* RTL layout for Arabic */
 }
 
 /* =========================
@@ -23,8 +23,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4em;                     /* مسافة بين الأيقونة والنص */
-  padding: 0.4em 0.6em;            /* حشوة مناسبة */
+  gap: 0.4em;                     /* Space between flag icon and text */
+  padding: 0.4em 0.6em;           /* Comfortable padding */
   border: 0.5px solid var(--accent-color);
   border-radius: 4px;
   background-color: var(--bg-color, #fff);
@@ -32,35 +32,35 @@
   font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;
-  flex: 1 1 120px;                 /* كل زر يحاول يكون 120px */
-  max-width: 140px;                 /* الحد الأقصى للزر */
-  text-align: center;               /* النص في الوسط */
-  min-width: 100px;                 /* أقل عرض */
-  white-space: nowrap;              /* منع النص من الانكسار */
-  overflow: hidden;                 /* اخفاء النص الزائد */
-  text-overflow: ellipsis;          /* تظهر نقاط ... للنص الطويل جدًا */
+  flex: 1 1 120px;                /* Attempt 120px width per button */
+  max-width: 140px;
+  min-width: 100px;
+  text-align: center;
+  white-space: nowrap;             /* Prevent text wrap */
+  overflow: hidden;                /* Hide overflow */
+  text-overflow: ellipsis;         /* Show "..." for long text */
   box-sizing: border-box;
   line-height: 1;
   transition: all 0.2s ease-in-out;
 }
 
-/* Hover & Focus */
+/* Hover & Focus states */
 .language-btn:hover,
 .language-btn:focus {
   background-color: var(--accent-color);
   color: var(--sign-in-hover-text, #fff);
   box-shadow: 0 0 6px var(--accent-color);
-  transform: translateY(-1px);
+  transform: translateY(-1px);     /* Slight lift on hover/focus */
 }
 
-/* Active / Selected */
+/* Active / Selected state */
 .language-btn.active,
 .language-btn:active {
-    background-color: var(--accent-color);
-      color: var(--sign-in-hover-text, #fff);
+  background-color: var(--accent-color);
+  color: var(--sign-in-hover-text, #fff);
   outline: 2px solid var(--accent-color);
   box-shadow: 0 0 6px var(--accent-color);
-  transform: translateY(0);
+  transform: translateY(0);        /* Reset lift */
 }
 
 /* =========================
@@ -68,7 +68,7 @@
 ========================= */
 .language-btn .fi {
   font-size: 1.2rem;
-  color: inherit;
+  color: inherit;                  /* Match button text color */
   transition: color 0.2s ease-in-out;
 }
 
@@ -79,12 +79,11 @@
 }
 
 /* =========================
-   📱 Responsive
+   📱 Responsive adjustments
 ========================= */
 @media (max-width: 768px) {
-
   .language-btn {
-    flex: 1 1 100px;  /* أصغر حجم للزر */
+    flex: 1 1 100px;
     max-width: 120px;
     padding: 0.35em 0.5em;
     font-size: 0.75rem;
@@ -133,7 +132,7 @@
   }
 }
 
-/* Landscape (الشاشات الأفقية الصغيرة) */
+/* Landscape mode adjustments for small horizontal screens */
 @media (orientation: landscape) {
   .languages-inline {
     gap: 12px;

@@ -1,43 +1,53 @@
 /* =========================
-   Fonts Switcher - Responsive with More Gap on Mobile
+   Fonts Switcher - Responsive & User Friendly
 ========================= */
 
+/* Container for all font buttons */
 .fonts-container {
   display: flex;
   align-items: center;
-  gap: 8px; /* الافتراضي على الشاشات الكبيرة */
+  gap: 8px; /* Default gap between buttons on larger screens */
 }
 
+/* Common styles for each font button */
 .font-btn {
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
+  width: 38px;            
+  height: 38px;             
+  border-radius: 8px;      
   border: 2px solid var(--accent-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: transparent;
-  color: var(--accent-color);
+  background-color: transparent; /* Transparent for minimalist look */
+  color: var(--accent-color); 
   font-weight: 600;
   font-family: var(--main-font, 'Inter', sans-serif);
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; /* Smooth hover/active transitions */
 }
 
+/* Optional class for the “A” icon if used separately */
 .icon-A {
   font-size: 1rem;
-  color: inherit;
+  color: inherit; /* Inherit color from button */
 }
 
-.font-btn:hover { transform: scale(1.05); }
-.font-btn:active { transform: scale(0.95); }
+/* Hover & Active effects for better interactivity */
+.font-btn:hover {
+  transform: scale(1.05); /* Slight grow on hover */
+}
+.font-btn:active {
+  transform: scale(0.95); /* Slight shrink on click */
+}
 
 /* =========================
-   Mobile Adjustments - Slightly Smaller with More Gap
+   Mobile Adjustments
 ========================= */
+
+/* 📱 Small screens (≤480px) */
 @media (max-width: 480px) {
-  .fonts-container { gap: 8px; }  /* زيادة الفجوة */
+  .fonts-container { gap: 8px; }  /* Slightly more space between buttons */
 
   .font-btn {
     width: 34px;
@@ -48,8 +58,9 @@
   .icon-A { font-size: 0.95rem; }
 }
 
+/* 📞 Extra small screens (≤350px) */
 @media (max-width: 350px) {
-  .fonts-container { gap: 10px; } /* فجوة أكبر للشاشات الصغيرة جدًا */
+  .fonts-container { gap: 10px; } /* More noticeable gap for tiny screens */
 
   .font-btn {
     width: 32px;

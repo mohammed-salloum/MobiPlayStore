@@ -1,26 +1,30 @@
-
-/* العناوين الفرعية داخل الفورم */
+/* ==============================
+   Form Subtitles
+============================== */
 .contact-form-subtitle {
   font-size: clamp(0.9rem, 0.5vw + 0.85rem, 1rem);
   color: var(--text-color);
   margin-bottom: 0.75rem;
   line-height: 1.5;
 }
-/* حاوية الفورم */
+
+/* Form container */
 .form-container {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  padding: 0 12px; /* يحمي من الالتصاق بالحواف */
+  padding: 0 12px; /* Prevents content from touching the edges */
   box-sizing: border-box;
 }
 
-
+/* Extra spacing for the last subtitle */
 .contact-form-subtitle:last-of-type {
   margin-bottom: 2rem;
 }
 
-/* رسائل الخطأ والنجاح */
+/* ==============================
+   Form messages (error/success)
+============================== */
 .form-message-below {
   margin-top: 0.6rem;
   min-height: 1.4rem;
@@ -29,6 +33,7 @@
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
+/* Fade in/out animation for messages */
 .form-message-below.fade-in {
   opacity: 1;
   transform: translateY(0);
@@ -39,18 +44,19 @@
   transform: translateY(-3px);
 }
 
+/* Error and success message styling */
 .form-error,
 .form-success {
   padding: 0.6rem 1rem;
   border-radius: 8px;
   font-weight: 500;
   font-size: clamp(0.8rem, 0.4vw + 0.75rem, 0.9rem);
-  display: block;               /* بدل inline-block */
+  display: block;               /* Ensures full width block */
   line-height: 1.4;
   border: 1px solid transparent;
-  white-space: normal;          /* يسمح بكسر السطر */
-  overflow-wrap: break-word;    /* يكسر الكلمات الطويلة إذا لزم */
-  width: 100%;                  /* عرض كامل */
+  white-space: normal;          /* Allow line breaks */
+  overflow-wrap: break-word;    /* Break long words if needed */
+  width: 100%;                  /* Full width */
 }
 
 .form-error {
@@ -65,9 +71,9 @@
   border-color: var(--form-success-border);
 }
 
-/* =============================
-   زر Submit
-============================= */
+/* ==============================
+   Submit button wrapper
+============================== */
 .form-field-wrapper.submit-wrapper {
   display: flex;
   flex-direction: row;
@@ -77,17 +83,19 @@
 }
 
 .form-field-wrapper.submit-wrapper label {
-  flex: 0 0 110px; /* نفس عرض اللابل */
+  flex: 0 0 110px; /* Fixed label width */
   width: 110px;
 }
 
 .form-field-wrapper.submit-wrapper .field-wrapper {
-  display: inline-flex; /* على قدر النص */
-  flex: none;           /* لا تتمدد */
-  width: auto;          /* على قدر النص */
+  display: inline-flex; /* Fit width to content */
+  flex: none;           /* Prevent stretching */
+  width: auto;
 }
 
-/* الزر نفسه */
+/* ==============================
+   Submit button styling
+============================== */
 .form-field-wrapper.submit-wrapper .btn-inline {
   width: auto !important;
   min-width: 0 !important;
@@ -112,24 +120,26 @@
   -moz-appearance: none;
 }
 
+/* Disabled state */
 .btn-inline:disabled {
-  color: #fff; /* نص ثابت حتى عند disabled */
+  color: #fff; /* Keep text readable */
   background-color: var(--accent-color);
   cursor: not-allowed;
   opacity: 0.8;
   pointer-events: none;
 }
 
+/* Hover, focus, active */
 .btn-inline:focus,
 .btn-inline:active,
 .btn-inline:hover {
-  color: #fff; /* نص ثابت حتى عند disabled */
-  background-color: var(--accent-color); /* يبقى ثابت */
+  color: #fff;
+  background-color: var(--accent-color);
   outline: none;
   box-shadow: none;
 }
 
-
+/* Animated dots for "Sending..." state */
 .dots span {
   animation: blink 1s infinite;
   font-weight: bold;
@@ -145,31 +155,30 @@
   100% { opacity: 0; }
 }
 
-
-
-/* =============================
-   الشاشات الصغيرة
-============================= */
+/* ==============================
+   Responsive adjustments for small screens
+============================== */
 @media (max-width: 480px) {
   .form-field-wrapper.submit-wrapper {
-    flex-direction: column; /* اللابل فوق الحقل */
-    align-items: flex-start; /* يبدأ من نفس جهة الحقل */
+    flex-direction: column;     /* Label on top of button */
+    align-items: flex-start;    /* Align start of button */
     margin-bottom: 0.5rem;
   }
 
   .form-field-wrapper.submit-wrapper label {
-       display: none; /* يخفي label الفارغ */
+    display: none;              /* Hide empty label */
     width: 100%;
     margin-bottom: 0.25rem;
   }
 
   .form-field-wrapper.submit-wrapper .field-wrapper {
-    width: auto;          /* فقط على قدر الزر */
+    width: auto;                
     display: inline-flex; 
-    justify-content: flex-start; /* LTR على اليسار */
+    justify-content: flex-start; /* LTR alignment */
   }
 
+  /* RTL support */
   .rtl .form-field-wrapper.submit-wrapper .field-wrapper {
-    justify-content: flex-end; /* RTL على اليمين */
+    justify-content: flex-end;  /* Align right for RTL */
   }
 }

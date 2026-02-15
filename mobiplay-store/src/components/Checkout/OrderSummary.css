@@ -1,42 +1,62 @@
 /* =========================
-   Professional Order Summary Card - Grid Layout with Quantity Badge on Image
+   📝 Order Summary Card Container
+   -------------------------
+   General wrapper for the checkout summary.
+   Uses flex column layout to stack title, items, and total.
+   Supports max-height with scrollable items list.
 ========================= */
 .order-summary-card {
   border-radius: 16px;
   padding: 24px;
-  background-color: var(--bg-bg);
-   border: 1px solid var(--accent-color);
+  background-color: var(--bg-bg); /* main card background */
+  border: 1px solid var(--accent-color);
   transition: all 0.3s ease;
   box-sizing: border-box;
-  max-height: 80vh; /* أقصى ارتفاع للبطاقة */
+  max-height: 80vh; /* Limit card height on large screens */
   display: flex;
   flex-direction: column;
 }
 
-/* Title */
+/* =========================
+   Title
+   -------------------------
+   Page section title, centered and prominent.
+========================= */
 .order-summary-title {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: clamp(1.5rem, 2.5vw, 2rem); /* responsive font scaling */
   font-weight: 700;
   text-align: center;
   margin-bottom: 24px;
   color: var(--accent-color);
 }
 
-/* Items list - scrollable */
+/* =========================
+   Items List
+   -------------------------
+   Scrollable container for all cart items.
+   Flex column allows items to stack vertically.
+========================= */
 .order-items-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;  /* تفعيل السكول */
-  flex: 1;            /* يملأ المساحة المتبقية داخل البطاقة */
+  overflow-y: auto;  /* Enable vertical scroll if items exceed height */
+  flex: 1;           /* Fill remaining space in the card */
 }
 
-/* Single item - Grid */
+/* =========================
+   Single Item Styling
+   -------------------------
+   Grid layout:
+   - Image + Quantity Badge | Product Name | Price
+   -------------------------
+   Includes hover effects for subtle elevation.
+========================= */
 .order-item {
   display: grid;
-  grid-template-columns: auto 1fr auto; /* صورة+Badge | اسم اللعبة | السعر */
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 12px;
   background-color: var(--bg-color);
@@ -50,17 +70,20 @@
   box-shadow: 0 2px 8px var(--card-shadow);
 }
 
-/* Image container for badge */
+/* =========================
+   Image Container with Quantity Badge
+   -------------------------
+   Positions the quantity badge over the bottom-center of the image.
+========================= */
 .order-item-img-container {
   position: relative;
   width: 90px;
   height: 90px;
   flex-shrink: 0;
-  min-width: 50px; /* حد أدنى للصورة */
+  min-width: 50px;
   min-height: 50px;
 }
 
-/* Image */
 .order-item-img {
   width: 100%;
   height: 100%;
@@ -68,7 +91,7 @@
   border-radius: 8px;
 }
 
-/* Quantity badge slightly above bottom of image, centered horizontally */
+/* Quantity badge overlay */
 .order-item-qty-badge {
   position: absolute;
   bottom: 8px;
@@ -88,13 +111,17 @@
   white-space: nowrap;
 }
 
-/* RTL support */
+/* RTL support for badge */
 [dir="rtl"] .order-item-qty-badge {
   left: 50%;
   transform: translateX(-50%);
 }
 
-/* Name */
+/* =========================
+   Product Name
+   -------------------------
+   Flexible text wrapping for long product names.
+========================= */
 .order-item-name {
   font-weight: 600;
   font-size: 0.9rem;
@@ -103,7 +130,12 @@
   word-break: break-word;
 }
 
-/* Price */
+/* =========================
+   Product Price
+   -------------------------
+   Aligned right (LTR) or left (RTL)
+   Emphasized with accent color.
+========================= */
 .order-item-price {
   font-weight: 700;
   font-size: 1rem;
@@ -116,19 +148,23 @@
   text-align: left;
 }
 
-/* Total */
+/* =========================
+   Order Total Section
+   -------------------------
+   Fixed summary of total price at the bottom of the card.
+   Uses flex to space label and amount evenly.
+========================= */
 .order-total {
   display: flex;
   justify-content: space-between;
   font-weight: 700;
   font-size: 1.3rem;
   padding-top: 16px;
-  border-top:  1px solid var(--accent-color);
+  border-top: 1px solid var(--accent-color);
   margin-top: 12px;
   color: var(--text-color);
 }
 
-/* السعر فقط */
 .total-amount {
   font-weight: 700;
   font-size: 1.3rem;
@@ -141,7 +177,12 @@
 }
 
 /* =========================
-   Responsive
+   Responsive Styles
+   -------------------------
+   Adjust layout for mobile screens (≤480px)
+   - Stack item grid into two rows
+   - Resize images and badge
+   - Reduce font sizes
 ========================= */
 @media (max-width: 480px) {
   .order-item {
@@ -160,7 +201,7 @@
   }
 
   .order-item-img-container {
-    width: 60px;  /* أقل تصغير للصورة */
+    width: 60px;
     height: 60px;
     min-width: 40px;
     min-height: 40px;

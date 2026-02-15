@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useTranslation } from "react-i18next";
@@ -26,16 +26,18 @@ export default function FormField({
   const [showSuccess, setShowSuccess] = useState(false);
   const showError = Boolean(error && touched);
 
+  // Show success border/message for 4 seconds when input is valid and touched
   useEffect(() => {
     if (!showError && touched && value?.toString().trim() !== "") {
       setShowSuccess(true);
-      const timer = setTimeout(() => setShowSuccess(false), 4000); // اختفاء بعد 4 ثواني
+      const timer = setTimeout(() => setShowSuccess(false), 4000);
       return () => clearTimeout(timer);
     } else {
       setShowSuccess(false);
     }
   }, [value, touched, showError]);
 
+  // Dynamically apply error/success styling
   const inputClass = `form-input ${showError ? "error-border" : ""} ${showSuccess ? "success-border" : ""}`;
 
   return (
@@ -44,6 +46,7 @@ export default function FormField({
 
       <div className="field-wrapper">
         {type === "phone" ? (
+          // Phone input field
           <PhoneInput
             country="sy"
             value={value}
@@ -61,6 +64,7 @@ export default function FormField({
             specialLabel=""
           />
         ) : isTextarea ? (
+          // Multi-line textarea
           <textarea
             {...register?.(name)}
             placeholder={placeholder}
@@ -68,6 +72,7 @@ export default function FormField({
             className={inputClass}
           />
         ) : (
+          // Standard text input
           <input
             {...register?.(name)}
             type={type}

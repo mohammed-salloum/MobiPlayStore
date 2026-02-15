@@ -1,5 +1,10 @@
-// src/components/Checkout/PaymentForm.jsx
-import React, { useContext, useEffect, useState, useCallback } from 'react';
+// ==========================
+// PaymentForm Component
+// Handles checkout payment form with validation, theme support, RTL, and Redux cart integration
+// Uses react-hook-form + yup for robust validation
+// ==========================
+
+import { useContext, useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaCheckCircle } from 'react-icons/fa';
 import { ThemeContext } from "../../context/ThemeContext";
@@ -14,6 +19,10 @@ import Button from '../Common/Button/Button';
 import CustomSelect from '../Common/Select/CustomSelect';
 import './PaymentForm.css';
 
+// ==========================
+// Payment Options
+// List of available payment methods with keys for translation
+// ==========================
 const paymentOptions = [
   { value: 'credit-card', label: 'Credit Card' },
   { value: 'paypal', label: 'PayPal' },
@@ -21,23 +30,42 @@ const paymentOptions = [
 ];
 
 function PaymentForm({ onPaymentSuccess }) {
+  // ==========================
+  // Contexts
+  // Theme for UI styling
+  // Language for RTL and localization
+  // ==========================
   const { theme } = useContext(ThemeContext);
   const { language } = useContext(LanguageContext);
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
   const navigate = useNavigate();
 
-  // ✅ جلب بيانات السلة من Redux بدل useCart()
+  // ==========================
+  // Redux
+  // Get cart items and calculate total price
+  // ==========================
   const cartItems = useSelector((state) => state.cart.items);
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + (item.discountedPrice ?? item.price) * item.quantity,
     0
   );
 
+  // ==========================
+  // Local state
+  // loading: disable buttons while processing
+  // generalMessageKey: show general error messages
+  // submitAttempted: track if user submitted the form to show validation errors
+  // ==========================
   const [loading, setLoading] = useState(false);
   const [generalMessageKey, setGeneralMessageKey] = useState("");
   const [submitAttempted, setSubmitAttempted] = useState(false);
 
+  // ==========================
+  // Validation schema
+  // Dynamic yup schema with full validation rules for each field
+  // Trims inputs, checks for double spaces, valid names, email format, address validity
+  // ==========================
   const getSchema = useCallback(
     () =>
       yup.object().shape({
@@ -53,8 +81,8 @@ function PaymentForm({ onPaymentSuccess }) {
           .test("valid-fullname", "contact.form.nameInvalid", (value) => {
             if (!value) return false;
             const words = value.split(" ").filter(Boolean);
-            if (words.length < 2 || words.length > 4) return false;
-            return words.every((word) => /^[\u0621-\u064A A-Za-z]{3,}$/.test(word));
+            return words.length >= 2 && words.length <= 4 &&
+              words.every((word) => /^[\u0621-\u064A A-Za-z]{3,}$/.test(word));
           })
           .max(50, "contact.form.max50Chars"),
 
@@ -87,6 +115,11 @@ function PaymentForm({ onPaymentSuccess }) {
     []
   );
 
+  // ==========================
+  // react-hook-form initialization
+  // Resolver integrates yup schema
+  // Mode "onBlur" triggers validation on field blur
+  // ==========================
   const {
     register,
     handleSubmit,
@@ -106,17 +139,23 @@ function PaymentForm({ onPaymentSuccess }) {
     mode: "onBlur",
   });
 
+  // ==========================
+  // Trigger validation on language change
+  // Ensures error messages update for current language
+  // ==========================
   useEffect(() => {
     trigger();
   }, [i18n.language, trigger]);
 
-  // حفظ القيم محليًا
+  // ==========================
+  // Persist form fields in localStorage
+  // Useful if user navigates away and comes back
+  // ==========================
   const watchedFields = watch();
   useEffect(() => {
     localStorage.setItem("paymentForm", JSON.stringify(watchedFields));
   }, [watchedFields]);
 
-  // استرجاع القيم
   useEffect(() => {
     const savedForm = localStorage.getItem("paymentForm");
     if (savedForm) {
@@ -125,22 +164,30 @@ function PaymentForm({ onPaymentSuccess }) {
     }
   }, [setValue]);
 
+  // ==========================
+  // Form submission handler
+  // Simulates payment processing and triggers onPaymentSuccess callback
+  // ==========================
   const onSubmit = (data) => {
     setGeneralMessageKey("");
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      onPaymentSuccess(); // ✅ نجاح الدفع
+      onPaymentSuccess(); // Payment succeeded
     }, 1000);
   };
 
   const handleFullSubmit = (e) => {
     setSubmitAttempted(true);
     handleSubmit(onSubmit, () => {
-      setGeneralMessageKey("checkout.fillAllFields");
+      setGeneralMessageKey("checkout.fillAllFields"); // show general error if validation fails
     })(e);
   };
 
+  // ==========================
+  // Helper to show field errors
+  // Shows error if touched or form submitted
+  // ==========================
   const showError = (fieldName) =>
     !!errors[fieldName] && (touchedFields[fieldName] || submitAttempted);
 
@@ -153,7 +200,7 @@ function PaymentForm({ onPaymentSuccess }) {
         <h4 className="payment-form-title">{t("checkout.paymentDetails")}</h4>
 
         <form onSubmit={handleFullSubmit} noValidate>
-          {/* الاسم */}
+          {/* Full Name Field */}
           <div className="mb-3">
             <label htmlFor="name" className="form-label required">
               {t("checkout.fullName")}
@@ -172,7 +219,7 @@ function PaymentForm({ onPaymentSuccess }) {
             )}
           </div>
 
-          {/* البريد الإلكتروني */}
+          {/* Email Field */}
           <div className="mb-3">
             <label htmlFor="email" className="form-label required">
               {t("checkout.email")}
@@ -191,7 +238,7 @@ function PaymentForm({ onPaymentSuccess }) {
             )}
           </div>
 
-          {/* العنوان */}
+          {/* Address Field */}
           <div className="mb-3">
             <label htmlFor="address" className="form-label required">
               {t("checkout.shippingAddress")}
@@ -212,7 +259,7 @@ function PaymentForm({ onPaymentSuccess }) {
             )}
           </div>
 
-          {/* طريقة الدفع */}
+          {/* Payment Method */}
           <div className="mb-4">
             <label htmlFor="paymentMethod" className="form-label required">
               {t("checkout.paymentMethod")}
@@ -241,7 +288,7 @@ function PaymentForm({ onPaymentSuccess }) {
             )}
           </div>
 
-          {/* أزرار الدفع */}
+          {/* Payment & Back Buttons */}
           <div className="payment-buttons">
             <Button type="submit" variant="checkout" fullWidth disabled={loading}>
               {loading ? (
@@ -265,6 +312,7 @@ function PaymentForm({ onPaymentSuccess }) {
             </Button>
           </div>
 
+          {/* General form message */}
           {generalMessageKey && (
             <div className={`form-message error theme-${theme} show mt-3`}>
               {t(generalMessageKey)}

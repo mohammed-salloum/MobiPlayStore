@@ -1,4 +1,4 @@
-import React, { Suspense, useContext, useState } from "react";
+import { Suspense, useContext, useState } from "react";
 import { ThemeContext } from "../../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
 import Spinner from "../Spinner/Spinner";
@@ -6,16 +6,18 @@ import ProductList from "../ProductList/ProductList";
 import "./GenericProductPage.css";
 
 const GenericProductPage = ({ useDataHook, titleKey, emptyKey, fetchErrorKey }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext); // Current theme (light/dark)
   const { t, i18n } = useTranslation();
-  const isRTL = i18n.language === "ar";
+  const isRTL = i18n.language === "ar"; // Determine RTL layout
 
+  // Initialize current page from URL query or default to 1
   const [currentPage, setCurrentPage] = useState(() => {
     const params = new URLSearchParams(window.location.search);
     const saved = parseInt(params.get("page"), 10);
     return saved && saved > 0 ? saved : 1;
   });
 
+  // Fetch paginated data using the provided hook
   const { data, isLoading, error } = useDataHook(currentPage);
   const items = data?.games || [];
   const totalPages = data?.totalPages || 1;

@@ -2,7 +2,7 @@
    Payment Form Styles (Responsive & Themed)
 ========================= */
 
-/* Card Wrapper */
+/* Card Wrapper: Container for the entire payment form */
 .payment-form-card {
   width: 100%;
   max-width: 600px;
@@ -15,17 +15,17 @@
   box-sizing: border-box;
 }
 
-/* Form Title */
+/* Form Title: Main heading for the form */
 .payment-form-title {
   font-weight: 700;
   text-align: center;
   color: var(--accent-color);
   margin-bottom: 2rem;
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: clamp(1.5rem, 2.5vw, 2rem); /* Responsive scaling */
   line-height: 1.2;
 }
 
-/* Labels */
+/* Labels: Associated with each input field */
 .form-label {
   font-weight: 600;
   color: var(--text-color);
@@ -33,13 +33,12 @@
   display: block;
 }
 
-/* Inputs & Textareas */
+/* Inputs & Textareas: Standard form fields styling */
 .form-control {
   width: 100%;
   border-radius: 6px;
   border: 1px solid var(--border-color);
-background-color: transparent;
-
+  background-color: transparent;
   color: var(--text-color);
   min-height: 48px;
   padding: 8px 12px;
@@ -48,28 +47,31 @@ background-color: transparent;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
+/* Placeholder text: Slightly muted for better readability */
 .form-control::placeholder {
   color: var(--text-color);
   opacity: 0.7;
 }
 
+/* Focus state: Highlighted border & subtle shadow */
 .form-control:focus {
   outline: none;
   border-color: var(--accent-color);
-  box-shadow: 0 0 4px 1px var(--accent-color); /* ظل خفيف جداً */
+  box-shadow: 0 0 4px 1px var(--accent-color); /* Soft glow effect */
 }
 
+/* Textarea adjustments */
 textarea.form-control {
   resize: vertical;
   min-height: 80px;
 }
 
-/* Custom Select Wrapper */
+/* Custom Select Wrapper: Margin for select dropdowns */
 .custom-select-container {
   margin-top: 0.5rem;
 }
 
-/* Buttons */
+/* Buttons Container: Stack buttons vertically or horizontally */
 .payment-buttons {
   display: flex;
   flex-direction: column;
@@ -77,21 +79,25 @@ textarea.form-control {
   margin-top: 1.5rem;
 }
 
+/* Horizontal button layout */
 .payment-buttons.row {
   flex-direction: row;
   gap: 16px;
 }
 
+/* Button Styling */
 .btn.full-width {
   width: 100%;
   background-color: var(--primary-color);
   color: var(--btn-text-color, #fff);
   border: 1px solid var(--primary-color);
-
 }
+
 /* =========================
-   Field Messages (same style as your form-field-wrapper)
+   Field Messages (Validation & Status)
 ========================= */
+
+/* General field message styling */
 .field-message,
 .form-message {
   font-size: 0.85rem;
@@ -103,91 +109,87 @@ textarea.form-control {
   box-sizing: border-box;
 }
 
+/* Form-level messages */
 .form-message {
   padding: 10px 12px;
   margin-top: 16px;
 }
 
+/* Success message styling */
 .form-message.success {
   color: var(--form-success-text);
   background-color: var(--form-success-bg);
   border: 1px solid var(--form-success-border);
 }
 
+/* Error message styling */
 .form-message.error {
   color: var(--form-error-text);
   background-color: var(--form-error-bg);
   border: 1px solid var(--form-error-border);
 }
 
-/* ظهور الرسالة */
+/* Show message with animation */
 .form-message.show {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 
+/* Required field indicator */
 label.required::after {
   content: " *";
   color: var(--error-color);
 }
 
-/* Responsive Adjustments */
+/* =========================
+   Responsive Adjustments
+========================= */
+
+/* Large screens */
 @media (max-width: 1024px) {
   .payment-form-card { padding: 20px; }
   .payment-form-title { font-size: 1.6rem; margin-bottom: 1.8rem; }
 }
 
+/* Medium screens / tablets */
 @media (max-width: 768px) {
   .payment-form-card { padding: 18px; }
   .payment-form-title { font-size: 1.5rem; margin-bottom: 1.6rem; }
 }
 
-/* Small screens / Mobile adjustments */
+/* Small screens / mobile */
 @media (max-width: 480px) {
   .form-control {
-    min-height: 56px; /* زيادة بسيطة من 48px → 56px */
-    padding: 10px 14px; /* زيادة padding لمزيد من الراحة */
-    font-size: 1.05rem; /* تكبير بسيط للنص */
+    min-height: 56px;        /* Slightly taller fields for touch devices */
+    padding: 10px 14px;      /* More comfortable padding */
+    font-size: 1.05rem;      /* Slightly larger text */
   }
 
   textarea.form-control {
-    min-height: 100px; /* زيادة ارتفاع textarea */
+    min-height: 100px;       /* Taller textarea */
     padding: 12px 14px;
     font-size: 1.05rem;
   }
 }
-/* Small screens / Mobile adjustments */
-/* Small screens / Mobile adjustments */
-@media (max-width: 480px) {
-  .form-control {
-    min-height: 56px; /* زيادة بسيطة من 48px → 56px */
-    padding: 10px 14px; /* زيادة padding لمزيد من الراحة */
-    font-size: 1.05rem; /* تكبير بسيط للنص */
-  }
 
-  textarea.form-control {
-    min-height: 100px; /* زيادة ارتفاع textarea */
-    padding: 12px 14px;
-    font-size: 1.05rem;
-  }
-}
-/* Extra small screens / Very small devices */
+/* Extra small screens / very small devices */
 @media (max-width: 350px) {
   .form-control {
-    min-height: 60px;        /* زيادة بسيطة إضافية */
-    padding: 12px 14px;      /* مزيد من المساحة داخل الحقل */
-    font-size: 1.1rem;       /* تكبير النص قليلاً */
+    min-height: 60px;        /* Additional height for very small screens */
+    padding: 12px 14px;
+    font-size: 1.1rem;       /* Slightly larger font for readability */
   }
 
   textarea.form-control {
-    min-height: 110px;       /* ارتفاع أكبر قليلاً للـ textarea */
+    min-height: 110px;
     padding: 14px 14px;
     font-size: 1.1rem;
   }
 }
 
-/* RTL Support */
+/* =========================
+   RTL & LTR Direction Support
+========================= */
 .rtl { direction: rtl; }
 .ltr { direction: ltr; }
-

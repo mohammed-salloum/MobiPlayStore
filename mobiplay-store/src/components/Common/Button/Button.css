@@ -1,5 +1,6 @@
 /* =========================
-   قاعدة عامة لكل الأزرار (متوافقة مع كل الثيمات)
+   Base button styles (theme-agnostic)
+   Applies to all button variants
 ========================= */
 .btn {
   display: flex;
@@ -18,25 +19,26 @@
   color: #ffffff;
   border: 1px solid transparent;
 
-  min-width: 140px;  /* الحد الأدنى للعرض */
-  height: 40px;      /* ارتفاع ثابت */
-  padding: 0 1rem;
+  min-width: 140px;  /* Minimum button width */
+  height: 40px;      /* Fixed height for consistency */
 }
 
-/* المحتوى الداخلي داخل الزر */
-.btn span, 
+/* Inner content alignment (text / icon wrapper) */
+.btn span,
 .btn-quantity span {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Hover / Active / Focus / Disabled */
-/* Hover / Active / Focus / Disabled */
+/* =========================
+   Interaction states
+   Hover / Active / Focus / Disabled
+========================= */
 .btn:hover:not(.disabled),
 .btn-quantity:hover:not(.disabled) {
-  background-color: var(--primary-hover); /* يستخدم المتغير الخاص بالثيم */
-  color: var(--sign-in-hover-text) !important;    /* نص أبيض دائمًا عند hover */
+  background-color: var(--primary-hover);          /* Theme-driven hover color */
+  color: var(--sign-in-hover-text) !important;     /* Always readable text */
   transform: translateY(-1px);
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
@@ -49,7 +51,7 @@
 
 .btn:focus-visible,
 .btn-quantity:focus-visible {
-  outline: 2px solid var(--accent-color); /* يبقى ثابت */
+  outline: 2px solid var(--accent-color); /* Accessible focus ring */
   outline-offset: 2px;
 }
 
@@ -64,7 +66,8 @@
 }
 
 /* =========================
-   Full width (يتم استخدامه بحذر)
+   Full-width modifier
+   Use carefully (layout-dependent)
 ========================= */
 .btn.full-width {
   width: 100%;
@@ -72,7 +75,7 @@
 }
 
 /* =========================
-   زر الكمية (+/-)
+   Quantity button (+ / -)
 ========================= */
 .btn-quantity {
   width: 36px;
@@ -86,7 +89,7 @@
 }
 
 /* =========================
-   مربّع الكمية
+   Quantity input field
 ========================= */
 .quantity-wrapper input[type="number"] {
   width: 80px;
@@ -98,7 +101,7 @@
   color: var(--input-text);
 }
 
-/* إزالة أسهم الـ number input */
+/* Remove default number input arrows */
 .quantity-wrapper input::-webkit-outer-spin-button,
 .quantity-wrapper input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -106,16 +109,15 @@
 }
 
 /* =========================
-   مسافة موحدة بين الأيقونة والنص في جميع الأزرار
+   Icon spacing (LTR / RTL aware)
 ========================= */
-/* مسافة موحدة بين الأيقونة والنص لجميع الأزرار */
 .btn svg,
 .btn i {
-  margin-right: 6px; /* افتراضي LTR */
-  flex-shrink: 0;    /* منع تصغير الأيقونة */
+  margin-right: 6px; /* Default LTR spacing */
+  flex-shrink: 0;    /* Prevent icon from shrinking */
 }
 
-/* إذا الموقع RTL، قلب المسافة */
+/* Flip spacing for RTL layouts */
 .rtl .btn svg,
 .rtl .btn i {
   margin-right: 0;
@@ -123,7 +125,7 @@
 }
 
 /* =========================
-   Responsive لجميع الشاشات الصغيرة
+   Responsive adjustments
 ========================= */
 @media (max-width: 1024px) {
   .btn {

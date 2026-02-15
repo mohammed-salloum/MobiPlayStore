@@ -1,11 +1,27 @@
+/* =========================
+   Features Section Styles
+   ------------------------
+   Styles for the main features section container
+   and the section title.
+========================= */
+
+/* Section Wrapper
+   - Centers content vertically and horizontally
+   - Flex column layout with spacing between elements
+   - Padding for internal spacing
+   - Background and text color adapt to theme variables
+   - Full width with box-sizing to include padding
+   - Minimum height to ensure visible section
+   - Overflow hidden to prevent scroll issues
+   - Gap between child elements for consistent spacing */
 .features-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--bg-color); /* Theme-based background */
+  color: var(--text-color);          /* Theme-based text color */
   width: 100%;
   box-sizing: border-box;
   min-height: 55vh;
@@ -13,9 +29,13 @@
   gap: 40px;
 }
 
+/* Section Title
+   - Large, prominent heading
+   - Centered text
+   - Margin-bottom to separate from carousel or content below
+   - Font size can be adjusted for responsiveness via media queries if needed */
 .features-title {
   font-size: 2.2rem;
   margin-bottom: 30px;
   text-align: center;
-
 }

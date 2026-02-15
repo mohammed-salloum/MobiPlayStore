@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, useContext } from "react";
+import { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { ThemeContext } from "../../context/ThemeContext";
@@ -23,15 +23,24 @@ function Navbar({ openSettings }) {
   const location = useLocation();
   const isRTL = language === "ar";
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  // =========================
+  // State
+  // =========================
+  const [isOpen, setIsOpen] = useState(false); // Hamburger menu open state
+  const [scrolled, setScrolled] = useState(false); // Navbar shadow on scroll
+  const [userMenuOpen, setUserMenuOpen] = useState(false); // User dropdown
 
+  // =========================
+  // Refs
+  // =========================
   const menuBtnRef = useRef(null);
   const settingsBtnRef = useRef(null);
   const navContentRef = useRef(null);
   const userMenuRef = useRef(null);
 
+  // =========================
+  // Navigation Links
+  // =========================
   const navLinks = [
     { path: "", label: t("nav.home") },
     { path: "products", label: t("nav.productsLabel") },
@@ -41,6 +50,9 @@ function Navbar({ openSettings }) {
     { path: "about-us", label: t("nav.aboutLabel") },
   ];
 
+  // =========================
+  // Menu & User Menu Handlers
+  // =========================
   const closeMenu = () => {
     if (document.activeElement) document.activeElement.blur();
     setIsOpen(false);
@@ -71,26 +83,40 @@ function Navbar({ openSettings }) {
     return location.pathname === homePath || location.pathname === `/${language}`;
   };
 
+  // =========================
+  // Scroll Detection for Navbar Shadow
+  // =========================
   const handleScroll = useCallback(() => setScrolled(window.scrollY > 50), []);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
+  // =========================
+  // Apply Font Settings via CSS Variables
+  // =========================
   useEffect(() => {
     document.documentElement.style.setProperty("--main-font-size", `${fontSize}px`);
     document.documentElement.style.setProperty("--main-font", fontFamily);
   }, [fontSize, fontFamily]);
 
+  // =========================
+  // Apply Theme to Body
+  // =========================
   useEffect(() => {
     document.body.dataset.theme = theme;
   }, [theme]);
 
+  // =========================
+  // Scroll to top on route change
+  // =========================
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
 
-  // غلق dropdown عند الضغط خارجها
+  // =========================
+  // Close user dropdown on outside click
+  // =========================
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
@@ -101,45 +127,55 @@ function Navbar({ openSettings }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // منع التمرير على body مع السماح بالتمرير داخل الهامبرغر
-useEffect(() => {
-  const navContent = navContentRef.current;
-  if (!isOpen || !navContent) return;
+  // =========================
+  // Prevent body scroll when hamburger menu is open
+  // =========================
+  useEffect(() => {
+    const navContent = navContentRef.current;
+    if (!isOpen || !navContent) return;
 
-  let startY = 0;
+    let startY = 0;
 
-  const touchStart = (e) => {
-    startY = e.touches[0].clientY;
-  };
+    const touchStart = (e) => {
+      startY = e.touches[0].clientY;
+    };
 
-  const touchMove = (e) => {
-    const currentY = e.touches[0].clientY;
-    const atTop = navContent.scrollTop === 0;
-    const atBottom = navContent.scrollHeight - navContent.scrollTop <= navContent.clientHeight;
+    const touchMove = (e) => {
+      const currentY = e.touches[0].clientY;
+      const atTop = navContent.scrollTop === 0;
+      const atBottom = navContent.scrollHeight - navContent.scrollTop <= navContent.clientHeight;
 
-    // منع تمرير body إذا كان عندنا تجاوز للنهاية أو البداية
-    if ((atTop && currentY > startY) || (atBottom && currentY < startY)) {
-      e.preventDefault();
-    }
-    e.stopPropagation(); // السماح بالتمرير داخل القائمة
-  };
+      // Prevent scrolling body when over/under scrolled
+      if ((atTop && currentY > startY) || (atBottom && currentY < startY)) {
+        e.preventDefault();
+      }
+      e.stopPropagation(); // Allow scrolling inside menu
+    };
 
-  document.body.style.overflow = "hidden"; // منع التمرير العام
-  navContent.addEventListener("touchstart", touchStart, { passive: false });
-  navContent.addEventListener("touchmove", touchMove, { passive: false });
+    document.body.style.overflow = "hidden"; // Lock body scroll
+    navContent.addEventListener("touchstart", touchStart, { passive: false });
+    navContent.addEventListener("touchmove", touchMove, { passive: false });
 
-  return () => {
-    document.body.style.overflow = "";
-    navContent.removeEventListener("touchstart", touchStart);
-    navContent.removeEventListener("touchmove", touchMove);
-  };
-}, [isOpen]); 
+    return () => {
+      document.body.style.overflow = "";
+      navContent.removeEventListener("touchstart", touchStart);
+      navContent.removeEventListener("touchmove", touchMove);
+    };
+  }, [isOpen]);
 
+  // =========================
+  // Render
+  // =========================
   return (
     <>
+      {/* Overlay behind menu */}
       <div className={`navbar-overlay ${isOpen ? "show" : ""} ${theme}`} onClick={closeMenu} tabIndex={-1} />
+
+      {/* Navbar */}
       <nav className={`navbar ${theme} ${scrolled ? "scrolled" : ""}`} dir={isRTL ? "rtl" : "ltr"}>
         <div className="navbar-container">
+
+          {/* Brand / Logo */}
           <NavLink
             to={`/${language}/`}
             className={isHomeActive() ? "active navbar-brand" : "navbar-brand"}
@@ -149,6 +185,7 @@ useEffect(() => {
             <FaGamepad /> {t("siteName")}
           </NavLink>
 
+          {/* Navigation links (Hamburger menu content) */}
           <div ref={navContentRef} id="navbar-menu" className={`navbar-content ${isOpen ? "open" : ""}`} role="dialog" aria-modal={isOpen}>
             <ul className="navbar-links">
               {navLinks.map(({ path, label }, index) => {
@@ -168,6 +205,7 @@ useEffect(() => {
               })}
             </ul>
 
+            {/* Mobile Sign-in if not logged in */}
             {!user && (
               <NavLink to={`/${language}/login`} className="mobile-signin" onClick={() => { closeMenu(); scrollToTop(); }}>
                 <FaUserCircle className="signin-icon" />
@@ -176,6 +214,7 @@ useEffect(() => {
             )}
           </div>
 
+          {/* Navbar tools: Cart, User, Settings, Hamburger */}
           <div className="navbar-tools">
             <CartIcon collapseNavbar={() => { closeMenu(); scrollToTop(); }} onClick={() => { if (!user) navigate(`/${language}/login`); }} />
 
@@ -206,11 +245,13 @@ useEffect(() => {
               </NavLink>
             )}
 
+            {/* Settings Button */}
             <button type="button" ref={settingsBtnRef} className="settings-btn" onClick={(e) => { e.preventDefault(); e.stopPropagation(); openSettings(); settingsBtnRef.current?.focus({ preventScroll: true }); }} aria-label="Settings">
               <FiSettings className="settings-icon" />
               <span className="settings-text">{t("nav.settings") || "Settings"}</span>
             </button>
 
+            {/* Hamburger / Menu Toggle */}
             <button type="button" ref={menuBtnRef} className="menu-toggle" onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleMenu(); }} aria-label={isOpen ? "Close menu" : "Open menu"} aria-expanded={isOpen} aria-controls="navbar-menu">
               {isOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
             </button>

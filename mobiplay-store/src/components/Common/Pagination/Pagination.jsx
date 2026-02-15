@@ -1,30 +1,32 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Button from "../Button/Button";
 import "./Pagination.css";
 
 const Pagination = ({ currentPage, totalPages, onPageChange, lang }) => {
-  const { t } = useTranslation();
-  const isRTL = lang === "ar";
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
+  const { t } = useTranslation();       // Translation function
+  const isRTL = lang === "ar";          // Determine RTL layout
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 576); // Track mobile viewport
 
-  // تتبع حجم الشاشة
+  // Track window resize to update mobile view
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 576);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Handle page change
   const handlePageChange = (page) => {
     if (page === currentPage) return;
     onPageChange(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Smooth scroll to top
   };
 
+  // Navigate prev / next page
   const handlePrev = () => handlePageChange(Math.max(currentPage - 1, 1));
   const handleNext = () => handlePageChange(Math.min(currentPage + 1, totalPages));
 
-  // توليد أرقام الصفحات مع ellipsis
+  // Generate page numbers with ellipsis for large pagination
   const getPageNumbers = () => {
     const pages = [];
     if (totalPages <= 7) {
@@ -33,14 +35,15 @@ const Pagination = ({ currentPage, totalPages, onPageChange, lang }) => {
       const left = Math.max(currentPage - 1, 2);
       const right = Math.min(currentPage + 1, totalPages - 1);
       pages.push(1);
-      if (left > 2) pages.push("...");
+      if (left > 2) pages.push("...");           // Left ellipsis
       for (let i = left; i <= right; i++) pages.push(i);
-      if (right < totalPages - 1) pages.push("...");
+      if (right < totalPages - 1) pages.push("..."); // Right ellipsis
       pages.push(totalPages);
     }
     return pages;
   };
 
+  // Render numeric page buttons
   const renderPages = () =>
     getPageNumbers().map((page, idx) =>
       page === "..." ? (
@@ -58,6 +61,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, lang }) => {
       )
     );
 
+  // Render prev / next navigation buttons
   const renderNavButton = (type) => {
     const isNext = type === "next";
     const disabled = isNext ? currentPage === totalPages : currentPage === 1;
@@ -90,7 +94,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, lang }) => {
     <div className={`pagination-container ${isRTL ? "rtl" : "ltr"}`}>
       {renderNavButton("prev")}
 
-      {/* على الموبايل: أظهر فقط current / total */}
+      {/* On mobile: show only current / total pages */}
       {isMobile ? (
         <span className="current-page-mobile">
           {currentPage} / {totalPages}

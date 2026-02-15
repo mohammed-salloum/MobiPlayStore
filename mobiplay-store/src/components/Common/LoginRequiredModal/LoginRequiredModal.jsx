@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../../../context/ThemeContext";
@@ -7,13 +7,13 @@ import Spinner from "../../Common/Spinner/Spinner";
 import "./LoginRequiredModal.css";
 
 const LoginRequiredModal = ({ show, onConfirm, onCancel }) => {
-  const { t } = useTranslation();
-  const { theme } = useContext(ThemeContext);
-  const modalRef = useRef(null);
-  const [loading, setLoading] = useState(false);
-  const [closing, setClosing] = useState(false);
+  const { t } = useTranslation();                  // Translation function
+  const { theme } = useContext(ThemeContext);     // Current theme (light/dark)
+  const modalRef = useRef(null);                  // Ref for modal element
+  const [loading, setLoading] = useState(false); // Loading state for confirm action
+  const [closing, setClosing] = useState(false); // Animate closing
 
-  // منع تمرير الصفحة عند فتح المودال
+  // Prevent body scrolling when modal is open
   useEffect(() => {
     if (show) {
       const scrollY = window.scrollY;
@@ -24,18 +24,20 @@ const LoginRequiredModal = ({ show, onConfirm, onCancel }) => {
       document.body.style.overflow = "hidden";
       document.body.dataset.scrollY = scrollY;
     } else {
-      const scrollY = document.body.dataset.scrollY ? parseInt(document.body.dataset.scrollY) : 0;
+      const scrollY = document.body.dataset.scrollY
+        ? parseInt(document.body.dataset.scrollY)
+        : 0;
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.left = "";
       document.body.style.right = "";
       document.body.style.overflow = "";
-      window.scrollTo(0, scrollY);
+      window.scrollTo(0, scrollY); // Restore previous scroll
       delete document.body.dataset.scrollY;
     }
   }, [show]);
 
-  // غلق عند الضغط خارج المودال أو Esc
+  // Close modal on outside click or Escape key
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) handleCancel();
@@ -53,27 +55,29 @@ const LoginRequiredModal = ({ show, onConfirm, onCancel }) => {
     };
   }, [show]);
 
+  // Confirm button handler (simulates loading)
   const handleConfirm = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       onConfirm();
-    }, 1000);
+    }, 1000); // Simulate network delay
   };
 
+  // Cancel button handler with fade-out animation
   const handleCancel = () => {
     setClosing(true);
     setTimeout(() => {
       setClosing(false);
       onCancel();
-    }, 300);
+    }, 300); // Duration matches fade-out animation
   };
 
-  if (!show) return null;
+  if (!show) return null; // Do not render if modal is hidden
 
   return (
     <>
-      {/* Overlay المودال */}
+      {/* Modal overlay */}
       <div className={`login-modal-overlay theme-${theme} ${closing ? "fade-out" : "fade-in"}`}>
         <div className="login-modal" ref={modalRef}>
           <h3 className="login-modal-message">{t("loginRequired.message")}</h3>
@@ -88,7 +92,7 @@ const LoginRequiredModal = ({ show, onConfirm, onCancel }) => {
         </div>
       </div>
 
-      {/* Spinner overlay كامل الشاشة عبر Portal */}
+      {/* Full-screen spinner using portal */}
       {loading &&
         createPortal(
           <div className="global-spinner-overlay">

@@ -1,5 +1,6 @@
 // src/pages/Profile/Profile.jsx
-import React, { useState, useEffect } from "react";
+
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,16 +11,29 @@ import { selectCartItems } from "../../redux/slices/cartSlice";
 import { handleLogout as logoutService } from "../../services/cartService";
 import "./Profile.css";
 
+/**
+ * Profile Page
+ * --------------------------------------------------
+ * Handles user profile display and updates:
+ * - Shows user information (username, email, avatar)
+ * - Allows editing profile details and avatar
+ * - Handles password change securely
+ * - Integrates with Redux for state management
+ * - Supports RTL/LTR and i18n translations
+ */
 function Profile() {
+  // i18n and RTL check
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
   const isRTL = lang === "ar";
 
+  // Redux state
   const user = useSelector(selectUser);
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Local state
   const [isEditing, setIsEditing] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -32,7 +46,9 @@ function Profile() {
   const [newPassword, setNewPassword] = useState("");
   const [avatarUrl, setAvatarUrl] = useState(null);
 
-  // تهيئة البيانات عند تغيير المستخدم
+  // --------------------------------------------------
+  // Initialize form data when user changes
+  // --------------------------------------------------
   useEffect(() => {
     if (user) {
       setUsername(user.username || "");
@@ -46,7 +62,9 @@ function Profile() {
     }
   }, [user]);
 
-  // إدارة عرض رابط الأفاتار بشكل آمن
+  // --------------------------------------------------
+  // Manage avatar preview URL safely
+  // --------------------------------------------------
   useEffect(() => {
     let url = null;
     if (avatarDeleted) {
@@ -64,6 +82,9 @@ function Profile() {
     };
   }, [avatar, avatarDeleted]);
 
+  // --------------------------------------------------
+  // Avatar input handlers
+  // --------------------------------------------------
   const handleAvatarChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setAvatar(e.target.files[0]);
@@ -77,6 +98,9 @@ function Profile() {
     setAvatarUrl(null);
   };
 
+  // --------------------------------------------------
+  // Editing state handlers
+  // --------------------------------------------------
   const openEdit = () => {
     setIsEditing(true);
     setShowPasswordForm(false);
@@ -92,73 +116,90 @@ function Profile() {
     setNewPassword("");
     setAvatarUrl(user.avatar || null);
   };
-const handleSave = async (e) => {
-  e.preventDefault();
-  if (!user) return;
 
-  // التحقق من كلمة المرور
-  if (showPasswordForm) {
-    if (newPassword && !currentPassword) {
-      setMessage(t("profile.currentPasswordRequired"));
-      return;
+  // --------------------------------------------------
+  // Save profile changes
+  // --------------------------------------------------
+  const handleSave = async (e) => {
+    e.preventDefault();
+    if (!user) return;
+
+    // Password validation
+    if (showPasswordForm) {
+      if (newPassword && !currentPassword) {
+        setMessage(t("profile.currentPasswordRequired"));
+        return;
+      }
+      if (!newPassword && currentPassword) {
+        setMessage(t("profile.newPasswordRequired"));
+        return;
+      }
     }
-    if (!newPassword && currentPassword) {
-      setMessage(t("profile.newPasswordRequired"));
-      return;
+
+    // Prepare FormData for API
+    const formData = new FormData();
+    formData.append("username", username || user.username);
+    formData.append("email", email || user.email);
+    formData.append("avatarDeleted", avatarDeleted ? "true" : "false");
+
+    if (showPasswordForm && newPassword) {
+      formData.append("password", newPassword);
+      formData.append("currentPassword", currentPassword || "");
     }
-  }
 
-  const formData = new FormData();
-  formData.append("username", username || user.username);
-  formData.append("email", email || user.email);
-  formData.append("avatarDeleted", avatarDeleted ? "true" : "false");
+    if (avatar instanceof File) formData.append("avatar", avatar);
 
-  if (showPasswordForm && newPassword) {
-    formData.append("password", newPassword);
-    formData.append("currentPassword", currentPassword || "");
-  }
+    try {
+      const resultAction = await dispatch(
+        updateUserAsync({ id: String(user.id), formData })
+      );
 
-  if (avatar instanceof File) formData.append("avatar", avatar);
-
-  try {
-    const resultAction = await dispatch(updateUserAsync({ id: String(user.id), formData }));
-
-    if (updateUserAsync.fulfilled.match(resultAction)) {
-      // نجاح التحديث
-      setMessage(t("profile.saved"));
-      setIsEditing(false);
-      setShowPasswordForm(false);
-      setCurrentPassword("");
-      setNewPassword("");
-      setAvatar(null);
-      setAvatarDeleted(false);
-      setAvatarUrl(resultAction.payload.user.avatar || null);
-    } else if (updateUserAsync.rejected.match(resultAction)) {
-      // الأخطاء المتوقعة تظهر فقط بالواجهة
-      const code = resultAction.payload?.code;
-      const messageMap = {
-        wrongCurrentPassword: t("profile.currentPasswordIncorrect"),
-        currentPasswordRequired: t("profile.currentPasswordRequired"),
-        newPasswordRequired: t("profile.newPasswordRequired"),
-        emailExists: t("profile.emailExists"),
-      };
-      setMessage(messageMap[code] || t("profile.updateFailed"));
+      // Success
+      if (updateUserAsync.fulfilled.match(resultAction)) {
+        setMessage(t("profile.saved"));
+        setIsEditing(false);
+        setShowPasswordForm(false);
+        setCurrentPassword("");
+        setNewPassword("");
+        setAvatar(null);
+        setAvatarDeleted(false);
+        setAvatarUrl(resultAction.payload.user.avatar || null);
+      }
+      // Expected errors
+      else if (updateUserAsync.rejected.match(resultAction)) {
+        const code = resultAction.payload?.code;
+        const messageMap = {
+          wrongCurrentPassword: t("profile.currentPasswordIncorrect"),
+          currentPasswordRequired: t("profile.currentPasswordRequired"),
+          newPasswordRequired: t("profile.newPasswordRequired"),
+          emailExists: t("profile.emailExists"),
+        };
+        setMessage(messageMap[code] || t("profile.updateFailed"));
+      }
+    } catch {
+      // Unexpected errors
+      setMessage(t("profile.updateFailed"));
     }
-  } catch {
-    // أخطاء غير متوقعة عامة
-    setMessage(t("profile.updateFailed"));
-  }
 
-  // مسح الرسالة بعد 3 ثواني
-  setTimeout(() => setMessage(""), 3000);
+    // Clear message after 3 seconds
+    setTimeout(() => setMessage(""), 3000);
+  };
+
+  // --------------------------------------------------
+  // Logout handler
+  // --------------------------------------------------
+  const handleLogout = () => {
+  // Use i18n translation key instead of hardcoded text
+  setToastMessage(t("profile.logoutSuccess")); 
+
+  // Delay actual logout to allow toast to show
+  setTimeout(() => logoutService(cartItems, dispatch, navigate, lang), 1000);
 };
 
 
-  const handleLogout = () => {
-    setToastMessage(lang === "ar" ? "تم تسجيل الخروج 👋" : "Logged out 👋");
-    setTimeout(() => logoutService(cartItems, dispatch, navigate, lang), 1000);
-  };
-
+  // --------------------------------------------------
+  // Not logged in view
+  // --------------------------------------------------
   if (!user) {
     return (
       <div className="profile-container">
@@ -172,10 +213,15 @@ const handleSave = async (e) => {
     );
   }
 
+  // --------------------------------------------------
+  // Main profile view
+  // --------------------------------------------------
   return (
     <div className="profile-container" dir={isRTL ? "rtl" : "ltr"}>
-     <h2 className="profile-title">{t("profile.title")}</h2>
+      <h2 className="profile-title">{t("profile.title")}</h2>
       <div className="profile-card">
+
+        {/* Avatar Section */}
         <div className="avatar-wrapper">
           {avatarUrl ? (
             <img src={avatarUrl} alt="Profile" className="profile-avatar-img" />
@@ -210,6 +256,7 @@ const handleSave = async (e) => {
           )}
         </div>
 
+        {/* Profile Info or Edit Form */}
         {!isEditing ? (
           <>
             <h2 className="profile-name">{user.username}</h2>
@@ -267,6 +314,7 @@ const handleSave = async (e) => {
           </form>
         )}
 
+        {/* Feedback Messages */}
         {message && <p className="success-message">{message}</p>}
         {toastMessage && <div className="toast-message">{toastMessage}</div>}
       </div>

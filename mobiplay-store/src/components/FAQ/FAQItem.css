@@ -1,18 +1,28 @@
 /* =========================
    FAQ Item Styles
+   ------------------------
+   Styles for individual FAQ entries including
+   question, answer, icon, and responsive theme support.
 ========================= */
 
-/* الحاوية لكل عنصر */
+/* FAQ Item Container
+   - Rounded corners, spacing between items
+   - Smooth transitions for theme changes (background, border, text)
+   - Border and text color adapt to current theme */
 .faq-item {
   border-radius: 12px;
   margin-bottom: 1rem;
-  overflow: hidden;
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; /* يعتمد على الثيم */
+  overflow: hidden; /* Prevent content overflow when collapsed */
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   border: 1px solid var(--accent-color); 
-  color: var(--text-color);           /* يرث اللون */
+  color: var(--text-color);
 }
 
-/* السؤال */
+/* FAQ Question Button
+   - Full width, padded for clickable area
+   - Uses flex to align text and icon
+   - No native button styles (border/outline)
+   - Rounded corners and cursor pointer */
 .faq-question {
   width: 100%;
   padding: 1rem 1.5rem;
@@ -27,26 +37,33 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 12px;
-  color: var(--text-color);          /* لون النص حسب الثيم */
+  color: var(--text-color); /* Text color adapts to theme */
 }
 
-/* دعم RTL */
+/* Right-to-left support */
 .rtl .faq-question {
   text-align: right;
 }
 
-/* أيقونة */
+/* FAQ Icon (Chevron)
+   - Smooth rotation when expanded
+   - Color adapts to theme */
 .faq-icon {
   font-size: 1.2rem;
   transition: transform 0.3s ease, color 0.3s ease;
-  color: var(--icon-color);          /* لون الأيقونة حسب الثيم */
+  color: var(--icon-color);
 }
 
+/* Rotate icon when FAQ is open */
 .faq-icon.rotate {
   transform: rotate(180deg);
 }
 
-/* الجواب */
+/* FAQ Answer Container
+   - Collapsed by default (max-height 0)
+   - Hidden overflow for smooth transition
+   - Padding applied only when expanded
+   - Text color and background can adapt to theme */
 .faq-answer {
   max-height: 0;
   overflow: hidden;
@@ -54,10 +71,13 @@
   padding: 0 1.5rem;
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--accent-color);         /* لون النص حسب الثيم */  /* الخلفية حسب الثيم */
+  color: var(--accent-color);
 }
 
+/* Opened FAQ Answer
+   - Max-height set large enough to show content
+   - Padding added for spacing */
 .faq-answer.open {
-  max-height: 1000px; /* كبير بما يكفي لكل المحتويات */
+  max-height: 1000px; /* Large enough to accommodate most content */
   padding: 1rem 1.5rem;
 }

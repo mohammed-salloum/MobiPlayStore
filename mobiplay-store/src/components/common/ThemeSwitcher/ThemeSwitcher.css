@@ -2,7 +2,7 @@
    ThemeSwitcher.css (Themed - Responsive Buttons)
 ========================= */
 
-/* Container - Desktop */
+/* Container - Desktop layout: 2 columns with spacing */
 .theme-container.inline {
   display: grid;
   grid-template-columns: repeat(2, auto);
@@ -11,12 +11,12 @@
   align-items: center;
 }
 
-/* RTL فقط للمحاذاة النصية */
+/* RTL support: right-to-left text direction */
 .theme-container.inline.rtl {
   direction: rtl;
 }
 
-/* Buttons */
+/* Theme buttons: flex layout with icon and label */
 .theme-btn {
   display: flex;
   align-items: center;
@@ -35,18 +35,19 @@
   transition: all 0.2s ease-in-out;
 }
 
-/* Hover */
+/* Hover state for button: color, background, and shadow */
 .theme-btn:hover {
   background-color: var(--accent-color);
   color: var(--sign-in-hover-text, #fff);
   box-shadow: 0 0 6px var(--accent-color);
 }
 
+/* Hover state for icon inside button */
 .theme-btn:hover .theme-icon {
   color: var(--icon-hover-color, #fff);
 }
 
-/* Active button */
+/* Active / selected button state */
 .theme-btn.active,
 .theme-btn:active {
   border-color: var(--accent-color);
@@ -55,33 +56,36 @@
   box-shadow: 0 0 6px var(--accent-color);
 }
 
+/* Icon color in active / selected state */
 .theme-btn.active .theme-icon,
 .theme-btn:active .theme-icon {
   color: var(--icon-hover-color, #fff);
 }
 
-/* Icon inside button */
+/* Icon styling inside button */
 .theme-icon {
   font-size: clamp(1rem, 2vw, 1.2rem);
-  pointer-events: none;
+  pointer-events: none; /* Prevent icon from blocking button clicks */
   color: var(--icon-color);
 }
 
-/* Name inside button */
+/* Theme name text inside button */
 .theme-name {
   font-size: clamp(0.75rem, 1.5vw, 0.9rem);
   font-weight: 500;
-  color: inherit;
+  color: inherit; /* Inherit from button state */
 }
 
 /* =========================
    Mobile Adjustments
 ========================= */
+
+/* Stack buttons vertically on small screens */
 @media (max-width: 768px) {
   .theme-container.inline {
     display: grid;
     grid-auto-flow: row;
-    gap: 6px; /* قلل الفجوة */
+    gap: 6px; /* Reduced spacing for mobile */
     justify-content: start;
   }
 
@@ -89,6 +93,7 @@
     direction: rtl;
   }
 
+  /* Button adjustments for smaller screens */
   .theme-btn {
     padding: 4px 6px;
     gap: 3px;
@@ -98,10 +103,12 @@
     font-size: clamp(0.7rem, 1.5vw, 0.85rem);
   }
 
+  /* Icon size for mobile */
   .theme-icon {
     font-size: clamp(0.9rem, 1.5vw, 1rem);
   }
 
+  /* Label size for mobile */
   .theme-name {
     font-size: clamp(0.65rem, 1.2vw, 0.8rem);
   }

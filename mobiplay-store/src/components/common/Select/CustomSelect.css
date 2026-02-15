@@ -1,103 +1,105 @@
 /* ==============================
    ⚙️ Custom Select (react-select)
-   مخصص ليتناسق مع الثيم العام
+   Styled to match the global theme
 ============================== */
 
-/* الحاوية العامة */
+/* Container */
 .custom-select-container {
-  width: 100%;
+  width: 100%; /* full width of parent */
 }
 
 /* ==============================
-   Control (الحقل الرئيسي)
+   Control (Main input field)
 ============================== */
 .custom-select__control {
-  background-color: transparent !important; /* 🔹 خلفية شفافة */
-  border: 1px solid var(--border-color) !important;
+  background-color: transparent !important; /* transparent background */
+  border: 1px solid var(--border-color) !important; /* border according to theme */
   border-radius: 6px;
   min-height: 48px;
-  cursor: pointer;
-  box-shadow: none !important;
+  cursor: pointer; /* pointer indicates clickable */
+  box-shadow: none !important; /* remove default react-select shadow */
   color: var(--text-color);
   font-family: var(--main-font);
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; /* smooth transition for hover/focus */
 }
 
-/* عند التركيز */
+/* Focused state */
 .custom-select__control--is-focused {
-  border-color: var(--accent-color) !important;
-  box-shadow: 0 0 5px var(--accent-color)33 !important;
+  border-color: var(--accent-color) !important; /* accent border on focus */
+  box-shadow: 0 0 5px var(--accent-color)33 !important; /* subtle glow */
 }
 
-/* Placeholder */
+/* Placeholder text */
 .custom-select__placeholder {
   color: var(--text-color);
-  opacity: 0.6;
+  opacity: 0.6; /* slightly faded */
 }
 
-/* النص المحدد */
+/* Selected value */
 .custom-select__single-value {
   color: var(--text-color) !important;
 }
 
 /* ==============================
-   القائمة Dropdown
+   Dropdown Menu
 ============================== */
 .custom-select__menu {
-  background-color: var(--bg-color) !important; /* 🔹 نفس خلفية الثيم */
+  background-color: var(--bg-color) !important; /* match theme background */
   border: 1px solid var(--border-color) !important;
   border-radius: 6px;
   color: var(--dropdown-text) !important;
-  margin-top: 4px;
-  z-index: 9999 !important;
-  overflow: hidden;
+  margin-top: 4px; /* slight spacing from control */
+  z-index: 9999 !important; /* ensure it overlays other elements */
+  overflow: hidden; /* prevent overflow */
 }
 
 /* ==============================
-   الخيارات
+   Options inside dropdown
 ============================== */
 .custom-select__option {
   background-color: var(--bg-color) !important;
   color: var(--text-color) !important;
   padding: 10px;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition: background-color 0.25s ease, color 0.25s ease; /* smooth hover transition */
+  cursor: pointer !important; /* pointer on hover */
 }
 
-/* 🖱️ عند التحويم (Hover / Focus) */
+/* Hover / Focused option */
 .custom-select__option--is-focused {
-  background-color: var(--accent-color) !important;
-  color: #fff !important;
+  background-color: var(--accent-color) !important; /* highlight color */
+  color: #fff !important; /* text contrast on highlight */
 }
 
-
-/* 🖱️ التحكم بالمؤشر بدقة */
-.custom-select__option {
-  cursor: pointer !important; /* الافتراضي: اليد */
-}
-
-
-/* 🔹 السهم الافتراضي */
+/* ==============================
+   Dropdown Indicator (Arrow)
+============================== */
 .custom-select__dropdown-indicator {
-  color: var(--accent-color); /* لون السهم حسب الثيم */
-  transition: transform 0.3s ease, color 0.3s ease; /* حركة سلسة للدوران وتبديل اللون */
+  color: var(--accent-color); /* arrow color */
+  transition: transform 0.3s ease, color 0.3s ease; /* smooth rotation & color */
 }
+
+/* Remove separator between arrow and value */
 .custom-select__indicator-separator { 
   display: none; 
 }
 
-
-/* 🔹 عند فتح القائمة: دوران + تغيير اللون */
+/* Arrow rotation when menu is open */
 .custom-select__control--menu-is-open .custom-select__dropdown-indicator {
-  transform: rotate(180deg); /* يدور للأعلى */
-  color: var(--accent-color); /* يغيّر لونه للون الرئيسي */
+  transform: rotate(180deg); /* point up */
+  color: var(--accent-color); /* accent color */
 }
 
 /* ==============================
-   RTL / LTR دعم الاتجاه
+   RTL / LTR Support
 ============================== */
+/* RTL control alignment */
 [dir="rtl"] .custom-select__control { text-align: right; }
+/* RTL single value spacing */
 [dir="rtl"] .custom-select__single-value { margin-right: 8px; margin-left: 0; }
+/* LTR single value spacing */
 [dir="ltr"] .custom-select__single-value { margin-left: 8px; margin-right: 0; }
+/* RTL arrow positioning */
 [dir="rtl"] .custom-select__dropdown-indicator { margin-left: 8px; margin-right: 0; }
+/* LTR arrow positioning */
 [dir="ltr"] .custom-select__dropdown-indicator { margin-right: 8px; margin-left: 0; }

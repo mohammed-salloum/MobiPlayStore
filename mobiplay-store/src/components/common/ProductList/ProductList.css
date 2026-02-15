@@ -1,8 +1,10 @@
 /* =========================
-   ProductList - عام للمنتجات والعروض
+   ProductList - General Styles for Products and Offers
 ========================= */
+
+/* Container for the product list */
 .product-list-container {
-  min-height: 80vh;
+  min-height: 80vh; /* Ensure enough height for content */
   width: 100%;
   padding: 1rem;
   color: var(--text-color);
@@ -10,31 +12,47 @@
   flex-direction: column;
 }
 
+/* Section title styling */
 .product-list-title {
   font-weight: 700;
   text-align: center;
   margin-top: 80px;
   margin-bottom: 2rem;
-   color: var(--accent-color);
+  color: var(--accent-color);
 }
 
-/* RTL / LTR */
-.rtl { direction: rtl; text-align: right; }
-.ltr { direction: ltr; text-align: left; }
+/* Directional support: RTL / LTR */
+.rtl { 
+  direction: rtl; 
+  text-align: right; 
+}
 
-/* شبكة Grid للبطاقات */
+.ltr { 
+  direction: ltr; 
+  text-align: left; 
+}
+
+/* Grid layout for product cards */
 .product-list-grid {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.5rem; /* Spacing between cards */
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   margin-bottom: 2rem;
 }
 
-/* Responsive grid */
-@media (max-width: 1400px) { .product-list-grid { grid-template-columns: repeat(4, 1fr); } }
-@media (max-width: 1200px) { .product-list-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 992px)  { .product-list-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 576px)  { .product-list-grid { grid-template-columns: 1fr; } }
+/* Responsive grid adjustments for different screen sizes */
+@media (max-width: 1400px) { 
+  .product-list-grid { grid-template-columns: repeat(4, 1fr); } 
+}
 
+@media (max-width: 1200px) { 
+  .product-list-grid { grid-template-columns: repeat(3, 1fr); } 
+}
 
+@media (max-width: 992px)  { 
+  .product-list-grid { grid-template-columns: repeat(2, 1fr); } 
+}
 
+@media (max-width: 576px)  { 
+  .product-list-grid { grid-template-columns: 1fr; } 
+}

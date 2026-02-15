@@ -1,26 +1,25 @@
-import React from "react";
 import Stars from "./Stars";
 import { useTranslation } from "react-i18next";
 
 function RatingReadOnly({
-  rating = 0,
-  reviewCount = 0,
-  theme = "light",
-  totalStars = 5,
-  size = 22
+  rating = 0,           // Current average rating to display
+  reviewCount = 0,      // Number of reviews for display
+  theme = "light",      // Theme: light or dark
+  totalStars = 5,       // Total number of stars to display
+  size = 22             // Size of the star icons in pixels
 }) {
   const { i18n } = useTranslation();
-  const isRTL = i18n.language === "ar";
+  const isRTL = i18n.language === "ar"; // RTL layout if Arabic
 
   return (
     <Stars
-      rating={rating}
-      reviewCount={reviewCount}
-      totalStars={totalStars}
-      isRTL={isRTL}
-      theme={theme}
-      interactive={false}
-      size={size}
+      rating={rating}          // Value to fill stars
+      reviewCount={reviewCount} // Optional display of review count
+      totalStars={totalStars}   // Max number of stars
+      isRTL={isRTL}             // Layout direction
+      theme={theme}             // Theme for stars
+      interactive={false}       // Read-only mode
+      size={size}               // Icon size
     />
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Button from "../Common/Button/Button";
 import { useTranslation } from "react-i18next";
@@ -19,54 +19,57 @@ function ProductInfoSection({
   const dispatch = useDispatch();
   const [description, setDescription] = useState(product.description || "");
 
+  // Update description if product changes
   useEffect(() => {
     setDescription(product.description || "");
   }, [product.description]);
 
+  // Determine display price and total price
   const displayPrice = Number(product.discountedPrice ?? product.price);
   const formattedDisplayPrice = formatUSD(displayPrice);
   const formattedTotalPrice = formatUSD(displayPrice * quantity);
 
+  // Handle quantity change, minimum 1
   const handleQuantityChange = (newQty) => {
     if (newQty < 1) return;
     setQuantity(newQty);
   };
 
+  // Add to cart or update quantity if already in cart
   const handleAddOrUpdate = () => {
     if (cartItem) {
-      // تحديث الكمية بالضبط
       dispatch(setQuantityExact({ id: product.id, quantity }));
     } else {
-      // إضافة المنتج للمرة الأولى
       dispatch(addToCart({ product, quantity }));
     }
   };
 
+  // Remove item from cart
   const handleRemove = () => {
     if (cartItem) dispatch(removeFromCart(product.id));
   };
 
   return (
     <div className={`product-info-cart theme-${theme} ${isRTL ? "rtl" : "ltr"}`}>
-      {/* وصف المنتج */}
+      {/* Product description */}
       <div className="product-description">
         <strong>{t("productDetails.description")}:</strong>
         {description?.trim() ? (
           <div
             className="product-description-content"
-            dangerouslySetInnerHTML={{ __html: description }}
+            dangerouslySetInnerHTML={{ __html: description }} // Render HTML description
           />
         ) : (
           <span>{t("productDetails.noDescription")}</span>
         )}
       </div>
 
-      {/* السعر */}
+      {/* Single item price */}
       <p>
         <strong>{t("productDetails.price")}:</strong> {formattedDisplayPrice}
       </p>
 
-      {/* اختيار الكمية */}
+      {/* Quantity selector */}
       <div className={`quantity-wrapper ${isRTL ? "rtl" : "ltr"}`}>
         <strong className="quantity-label">{t("productDetails.quantity")}:</strong>
         <div className={`quantity-controls ${isRTL ? "rtl" : "ltr"}`}>
@@ -92,28 +95,30 @@ function ProductInfoSection({
         </div>
       </div>
 
-      {/* السعر الإجمالي */}
+      {/* Total price for selected quantity */}
       <p>
         <strong>{t("productDetails.totalPrice")}:</strong> {formattedTotalPrice}
       </p>
 
-      {/* أزرار السلة */}
+      {/* Cart action buttons */}
       <div className="cart-buttons">
         <Button
           variant="primary"
           onClick={handleAddOrUpdate}
           fullWidth
-          disabled={quantity < 1}
+          disabled={quantity < 1} // Disable if quantity is invalid
         >
           {cartItem ? t("productDetails.updateCart") : t("productDetails.addToCart")}
         </Button>
 
+        {/* Remove from cart button only if item exists */}
         {cartItem && (
           <Button variant="remove-cart" onClick={handleRemove}>
             {t("productDetails.remove")}
           </Button>
         )}
 
+        {/* Back navigation button */}
         <Button variant="back" onClick={onBack}>
           {isRTL ? "← " : "→ "} {t("productDetails.back")}
         </Button>

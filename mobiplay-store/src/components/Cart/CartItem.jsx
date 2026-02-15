@@ -1,5 +1,5 @@
 // src/components/Cart/CartItem.jsx
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
@@ -7,34 +7,67 @@ import { removeFromCart, setQuantityExact } from "../../redux/slices/cartSlice";
 import Button from "../Common/Button/Button";
 import "./CartItem.css";
 
+/**
+ * CartItem Component
+ * ------------------
+ * Displays a single product/item in the shopping cart.
+ * Includes quantity controls, price calculation, and remove button.
+ *
+ * Props:
+ *  - item: object containing { id, name, price, discountedPrice, quantity, ... }
+ */
 function CartItem({ item }) {
   const dispatch = useDispatch();
-  const { theme } = useContext(ThemeContext);
-  const { t, i18n } = useTranslation();
-  const isRTL = i18n.language === "ar";
 
+  // ThemeContext allows dynamic theming (dark/light)
+  const { theme } = useContext(ThemeContext);
+
+  // i18n for translation
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === "ar"; // adjust layout for RTL languages
+
+  /**
+   * Increase the quantity of this item by 1
+   */
   const handleIncrease = () => {
     dispatch(setQuantityExact({ id: item.id, quantity: item.quantity + 1 }));
   };
 
+  /**
+   * Decrease the quantity of this item by 1 (minimum 1)
+   */
   const handleDecrease = () => {
     if (item.quantity > 1) {
       dispatch(setQuantityExact({ id: item.id, quantity: item.quantity - 1 }));
     }
   };
 
+  /**
+   * Remove this item entirely from the cart
+   */
   const handleRemove = () => {
     dispatch(removeFromCart(item.id));
   };
 
+  /**
+   * Calculate total price for this cart item
+   * If a discounted price exists, use it; otherwise use original price
+   */
   const itemPrice = (item.discountedPrice ?? item.price) * item.quantity;
 
   return (
     <li className="cart-item" data-theme={theme} dir={isRTL ? "rtl" : "ltr"}>
-      {/* اسم اللعبة */}
+      {/* -------------------------
+          Product Name
+      -------------------------- */}
       <div className="cart-item-name">{item.name}</div>
 
-      {/* أزرار الكمية */}
+      {/* -------------------------
+          Quantity Controls
+          - Decrease button
+          - Quantity display
+          - Increase button
+      -------------------------- */}
       <div className="quantity-wrapper">
         <Button variant="quantity" theme={theme} onClick={handleDecrease}>
           -
@@ -45,10 +78,17 @@ function CartItem({ item }) {
         </Button>
       </div>
 
-      {/* السعر */}
+      {/* -------------------------
+          Price Display
+          Shows total price for the quantity
+      -------------------------- */}
       <div className="cart-item-price">${itemPrice.toFixed(2)}</div>
 
-      {/* زر الإلغاء */}
+      {/* -------------------------
+          Remove Button
+          - Uses translation key "cart.cancel"
+          - Styled according to theme
+      -------------------------- */}
       <div className="cart-item-cancel">
         <Button
           className="cancel"

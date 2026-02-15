@@ -1,5 +1,5 @@
 /* =========================
-   Pagination & Nav Buttons
+   🔘 Pagination & Navigation Buttons
 ========================= */
 
 /* Pagination container */
@@ -7,14 +7,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap; /* يسمح بالانتقال لسطر جديد على الديسكتوب إذا لزم */
+  gap: 12px;                   /* Space between buttons */
+  flex-wrap: wrap;              /* Wrap to new line if needed */
   margin: 20px 0;
   padding: 0 1rem;
-  overflow-x: auto;
+  overflow-x: auto;             /* Horizontal scroll if too many buttons */
 }
 
-/* Buttons (Prev / Next & Pages) */
+/* Buttons: Page numbers and Prev/Next */
 .btn-pagination,
 .nav-btn {
   display: inline-flex;
@@ -35,14 +35,15 @@
   border: 1px solid var(--border-color);
 }
 
-/* Hover / Active / Disabled */
+/* Hover and active states */
 .btn-pagination:hover:not(.active):not(:disabled),
 .nav-btn:hover:not(:disabled) {
   background-color: var(--primary-color);
   color: var(--text-on-primary, #fff);
-  transform: translateY(-1px);
+  transform: translateY(-1px);      /* Lift effect */
   box-shadow: 0 2px 6px rgba(0,0,0,0.12);
 }
+
 .btn-pagination.active,
 .btn-pagination.active:hover {
   background-color: var(--primary-color);
@@ -51,6 +52,8 @@
   transform: none;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
+
+/* Disabled buttons */
 .btn-pagination:disabled,
 .nav-btn:disabled {
   cursor: not-allowed;
@@ -62,24 +65,24 @@
   border: 1px solid var(--border-color);
 }
 
-/* Pages wrapper */
+/* Pages wrapper (numeric buttons) */
 .pages-wrapper {
   display: flex;
   gap: 8px;
   justify-content: center;
-  flex-wrap: nowrap; /* دائمًا على سطر واحد */
+  flex-wrap: nowrap;             /* Keep pages in one line */
   overflow-x: auto;
 }
 
-/* Current page mobile */
+/* Current page display for mobile */
 .current-page-mobile {
-  display: none; /* تظهر على الموبايل */
+  display: none;                 /* Shown only on small screens */
   font-weight: 600;
   font-size: 0.95rem;
   margin: 0 6px;
 }
 
-/* Nav arrows */
+/* Nav arrow icons */
 .arrow-pagination {
   font-size: 0.95rem;
   display: inline-block;
@@ -96,21 +99,23 @@
   gap: 6px;
 }
 .nav-btn .nav-content.rtl {
-  flex-direction: row-reverse;
+  flex-direction: row-reverse;   /* Flip label + arrow for RTL */
 }
 
 /* =========================
-   Responsive
+   📱 Responsive Styles
 ========================= */
+
+/* Small screens (<576px) */
 @media (max-width: 576px) {
   .pagination-container {
-    display: inline-flex;       /* الحاوية فقط بعرض الأزرار */
+    display: inline-flex;
     align-items: center;
-    justify-content: center;    /* أزرار في الوسط */
-    gap: 10px;                  /* مسافة بين الأزرار */
-    padding: 0 6px;             /* مسافة بسيطة من الحواف */
+    justify-content: center;
+    gap: 10px;
+    padding: 0 6px;
     box-sizing: border-box;
-    width: auto;                /* العرض على قد المحتوى */
+    width: auto;
   }
 
   .btn-pagination,
@@ -127,20 +132,22 @@
     text-align: center;
   }
 }
+
+/* Very small screens (<400px) */
 @media (max-width: 400px) {
   .pagination-container {
     display: flex;
-    flex-wrap: wrap; /* السماح بالانزلاق إذا لم تكفي المساحة */
+    flex-wrap: wrap;              /* Allow line wrapping if needed */
     justify-content: center;
     align-items: center;
-    gap: 6px; 
-    padding: 0 8px; /* مسافة من الحواف */
+    gap: 6px;
+    padding: 0 8px;
   }
 
   .btn-pagination,
   .nav-btn {
-    flex: 0 1 auto; /* الحجم الطبيعي حسب النص */
-    min-width: 40px; /* الحد الأدنى */
+    flex: 0 1 auto;               /* Natural button size */
+    min-width: 40px;
     height: 40px;
     padding: 0 8px;
     font-size: 0.85rem;
@@ -149,38 +156,40 @@
   .current-page-mobile {
     width: 100%;
     text-align: center;
-    margin: 4px 0; /* مسافة بسيطة بين الصفوف */
+    margin: 4px 0;
   }
 }
 
-
-/* شاشات صغيرة جدًا جدًا (≤350px) */
+/* Extra small screens (≤350px) */
 @media (max-width: 350px) {
   .pagination-container {
-    flex-direction: column; /* لجعل الأزرار عمودية لو لا يوجد مساحة كافية */
+    flex-direction: column;       /* Stack buttons vertically */
     align-items: center;
   }
+
   .btn-pagination,
   .nav-btn {
-    width: 80%; /* تقريب الأزرار لملئ الشاشة */
+    width: 80%;                   /* Stretch buttons to container */
     max-width: 160px;
     margin: 2px 0;
   }
 }
 
-/* Landscape صغير على الهواتف */
+/* Landscape small devices */
 @media (max-width: 768px) and (orientation: landscape) {
   .pagination-container {
     flex-direction: row;
     flex-wrap: nowrap;
     gap: 8px;
   }
+
   .btn-pagination,
   .nav-btn {
     min-width: 40px;
     height: 40px;
     font-size: 0.85rem;
   }
+
   .current-page-mobile {
     font-size: 0.9rem;
   }

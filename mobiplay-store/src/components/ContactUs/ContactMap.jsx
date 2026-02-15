@@ -1,32 +1,36 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import "./ContactMap.css";
 
+/* =========================
+   ContactMap Component
+   - Displays Google Maps iframe for store location
+   - Supports optional small view and zoom level
+========================= */
 function ContactMap({ small, zoom = 14 }) {
   const { t } = useTranslation();
 
-  // الموقع بالإنجليزي
+  // Store location query in English for Google Maps
   const locationQuery = "MobiPlayStore, Tartus, Syria";
 
+  /* =========================
+     Build Google Maps embed URL
+     - Encodes location query and zoom
+     - Returns iframe-friendly URL
+  ======================== */
   const buildMapURL = () => {
     const base = "https://maps.google.com/maps";
     return `${base}?q=${encodeURIComponent(locationQuery)}&z=${zoom}&output=embed`;
   };
 
-  const src = buildMapURL();
+  const src = buildMapURL(); // iframe src
 
   return (
+    /* Wrapper adjusts size if 'small' prop is true */
     <div className={`contact-map-wrapper ${small ? "small" : ""}`}>
       <iframe
         title="MobiPlayStore"
         src={src}
-        loading="lazy"
-        style={{
-          width: "100%",
-          height: small ? "220px" : "400px",
-          border: 0,
-          pointerEvents: "auto", // تفاعل ممكن على كل الشاشات
-        }}
+        loading="lazy" // improves performance on page load
       ></iframe>
     </div>
   );

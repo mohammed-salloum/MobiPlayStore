@@ -1,16 +1,26 @@
 /* ==============================
-   📝 معلومات الاتصال
+   📝 Contact Info Container
+   - Handles company contact details layout
+   - Flexible padding and responsive width
 ============================== */
 .contact-info {
   flex: 1;
   min-width: 250px;
-  padding-inline: clamp(0.5rem, 2vw, 1rem); /* مسافة جانبية مرنة */
+  padding-inline: clamp(0.5rem, 2vw, 1rem); /* responsive horizontal padding */
 }
+
+/* Subtitle / Company Name */
 .contact-subtitle {
   font-weight: bold;
-color: var(--accent-color);
+  color: var(--accent-color);
 }
-/* الأيقونات ترث اللون من الثيم */
+
+/* ==============================
+   Icon Box
+   - Circular container for icons
+   - Inherits theme colors
+   - Hover effects for interactivity
+============================== */
 .icon-box {
   width: clamp(24px, 4vw, 28px);
   height: clamp(24px, 4vw, 28px);
@@ -30,15 +40,23 @@ color: var(--accent-color);
   filter: brightness(1.1);
 }
 
-/* ترتيب العناصر */
+/* ==============================
+   Info Item Layout
+   - Aligns icon with text/link
+   - Responsive gap and spacing
+============================== */
 .contact-info .info-item {
   display: flex;
   align-items: center;
-  gap: clamp(6px, 2vw, 14px); /* فجوة ديناميكية */
+  gap: clamp(6px, 2vw, 14px); /* dynamic spacing */
   margin-bottom: clamp(0.5rem, 1vw, 1rem);
 }
 
-/* نصوص وروابط */
+/* ==============================
+   Text and Links
+   - Responsive font sizes
+   - Hover effects on links
+============================== */
 .contact-info .info-text,
 .contact-info .info-link {
   font-size: clamp(0.85rem, 1.5vw, 1rem);
@@ -50,21 +68,24 @@ color: var(--accent-color);
 
 .contact-info .info-link:hover {
   text-decoration: underline;
-    color: var(--link-hover);  
+  color: var(--link-hover);
 }
 
-/* الهاتف دائمًا LTR */
+/* Ensure phone numbers are always LTR */
 .contact-info .info-link[href^="tel"] {
   direction: ltr;
 }
 
-/* الاتجاه حسب اللغة */
+/* ==============================
+   Direction Support (RTL / LTR)
+============================== */
 .rtl { direction: rtl; text-align: right; }
 .ltr { direction: ltr; text-align: left; }
 
-/* =========================
-   التجاوب الاحترافي
-========================= */
+/* ==============================
+   Responsive Adjustments
+   - Adjust spacing for tablets and mobile
+============================== */
 @media (max-width: 1024px) {
   .contact-info {
     margin-top: 1.5rem;

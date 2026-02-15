@@ -5,40 +5,78 @@ import { translateText } from "../utils/translate.js";
 
 const router = express.Router();
 
-// ===== RAWG API Key =====
+// ==================================================
+// RAWG API Key (must be defined in environment vars)
+// ==================================================
 const RAWG_API_KEY = process.env.RAWG_API_KEY;
 if (!RAWG_API_KEY) {
   console.error("❌ RAWG_API_KEY is missing in .env!");
   process.exit(1);
 }
 
-// ===== Constants =====
-const AXIOS_TIMEOUT = 30000;
-const DEFAULT_PAGE_SIZE = 8;
-const CACHE_TTL = 300; // 5 دقائق
-const TOTAL_PRODUCT_PAGES = 4;
-const TOTAL_OFFER_PAGES = 2;
-const OFFER_DISCOUNT = 20;
+// ==================================================
+// Configuration Constants
+// ==================================================
+const AXIOS_TIMEOUT = 30000;        // Request timeout (ms)
+const DEFAULT_PAGE_SIZE = 8;        // Number of games per page
+const CACHE_TTL = 300;              // Cache TTL (5 minutes)
+const TOTAL_PRODUCT_PAGES = 4;      // Total pages for products
+const TOTAL_OFFER_PAGES = 2;        // Total pages for offers
+const OFFER_DISCOUNT = 20;          // Discount percentage for offers
 
-// ===== Utility Functions =====
+// ==================================================
+// Utility Functions
+// ==================================================
+
+/**
+ * Generate a fixed pseudo-price based on game ID
+ */
 const getFixedPrice = (id) => 10 + (parseInt(id, 10) % 51);
 
+/**
+ * Truncate text by word count
+ */
 const truncateWords = (text, wordLimit = 50) => {
   if (!text) return "";
   const words = text.split(/\s+/);
-  return words.length <= wordLimit ? text : words.slice(0, wordLimit).join(" ") + "...";
+  return words.length <= wordLimit
+    ? text
+    : words.slice(0, wordLimit).join(" ") + "...";
 };
 
-// ===== Fetch RAWG API =====
-const fetchRawgGamesPage = async (page = 1, pageSize = DEFAULT_PAGE_SIZE) => {
-  const { data } = await axios.get("https://api.rawg.io/api/games", {
-    params: { key: RAWG_API_KEY, page_size: pageSize, page },
-    timeout: AXIOS_TIMEOUT,
-  });
+// ==================================================
+// RAWG API Fetch Helpers
+// ==================================================
+
+/**
+ * Fetch a page of games from RAWG API
+ */
+const fetchRawgGamesPage = async (
+  page = 1,
+  pageSize = DEFAULT_PAGE_SIZE
+) => {
+  const { data } = await axios.get(
+    "https://api.rawg.io/api/games",
+    {
+      params: {
+        key: RAWG_API_KEY,
+        page_size: pageSize,
+        page,
+      },
+      timeout: AXIOS_TIMEOUT,
+    }
+  );
+
   return data.results;
 };
 
-// ===== Cache Helper (Lazy) =====
+// ==================================================
+// Cache Helper (Lazy Fetch Pattern)
+// ==================================================
+
+/**
+ * Retrieve data from cache or fetch it if missing
+ */
 const getOrFetch = async (cacheKey, fetchFn, ttl = CACHE_TTL) => {
   const cached = getCache(cacheKey);
   if (cached) return cached;
@@ -48,20 +86,39 @@ const getOrFetch = async (cacheKey, fetchFn, ttl = CACHE_TTL) => {
   return data;
 };
 
-// ===== Routes =====
-router.get("/", (req, res) => res.json({ message: "Welcome to Games API" }));
+// ==================================================
+// Routes
+// ==================================================
 
-// ===== Products =====
+/**
+ * Health / Welcome route
+ */
+router.get("/", (req, res) => {
+  res.json({ message: "Welcome to Games API" });
+});
+
+// ==================================================
+// Products List
+// ==================================================
 router.get("/products", async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
+
+    // Validate page range
     if (page > TOTAL_PRODUCT_PAGES) {
-      return res.status(400).json({ results: [], error: "Invalid page number" });
+      return res
+        .status(400)
+        .json({ results: [], error: "Invalid page number" });
     }
 
     const cacheKey = `products:page:${page}:size:${DEFAULT_PAGE_SIZE}`;
-    const results = await getOrFetch(cacheKey, () => fetchRawgGamesPage(page, DEFAULT_PAGE_SIZE));
 
+    const results = await getOrFetch(
+      cacheKey,
+      () => fetchRawgGamesPage(page, DEFAULT_PAGE_SIZE)
+    );
+
+    // Normalize product data
     const games = results.map((game) => ({
       id: game.id,
       name: game.name || "Unknown",
@@ -79,40 +136,57 @@ router.get("/products", async (req, res) => {
     });
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ results: [], error: "Failed to fetch products" });
+    res
+      .status(500)
+      .json({ results: [], error: "Failed to fetch products" });
   }
 });
 
-// ===== Offers =====
+// ==================================================
+// Offers List
+// ==================================================
 router.get("/offers", async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
+
+    // Validate page range
     if (page > TOTAL_OFFER_PAGES) {
-      return res.status(400).json({ results: [], error: "Invalid page number" });
+      return res
+        .status(400)
+        .json({ results: [], error: "Invalid page number" });
     }
 
-    // حساب رقم الصفحة في RAWG بعد آخر صفحة من المنتجات
+    // RAWG pages for offers start after product pages
     const rawgPage = TOTAL_PRODUCT_PAGES + page;
-    const cacheKey = `offers:page:${page}:size:${DEFAULT_PAGE_SIZE}`;
-    const results = await getOrFetch(cacheKey, () => fetchRawgGamesPage(rawgPage, DEFAULT_PAGE_SIZE));
 
-    // إنشاء كاش مركزي لكل العروض (id -> خصم)
+    const cacheKey = `offers:page:${page}:size:${DEFAULT_PAGE_SIZE}`;
+
+    const results = await getOrFetch(
+      cacheKey,
+      () => fetchRawgGamesPage(rawgPage, DEFAULT_PAGE_SIZE)
+    );
+
+    // Build centralized offers index (gameId -> discount)
     let offersIndex = getCache("offersIndex") || {};
     results.forEach((game) => {
       offersIndex[game.id] = OFFER_DISCOUNT;
     });
     setCache("offersIndex", offersIndex, CACHE_TTL);
 
-    const games = results.map((game) => ({
-      id: game.id,
-      name: game.name || "Unknown",
-      background_image: game.background_image,
-      rating: game.rating ?? 0,
-      ratings_count: game.ratings_count ?? 0,
-      price: getFixedPrice(game.id),
-      discount: OFFER_DISCOUNT,
-      discountedPrice: +(getFixedPrice(game.id) * (1 - OFFER_DISCOUNT / 100)).toFixed(2),
-    }));
+    // Normalize offer data
+    const games = results.map((game) => {
+      const price = getFixedPrice(game.id);
+      return {
+        id: game.id,
+        name: game.name || "Unknown",
+        background_image: game.background_image,
+        rating: game.rating ?? 0,
+        ratings_count: game.ratings_count ?? 0,
+        price,
+        discount: OFFER_DISCOUNT,
+        discountedPrice: +(price * (1 - OFFER_DISCOUNT / 100)).toFixed(2),
+      };
+    });
 
     res.json({
       results: games,
@@ -122,28 +196,38 @@ router.get("/offers", async (req, res) => {
     });
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ results: [], error: "Failed to fetch offers" });
+    res
+      .status(500)
+      .json({ results: [], error: "Failed to fetch offers" });
   }
 });
 
-// ===== Single Product Details =====
+// ==================================================
+// Single Product Details
+// ==================================================
 router.get("/products/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const lang = req.query.lang || "en";
+
     const cacheKey = `product:${id}`;
 
     const product = await getOrFetch(cacheKey, async () => {
-      const { data: rawGame } = await axios.get(`https://api.rawg.io/api/games/${id}`, {
-        params: { key: RAWG_API_KEY },
-        timeout: AXIOS_TIMEOUT,
-      });
+      const { data: rawGame } = await axios.get(
+        `https://api.rawg.io/api/games/${id}`,
+        {
+          params: { key: RAWG_API_KEY },
+          timeout: AXIOS_TIMEOUT,
+        }
+      );
 
       if (!rawGame) return null;
 
-      // ===== استخدام كاش مركزي للعروض =====
+      // Retrieve discount from centralized offers cache
       const offersIndex = getCache("offersIndex") || {};
       const discount = offersIndex[rawGame.id] || 0;
+
+      const price = getFixedPrice(id);
 
       return {
         id: rawGame.id,
@@ -151,27 +235,38 @@ router.get("/products/:id", async (req, res) => {
         background_image: rawGame.background_image,
         rating: rawGame.rating ?? 0,
         ratings_count: rawGame.ratings_count ?? 0,
-        price: getFixedPrice(id),
+        price,
         discount,
-        discountedPrice: +(getFixedPrice(id) * (1 - discount / 100)).toFixed(2),
+        discountedPrice: +(price * (1 - discount / 100)).toFixed(2),
         description_raw: rawGame.description_raw || "",
       };
     });
 
-    if (!product) return res.status(404).json({ error: "Product not found" });
-
-    // ===== ترجمة عند الطلب =====
-    const descCacheKey = `desc:${id}:${lang}`;
-    let description = getCache(descCacheKey);
-    if (!description) {
-      description = await translateText(product.description_raw, lang);
-      setCache(descCacheKey, description, 86400); // يوم كامل
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
     }
 
-    res.json({ ...product, description: truncateWords(description, 50) });
+    // Translate description on demand (cached per language)
+    const descCacheKey = `desc:${id}:${lang}`;
+    let description = getCache(descCacheKey);
+
+    if (!description) {
+      description = await translateText(
+        product.description_raw,
+        lang
+      );
+      setCache(descCacheKey, description, 86400); // Cache for 1 day
+    }
+
+    res.json({
+      ...product,
+      description: truncateWords(description, 50),
+    });
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ error: "Failed to fetch product" });
+    res
+      .status(500)
+      .json({ error: "Failed to fetch product" });
   }
 });
 

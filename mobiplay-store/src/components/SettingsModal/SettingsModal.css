@@ -2,13 +2,14 @@
    Settings Modal - Responsive & Auto Size
 ========================= */
 
+/* Full-screen overlay for modal with centered content */
 .settings-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.4); /* semi-transparent backdrop */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,6 +17,7 @@
   padding: 8px 5px;
 }
 
+/* Modal container */
 .settings-modal {
   display: flex;
   flex-direction: column;
@@ -28,13 +30,15 @@
   width: auto;
   min-width: 180px;
   max-width: 90%;
-  max-height: 90vh;       /* لا يتجاوز ارتفاع الشاشة */
+  max-height: 90vh;       /* Do not exceed viewport height */
   box-shadow: 0 5px 15px rgba(0,0,0,0.25);
   overflow: hidden;
   padding: 10px 15px;
 }
 
-/* Header */
+/* =========================
+   Header
+========================= */
 .settings-header {
   display: flex;
   align-items: center;
@@ -46,11 +50,12 @@
 }
 
 .settings-header h3 {
-  margin:0;
-  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-  font-weight:600;
+  margin: 0;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem); /* Responsive heading */
+  font-weight: 600;
 }
 
+/* Close button styles */
 .close-btn {
   background: transparent;
   border: none;
@@ -63,25 +68,28 @@
   color: var(--accent-color,#2563eb); 
 }
 
-/* Content */
+/* =========================
+   Content
+========================= */
 .settings-content {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: auto; /* Scroll if content overflows */
   padding: 8px 10px;
 }
 
-/* Sections */
+/* Individual sections inside modal */
 .settings-section { margin-bottom:8px; }
 
 .settings-section h4 {
   margin-bottom:6px;
-  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  font-size: clamp(0.75rem, 2vw, 0.9rem); /* Responsive section titles */
   font-weight:500;
 }
-/* خطوط الفصل - يورث اللون من الثيم */
+
+/* Divider line inherits theme color */
 hr {
   border: none;
-  border-top: 1px solid var(--accent-color); /* fallback للون الافتراضي */
+  border-top: 1px solid var(--accent-color); /* fallback */
   margin: 8px 0;
 }
 
@@ -104,20 +112,21 @@ hr {
 }
 
 .fonts-container .font-btn.size {
-  height: 26px;
+  height: 26px; /* Fixed height for font size buttons */
 }
 
 /* =========================
-   أيقونات SettingsModal
+   Icons
 ========================= */
-/* أيقونة الإعدادات */
+
+/* Settings icon */
 .settings-icon {
   color: var(--icon-color);
-  font-size: clamp(1rem, 2vw, 1.2rem); /* أصغر حجم متناسق */
+  font-size: clamp(1rem, 2vw, 1.2rem); /* Responsive icon size */
   margin-right: 4px;
 }
 
-/* أيقونة الإغلاق */
+/* Close icon */
 .close-icon {
   color: var(--icon-color);
   font-size: clamp(1.2rem, 2vw, 1.5rem);
@@ -128,7 +137,7 @@ hr {
    Responsive Media Queries
 ========================= */
 
-/* شاشات صغيرة ≤480px */
+/* Small screens ≤480px */
 @media (max-width:480px) {
   .settings-modal { 
     padding: 6px 8px; 
@@ -136,7 +145,7 @@ hr {
   }
 }
 
-/* شاشات صغيرة جدًا ≤350px */
+/* Very small screens ≤350px */
 @media (max-width:350px) {
   .settings-modal { 
     padding: 4px 6px; 
@@ -144,7 +153,7 @@ hr {
   }
 }
 
-/* الوضع الأفقي - Landscape */
+/* Landscape orientation adjustments */
 @media (orientation: landscape) {
   .settings-modal { 
     max-height: calc(100vh - 50px);

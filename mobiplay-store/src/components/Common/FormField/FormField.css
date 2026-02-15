@@ -1,17 +1,17 @@
 /* ==============================
-   ⚙️ حاوية الفورم الرئيسية
+   ⚙️ Main form container
 ============================== */
 .form-wrapper {
   width: 100%;
-  max-width: 600px;     /* أقصى عرض للفورم */
-  margin: 0 auto;       /* تمركز أفقياً */
-  padding: 0 12px;      /* مسافة من الجوانب على الشاشات الصغيرة */
+  max-width: 600px;     /* Maximum form width */
+  margin: 0 auto;       /* Center horizontally */
+  padding: 0 12px;      /* Side padding for small screens */
   box-sizing: border-box;
   font-family: var(--main-font);
 }
 
 /* ==============================
-   ⚙️ إعدادات شاملة للفورم لجميع الشاشات
+   ⚙️ Form field wrapper (all screens)
 ============================== */
 .form-field-wrapper {
   display: flex;
@@ -23,27 +23,29 @@
   transition: all 0.3s ease;
 }
 
-/* اللابل */
+/* Label styling */
 .form-field-wrapper label {
   flex: 0 0 110px;
   font-weight: 600;
   font-size: clamp(0.8rem, 0.7rem, 0.8rem);
-  margin-right: 12px; /* المسافة بين اللابل والحقل */
+  margin-right: 12px; /* Space between label and field */
   margin-top: 0.5rem;
   white-space: nowrap;
 }
+
+/* RTL adjustments */
 .form-field-wrapper.rtl label {
-  margin-left: 12px; /* المسافة بين اللابل والحقل في اللغة العربية */
-  margin-right: 0;   /* للتأكد */
+  margin-left: 12px;
+  margin-right: 0;
 }
 
-/* اللابل المطلوب */
+/* Required field indicator */
 .form-field-wrapper label.required::after {
   content: " *";
   color: var(--error-color);
 }
 
-/* غلاف الحقل + الرسالة */
+/* Field wrapper (input + messages) */
 .form-field-wrapper .field-wrapper {
   display: flex;
   flex-direction: column;
@@ -52,7 +54,7 @@
 }
 
 /* ==============================
-   💬 الحقول الأساسية
+   💬 Base input fields
 =============================== */
 .form-input,
 .phone-container .form-control {
@@ -66,10 +68,11 @@
   box-sizing: border-box;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
 }
-/* textarea الخاصة بالسؤال */
+
+/* Textarea adjustments */
 textarea.form-input {
   width: 100%;
-  min-height: 65px; /* قللنا من 100px إلى 60px */
+  min-height: 65px; /* Reduced from 100px */
   line-height: 1.2;
   resize: vertical;
   padding: 10px 12px;
@@ -79,17 +82,17 @@ textarea.form-input {
   box-sizing: border-box;
 }
 
-/* التركيز */
+/* Focus state for inputs */
 .form-input:focus,
 textarea.form-input:focus,
 .phone-container .form-control:focus {
   outline: none;
   border-color: var(--accent-color);
-  box-shadow: 0 0 4px 1px var(--accent-color); /* ظل خفيف جداً */
+  box-shadow: 0 0 4px 1px var(--accent-color); /* Light shadow */
 }
 
 /* ==============================
-   📱 حقل الهاتف
+   📱 Phone input field
 =============================== */
 .phone-container {
   width: 100%;
@@ -97,7 +100,7 @@ textarea.form-input:focus,
   background-color: transparent;
 }
 
-/* العلم والDropdown */
+/* Flag + dropdown positioning */
 .phone-container .selected-flag,
 .phone-container .flag-dropdown {
   position: absolute;
@@ -111,43 +114,44 @@ textarea.form-input:focus,
   border: none !important;
 }
 
+/* Remove default dropdown arrow */
 .phone-container .selected-flag .arrow,
 .phone-container .flag-dropdown .arrow {
   display: none !important;
 }
 
-
-/* LTR */
+/* LTR positioning */
 .phone-container .selected-flag,
 .phone-container .flag-dropdown {
   left: 12px;
 }
 
-/* RTL */
+/* RTL positioning */
 .form-field-wrapper.rtl .phone-container .selected-flag,
 .form-field-wrapper.rtl .phone-container .flag-dropdown {
   left: auto;
   right: 12px;
 }
 
-/* padding الهاتف ثابت */
+/* Input padding for phone field */
 .phone-container .form-control {
   height: 44px;
-  padding-left: 64px; /* علم + مسافة */
+  padding-left: 64px; /* Space for flag */
   padding-right: 12px;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-  background-color: transparent; /* شفافة تمامًا */
+  background-color: transparent;
   color: var(--input-text);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
 }
 
+/* RTL padding adjustment */
 .form-field-wrapper.rtl .phone-container .form-control {
   padding-left: 12px;
   padding-right: 64px;
 }
 
-/* إزالة أي خلفية إضافية من wrapper الداخلي */
+/* Remove extra backgrounds/borders */
 .phone-container,
 .phone-container .selected-flag,
 .phone-container .flag-dropdown {
@@ -156,7 +160,7 @@ textarea.form-input:focus,
 }
 
 /* ==============================
-   💬 رسائل الحقول
+   💬 Field messages
 =============================== */
 .field-message {
   font-size: 0.75rem;
@@ -165,7 +169,7 @@ textarea.form-input:focus,
 }
 
 /* ==============================
-   🧱 رسائل النجاح أو الخطأ
+   🧱 Success & error messages
 =============================== */
 .error,
 .success {
@@ -187,11 +191,10 @@ textarea.form-input:focus,
   border: 1px solid var(--form-success-border);
 }
 
-
 /* ==============================
-   ⚡️ تجاوب احترافي
+   ⚡️ Responsive adjustments
 =============================== */
-/* بقاء الحقول على نفس سطر اللابل طالما الشاشة تسمح */
+/* Maintain label and field in a row on medium screens */
 @media (max-width: 768px) {
   .form-field-wrapper {
     flex-direction: row;
@@ -216,7 +219,7 @@ textarea.form-input:focus,
   }
 }
 
-/* الشاشات الصغيرة جدًا */
+/* Small screens: stack label above field */
 @media (max-width: 480px) {
   .form-field-wrapper {
     flex-direction: column;
@@ -244,6 +247,7 @@ textarea.form-input:focus,
   }
 }
 
+/* Extra small screens */
 @media (max-width: 350px) {
   .form-field-wrapper label {
     margin-bottom: 2px;
@@ -259,9 +263,8 @@ textarea.form-input:focus,
   }
 }
 
-
 /* ==============================
-   ✅ قائمة الدول مع دعم Dark/Light Theme
+   ✅ Country list styling (Dark/Light)
 =============================== */
 .react-tel-input .country-list {
   background-color: var(--input-bg);
@@ -274,7 +277,7 @@ textarea.form-input:focus,
   z-index: 9999;
 }
 
-/* عناصر الدول */
+/* Country item layout */
 .react-tel-input .country-list .country {
   display: flex !important;
   flex-direction: row !important;
@@ -287,7 +290,7 @@ textarea.form-input:focus,
   color: var(--text-color);
 }
 
-/* العلم */
+/* Flag & dial code */
 .react-tel-input .country-list .country .flag {
   margin-left: 0;
   margin-right: 6px;
@@ -297,8 +300,8 @@ textarea.form-input:focus,
   color: var(--accent-color);
 }
 
-/* ===============================
-   🇨🇦 هوفر على الدولة (Hover)
+/* ==============================
+   🇨🇦 Country hover state
 =============================== */
 .react-tel-input .country-list .country:hover,
 .react-tel-input .country-list .country.highlight:hover,
@@ -307,8 +310,9 @@ textarea.form-input:focus,
   color: #fff !important;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
-/* ===============================
-   ✅ الدولة المحددة (Selected / Active)
+
+/* ==============================
+   ✅ Selected / Active country
 =============================== */
 .react-tel-input .country-list .country.highlight,
 .react-tel-input .country-list .country.active {
@@ -317,26 +321,25 @@ textarea.form-input:focus,
   font-weight: 600;
 }
 
-/* جعل رمز النداء أبيض عند الهوفر */
+/* Make dial code white on hover */
 .react-tel-input .country-list .country:hover .dial-code,
 .react-tel-input .country-list .country.highlight:hover .dial-code,
 .react-tel-input .country-list .country.active:hover .dial-code {
   color: #fff !important;
 }
 
-
-/* 🇸🇦 قلب اتجاه رمز النداء بالعربية */
+/* 🇸🇦 RTL adjustments for dial code */
 .form-field-wrapper.rtl .react-tel-input .country-list .country .dial-code {
-  direction: ltr !important; /* الأرقام نفسها تبقى من اليسار لليمين */
-  unicode-bidi: embed !important; /* يضمن عرضها بشكل صحيح داخل RTL */
-  text-align: left !important; /* يخلي علامة + تبقى جهة اليسار من الرقم */
+  direction: ltr !important;       /* Keep numbers left-to-right */
+  unicode-bidi: embed !important;  /* Correct display inside RTL */
+  text-align: left !important;     /* Keep + on left of number */
 }
 
-/* نجعل حقل الإدخال نفسه يبدأ من اليمين */
+/* Input field text RTL adjustments */
 .form-field-wrapper.rtl .react-tel-input .form-control {
-  direction: ltr !important; /* الأرقام ورمز النداء تبقى طبيعية */
+  direction: ltr !important;       /* Numbers & dial code remain natural */
   unicode-bidi: embed !important;
-  text-align: right !important; /* يلتصق النص باليمين */
-  padding-right: 60px !important; /* مساحة للعلم والرمز */
+  text-align: right !important;    /* Align text to right */
+  padding-right: 60px !important;  /* Space for flag & code */
   padding-left: 10px !important;
 }

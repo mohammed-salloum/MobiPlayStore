@@ -1,77 +1,102 @@
-/* Stars.css */
+/* ==============================
+   ⭐ Stars Component Wrapper
+   - Main container for both interactive and read-only stars
+============================== */
 .stars-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;       /* Stack stars and number vertically */
   align-items: center;
-  cursor: default;
+  cursor: default;              /* Default cursor for read-only */
   font-family: var(--main-font);
-  gap: 2px;
+  gap: 2px;                     /* Space between stars and rating number */
 }
 
+/* Interactive mode changes cursor to pointer */
 .stars-wrapper.interactive {
   cursor: pointer;
 }
 
+/* RTL support for wrapper */
 .stars-wrapper.rtl {
   direction: rtl;
 }
 
+/* ==============================
+   ⭐ Individual Star Container
+   - Handles hover, focus, scaling, and accessibility
+============================== */
 .star-wrapper {
   display: inline-flex;
-  transition: transform 0.2s ease, color 0.2s ease;
   vertical-align: middle;
-  outline: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+  outline: none;                /* Remove default focus outline */
 }
 
+/* Focus visible for keyboard navigation */
 .star-wrapper:focus {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
 
+/* Interactive hover and click scaling */
 .stars-wrapper.interactive .star-wrapper:hover,
 .stars-wrapper.interactive .star-wrapper:hover ~ .star-wrapper,
 .stars-wrapper.interactive .star-wrapper:active {
-  transform: scale(1.2);
+  transform: scale(1.2);       /* Slight enlarge effect */
 }
 
+/* Half star mirroring for RTL languages */
 .rtl-half {
   display: inline-flex;
-  transform: scaleX(-1);
+  transform: scaleX(-1);       /* Mirror horizontally */
   vertical-align: middle;
 }
 
+/* ==============================
+   ⭐ Star Icon Styles
+   - Empty, half, and full
+============================== */
 .star,
 .star.filled,
 .star.half {
   vertical-align: middle;
+  font-size: var(--star-size, 22px); /* Default size variable */
 }
 
 .star {
-  color: var(--star-empty);
-  transition: color 0.2s;
+  color: var(--star-empty);     /* Empty star color */
+  transition: color 0.2s ease;
 }
 
 .star.filled,
 .star.half {
-  color: var(--star-filled);
+  color: var(--star-filled);    /* Filled/half star color */
 }
 
+/* ==============================
+   ⭐ Stars + Rating Number Layout
+============================== */
 .stars-and-number {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.3rem;                  /* Space between stars and number */
 }
 
+/* Reverse order for RTL */
 .stars-wrapper.rtl .stars-and-number {
   flex-direction: row-reverse;
 }
 
+/* Rating number text */
 .rating-number {
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--feedback-color);
+  color: var(--feedback-color); /* Optional feedback color */
 }
 
+/* ==============================
+   ⭐ Review Count Text
+============================== */
 .review-count {
   font-size: 0.75rem;
   color: var(--secondary-color);

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useMemo, useEffect } from "react";
+import { useContext, useState, useMemo, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -9,17 +9,29 @@ import FormField from "../Common/FormField/FormField";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import "./ContactForm.css";
 
+/* =========================
+   ContactForm Component
+   - Handles user contact form submission
+   - Supports RTL/LTR layouts and theme switching
+   - Validation via Yup and react-hook-form
+========================= */
 function ContactForm() {
-  const { theme } = useContext(ThemeContext);
-  const { t, i18n } = useTranslation();
-  const isRTL = i18n.language === "ar";
+  const { theme } = useContext(ThemeContext);  // current theme: light/dark
+  const { t, i18n } = useTranslation();        // translation hook
+  const isRTL = i18n.language === "ar";        // check if current language is Arabic
 
-  const [formMessageType, setFormMessageType] = useState("");
-  const [formMessageVisible, setFormMessageVisible] = useState(false);
+  const [formMessageType, setFormMessageType] = useState(""); // "success" | "error"
+  const [formMessageVisible, setFormMessageVisible] = useState(false); // toggle form message
 
-  // ==============================
-  // 📌 Validation Schema
-  // ==============================
+  /* =========================
+     Validation Schema
+     - Name: 2-4 words, letters only, no double spaces
+     - Phone: optional, validated via libphonenumber-js
+     - Email: required, valid format
+     - Company: optional, 3-50 chars, letters required
+     - Subject: required, max 100 chars
+     - Question: required, max 500 chars
+  ========================== */
   const schema = useMemo(
     () =>
       yup.object().shape({
@@ -44,8 +56,7 @@ function ContactForm() {
           .nullable()
           .transform((v) => (v?.trim() === "" ? null : v))
           .test("phone-valid", function (value) {
-            if (!value) return true;
-
+            if (!value) return true; // optional
             const cleaned = value.replace(/\s+/g, "").replace(/^0+/, "");
             try {
               const phoneNumber = parsePhoneNumberFromString(
@@ -82,25 +93,15 @@ function ContactForm() {
           .transform((v) => (v ? v.trim() : ""))
           .test("company-valid", function (val) {
             if (!val) return true;
-
             if (/^\s|\s$/.test(val) || /\s{2,}/.test(val)) {
               return this.createError({ message: t("contact.form.companyDoubleSpaces") });
             }
-
             const noSpaces = val.replace(/\s/g, "");
-
             if (!/[\p{L}]/u.test(noSpaces)) {
               return this.createError({ message: t("contact.form.companyInvalid") });
             }
-
-            if (noSpaces.length < 3) {
-              return this.createError({ message: t("contact.form.companyMin3Chars") });
-            }
-
-            if (noSpaces.length > 50) {
-              return this.createError({ message: t("contact.form.companyMax50Chars") });
-            }
-
+            if (noSpaces.length < 3) return this.createError({ message: t("contact.form.companyMin3Chars") });
+            if (noSpaces.length > 50) return this.createError({ message: t("contact.form.companyMax50Chars") });
             return true;
           }),
 
@@ -119,9 +120,11 @@ function ContactForm() {
     [t, i18n.language]
   );
 
-  // ==============================
-  // 📌 useForm
-  // ==============================
+  /* =========================
+     React Hook Form Setup
+     - handleSubmit, register, Controller, errors, etc.
+     - mode: onBlur for real-time validation feedback
+  ========================== */
   const {
     register,
     handleSubmit,
@@ -145,6 +148,7 @@ function ContactForm() {
 
   const watched = watch();
 
+  // Automatically hide error message when all fields become valid
   useEffect(() => {
     if (!Object.keys(errors).length && formMessageType === "error") {
       setFormMessageVisible(false);
@@ -152,17 +156,20 @@ function ContactForm() {
     }
   }, [watched, errors, formMessageType]);
 
+  // Re-trigger validation when language changes (i18n)
   useEffect(() => {
     trigger();
   }, [i18n.language, trigger]);
 
-  // ==============================
-  // 📌 Submit Handler
-  // ==============================
+  /* =========================
+     Form Submission Handler
+     - Simulated async submission with 1s delay
+     - Displays success or error messages
+  ========================== */
   const onSubmit = async (data) => {
     try {
-      await new Promise((res) => setTimeout(res, 1000));
-      reset();
+      await new Promise((res) => setTimeout(res, 1000)); // simulate API call
+      reset();                                        // reset form fields
       setFormMessageType("success");
       setFormMessageVisible(true);
       setTimeout(() => setFormMessageVisible(false), 4000);
@@ -173,6 +180,7 @@ function ContactForm() {
     }
   };
 
+  // Display error message if validation fails
   const onError = () => {
     setFormMessageType("error");
     setFormMessageVisible(true);
@@ -180,10 +188,12 @@ function ContactForm() {
 
   return (
     <div className={`contact-form ${theme} ${isRTL ? "rtl" : "ltr"}`} dir={isRTL ? "rtl" : "ltr"}>
+      {/* Section subtitles */}
       <p className="contact-form-subtitle">{t("contact.subtitle1")}</p>
       <p className="contact-form-subtitle">{t("contact.subtitle2")}</p>
 
       <form onSubmit={handleSubmit(onSubmit, onError)}>
+        {/* Name Field */}
         <FormField
           label={t("contact.form.nameLabel")}
           placeholder={t("contact.form.namePlaceholder")}
@@ -195,7 +205,7 @@ function ContactForm() {
           touched={!!touchedFields.name}
         />
 
-        {/* PHONE FIELD */}
+        {/* Phone Field using Controller for complex validation */}
         <Controller
           name="phone"
           control={control}
@@ -214,6 +224,7 @@ function ContactForm() {
           )}
         />
 
+        {/* Email Field */}
         <FormField
           label={t("contact.form.emailLabel")}
           placeholder={t("contact.form.emailPlaceholder")}
@@ -226,6 +237,7 @@ function ContactForm() {
           touched={!!touchedFields.email}
         />
 
+        {/* Company Field (optional) */}
         <FormField
           label={t("contact.form.companyLabel")}
           placeholder={t("contact.form.companyPlaceholder")}
@@ -236,6 +248,7 @@ function ContactForm() {
           touched={!!touchedFields.company}
         />
 
+        {/* Subject Field */}
         <FormField
           label={t("contact.form.subjectLabel")}
           placeholder={t("contact.form.subjectPlaceholder")}
@@ -247,6 +260,7 @@ function ContactForm() {
           touched={!!touchedFields.subject}
         />
 
+        {/* Question / Message Field */}
         <FormField
           label={t("contact.form.questionLabel")}
           placeholder={t("contact.form.questionPlaceholder")}
@@ -259,6 +273,7 @@ function ContactForm() {
           touched={!!touchedFields.question}
         />
 
+        {/* Submit Button */}
         <div className="form-field-wrapper submit-wrapper">
           <label></label>
           <div className="field-wrapper">
@@ -279,6 +294,7 @@ function ContactForm() {
           </div>
         </div>
 
+        {/* Success/Error Message */}
         <div className={`form-message-below ${formMessageVisible ? "fade-in" : "fade-out"}`}>
           {formMessageType === "error" && (
             <span className="form-error">{t("contact.form.errorMessage")}</span>

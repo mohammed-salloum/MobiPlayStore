@@ -12,19 +12,23 @@ import "./Footer.css";
 
 const Footer = () => {
   const { t, i18n } = useTranslation();
-  const isRTL = i18n.language === 'ar'; // Check if current language is Arabic
-  const lang = i18n.language || 'en';  // Default to English if language not defined
+  const isRTL = i18n.language === 'ar'; // RTL check for Arabic
+  const lang = i18n.language || 'en';  // Default language fallback
 
   return (
     <>
       {/* =========================
           Footer Section
+          - Main footer container
+          - Applies RTL/LTR class dynamically
       ======================== */}
       <footer className={`footer ${isRTL ? 'rtl' : 'ltr'}`}>
         <div className="footer-container">
 
           {/* =========================
               Useful Links Column
+              - Navigation links translated
+              - Uses dynamic language in URL
           ======================== */}
           <div className="footer-column useful-links">
             <h5>{t('footer.usefulLinks')}</h5>
@@ -35,16 +39,18 @@ const Footer = () => {
             </ul>
           </div>
 
-
           {/* =========================
               About Us Column
+              - Short description of the store/company
           ======================== */}
           <div className="footer-column about-us">
             <h5>{t('footer.aboutUs')}</h5>
             <p>{t('footer.aboutText')}</p>
           </div>
+
           {/* =========================
               Store Info Column
+              - City and country details
           ======================== */}
           <div className="footer-column store-info">
             <h5>{t('footer.storeName')}</h5>
@@ -56,20 +62,20 @@ const Footer = () => {
 
           {/* =========================
               Connect With Us Column
+              - Contact methods and social links
+              - Social icons use FontAwesome
           ======================== */}
           <div className="footer-column connect-with-us">
             <h5>{t('footer.connect')}</h5>
             <ul className="contact-list">
-              {/* Messaging link */}
               <li>💬 <a href={`/${lang}/contact-us`}>{t('contactLabel')}</a></li>
-              {/* Email link */}
               <li>📧 <a href="mailto:info@mobiplaystore.com">info@mobiplaystore.com</a></li>
-              {/* Phone link */}
               <li>📞 <a href="tel:+963944123456">+(963) 944 123 456</a></li>
             </ul>
 
             {/* =========================
                 Social Media Icons
+                - Each platform gets its own styled link
             ======================== */}
             <div className="social-icons">
               <a href="#" className="social-icon facebook"><FontAwesomeIcon icon={faFacebookF} /></a>
@@ -86,6 +92,8 @@ const Footer = () => {
 
       {/* =========================
           Footer Bottom Section
+          - Copyright & credits
+          - Handles RTL/LTR layout
       ======================== */}
       <div className={`footer-bottom ${isRTL ? 'rtl' : 'ltr'}`}>
         <div className="footer-bottom-container">

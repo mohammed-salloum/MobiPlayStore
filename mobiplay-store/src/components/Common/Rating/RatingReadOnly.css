@@ -1,53 +1,64 @@
-/* StarsReadOnly.css */
+/* =========================
+   ⭐ Stars Read-Only Component
+========================= */
+
+/* Wrapper around the entire stars + optional text */
 .stars-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;     /* Stars above text */
   align-items: center;
-  gap: 4px;
+  gap: 4px;                   /* Space between stars and text */
   font-family: var(--main-font);
 }
 
+/* Container for the stars themselves */
 .stars-wrapper .stars {
   display: flex;
-  gap: 4px;
+  gap: 4px;                   /* Space between stars */
   align-items: center;
   justify-content: center;
 }
 
+/* RTL support: reverse star order */
 .stars-wrapper.rtl .stars {
   flex-direction: row-reverse;
 }
 
+/* Each individual star container */
 .star-wrapper {
-  width: var(--star-size, 22px);
-  height: var(--star-size, 22px);
+  width: var(--star-size, 22px);   /* Default width, themeable */
+  height: var(--star-size, 22px);  /* Default height, themeable */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   vertical-align: middle;
 }
 
+/* Star icon default state (empty) */
 .star {
-  color: var(--star-empty);
+  color: var(--star-empty);        /* Empty star color, themeable */
   font-size: var(--star-size, 22px);
-  transition: color 0.2s ease;
+  transition: color 0.2s ease;     /* Smooth color transition */
 }
 
+/* Filled or half-filled stars */
 .star.filled,
 .star.half {
-  color: var(--star-filled);
+  color: var(--star-filled);       /* Filled star color, themeable */
 }
 
+/* Mirror half-star in RTL layout */
 .stars-wrapper.rtl .star.half {
   transform: scaleX(-1);
   display: inline-flex;
   vertical-align: middle;
 }
 
+/* Optional rating text below stars */
 .rating-text {
   font-size: 0.9rem;
   font-weight: 500;
-  color: var(--feedback-color);
+  color: var(--feedback-color);    /* Themeable text color */
   text-align: center;
-  margin-top: 4px;
+  margin-top: 4px;                 /* Space above text */
 }

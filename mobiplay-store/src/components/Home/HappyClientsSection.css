@@ -1,7 +1,12 @@
 /* =========================== */
-/* 🌟 Happy Clients Section (with Animated Background Integration) */
+/* 🌟 Happy Clients Section Styles (with Animated Background) */
 /* =========================== */
 
+/* Main Section Wrapper
+   - Relative positioning to contain background and overlay
+   - Flexible layout to center content
+   - Hardware-accelerated transforms for smoother animations
+   - Theme-aware background transitions */
 .happy-clients-section {
   position: relative;
   overflow: hidden;
@@ -20,7 +25,11 @@
   transition: background-color 0.6s ease-in-out;
 }
 
-/* الخلفية المتحركة */
+/* Animated Background Layer
+   - Positioned absolutely behind content
+   - Covers entire section
+   - Filter applied for brightness, contrast, and saturation adjustments
+   - Optimized with will-change for performance */
 .happy-clients-section .animated-bg {
   position: absolute;
   inset: 0;
@@ -34,12 +43,18 @@
   will-change: background, transform, opacity;
 }
 
+/* Overlay Layer
+   - Semi-transparent dark overlay for readability
+   - Blur effect adds depth */
 .happy-clients-section .overlay {
-  background: rgba(0, 0, 0, 0.35); /* بدلاً من 0.55 */
+  background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(2px);
 }
 
-/* المحتوى */
+/* Content Wrapper
+   - Relative positioning to sit above background and overlay
+   - Centers content and constrains width
+   - Adds padding for spacing */
 .clients-content {
   position: relative;
   z-index: 4;
@@ -49,7 +64,10 @@
   text-align: center;
 }
 
-/* العنوان */
+/* Section Title
+   - Large, bold, prominent heading
+   - Color theme-aware
+   - Spacing from carousel below */
 .clients-title {
   font-size: 2.3rem;
   color: var(--clients-name-color);
@@ -59,7 +77,9 @@
   transition: font-size 0.3s ease, filter 0.3s ease;
 }
 
-/* Carousel */
+/* Carousel Wrapper
+   - Hides overflow
+   - Supports touch gestures */
 .clients-carousel-wrapper {
   position: relative;
   overflow: hidden;
@@ -67,6 +87,10 @@
   touch-action: pan-y;
 }
 
+/* Carousel Track (Client Cards)
+   - Flex container for slides
+   - Smooth transform transitions
+   - Optional transition disabling for infinite loop adjustments */
 .client-card {
   display: flex;
   will-change: transform;
@@ -75,9 +99,13 @@
 }
 
 .client-card.transition-disabled {
-  transition: none !important;
+  transition: none !important; /* Used when jumping from cloned slides */
 }
 
+/* Individual Client Slide
+   - Full width of carousel
+   - Padding for spacing
+   - Flex column layout to center text */
 .client-slide {
   min-width: 100%;
   padding: 25px 20px;
@@ -86,18 +114,24 @@
   align-items: center;
 }
 
-/* نصوص العميل */
+/* Client Text
+   - Italic testimonial text
+   - Controlled line height and font size
+   - Color adapts to theme variable
+   - Max width for readability */
 .client-text {
   font-style: italic;
   line-height: 1.75;
   font-size: 1.25rem;
   margin-bottom: 20px;
-  color: var(--clients-text-color); /* استخدم المتغير الجديد */
+  color: var(--clients-text-color);
   max-width: 850px;
   transition: opacity 0.4s ease;
 }
 
-
+/* Client Name
+   - Bold, larger font for emphasis
+   - Theme-aware color */
 .client-name {
   color: var(--clients-name-color);
   font-size: 1.25rem;
@@ -105,13 +139,20 @@
   margin-bottom: 6px;
 }
 
+/* Client Role
+   - Smaller, secondary text for position or role
+   - Slight opacity for softer visual hierarchy */
 .client-role {
   color: var(--clients-role-color);
   font-size: 0.95rem;
   opacity: 0.95;
 }
 
-/* الأسهم */
+/* Carousel Arrows
+   - Positioned vertically centered on left and right
+   - Semi-transparent background with blur
+   - Hover effect scales arrow and brightens background
+   - z-index above carousel content */
 .arrow {
   position: absolute;
   top: 50%;
@@ -137,15 +178,16 @@
 .arrow.left { left: 10px; }
 .arrow.right { right: 10px; }
 
-/* Dots */
+/* Carousel Dots
+   - Interactive navigation
+   - Theme-aware colors
+   - Active dot scaled and fully opaque */
 .dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
   cursor: pointer;
   transition: transform 0.25s ease, background-color 0.25s ease, opacity 0.3s ease;
-
-  /* ✅ استخدم المتغير بدلاً من اللون الثابت */
   background-color: var(--clients-dots-color);
   opacity: 0.8;
 }
@@ -160,17 +202,20 @@
 /* Responsive Adjustments */
 /* =========================== */
 
+/* Large screens (<=1024px) */
 @media (max-width: 1024px) {
   .clients-title { font-size: 2rem; }
   .client-text { font-size: 1.15rem; }
 }
 
+/* Medium screens / tablets (<=768px) */
 @media (max-width: 768px) {
   .clients-title { font-size: 1.85rem; filter: contrast(1.5) brightness(1.1); }
   .client-text { font-size: 1.05rem; line-height: 1.6; }
-  .arrow { display: none !important; }
+  .arrow { display: none !important; } /* Hide arrows for touch devices */
 }
 
+/* Landscape orientation adjustments */
 @media screen and (orientation: landscape) {
   .happy-clients-section {
     display: flex;
@@ -182,20 +227,13 @@
     height: auto;
   }
 
-  .happy-clients-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 900px;
-    position: relative;
-  }
-
+  .happy-clients-inner,
   .clients-carousel-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    max-width: 900px;
     position: relative;
   }
 
@@ -226,7 +264,6 @@
 
   .arrow {
     display: flex !important;
-    position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
@@ -236,6 +273,7 @@
   .arrow-right { right: 10px; }
 }
 
+/* Small screens / mobile (<=480px) */
 @media (max-width: 480px) {
   .clients-title { font-size: 1.55rem; margin-bottom: 30px; filter: contrast(1.5) brightness(1.15); }
   .client-text { font-size: 0.95rem; line-height: 1.55; padding: 0 6px; }
@@ -243,6 +281,7 @@
   .client-role { font-size: 0.9rem; }
 }
 
+/* Extra small screens (<=350px) */
 @media (max-width: 350px) {
   .clients-title { font-size: 1.35rem; margin-bottom: 20px; }
   .client-text { font-size: 0.9rem; line-height: 1.45; padding: 0 5px; }

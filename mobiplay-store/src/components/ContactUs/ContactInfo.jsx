@@ -1,20 +1,27 @@
 // src/components/ContactUs/ContactInfo.jsx
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
 import './ContactInfo.css';
 
+/* =========================
+   ContactInfo Component
+   - Displays company contact details: address, email, phone
+   - Supports theme switching and RTL/LTR layout
+========================= */
 function ContactInfo() {
-  const { theme } = useContext(ThemeContext);
-  const { t, i18n } = useTranslation(); // هاد الطريقة الصحيحة
-  const isRTL = i18n.language === "ar";
+  const { theme } = useContext(ThemeContext); // current theme (light/dark)
+  const { t, i18n } = useTranslation();       // translation hook
+  const isRTL = i18n.language === "ar";       // check for Arabic RTL
+
   return (
     <div className={`contact-info ${theme} ${isRTL ? "rtl" : "ltr"}`}>
-      {/* اسم الشركة */}
+      
+      {/* Company Name */}
       <h3 className="contact-subtitle">{t("contact.info.companyName")}</h3>
 
-      {/* العنوان */}
+      {/* Address */}
       <div className="info-item">
         <div className="icon-box map">
           <FaMapMarkerAlt size={16} />
@@ -22,7 +29,7 @@ function ContactInfo() {
         <span className="info-text map-text">{t("contact.info.address")}</span>
       </div>
 
-      {/* البريد الإلكتروني */}
+      {/* Email */}
       <div className="info-item">
         <div className="icon-box envelope">
           <FaEnvelope size={16} />
@@ -32,7 +39,7 @@ function ContactInfo() {
         </a>
       </div>
 
-      {/* رقم الهاتف */}
+      {/* Phone */}
       <div className="info-item">
         <div className="icon-box phone">
           <FaPhone size={16} />

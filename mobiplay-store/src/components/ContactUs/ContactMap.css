@@ -1,40 +1,51 @@
 /* ==============================
-   ⚙️ حاوية الخريطة
+   ⚙️ Contact Map Wrapper
+   - Container for embedded Google Map
+   - Handles hover effect and border styling
 ============================== */
 .contact-map-wrapper {
   position: relative;
   width: 100%;
-  overflow: visible; /* لتعمل الخريطة على جميع الشاشات */
+  overflow: visible; /* ensures map is fully visible on all screens */
   background: var(--card-bg, #ffffff);
   border: 2px solid var(--border-color, rgba(0,0,0,0.08));
   transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
 }
 
+/* Hover effect for wrapper */
 .contact-map-wrapper:hover {
   transform: translateY(-3px);
   border-color: var(--accent-color, #0d6efd);
 }
 
+/* ==============================
+   Map iframe
+   - Full width, responsive height
+   - Allows user interaction
+============================== */
 .contact-map-wrapper iframe {
   width: 100%;
-  height: 400px;
+  height: 400px; /* default height */
   border: 0;
   display: block;
-  pointer-events: auto; /* التفاعل ممكن على جميع الشاشات */
+  pointer-events: auto; /* enable interaction on all screens */
 }
 
-/* نسخة صغيرة */
+/* Small variant */
 .contact-map-wrapper.small iframe {
   height: 220px;
 }
 
-/* تجاوب للشاشات الصغيرة */
+/* ==============================
+   Responsive for smaller screens
+   - Adjust iframe height for tablets/phones
+============================== */
 @media (max-width: 768px) {
   .contact-map-wrapper iframe { height: 320px; }
   .contact-map-wrapper.small iframe { height: 180px; }
 }
 
-/* التأكد من التفاعل على جميع الشاشات */
+/* Ensure pointer events work on wrapper and iframe */
 .contact-map-wrapper,
 .contact-map-wrapper iframe {
   pointer-events: auto;

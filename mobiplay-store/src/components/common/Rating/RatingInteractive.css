@@ -1,51 +1,60 @@
 /* =========================
-   RatingInteractive.css
+   ⭐ RatingInteractive Component Styles
 ========================= */
+
+/* Wrapper for the entire interactive rating */
 .rating-interactive-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 6px;                   /* Space between text and stars */
   font-family: var(--main-font);
-  color: var(--text-color); /* نص الرسالة يرث لون الثيم */
+  color: var(--text-color);    /* Inherit theme text color */
 }
 
+/* Label prompting user to rate */
 .rate-text {
   font-weight: 500;
   text-align: center;
-  color: inherit; /* يرث اللون من wrapper */
+  color: inherit;             /* Inherits color from wrapper */
 }
 
+/* RTL support: reverse star order */
 .rating-interactive-wrapper[dir="rtl"] .stars-wrapper {
   flex-direction: row-reverse;
 }
 
+/* Each star container */
 .stars-wrapper .star-wrapper {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 28px;                /* Default width, can be overridden */
+  height: 28px;               /* Default height, can be overridden */
 }
 
+/* Hover effect for interactive stars */
 .stars-wrapper.interactive .star-wrapper:hover .star {
-  transform: scale(1.2);
-  cursor: pointer;
+  transform: scale(1.2);      /* Slight enlarge on hover */
+  cursor: pointer;            /* Indicate clickable */
 }
 
+/* Star icon default (empty) */
 .stars-wrapper .star {
-  color: var(--star-empty, #ccc); /* فارغة ترث من الثيم أو افتراضي */
-  font-size: 22px;
-  transition: transform 0.2s ease, color 0.2s ease;
+  color: var(--star-empty, #ccc);  /* Empty stars color, themeable */
+  font-size: 22px;                 /* Default size */
+  transition: transform 0.2s ease, color 0.2s ease; /* Smooth hover & fill animation */
 }
 
+/* Filled or half-filled stars */
 .stars-wrapper .star.filled,
 .stars-wrapper .star.half {
-  color: var(--star-filled, #ffc107); /* ممتلئة ترث من الثيم أو افتراضي */
+  color: var(--star-filled, #ffc107); /* Filled star color, themeable */
 }
 
+/* RTL adjustment for half stars */
 .stars-wrapper.rtl .star.half {
-  transform: scaleX(-1);
+  transform: scaleX(-1);       /* Mirror half-star in RTL */
   display: inline-flex;
   vertical-align: middle;
 }

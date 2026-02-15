@@ -23,7 +23,6 @@ import AboutUs from "./pages/AboutUs/AboutUs";
 import Checkout from "./pages/Checkout/Checkout";
 import Offers from "./pages/Offers/Offers";
 import FAQ from "./pages/FAQ/FAQ";
-import Reviews from "./pages/Reviews/Reviews";
 import SignIn from "./pages/SignIn/SignIn";
 import Profile from "./pages/Profile/Profile";
 
@@ -127,7 +126,6 @@ function App() {
               <Route path="product/:id" element={<ProductDetails />} />
               <Route path="offers" element={<Offers />} />
               <Route path="faq" element={<FAQ />} />
-              <Route path="reviews" element={<Reviews />} />
 
               {/* Protected cart route */}
               <Route

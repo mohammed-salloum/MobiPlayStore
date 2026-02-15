@@ -1,68 +1,86 @@
 /* ==========================
-   Wrapper البطاقة
+   Payment Confirmation Wrapper
+   - Centers the card horizontally
+   - Aligns it near the top
+   - Provides padding for breathing space
 ========================== */
 .payment-confirmation-wrapper {
-  min-height: auto;           /* بدل 50vh، الحاوية تأخذ ارتفاع المحتوى فقط */
+  min-height: auto;           /* Let container adjust to content height */
   display: flex;
-  justify-content: center;    /* توسيط أفقي */
-  align-items: flex-start;    /* قرب البطاقة من الأعلى */
-  padding: 1rem 2rem;         /* قلل البادينغ العلوي */
-  text-align: center;
+  justify-content: center;    /* Center horizontally */
+  align-items: flex-start;    /* Align card near top */
+  padding: 1rem 2rem;         /* Top/side padding */
+  text-align: center;         /* Center text inside */
 }
 
 /* ==========================
-   البطاقة
+   Payment Confirmation Card
+   - Container for icon, title, message, and button
+   - Rounded corners with subtle border
+   - Flex column layout with gap
 ========================== */
 .payment-confirmation-card {
-  padding: 1.8rem 1.5rem;           /* قلل البادينغ */
+  padding: 1.8rem 1.5rem;          
   border-radius: 16px;   
-  border:  1px solid var(--accent-color);           /* انحناءات أصغر */
-  max-width: 400px;                 /* عرض أصغر */
+  border: 1px solid var(--accent-color); /* Accent border for focus */
+  max-width: 400px;                     /* Fixed width for desktop */
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;                      /* مسافة أقل بين العناصر */
+  gap: 1.5rem;                          /* Space between elements */
   align-items: center;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease;            /* Smooth transition on resize */
 }
 
-.payment-confirmation-icon {
-  font-size: 60px;          /* حجم الأيقونة */
-  color: var(--icon-color); /* اللون الآن من الثيم */
-  margin-bottom: 1rem;
-}
 /* ==========================
-   عنوان التأكيد
+   Success Icon
+   - Large icon to indicate success
+   - Color derived from current theme
+========================== */
+.payment-confirmation-icon {
+  font-size: 60px;          
+  color: var(--icon-color); 
+  margin-bottom: 1rem;      /* Space below icon */
+}
+
+/* ==========================
+   Title
+   - Prominent accent-colored heading
 ========================== */
 .payment-confirmation-title {
-  font-size: 1.7rem;                /* أصغر قليلاً */
+  font-size: 1.7rem;                
   font-weight: 700;
   color: var(--accent-color);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;           
 }
 
 /* ==========================
-   نص الرسالة
+   Confirmation Message
+   - Secondary text with muted color
+   - Handles long text gracefully
 ========================== */
 .payment-confirmation-message {
-  font-size: 1rem;                  /* أصغر قليلاً */
+  font-size: 1rem;                  
   color: var(--text-muted);
   line-height: 1.5;
-  word-wrap: break-word;
+  word-wrap: break-word;            /* Prevent overflow */
 }
 
 /* ==========================
-   زر الإنهاء
+   Finish Button
+   - Full width button with consistent padding
+   - Rounded corners for a modern look
 ========================== */
 .payment-confirmation-card .button-checkout {
   width: 100%;
-  padding: 0.65rem 1rem;            /* أصغر قليلاً */
+  padding: 0.65rem 1rem;            
   font-size: 1rem;
-  border-radius: 8px;               /* تقليل الانحناء */
+  border-radius: 8px;               
 }
 
 /* ==========================
-   استجابة للشاشات المتوسطة
+   Medium Screens (≤1024px)
+   - Slightly smaller card and padding
 ========================== */
 @media (max-width: 1024px) {
   .payment-confirmation-card {
@@ -72,7 +90,9 @@
 }
 
 /* ==========================
-   استجابة للشاشات الصغيرة
+   Small Screens (≤768px)
+   - Card width expands
+   - Slightly smaller text and padding
 ========================== */
 @media (max-width: 768px) {
   .payment-confirmation-card {
@@ -93,7 +113,9 @@
 }
 
 /* ==========================
-   استجابة للهواتف الصغيرة جدًا
+   Extra Small Screens (≤480px)
+   - Optimized for mobile devices
+   - Further reduced font sizes and padding
 ========================== */
 @media (max-width: 480px) {
   .payment-confirmation-card {

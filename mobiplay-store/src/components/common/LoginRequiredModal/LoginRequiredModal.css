@@ -1,62 +1,91 @@
+/* ===============================
+   🌐 Modal Overlay
+   Covers the entire viewport with semi-transparent background
+================================= */
 .login-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.4);       /* Semi-transparent dark overlay */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  padding: 8px 5px;
+  z-index: 1000;                     /* Above page content */
+  padding: 8px 5px;                  /* Small padding for small screens */
 }
 
+/* ===============================
+   🧱 Modal Box
+================================= */
 .login-modal {
   position: relative;
   width: 400px;
-  max-width: 90%;
+  max-width: 90%;                    /* Responsive width */
   background: var(--bg-color, #fff);
   color: var(--text-color, #1c1c1c);
   font-family: var(--main-font, 'Inter', sans-serif);
   border-radius: 15px;
   padding: 20px 25px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25); /* Subtle shadow for depth */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* ===============================
+   💬 Modal message text
+================================= */
 .login-modal-message {
   text-align: center;
   margin-bottom: 15px;
   font-size: 1.1rem;
 }
 
+/* ===============================
+   🔘 Modal buttons container
+================================= */
 .login-modal-buttons {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 10px;                        /* Space between buttons */
 }
 
-/* Spinner overlay كامل الشاشة */
+/* ===============================
+   ⏳ Full-screen Spinner Overlay
+   Displayed during loading via Portal
+================================= */
 .global-spinner-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.5); /* Semi-transparent white overlay */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1100;
+  z-index: 1100;                     /* Above modal overlay */
 }
 
+/* ===============================
+   ✨ Fade In / Fade Out Animations
+================================= */
+.fade-in { 
+  animation: fadeIn 0.3s forwards; 
+}
 
-/* Fade in / out */
-.fade-in { animation: fadeIn 0.3s forwards; }
-.fade-out { animation: fadeOut 0.3s forwards; }
+.fade-out { 
+  animation: fadeOut 0.3s forwards; 
+}
 
-@keyframes fadeIn { from {opacity:0} to {opacity:1} }
-@keyframes fadeOut { from {opacity:1} to {opacity:0} }
+@keyframes fadeIn { 
+  from { opacity: 0; } 
+  to { opacity: 1; } 
+}
+
+@keyframes fadeOut { 
+  from { opacity: 1; } 
+  to { opacity: 0; } 
+}

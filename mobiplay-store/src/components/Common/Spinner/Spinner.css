@@ -1,29 +1,30 @@
-/* wrapper عادي */
+/* Normal wrapper for the spinner */
 .spinner-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0; /* مسافة فوق وتحت */
+  display: flex;               /* Use flexbox for centering */
+  justify-content: center;     /* Center horizontally */
+  margin: 2rem 0;              /* Add vertical spacing (top and bottom) */
 }
 
-/* wrapper يغطي كامل الشاشة */
+/* Full-screen wrapper for the spinner */
 .spinner-wrapper-fullscreen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh; /* يغطي 80% من ارتفاع الصفحة */
+  display: flex;               /* Use flexbox */
+  justify-content: center;     /* Center horizontally */
+  align-items: center;         /* Center vertically */
+  height: 80vh;                /* Cover 80% of viewport height */
 }
 
-/* الدائرة الدوارة */
+/* The spinning circle */
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 6px solid var(--border-color);
-  border-top: 6px solid var(--spinner-color);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+  width: 50px;                 /* Width of the spinner */
+  height: 50px;                /* Height of the spinner */
+  border: 6px solid var(--border-color); /* Outer border color */
+  border-top: 6px solid var(--spinner-color); /* Color of the rotating part */
+  border-radius: 50%;          /* Make it a perfect circle */
+  animation: spin 1s linear infinite; /* Continuous spinning animation */
 }
 
+/* Keyframes for the spinner rotation */
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }    /* Start rotation at 0 degrees */
+  100% { transform: rotate(360deg); } /* Complete full circle rotation */
 }
